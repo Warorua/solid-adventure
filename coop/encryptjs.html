@@ -1,0 +1,35 @@
+<!-- index.html -->
+<html>
+<head>
+  <script type="text/javascript" src="encryptjs.js"></script>
+  <script type="text/javascript">
+    function makeRequest() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'index.php', true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var response = xhr.responseText;
+          // Handle the response from PHP
+          console.log('Response from PHP:', response);
+        }
+      };
+      xhr.send();
+    }
+    function callEnc(){
+        var enc = encryptJS('Lex2405!', 'wcHxgfAWhTB51SaWLPFMpMzrVzssq91', 256);
+        document.getElementById('enc').innerHTML = enc;
+    }
+    function callDec(){
+        var dec = decrypt('7I2JZD8/Pz+akGcJ0w4H1bk=', 'zVDTLIxWzRc58L68YJOEb2dZ4F212', 256);
+        document.getElementById('dec').innerHTML = dec;
+    }
+  </script>
+</head>
+<body>
+    <div id="dec"></div>
+    <div id="enc"></div>
+  <button onclick="makeRequest()">Call PHP</button>
+  <button onclick="callEnc()">Call encryptjs</button>
+  <button onclick="callDec()">Call decryptjs</button>
+</body>
+</html>

