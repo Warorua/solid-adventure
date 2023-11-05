@@ -93,6 +93,18 @@ if ($type == 'bills') {
     } else {
         $dt1 = 'Please add an invoice number to proceed!';
     }
+} elseif ($type == 'invoice3') {
+
+    if (isset($_POST['invoice3'])) {
+        if ($_POST['invoice3'] != '') {
+            $invoice3 = $_POST['invoice3'];
+            $head = 'invoice details(master & regular)';
+        } else {
+            $dt1 = 'Please add an invoice number to proceed!!';
+        }
+    } else {
+        $dt1 = 'Please add an invoice number to proceed!';
+    }
 } elseif ($type == 'bypass') {
     if (isset($_POST['amount']) && isset($_POST['invoice_no'])) {
         if ($_POST['amount'] != '' && $_POST['invoice_no'] != '') {
@@ -127,6 +139,7 @@ if (isset($bills)) {
             $dt1 = json_decode(httpGet($url, $data, $headers), true);
         }
     }
+    echo dt1($dt1, $head, $mini_head);
 }
 
 if (isset($invoice2)) {
@@ -140,6 +153,31 @@ if (isset($invoice2)) {
     $headers = ['Authorization:Bearer ' . $invtk];
     //echo $invtk;
     $dt1 = json_decode(httpGet($url, $data, $headers), true);
+    echo dt1($dt1, $head, $mini_head);
+}
+if (isset($invoice3)) {
+    $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $invoice3;
+    $data = [];
+    if (isset($_SESSION['token'])) {
+        $invtk = $_SESSION['token'];
+    } else {
+        $invtk = 'null';
+    }
+    $headers = ['Authorization:Bearer ' . $invtk];
+    //echo $invtk;
+    $dt12 = json_decode(httpGet($url, $data, $headers), true);
+
+    //echo dt1($dt1, $head, $mini_head);
+    $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
+    $data = ['invoice_no' => $invoice3];
+    $headers = [];
+
+    $dt11 = json_decode(httpPost($url, $data, $headers), true);
+    //$dt2 = 'Query proceessed!';
+    echo '<div class="row">
+    <div class="col-md-6">' . dt1($dt11, $head, $mini_head) . '</div>
+    <div class="col-md-6">' . dt1($dt12, $head, $mini_head) . '</div>
+    </div>';
 }
 
 if (isset($invoice)) {
@@ -148,6 +186,7 @@ if (isset($invoice)) {
     $headers = [];
 
     $dt1 = json_decode(httpPost($url, $data, $headers), true);
+    echo dt1($dt1, $head, $mini_head);
 }
 
 if (isset($bypass)) {
@@ -182,33 +221,34 @@ if (isset($bypass)) {
         $billType = 'LiquorLicence';
     } elseif ($bty[1] == 'GLR') {
         $billType = 'LandRate';
-    }elseif ($bty[1] == 'GGRT') {
+    } elseif ($bty[1] == 'GGRT') {
         $billType = 'GroundRent';
-    }elseif ($bty[1] == 'GLV') {
+    } elseif ($bty[1] == 'GLV') {
         $billType = 'LValua';
-    }elseif ($bty[1] == 'PS') {
+    } elseif ($bty[1] == 'PS') {
         $billType = 'PSVSticker';
-    }elseif ($bty[1] == 'GESS') {
+    } elseif ($bty[1] == 'GESS') {
         $billType = 'EssServices';
-    }elseif ($bty[1] == 'GINS') {
+    } elseif ($bty[1] == 'GINS') {
         $billType = 'Instinspect';
-    }elseif ($bty[1] == 'GLR') {
+    } elseif ($bty[1] == 'GLR') {
         $billType = 'LandRate';
-    }elseif ($bty[1] == 'GLR') {
+    } elseif ($bty[1] == 'GLR') {
         $billType = 'LandRate';
-    }elseif ($bty[1] == 'GLR') {
+    } elseif ($bty[1] == 'GLR') {
         $billType = 'LandRate';
-    }elseif ($bty[1] == 'GLR') {
+    } elseif ($bty[1] == 'GLR') {
         $billType = 'LandRate';
-    }elseif ($bty[1] == 'GLR') {
+    } elseif ($bty[1] == 'GLR') {
         $billType = 'LandRate';
-    }elseif ($bty[1] == 'GLR') {
+    } elseif ($bty[1] == 'GLR') {
         $billType = 'LandRate';
-    }elseif ($bty[1] == 'GLR') {
+    } elseif ($bty[1] == 'GLR') {
         $billType = 'LandRate';
     } else {
         $billType = '';
     }
+    $code = generateMpesaCode();
     $data = array(
         "mpesadetails" => array(
             "FirstName" => (string) "John",
@@ -216,7 +256,7 @@ if (isset($bypass)) {
             "TransAmount" => (string) $bypass['amount'],
             "BillType" => (string) $billType,
             "TransChannel" => (string) "mpesa",
-            "TransID" => (string) generateMpesaCode()
+            "TransID" => (string) $code
         )
     );
 
@@ -224,14 +264,23 @@ if (isset($bypass)) {
 
     $headers = [];
 
+   
+
+
     //$dt0 = httpPost($url, $data, $headers);
     //$dt1 = json_decode($dt0, true);
-    $dt1 = $data;
+    $dt0 = bypassCode($bypass, $billType, $code);
+    $dt1 = json_decode($dt0, true);
+    //$dt1 = [];
+    $dt1['code'] = $code;
+    $dt1['amount'] = $bypass['amount'];
+    //$dt1 = $data;
     //echo $dt0;
+    echo dt1($dt1, $head, $mini_head);
 }
 
 if (isset($number_plate)) {
-    $url1 = 'https://nairobiservices.go.ke/api/iprs/parking/ntsa/vehicle/'.$number_plate;
+    $url1 = 'https://nairobiservices.go.ke/api/iprs/parking/ntsa/vehicle/' . $number_plate;
 
     $dt3 = json_decode(httpGet($url1, []), true);
 
@@ -243,6 +292,7 @@ if (isset($number_plate)) {
     } else {
         $dt1 = json_encode($dt3);
     }
+    echo dt1($dt1, $head, $mini_head);
 }
 
 
@@ -252,6 +302,7 @@ if (isset($token)) {
     } else {
         $dt1 = ['user_token' => 'User Token Not Set!'];
     }
+    echo dt1($dt1, $head, $mini_head);
 }
 
 if (isset($trp)) {
@@ -274,6 +325,8 @@ if (isset($trp)) {
     } else {
         $dt2 = 'Request incomplete!';
     }
+
+    echo dt1($dt1, $head, $mini_head);
 }
 
 if (isset($psv_list)) {
@@ -296,6 +349,7 @@ if (isset($psv_list)) {
             // $dt1 = json_decode(httpGet($url, $data, $headers), true);
         }
     }
+    echo dt1($dt1, $head, $mini_head);
 }
 
 
@@ -317,6 +371,7 @@ if (isset($psv_activation)) {
             // $dt1 = json_decode(httpGet($url, $data, $headers), true);
         }
     }
+    echo dt1($dt1, $head, $mini_head);
 }
 
 if (isset($cpsb)) {
@@ -328,11 +383,12 @@ if (isset($cpsb)) {
     ];
 
     $dt1 = json_decode(httpGet($url, $data, $headers), true);
-    //$dt1 = $_POST['email'];  
+    //$dt1 = $_POST['email'];
+    echo dt1($dt1, $head, $mini_head);
 }
 
 
-
+//*
 if (isset($dt1)) {
     if (is_array($dt1)) {
         if (isset($dt1['success']) || isset($dt1['customer_id']) || isset($dt1['user_token']) || isset($dt1['data']) || isset($dt1['email'])) {
@@ -474,7 +530,150 @@ if (isset($dt1)) {
         echo $object_1;
     }
 }
+//*/
 
+function dt1($dt1, $head, $mini_head)
+{
+    if (is_array($dt1)) {
+        if (isset($dt1['success']) || isset($dt1['customer_id']) || isset($dt1['user_token']) || isset($dt1['data']) || isset($dt1['email'])|| isset($dt1['code'])) {
+            if (isset($dt1['status'])) {
+                if ($dt1['status'] == 'Unpaid') {
+                    $head = $head . '<b style="color: white; background-color: red">UNPAID</b>';
+                } elseif ($dt1['status'] == 'paid') {
+                    $head = $head . ' <b style="color: white; background-color: green">PAID</b>';
+                }
+            }
+            $oob = '';
+            $oob .= '
+            <br/><br/><br/><br/><br/><br/>
+            <h1 class="fw-light text-uppercase display-4 text-center text-info">' . $head . '</h1>
+        <table class="table table-striped-columns">
+        <thead>
+        <tr>
+          <th scope="col">#3</th>
+          <th scope="col">Info</th>
+        </tr>
+      </thead>
+      <tbody>
+        ';
+            foreach ($dt1 as $id => $row) {
+                if (!is_array($row)) {
+
+
+                    $t1 = strtoupper(str_replace('_', ' ', $id));
+
+                    if ($id == 'paid' && $row == true) {
+                        $row = '<b style="color:white;padding:10px;background-color:green;border:none;border-radius:5px">PAID</b>';
+                    } elseif ($id == 'paid' && $row != true) {
+                        $row = '<b style="color:red;padding:10px;background-color:black;border:none;border-radius:5px">UNPAID</b>';
+                    }
+
+                    if ($id == 'user_token') {
+                        $lng = ' class="text-break text-wrap"';
+                    } else {
+                        $lng = '';
+                    }
+                    if (isset($token)) {
+                        $clickMsg = "'Token Copied'";
+                        $attachBtn = '
+                        <button class="tokenCopy btn btn-primary" onclick="alert(' . $clickMsg . ')" data-clipboard-text="' . $row . '"> Copy Token to clipboard </button>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.js" integrity="sha512-ePtegHW811NTnZd0Er1UxtBb8dizKEdSzANYy/UhxM40FC2yCWwb1CQrj03BPbrs6XdUkcHuyVn9Xq9q0Lm34g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                        <script>new ClipboardJS(".tokenCopy");</script>
+                        ';
+                    } else {
+                        $tkcpy = "";
+                    }
+                    $oob .= '<tr><th scope="row">' . $t1 . ' </th><td ' . $lng . '> ' . $row . '</td></tr>';
+                } else {
+
+                    $oob .= '<tr>
+                            <th scope="row">' . $id . ' </th>
+                            <td>
+                            <table class="table table-striped-columns">
+                            <thead>
+                              <tr>
+                             <th scope="col">#4</th>
+                            <th scope="col">Info</th>
+                            </tr>
+                           </thead>
+                           <tbody>
+                   ';
+                    foreach ($row as $id2 => $row2) {
+                        if (is_array($row2)) {
+                            $oob .= '<tr style="font-weight:bold" class="table-primary"><th scope="row"></th><td>' . $mini_head . '</td></tr>';
+                            foreach ($row2 as $id3 => $row3) {
+                                if (!is_array($row3)) {
+                                    if ($row3 == 'unpaid') {
+                                        $row3 = '<b style="color:red;padding:10px;background-color:black;border:none;border-radius:5px">UNPAID</b>';
+                                    } elseif ($row3 == 'paid') {
+                                        $row3 = '<b style="color:white;padding:10px;background-color:green;border:none;border-radius:5px">PAID</b>';
+                                    }
+                                    $oob .= '
+                                   <tr>
+                                   <th scope="row">' . $id3 . ' </th>
+                                   <td > ' . $row3 . '</td>
+                                   </tr>';
+                                } else {
+                                    $oob .= '';
+                                    foreach ($row3 as $id4 => $row4) {
+                                        $oob .= '<tr style="border-top:solid 8px red">';
+                                        if (is_array($row4)) {
+                                            foreach ($row4 as $id5 => $row5) {
+
+                                                $oob .= '<tr>
+                                                       <td>
+                                                         <th>' . $id5 . ' </th>
+                                                         <td> ' . $row5 . '</td>
+                                                       </td>
+                                                    </tr>';
+                                            }
+                                        } else {
+                                            $oob .= '<tr>
+                                            <td>
+                                              <th>' . $id4 . ' </th>
+                                              <td> ' . $row4 . '</td>
+                                            </td>
+                                         </tr>';
+                                        }
+
+                                        $oob .= '</tr>';
+                                    }
+                                    $oob .= '';
+                                }
+                            }
+                        } else {
+                            $oob .= '<tr>
+                            <td>
+                              <th>' . $id2 . ' </th>
+                              <td> ' . $row2 . '</td>
+                            </td>
+                         </tr>';
+                        }
+                    }
+                    $oob .= '</tbody></table>
+                </td>
+                </tr>';
+                }
+            }
+            $oob .= ' </tbody></table>';
+            if (isset($attachBtn)) {
+                return $oob . $attachBtn;
+            } else {
+                return $oob;
+            }
+        } else {
+            if (isset($dt1['error'])) {
+                $object_1 =  '<br/><b style="color:red;padding:20px;background-color:black;border:none;border-radius:5px">Error: ' . $dt1['error'] . '</b>';
+            } else {
+                $object_1 =  '<br/><b style="color:red;padding:20px;background-color:black;border:none;border-radius:5px">' . json_encode($dt1) . '</b>';
+            }
+            return $object_1;
+        }
+    } else {
+        $object_1 = '<br/><b style="color:red;padding:20px;background-color:black;border:none;border-radius:5px">' . $dt1 . '</b>';
+        return $object_1;
+    }
+}
 
 
 

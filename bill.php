@@ -23,6 +23,7 @@ include './includes/header.php';
                     <option value="bills" selected>Bills</option>
                     <option value="invoice">Regular DB</option>
                     <option value="invoice2">Master DB</option>
+                    <option value="invoice3">Combined DB</option>
                     <option value="bypass">Bypass</option>
                     <option value="number_plate">Number Plate Search</option>
                     <option value="token">Token</option>
@@ -113,6 +114,10 @@ include './includes/header.php';
         }else if (activities.value == "invoice2") {
             $("#fNh").text('Invoice N0');
             $("#nmeF").html('<input type="text" name="invoice2" class="form-control" id="exampleInputtext2" aria-describedby="textHelp">');
+            document.getElementById("fNm").style.display = "";
+        }else if (activities.value == "invoice3") {
+            $("#fNh").text('Invoice N0');
+            $("#nmeF").html('<input type="text" name="invoice3" class="form-control" id="exampleInputtext2" aria-describedby="textHelp">');
             document.getElementById("fNm").style.display = "";
         }else if (activities.value == "bypass") {
             $("#fNh").text('Bill Bypass');
