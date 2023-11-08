@@ -118,6 +118,19 @@ if ($type == 'bills') {
     } else {
         $dt1 = 'Please add an invoice number to proceed! 2';
     }
+} elseif ($type == 'land') {
+    if (isset($_POST['stype']) && isset($_POST['doc_no'])) {
+        if ($_POST['stype'] != '' && $_POST['doc_no'] != '') {
+            $doc_no = $_POST['doc_no'];
+            $stype = $_POST['stype'];
+            $dt1 = '200';
+            $head = 'nairobi land search';
+        } else {
+            $dt1 = 'Please add an document number to proceed! 1';
+        }
+    } else {
+        $dt1 = 'Please add an document number to proceed! 2';
+    }
 }
 
 
@@ -139,7 +152,7 @@ if (isset($bills)) {
             $dt1 = json_decode(httpGet($url, $data, $headers), true);
         }
     }
-    echo dt1($dt1, $head, $mini_head);
+    // echo dt1($dt1, $head, $mini_head);
 }
 
 if (isset($invoice2)) {
@@ -153,7 +166,7 @@ if (isset($invoice2)) {
     $headers = ['Authorization:Bearer ' . $invtk];
     //echo $invtk;
     $dt1 = json_decode(httpGet($url, $data, $headers), true);
-    echo dt1($dt1, $head, $mini_head);
+    // echo dt1($dt1, $head, $mini_head);
 }
 if (isset($invoice3)) {
     $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $invoice3;
@@ -167,7 +180,7 @@ if (isset($invoice3)) {
     //echo $invtk;
     $dt12 = json_decode(httpGet($url, $data, $headers), true);
 
-    //echo dt1($dt1, $head, $mini_head);
+    //// echo dt1($dt1, $head, $mini_head);
     $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
     $data = ['invoice_no' => $invoice3];
     $headers = [];
@@ -186,7 +199,7 @@ if (isset($invoice)) {
     $headers = [];
 
     $dt1 = json_decode(httpPost($url, $data, $headers), true);
-    echo dt1($dt1, $head, $mini_head);
+    // echo dt1($dt1, $head, $mini_head);
 }
 
 if (isset($bypass)) {
@@ -264,9 +277,6 @@ if (isset($bypass)) {
 
     $headers = [];
 
-   
-
-
     //$dt0 = httpPost($url, $data, $headers);
     //$dt1 = json_decode($dt0, true);
     $dt0 = bypassCode($bypass, $billType, $code);
@@ -276,7 +286,7 @@ if (isset($bypass)) {
     $dt1['amount'] = $bypass['amount'];
     //$dt1 = $data;
     //echo $dt0;
-    echo dt1($dt1, $head, $mini_head);
+    // echo dt1($dt1, $head, $mini_head);
 }
 
 if (isset($number_plate)) {
@@ -292,9 +302,47 @@ if (isset($number_plate)) {
     } else {
         $dt1 = json_encode($dt3);
     }
-    echo dt1($dt1, $head, $mini_head);
+    // echo dt1($dt1, $head, $mini_head);
 }
 
+if (isset($doc_no)) {
+    if($stype == 'parcel'){
+        $dsc = "parcel_number ILIKE '".$doc_no."' OR lr_number ILIKE ''";
+    }elseif($stype == 'lr'){
+        $dsc = "parcel_number ILIKE '' OR lr_number ILIKE '".$doc_no."'";
+    }else{
+        $dsc = "parcel_number ILIKE '' OR lr_number ILIKE ''";
+    }
+    $dsc = urlencode($dsc);
+
+    function landSearch($dsc)
+    {
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://edev.nairobiservices.go.ke/api/maps/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=KNSDI%3Acp_cadastral_parcel&CQL_FILTER='.$dsc.'&outputFormat=application%2Fjson&propertyName=objectid%2Cfr_number%2Crim_name%2Clr_number%2Cparcel_number%2Csheet_number%2Cstated_area%2Carea_type%2Ccomments%2Cnull_comment%2Creg_block%2Cblock_name%2Cbound_type%2Cfeature_type%2Cdeed_plan_%2Ccounty%2Csub_county%2Csub_location%2Cdmp_number%2Coriginal_number%2Ctransaction%2Cold_parcel%2Cowner%2Ccurrent_status%2Cshape_leng%2Cshape_area%2Cdp_number%2Cgeom',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk5NDMzNzUxLCJpYXQiOjE2OTkyNjA5NTEsImp0aSI6IjlhOWYxMjVkNjlhZDRiMGQ5MjQzMWM5MzhhYzM1YTE4IiwidXNlcl9pZCI6ImU2Y2EyYjFjLWY2ODktNDBmYy04OTMyLWE3NGVmMWU5Mzg4ZSJ9.0m0W3huDeYWlMuP7WNyBNCRZYKwdQiTQHR2in3U4nz0'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        return $response;
+    }
+    $ls = landSearch($dsc);
+    //echo $ls;
+    $dt1 = json_decode($ls, true);
+}
 
 if (isset($token)) {
     if (isset($_SESSION['token'])) {
@@ -302,7 +350,7 @@ if (isset($token)) {
     } else {
         $dt1 = ['user_token' => 'User Token Not Set!'];
     }
-    echo dt1($dt1, $head, $mini_head);
+    // echo dt1($dt1, $head, $mini_head);
 }
 
 if (isset($trp)) {
@@ -326,7 +374,7 @@ if (isset($trp)) {
         $dt2 = 'Request incomplete!';
     }
 
-    echo dt1($dt1, $head, $mini_head);
+    // echo dt1($dt1, $head, $mini_head);
 }
 
 if (isset($psv_list)) {
@@ -349,7 +397,7 @@ if (isset($psv_list)) {
             // $dt1 = json_decode(httpGet($url, $data, $headers), true);
         }
     }
-    echo dt1($dt1, $head, $mini_head);
+    // echo dt1($dt1, $head, $mini_head);
 }
 
 
@@ -371,7 +419,7 @@ if (isset($psv_activation)) {
             // $dt1 = json_decode(httpGet($url, $data, $headers), true);
         }
     }
-    echo dt1($dt1, $head, $mini_head);
+    // echo dt1($dt1, $head, $mini_head);
 }
 
 if (isset($cpsb)) {
@@ -384,14 +432,14 @@ if (isset($cpsb)) {
 
     $dt1 = json_decode(httpGet($url, $data, $headers), true);
     //$dt1 = $_POST['email'];
-    echo dt1($dt1, $head, $mini_head);
+    // echo dt1($dt1, $head, $mini_head);
 }
 
 
 //*
 if (isset($dt1)) {
     if (is_array($dt1)) {
-        if (isset($dt1['success']) || isset($dt1['customer_id']) || isset($dt1['user_token']) || isset($dt1['data']) || isset($dt1['email'])) {
+        if (isset($dt1['success']) || isset($dt1['customer_id']) || isset($dt1['user_token']) || isset($dt1['data']) || isset($dt1['email']) || isset($dt1['type'])) {
             if (isset($dt1['status'])) {
                 if ($dt1['status'] == 'Unpaid') {
                     $head = $head . '<b style="color: white; background-color: red">UNPAID</b>';
@@ -475,13 +523,55 @@ if (isset($dt1)) {
                                         $oob .= '<tr style="border-top:solid 8px red">';
                                         if (is_array($row4)) {
                                             foreach ($row4 as $id5 => $row5) {
-
-                                                $oob .= '<tr>
+                                                if (is_array($row5)) {
+                                                    foreach($row5 as $id6 => $row6){
+                                                        if (is_array($row6)) {
+                                                            foreach($row6 as $id7 => $row7){
+                                                                if (is_array($row5)) {
+                                                                    foreach ($row7 as $id8 => $row8) {
+                                                                        if ($id8 == 0) {
+                                                                            $row8 = '<b class="badge text-bg-success">' . $row8 . '</b>';
+                                                                            $id8 = 'Latitude';
+                                                                        }else{
+                                                                            $row8 = '<b class="badge text-bg-info">' . $row8 . '</b>';
+                                                                            $id8 = 'Longitude';
+                                                                        }
+                                                                        $oob .= '<tr>
+                                                                        <td>
+                                                                          <th>' . $id8. ' </th>
+                                                                          <td> ' . $row8 . '</td>
+                                                                        </td>
+                                                                     </tr>';
+                                                                    }
+                                                                }else{
+                                                                  
+                                                                     $oob .= '<tr>
+                                                                       <td>
+                                                                         <th>' . $id7 . ' </th>
+                                                                         <td> ' . $row7 . '</td>
+                                                                       </td>
+                                                                    </tr>';
+                                                                } 
+                                                            }
+                                                        }else{
+                                                             $oob .= '<tr>
+                                                               <td>
+                                                                 <th>' . $id6 . ' </th>
+                                                                 <td> ' . $row6 . '</td>
+                                                               </td>
+                                                            </tr>';
+                                                        } 
+                                                    }
+                                                }else{
+                                                     $oob .= '<tr>
                                                        <td>
                                                          <th>' . $id5 . ' </th>
                                                          <td> ' . $row5 . '</td>
                                                        </td>
                                                     </tr>';
+                                                }                                                
+
+                                               
                                             }
                                         } else {
                                             $oob .= '<tr>
@@ -535,7 +625,7 @@ if (isset($dt1)) {
 function dt1($dt1, $head, $mini_head)
 {
     if (is_array($dt1)) {
-        if (isset($dt1['success']) || isset($dt1['customer_id']) || isset($dt1['user_token']) || isset($dt1['data']) || isset($dt1['email'])|| isset($dt1['code'])) {
+        if (isset($dt1['success']) || isset($dt1['customer_id']) || isset($dt1['user_token']) || isset($dt1['data']) || isset($dt1['email']) || isset($dt1['code'])) {
             if (isset($dt1['status'])) {
                 if ($dt1['status'] == 'Unpaid') {
                     $head = $head . '<b style="color: white; background-color: red">UNPAID</b>';

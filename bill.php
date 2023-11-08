@@ -29,6 +29,7 @@ include './includes/header.php';
                     <option value="token">Token</option>
                     <option value="psv_list">PSV Vehicles List</option>
                     <option value="psv_activation">PSV Activation Details</option>
+                    <option value="land_search">Nairobi Land Search</option>
                 </select>
             </div>
 
@@ -38,7 +39,7 @@ include './includes/header.php';
                 <div id="textHelp2" class="form-text">We'll never share your data with anyone else.</div>
             </div>
 
-            
+
             <div id="Mkl"></div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -91,7 +92,7 @@ include './includes/header.php';
 
     var activities = document.getElementById("userType");
 
-    function clearAll(){
+    function clearAll() {
         $("#nmeF").html('');
         $("#fNh").html('');
         $("#Mkl").html('');
@@ -111,17 +112,21 @@ include './includes/header.php';
             $("#fNh").text('Number Plate');
             $("#nmeF").html('<input type="text" name="number_plate" class="form-control" id="exampleInputtext2" aria-describedby="textHelp">');
             document.getElementById("fNm").style.display = "";
-        }else if (activities.value == "invoice2") {
+        } else if (activities.value == "invoice2") {
             $("#fNh").text('Invoice N0');
             $("#nmeF").html('<input type="text" name="invoice2" class="form-control" id="exampleInputtext2" aria-describedby="textHelp">');
             document.getElementById("fNm").style.display = "";
-        }else if (activities.value == "invoice3") {
+        } else if (activities.value == "invoice3") {
             $("#fNh").text('Invoice N0');
             $("#nmeF").html('<input type="text" name="invoice3" class="form-control" id="exampleInputtext2" aria-describedby="textHelp">');
             document.getElementById("fNm").style.display = "";
-        }else if (activities.value == "bypass") {
+        } else if (activities.value == "bypass") {
             $("#fNh").text('Bill Bypass');
             $("#Mkl").html('<input type="hidden" name="type" value="bypass"><div class="mb-3"> <label for="exampleInputtext2" id="fNh" class="form-label">Invoice N0</label> <input type="text" name="invoice_no" class="form-control" id="exampleInputtext2" aria-describedby="textHelp"> <div id="textHelp2" class="form-text">We will never share your data with anyone else.</div> </div> <div class="mb-3"> <label for="exampleInputtext2" id="fNh" class="form-label">Amount</label> <input type="number" name="amount" class="form-control" id="exampleInputtext2" aria-describedby="textHelp"> <div id="textHelp2" class="form-text">We will never share your data with anyone else.</div> </div> ');
+            document.getElementById("fNm").style.display = "";
+        } else if (activities.value == "land_search") {
+            $("#fNh").text('Nairobi Land Search');
+            $("#Mkl").html('<div class="mb-3"> <label for="exampleInputtext1" class="form-label">Search type</label> <select class="form-select mt-3" aria-label="Default select example" name="stype"> <option value="lr">LR Number</option> <option value="parcel" selected>Parcel Number</option> </select> </div> <input type="hidden" name="type" value="land"> <div class="mb-3"> <label for="exampleInputtext2" id="fNh" class="form-label">Document N0</label> <input type="text" name="doc_no" class="form-control" id="exampleInputtext2" aria-describedby="textHelp"> <div id="textHelp2" class="form-text">Enter Parcel or LR Numbers</div> </div>');
             document.getElementById("fNm").style.display = "";
         }
     });
