@@ -286,7 +286,7 @@ if (isset($bypass)) {
     $dt1['amount'] = $bypass['amount'];
     //$dt1 = $data;
     //echo $dt0;
-    // echo dt1($dt1, $head, $mini_head);
+     echo dt1($dt1, $head, $mini_head);
 }
 
 if (isset($number_plate)) {
