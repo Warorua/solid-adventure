@@ -1,7 +1,7 @@
 <?php
 // IMAP server connection parameters
-$hostname = '{master.kotnova.com:993/imap/ssl}INBOX.spam';
-$username = 'mailer@master.kotnova.com';
+$hostname = '{kever.io:993/imap/ssl}INBOX.spam';
+$username = 'mailer@kever.io';
 $password = '6R-=ael8vxS{';
 
 // Open an IMAP stream

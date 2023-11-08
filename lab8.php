@@ -112,7 +112,7 @@ function eCitizenWsAuth($data)
     $csrf = $data['csrf'];
     //$csrf = 'Ly9dOys5PA8GCQorOgstPEQTBRAWcA8WdZ6ILNp6A_KywMFKtb_yzHjW';
     $url = 'https://accounts.ecitizen.go.ke/live/websocket?_csrf_token=' . $csrf . '&_track_static%5B0%5D=https%3A%2F%2Faccounts.ecitizen.go.ke%2Fimages%2Ffavicon.ico&_track_static%5B1%5D=https%3A%2F%2Faccounts.ecitizen.go.ke%2Fassets%2Fapp-25dc2cd4f32ad0d3f9adc232428c773d.css%3Fvsn%3Dd&_track_static%5B2%5D=https%3A%2F%2Faccounts.ecitizen.go.ke%2Fassets%2Fapp-7ffaba9f01dbeaca6aba6a5ca02c109a.js%3Fvsn%3Dd&_mounts=0&_live_referer=undefined&vsn=2.0.0';
-    //$url = 'https://master.kotnova.com/lab16.php';
+    //$url = 'https://kever.io/lab16.php';
    $payload = '';
     return websocket(
         $url,

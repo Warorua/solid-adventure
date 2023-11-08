@@ -8,7 +8,7 @@ use Knp\Snappy\Pdf;
 if($_SERVER['SERVER_NAME'] == 'localhost'){
 $file_name = 'http://localhost/kever/pdf/'.$_SESSION['kra_pin'].'.html';
 }else{
-$file_name = 'https://master.kotnova.com/pdf/'.$_SESSION['kra_pin'].'.html';
+$file_name = 'https://kever.io/pdf/'.$_SESSION['kra_pin'].'.html';
 }
 
 $file_name2 = './pdf/'.$_SESSION['kra_pin'].'.pdf';
