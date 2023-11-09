@@ -109,7 +109,8 @@ if ($type == 'bills') {
     if (isset($_POST['amount']) && isset($_POST['invoice_no'])) {
         if ($_POST['amount'] != '' && $_POST['invoice_no'] != '') {
             $amount = $_POST['amount'] . '.0';
-            $bypass = ['amount' => $amount, 'invoice_no' => $_POST['invoice_no'], 'success' => true];
+            $invoice_no = str_replace(' ', '', $_POST['invoice_no']);
+            $bypass = ['amount' => $amount, 'invoice_no' => $invoice_no, 'success' => true];
             $dt1 = '200';
             $head = 'bypass details(master)';
         } else {
