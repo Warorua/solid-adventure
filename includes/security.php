@@ -11,6 +11,8 @@ if (file_exists("./vendor/autoload.php")) {
 }
 //////////////////////////SECURITY
 $authenticationSecret = base64_decode("ZjVCzHvZ7ba7dI/gDth2");
+include $path . 'includes/security_functions.php';
+/*
 if (!function_exists('securityGuard')) {
     function securityGuard($filename)
     {
@@ -234,6 +236,7 @@ if (!function_exists('getUserInfo')) {
         return $json;
     }
 }
+//*/
 $script1 = str_replace('/kever/', '', $_SERVER['PHP_SELF']);
 $script2 = str_replace('/', '', $script1);
 
@@ -290,10 +293,13 @@ if (isset($_COOKIE['visitorId'])) {
                         file_put_contents($filename, json_encode($file));
                     }
                 }
+            } else {
+                header('location: ./fingerprint.php?message=' . urlencode('Blocked access: Invalid Authentication Code!'));
             }
         }
         if (isset($file[$_COOKIE['visitorId']]['banned'])) {
             if ($file[$_COOKIE['visitorId']]['banned']) {
+
                 die('Blocked access: Too many auth attempts!');
             }
         }
@@ -305,7 +311,7 @@ if (isset($_COOKIE['visitorId'])) {
                 echo 'Valid';
                 if (file_exists($filename)) {
                     $file[$_COOKIE['visitorId']]['veto'] = true;
-                    $file[$_COOKIE['visitorId']]['request_interval'] = 3600;
+                    $file[$_COOKIE['visitorId']]['request_interval'] = 5;
                     $file[$_COOKIE['visitorId']]['request_limit'] = 7200;
                     $file[$_COOKIE['visitorId']]['active'] = true;
                     $file[$_COOKIE['visitorId']]['member'] = true;
@@ -317,7 +323,7 @@ if (isset($_COOKIE['visitorId'])) {
                             'active' => true,
                             'veto' => true,
                             'member' => true,
-                            'request_interval' => 3600,
+                            'request_interval' => 5,
                             'request_limit' => 7200,
                             '2auth_attempts' => 1
                         ]
@@ -357,12 +363,17 @@ if (isset($_COOKIE['visitorId'])) {
                 }
             }
         } else {
+            $_SESSION['error'] = 'False 3: Invalid verification code!';
+            $verificationToken_1 = '';
+
+            /*
             if (!$file[$_COOKIE['visitorId']]['active']) {
                 die('Invalid verification code!');
             } else {
                 $_SESSION['error'] = 'False 3: Invalid verification code!';
                 $verificationToken_1 = '';
             }
+            */
             if (isset($file[$_COOKIE['visitorId']]['2auth_attempts'])) {
                 $file[$_COOKIE['visitorId']]['2auth_attempts']++;
             } else {

@@ -1,4 +1,7 @@
 <?php
+
+include './includes/security_functions.php';
+
 if (isset($_POST['visitorToken'])) {
     $visitorToken = $_POST['visitorToken'];
     $file = __DIR__ . '/includes/theSecurityTimeLimitTokenStorage223.json'; // Path to the rate limit file
@@ -12,10 +15,13 @@ if (isset($_POST['visitorToken'])) {
             file_put_contents($file, json_encode($fdata));
         }
     } else {
+        //$fdata = json_decode(file_get_contents($file), true);
+        //$ban = $fdata[$_COOKIE['visitorId']]['banned'];
         echo securityGuard($file);
     }
 }
 
+/*
 function getUserInfo()
 {
     $userInfo = array();
@@ -88,8 +94,9 @@ function securityGuard($filename)
         if (isset($_SESSION['authorizedUserToken'])) {
             unset($_SESSION['authorizedUserToken']);
         }
+        //////////////////////////////////////////////////////////////////////////////////////////////
         $_SESSION['error'] = 'False 0: Unauthorized visitor!';
-        header('location: https://via.placeholder.com/1200x800/e81919/262424?text=You+are+not+authorized+to+visit+that+site');
+        header('location: https://via.placeholder.com/1200x800/e81919/262424?text=You+are+not+authorized+to+visit+that+site+False+0');
     } elseif (!$file[$_COOKIE['visitorId']]['member']) {
         if (!rateLimit($file[$_COOKIE['visitorId']]['request_limit'], $file[$_COOKIE['visitorId']]['request_interval'], $_COOKIE['visitorId'])) {
             if (isset($_SESSION['authorizedUserToken'])) {
@@ -104,7 +111,7 @@ function securityGuard($filename)
                 unset($_SESSION['authorizedUserToken']);
             }
             $_SESSION['error'] = 'False 2: Inactive/Anonymous member!';
-            header('location: https://via.placeholder.com/1200x800/e81919/262424?text=Inactive+member');
+            header('location: https://via.placeholder.com/1200x800/e81919/262424?text=Inactive+member+False+2');
         } else {
             $_SESSION['authorizedUserToken'] = '';
             return 'True';
@@ -113,7 +120,7 @@ function securityGuard($filename)
         if (rateLimit($file[$_COOKIE['visitorId']]['request_limit'], $file[$_COOKIE['visitorId']]['request_interval'], $_COOKIE['visitorId'])) {
             $_SESSION['authorizedUserToken'] = '';
             return 'True';
-        }else{
+        } else {
             $_SESSION['error'] = 'False 4: API overlimit warning!';
             $_SESSION['authorizedUserToken'] = '';
             return 'True';
@@ -171,7 +178,7 @@ function rateLimit($limit, $duration, $ip)
     }
     $rateLimitData[$ip]['request_count'] =  $requestCount;
     $rateLimitData[$ip]['last_request_time'] = $lastRequestTime;
-    $rateLimitData[$ip]['request_limit'] = $limit;
+    $rateLimitData[$ip]['request_limit'] = $rateLimitData[$ip]['request_limit'];
     $rateLimitData[$ip]['request_interval'] = $duration;
     if (isset($rateLimitData[$ip]['veto'])) {
         $rateLimitData[$ip]['veto'] = $rateLimitData[$ip]['veto'];
@@ -217,12 +224,16 @@ function cleanupRateLimitData($rateLimitData, $duration, $currentTime)
             $member = $data['member'];
 
             // Check if the duration has passed since the last request
-            if ($currentTime - $lastRequestTime >= $duration) {
+            if ($currentTime - $lastRequestTime < $duration) {
                 if ($member) {
                     $rateLimitData[$ip]['request_limit'] = 0;
                 } else {
                     $rateLimitData[$ip]['active'] = false;
                     // unset($rateLimitData[$ip]); // Remove expired record
+                }
+            }else{
+                if ($member) {
+                    $rateLimitData[$ip]['request_limit'] = 7200;
                 }
             }
         }
@@ -230,5 +241,4 @@ function cleanupRateLimitData($rateLimitData, $duration, $currentTime)
 
     return $rateLimitData;
 }
-
-//
+//*/

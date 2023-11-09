@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<p id="webgl"></p>
+<p id="audio"></p>
+<script src="https://iphey.com/js/libs/crypto.js"></script>
+<script src="https://iphey.com/js/libs/js_encrypt.js"></script>
+<script src="https://iphey.com/js/libs/leaflet.js"></script>
+<script src="https://iphey.com/js/check_fields.min.js"></script>
+<script>
+    function checkInnerText(elementId) {
+        return new Promise((resolve, reject) => {
+            function check() {
+                const element = document.getElementById(elementId);
+                const innerText = element.textContent.trim();
+                if (innerText !== '') {
+                    clearInterval(interval);
+                    resolve(innerText);
+                }
+            }
+
+            // Check the inner text every 1 second
+            const interval = setInterval(check, 1000);
+        });
+    }
+
+
+    let c1; // Declare c1 outside of the Promise
+    let c2; // Declare c2 outside of the Promise
+
+    checkInnerText('webgl')
+        .then((result) => {
+            c1 = result; // Assign c1 here
+            alert(c1);
+            return checkInnerText('audio');
+        })
+        .then((result) => {
+            c2 = result; // Assign c2 here
+            alert(c2);
+            var visitorId = c1 + "" + c2; // You can use c1 and c2 here
+            alert(visitorId);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+
+
+</script>
+
+</html>

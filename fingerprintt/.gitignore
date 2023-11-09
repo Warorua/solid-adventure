@@ -1,9 +1,0 @@
-.idea
-/vendor/
-/.cache
-.phpunit.result.cache
-.DS_Store
-.vscode
-.env
-release/yarn-error.log
-release/node_modules

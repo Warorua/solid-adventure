@@ -5,7 +5,26 @@ $filename = __DIR__ . '/theSecurityTimeLimitTokenStorage223.json'; // Path to th
 $file = json_decode(file_get_contents($filename), true);
 if (isset($_COOKIE['visitorId'])) {
     if (isset($file[$_COOKIE['visitorId']])) {
-        if (isset($file[$_COOKIE['visitorId']]['active'])) {
+        if (!$file[$_COOKIE['visitorId']]['banned']) {
+            if (isset($file[$_COOKIE['visitorId']]['active'])) {
+                include './includes/core.php';
+            }
+        } elseif(!isset($_GET['auth'])) {
+            if (isset($_SESSION['authorizedUserToken'])) {
+                unset($_SESSION['authorizedUserToken']);
+            }
+
+            if(isset($_GET['message'])){
+                $message = $_GET['message'];
+            }else{
+                 $message = 'You have been banned from accessing the Kever Server!';
+            }
+            if ($script2 != 'fingerprint.php') {
+                header('location: ./fingerprint.php?message='.urlencode($message));
+            }
+            $_GET['message'] = $message;
+            echo $_GET['message'];
+        }elseif($script2 == 'fingerprint.php' && isset($_GET['unban'])){
             include './includes/core.php';
         }
     } else {
