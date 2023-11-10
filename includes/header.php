@@ -84,6 +84,9 @@ if (isset($_COOKIE['visitorId'])) {
                     <a class="nav-link" href="bypass.php">Bypass</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="bypass_monitor.php">Bypass Monitor</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="kra_data.php">Revenue Data</a>
                 </li>
                 <li class="nav-item">

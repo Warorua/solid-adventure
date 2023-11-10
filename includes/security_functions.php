@@ -1,7 +1,7 @@
 <?php
-if(isset($path)){
+if (isset($path)) {
     $path = $path;
-}elseif (file_exists("./vendor/autoload.php")) {
+} elseif (file_exists("./vendor/autoload.php")) {
     require_once './vendor/autoload.php';
     $path = "./";
 } elseif (file_exists("../vendor/autoload.php")) {
@@ -27,9 +27,12 @@ if (!function_exists('securityGuard')) {
             $_SESSION['error'] = 'False -1: Verif script offline!';
         }
 
-        if($file[$_COOKIE['visitorId']]['banned']){
-            return 'Ban';
+        if (isset($file[$_COOKIE['visitorId']]['banned'])) {
+            if ($file[$_COOKIE['visitorId']]['banned']) {
+                return 'Ban';
+            }
         }
+
         if ($script2 != 'fingerprint.php' && !array_key_exists($_COOKIE['visitorId'], $file)) {
             if (isset($_SESSION['authorizedUserToken'])) {
                 unset($_SESSION['authorizedUserToken']);
