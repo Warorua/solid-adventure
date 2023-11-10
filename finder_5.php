@@ -4,13 +4,40 @@ require 'vendor/autoload.php';
 use simplehtmldom\HtmlDocument;
 
 include './includes/core.php';
-include './sqlite/connect.php';
+class Database
+{
+
+
+    private $server = "mysql:host=srv1140.hstgr.io;dbname=u854855859_kever";
+    private $username = "u854855859_kever";
+    private $password = "J2aI6:rxXl&+";
+    private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
+    protected $conn;
+
+    public function open()
+    {
+        try {
+            $this->conn = new PDO($this->server, $this->username, $this->password, $this->options);
+            return $this->conn;
+        } catch (PDOException $e) {
+            echo "There is some problem in connection: " . $e->getMessage();
+        }
+    }
+
+    public function close()
+    {
+        $this->conn = null;
+    }
+}
 
 //$dbFile = 'nationPersons.db';
 $start = date('Y-m-d H:i:s');
 //*
 
-$sqliteDB = new SQLiteDatabase();
+
+$pdo = new Database();
+
+$conn = $pdo->open();
 
 $dt1 = 'No Processing done!';
 
@@ -218,18 +245,16 @@ if (isset($bypass)) {
                     );
                     $tableName = 'bypass';
                     // Call the insert method
-                    if ($sqliteDB->insert($tableName, $dataToInsert)) {
-                        $dt1['insert_status'] = "Data inserted successfully recorded.";
-                    } else {
-                        $dt1['insert_status'] = "Failed to record data.";
-                    }
+                    $stmt = $conn->prepare('INSERT INTO bypass (invoice_no, amount) VALUES (:invoice_no, :amount)');
+                    $stmt->execute($dataToInsert);
+                    $dt1['insert_status'] = "Data inserted successfully recorded.";
                 } else {
                     $dt1['insert_status'] = "Data insertion disabled!";
                 }
             }
         }
     }
-
+    //J2aI6:rxXl&+
     if (!isset($dt1['insert_status'])) {
         $dt1['insert_status'] = "Data not recorded!";
     }
