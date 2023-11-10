@@ -8,7 +8,7 @@ function dbFile($filename){
 }
 class SQLiteDatabase
 {
-    private $dbFile = 'database/nationPersons.db';
+    private $dbFile = 'sqlite/bypassVerify.db';
     protected $conn;
 
     public function open()

@@ -1769,7 +1769,12 @@ function generateMpesaCode() {
   
     // Day (1 for 1st, 2 for 2nd, etc.)
     $currentDay = date('j');
-    $code .= $currentDay;
+    if ($currentDay > 9) {
+        $replaceChar = $alphabet[($currentDay - 10) % 26];
+        $code .= $replaceChar;
+    } else {
+        $code .= $currentDay;
+    }
   
     /*
     // Transaction order (A for 10th, B for 11th, etc.)

@@ -81,6 +81,9 @@ if (isset($_COOKIE['visitorId'])) {
                     <a class="nav-link" href="bill.php">Bills Data</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="bypass.php">Bypass</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="kra_data.php">Revenue Data</a>
                 </li>
                 <li class="nav-item">
@@ -89,6 +92,7 @@ if (isset($_COOKIE['visitorId'])) {
                 <li class="nav-item">
                     <a class="nav-link" href="mrw.php">Murang'a Women Data</a>
                 </li>
+                
             </ul>
 
             <div class="pull-right mt-2 mb-2">
