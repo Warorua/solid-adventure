@@ -4,6 +4,13 @@ require 'vendor/autoload.php';
 use simplehtmldom\HtmlDocument;
 
 include './includes/core.php';
+include './sqlite/connect.php';
+
+//$dbFile = 'nationPersons.db';
+$start = date('Y-m-d H:i:s');
+//*
+
+$sqliteDB = new SQLiteDatabase();
 
 $dt1 = 'No Processing done!';
 
@@ -41,15 +48,19 @@ if ($type == 'invoice2') {
         if ($_POST['amount'] != '' && $_POST['invoice_no'] != '') {
             $amount = $_POST['amount'] . '.0';
             $invoice_no = str_replace(array(' ', "\n", "\r", "\r\n"), '', $_POST['invoice_no']);
-            $bypass = ['amount' => $amount, 'invoice_no' => $invoice_no, 'success' => true, 'route'=>$_POST['route']];
+            $bypass = ['amount' => $amount, 'invoice_no' => $invoice_no, 'success' => true, 'route' => $_POST['route'], 'record' => $_POST['record']];
             $dt1 = '200';
             $head = 'bypass details(master)';
+            //echo json_encode($bypass);
         } else {
             $dt1 = 'Please add an invoice number to proceed! 1';
+            //echo json_encode($_POST);
         }
     } else {
         $dt1 = 'Please add an invoice number to proceed! 2';
+        //echo json_encode($_POST);
     }
+    //die();
 }
 
 
@@ -108,11 +119,11 @@ if (isset($invoice)) {
 }
 
 if (isset($bypass)) {
-    if($bypass['route'] == 'normal'){
+    if ($bypass['route'] == 'normal') {
         $url = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
-    }elseif($bypass['route'] == 'taifa'){
+    } elseif ($bypass['route'] == 'taifa') {
         $url = 'https://nairobiservices.go.ke/api/gateway/taifa/nrs/confirm';
-    }else{
+    } else {
         $url = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
     }
     //$url = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
@@ -193,10 +204,41 @@ if (isset($bypass)) {
     //$dt1 = json_decode($dt0, true);
     $dt0 = bypassCode($bypass, $billType, $code);
     $dt1 = json_decode($dt0, true);
+
     //$dt1 = [];
+
+    if (is_array($dt1)) {
+        if (isset($dt1['success'])) {
+            if ($dt1['success']) {
+                if ($bypass['record'] == 'yes') {
+                    $dataToInsert = array(
+                        "invoice_no" => $bypass['invoice_no'],
+                        "amount" => $bypass['amount']
+                        // Add more columns and values as needed
+                    );
+                    $tableName = 'bypass';
+                    // Call the insert method
+                    if ($sqliteDB->insert($tableName, $dataToInsert)) {
+                        $dt1['insert_status'] = "Data inserted successfully recorded.";
+                    } else {
+                        $dt1['insert_status'] = "Failed to record data.";
+                    }
+                } else {
+                    $dt1['insert_status'] = "Data insertion disabled!";
+                }
+            }
+        }
+    }
+
+    if (!isset($dt1['insert_status'])) {
+        $dt1['insert_status'] = "Data not recorded!";
+    }
+
     $dt1['code'] = $code;
     $dt1['amount'] = $bypass['amount'];
     $dt1['route'] = $bypass['route'];
+
+
     //$dt1 = $data;
     //echo $dt0;
     $htmlData = dt1($dt1, $head, $mini_head);
@@ -204,6 +246,8 @@ if (isset($bypass)) {
     $output['htmlData'] = $htmlData;
     $output['result'] = $dt1;
     //$output['regularDb'] = $dt11;
+
+
 
     echo json_encode($output);
 }
@@ -542,5 +586,5 @@ function dt1($dt1, $head, $mini_head)
 
 
 if (isset($dt2)) {
-   // echo $dt2;
+    // echo $dt2;
 }
