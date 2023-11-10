@@ -11,6 +11,10 @@ if (isset($_COOKIE['visitorId'])) {
                     include './includes/core.php';
                 }
             }
+        } elseif (!isset($file[$_COOKIE['visitorId']]['banned'])) {
+            if (isset($file[$_COOKIE['visitorId']]['active'])) {
+                include './includes/core.php';
+            }
         } elseif (!isset($_GET['auth'])) {
             if (isset($_SESSION['authorizedUserToken'])) {
                 unset($_SESSION['authorizedUserToken']);
