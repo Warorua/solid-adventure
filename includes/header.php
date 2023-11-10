@@ -5,26 +5,28 @@ $filename = __DIR__ . '/theSecurityTimeLimitTokenStorage223.json'; // Path to th
 $file = json_decode(file_get_contents($filename), true);
 if (isset($_COOKIE['visitorId'])) {
     if (isset($file[$_COOKIE['visitorId']])) {
-        if (!$file[$_COOKIE['visitorId']]['banned']) {
-            if (isset($file[$_COOKIE['visitorId']]['active'])) {
-                include './includes/core.php';
+        if (isset($file[$_COOKIE['visitorId']]['banned'])) {
+            if (!$file[$_COOKIE['visitorId']]['banned']) {
+                if (isset($file[$_COOKIE['visitorId']]['active'])) {
+                    include './includes/core.php';
+                }
             }
-        } elseif(!isset($_GET['auth'])) {
+        } elseif (!isset($_GET['auth'])) {
             if (isset($_SESSION['authorizedUserToken'])) {
                 unset($_SESSION['authorizedUserToken']);
             }
 
-            if(isset($_GET['message'])){
+            if (isset($_GET['message'])) {
                 $message = $_GET['message'];
-            }else{
-                 $message = 'You have been banned from accessing the Kever Server!';
+            } else {
+                $message = 'You have been banned from accessing the Kever Server!';
             }
             if ($script2 != 'fingerprint.php') {
-                header('location: ./fingerprint.php?message='.urlencode($message));
+                header('location: ./fingerprint.php?message=' . urlencode($message));
             }
             $_GET['message'] = $message;
             echo $_GET['message'];
-        }elseif($script2 == 'fingerprint.php' && isset($_GET['unban'])){
+        } elseif ($script2 == 'fingerprint.php' && isset($_GET['unban'])) {
             include './includes/core.php';
         }
     } else {
@@ -95,7 +97,7 @@ if (isset($_COOKIE['visitorId'])) {
                 <li class="nav-item">
                     <a class="nav-link" href="mrw.php">Murang'a Women Data</a>
                 </li>
-                
+
             </ul>
 
             <div class="pull-right mt-2 mb-2">
