@@ -3,78 +3,64 @@ include './includes/header.php';
 ?>
 <div class="row">
     <div class="col-md-6">
-        <form class="mt-3" id="keverB">
+        <form class="mt-3" id="keverB" autocomplete="off">
             <div class="mb-3">
                 <label for="exampleInputtext1" class="form-label">Invoice Number</label>
                 <input type="text" name="invoice_number" class="form-control" id="exampleInputtext1" aria-describedby="textHelp">
                 <div id="textHelp" class="form-text">We'll never share your Number with anyone else.</div>
-                <input type="hidden" name="type" value="authenticate" />
-
+                <input type="hidden" name="type" value="monitor" />
+                <div class="mb-3">
+                    <label for="exampleInputtext1" class="form-label">Record</label>
+                    <select class="form-select mt-3" name="record" aria-label="Default select example">
+                        <option value="yes" selected>Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Authenticate</button>
+            <button type="submit" class="btn btn-primary">Monitor Record</button>
+        </form>
+
+    </div>
+    <div class="col-md-6">
+        <form class="mt-3" id="keverB2" autocomplete="off">
+            <input type="hidden" name="type" value="bypassQuery">
+
+
+            <div class="mb-3">
+                <label for="exampleInputtext1" class="form-label">Record Query</label>
+                <select class="form-select mt-3" name="record" aria-label="Default select example">
+                    <option value="all" selected>All</option>
+                    <option value="paid">Paid</option>
+                    <option value="Unpaid">Unpaid</option>
+                    <option value="NaN">Erroneous</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputtext1" class="form-label">Purpose</label>
+                <select class="form-select mt-3" name="purpose" aria-label="Default select example">
+                    <option value="dev" selected>Development</option>
+                    <option value="prod">Production</option>
+                </select>
+            </div>
+         
+
+            <button type="submit" id="bypassInitiate" class="btn btn-primary">Query</button>
         </form>
         <div class="row mt-4">
             <h5 class="col-md-12" id="statusR"></h5>
             <h5 class="col-md-12" id="statusM"></h5>
+            <h5 class="col-md-12" id="invM"></h5>
+            <h5 class="col-md-12" id="amtM"></h5>
         </div>
-    </div>
-    <div class="col-md-6">
-        <form class="mt-3" id="keverB2" autocomplete="off">
-            <input type="hidden" name="type" value="bypass">
-            <div class="mb-3">
-                <label for="exampleInputtext1" class="form-label">Bypass Route</label>
-                <select class="form-select mt-3" id="userType" aria-label="Default select example" name="route">
-                    <option value="normal" selected>Normal</option>
-                    <option value="taifa">Taifa</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="exampleInputtext1" class="form-label">Pay Type</label>
-                <select class="form-select mt-3" id="pay_type" aria-label="Default select example">
-                    <option value="set" selected>Set</option>
-                    <option value="custom">Custom</option>
-                </select>
-            </div>
-
-
-            <div class="mb-3"> <label for="exampleInputtext2" id="fNh" class="form-label">Invoice Number</label>
-                <input type="text" class="form-control billInvoice" aria-describedby="textHelp" disabled>
-                <input type="hidden" name="invoice_no" class="form-control billInvoice">
-                <div id="textHelp2" class="form-text">Bill Invoice</div>
-            </div>
-
-            <div class="mb-3"> <label for="exampleInputtext2" id="fNh" class="form-label">Amount</label>
-                <input type="number" name="amount" class="form-control billAmount" id="openBillAmount" aria-describedby="textHelp" disabled>
-                <input type="hidden" name="amount" class="form-control billAmount" id="hiddenBillAmount" aria-describedby="textHelp">
-                <div id="textHelp2" class="form-text">Bill amount</div>
-            </div>
-
-            <div class="mb-3">
-                <label for="exampleInputtext1" class="form-label">Record</label>
-                <select class="form-select mt-3" name="record" aria-label="Default select example">
-                    <option value="yes" selected>Yes</option>
-                    <option value="no">No</option>
-                </select>
-            </div>
-
-
-            <div id="fNm" class="mb-3" style="display: none;">
-                <label for="exampleInputtext2" id="fNh" class="form-label">Invoice N0</label>
-                <div id="nmeF"></div>
-                <div id="textHelp2" class="form-text">We'll never share your data with anyone else.</div>
-            </div>
-
-            <button type="submit" id="bypassInitiate" class="btn btn-primary" disabled>Bypass</button>
-        </form>
     </div>
 
 
     <div id="Mkl"></div>
 </div>
 <div class="row">
-    <div class="mt-6 col-md-12" id="status"></div>
-    <h4 class="mt-6 col-md-8" id="arrErr"></h4>
+    <div class="mt-6 col-md-6" id="status"></div>
+    <h4 class="mt-6 col-md-6" id="arrErr"></h4>
     <div class="mt-6 col-md-12" id="rest"></div>
 </div>
 
@@ -88,6 +74,8 @@ include './includes/header.php';
         $("#statusM").html('');
         $("#statusR").html('');
         $("#arrErr").html('');
+        $("#amtM").html('');
+        $("#invM").html('');
 
         $("#status").html('<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>');
         formData = new FormData(this);
@@ -117,19 +105,22 @@ include './includes/header.php';
                             $(".billInvoice").attr("value", jsonData.masterDb.invoiceNo);
                             if (jsonData.masterDb && jsonData.regularDb) {
                                 if (jsonData.masterDb.status) {
+                                    $("#invM").html('Invoice No: <div class="badge text-bg-info">'+jsonData.masterDb.invoiceNo+'</div>');
+                                    $("#amtM").append('Master Price: <div class="badge text-bg-dark">'+jsonData.masterDb.amount+'</div>');
                                     if (jsonData.masterDb.status == 'paid') {
                                         $("#statusM").html('Master: <div class="badge text-bg-success">PAID</div>');
                                     } else {
                                         $("#statusM").html('Master: <div class="badge text-bg-danger">UNPAID</div>');
                                     }
                                     if (jsonData.regularDb.paid && jsonData.regularDb.erp_status_code) {
+                                        $("#amtM").append('Regular Price: <div class="badge text-bg-dark">'+jsonData.regularDb.amount+'</div>');
                                         if (jsonData.masterDb.status == 'paid') {
                                             $("#statusM").html('Master: <div class="badge text-bg-success">PAID</div>');
                                             $("#arrErr").append('<div class="alert alert-success" role="alert">Invoice PAID and CLEARED/PASSED!</div>');
                                             if (jsonData.regularDb.paid == true) {
                                                 $("#statusR").html('Regular: <div class="badge text-bg-success">PAID</div>');
                                             } else {
-                                                $("#statusR").html('Regular: <div class="badge text-bg-danger">UNPAID</div>');
+                                                $("#statusR").html('Regular: <div class="badge text-bg-danger">UNPAID</div> <div class="badge text-bg-info">UNPAID</div>');
                                             }
                                         } else {
                                             $("#statusM").html('Master: <div class="badge text-bg-danger">UNPAID</div>');
@@ -201,6 +192,8 @@ include './includes/header.php';
         $("#statusM").html('');
         $("#statusR").html('');
         $("#arrErr").html('');
+        $("#amtM").html('');
+        $("#invM").html('');
 
         $("#status").html('<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>');
         // Enable the invoice_no and amount fields
@@ -217,33 +210,9 @@ include './includes/header.php';
             success: function(data) {
                 console.log(data); // Log the response data
                 $("#status").html('');
-                $("#rest").html('RESPONSE: ', data);
+                $("#rest").html(data);
 
-                try {
-                    var jsonData = JSON.parse(data);
-                    console.log(jsonData);
-                    $("#rest").html(jsonData.htmlData);
-                    if (jsonData.result) {
-                        if (jsonData.result.success == true) {
-                            $("#arrErr").append('<div class="alert alert-primary" role="alert">' + jsonData.result.description + '</div>');
-                            $("#bypassInitiate").prop('disabled', true);
-                            $("#statusR").html('<div class="badge text-bg-success">SUCCESSFULLY PROCESSED!</div>');
-                        } else if (jsonData.result.error) {
-                            $("#arrErr").append('<div class="alert alert-danger" role="alert">' + jsonData.result.error + '</div>');
-                            $("#bypassInitiate").prop('disabled', false);
-                            $("#statusR").html('<div class="badge text-bg-danger">PROCESSING NOT GONE THROUGH! REINITIATE!</div>');
-                        } else {
-                            $("#arrErr").append('<div class="alert alert-danger" role="alert">UNKNOWN RESPONSE</div>');
-                            $("#bypassInitiate").prop('disabled', false);
-                            $("#statusR").html('<div class="badge text-bg-dark">UNKNOWN RESPONSE! REINITIATE!</div>');
-                        }
-                    } else {
-                        $("#arrErr").append('<div class="alert alert-danger" role="alert">UNEXPECTED RESPONSE: ' + data + '</div>');
-                    }
-                } catch (e) {
-                    console.error('Invalid JSON:', e);
-                    $("#arrErr").html('Invalid JSON:', e);
-                }
+          
 
             },
             error: function(xhr, status, error) {

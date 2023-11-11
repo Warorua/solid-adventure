@@ -70,6 +70,109 @@ if ($type == 'invoice2') {
     } else {
         $dt1 = 'Please add an invoice number to proceed!';
     }
+} elseif ($type == 'monitor') {
+    if (isset($_POST['invoice_number'])) {
+        if ($_POST['invoice_number'] != '') {
+            $monitor = $_POST['invoice_number'];
+            $record = $_POST['record'];
+            $head = 'invoice details(master & regular)';
+        } else {
+            $dt1 = 'Please add an invoice number to proceed!!';
+        }
+    } else {
+        $dt1 = 'Please add an invoice number to proceed!';
+    }
+}elseif ($type == 'bypassQuery') {
+   $record = $_POST['record'];
+   $purpose = $_POST['purpose'];
+   if($purpose == 'prod'){
+      $byPur = 'visually-hidden';
+   }else{
+    $byPur = '';
+   }
+   if($record == 'all'){
+    $qtail = '';
+   }else{
+    $qtail = 'WHERE master_status="'.$record.'"';
+   }
+   $stmt = $conn->prepare('SELECT COUNT(*) AS numrows FROM bypass '.$qtail);
+        $stmt->execute();
+        $dtCount = $stmt->fetch();
+        $queryRes = '';
+        $queryRes .= '<h2>Total count: <span class="badge bg-primary">'.$dtCount['numrows'].'</span></h2>';
+
+        $stmt = $conn->prepare('SELECT * FROM bypass '.$qtail);
+        $stmt->execute();
+        $byRes = $stmt->fetchAll();
+        $hesabu = 0;
+    $queryRes .= '
+        <table class="table">
+     <thead>
+     <tr>
+      <th scope="col">#</th>
+      <th scope="col">Invoice Number</th>
+      <th scope="col">Amount</th>
+      <th scope="col" class="'.$byPur.'">Master Status</th>
+      <th scope="col" class="'.$byPur.'">Regular Status</th>
+      <th scope="col" class="'.$byPur.'">note</th>
+      </tr>
+     </thead>
+      <tbody>
+        ';
+        foreach($byRes as $row){
+            if($row['amount'] != 'NanN'){
+                $blAm = intval($row['amount']);
+                $hesabu = $hesabu + $blAm;
+            }else{
+                $blAm = '<div class="badge text-bg-danger">'.$row['amount'].'</div>';
+            }
+            if($row['master_status'] == 'paid'){
+                $byMs = '<div class="badge text-bg-success">PAID</div>';
+            }elseif($row['master_status'] == 'Unpaid'){
+                $byMs = '<div class="badge text-bg-warning">UNPAID</div>';
+            }else{
+                $byMs = '<div class="badge text-bg-danger">ERR</div>';
+            }
+
+            if($row['regular_status'] == 'true'){
+                $byRg = '<div class="badge text-bg-info">PAID</div>';
+            }elseif($row['regular_status'] == 'false'){
+                $byRg = '<div class="badge text-bg-secondary">INITIATED</div>';
+            }else{
+                $byRg = '<div class="badge text-bg-dark">UNTOUCHED</div>';
+            }
+            $queryRes .= '
+        <tr>
+          <th scope="row">'.$row['id'].'</th>
+          <td>'.$row['invoice_no'].'</td>
+          <td>'.$row['amount'].'</td>
+          <td class="'.$byPur.'">'.$byMs.'</td>
+          <td class="'.$byPur.'">'.$byRg.'</td>
+          <td class="'.$byPur.'">'.$row['note'].'</td>
+        </tr>
+            ';
+        }
+    $queryRes .= '
+      </tbody>
+     </table>
+        ';
+         $totalQ = $hesabu/2;
+         $deal20 = $totalQ*0.2;
+         $batch=$totalQ-$deal20;
+        //echo '<h2>Total records: <span class="badge bg-primary">'.$dtCount['numrows'].'</span></h2>';
+        echo $queryRes;
+        echo '
+        <div class="list-group mb-6">
+       <a class="list-group-item list-group-item-action active" aria-current="true">
+       Batch:
+      </a>
+      <a class="list-group-item list-group-item-action">Processed: '.number_format($hesabu,1).'</a>
+      <a class="list-group-item list-group-item-action">Total: '.number_format($totalQ,1).'</a>
+      <a class="list-group-item list-group-item-action">20%: '.number_format($deal20,1).'</a>
+      <a class="list-group-item list-group-item-action">Batch: '.number_format($batch,1).'</a>
+     </div>
+        ';
+
 } elseif ($type == 'bypass') {
     if (isset($_POST['amount']) && isset($_POST['invoice_no'])) {
         if ($_POST['amount'] != '' && $_POST['invoice_no'] != '') {
@@ -129,6 +232,87 @@ if (isset($authenticate)) {
     <div class="col-md-6">' . dt1($dt12, $head, $mini_head) . '</div>
     </div>';
     $output = [];
+    $output['htmlData'] = $htmlData;
+    $output['masterDb'] = $dt12;
+    $output['regularDb'] = $dt11;
+
+    echo json_encode($output);
+}
+
+if (isset($monitor)) {
+    $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $monitor;
+    $data = [];
+    if (isset($_SESSION['token'])) {
+        $invtk = $_SESSION['token'];
+    } else {
+        $invtk = 'null';
+    }
+    $headers = ['Authorization:Bearer ' . $invtk];
+    //echo $invtk;
+    $dt12 = json_decode(httpGet($url, $data, $headers), true);
+
+    //// echo dt1($dt1, $head, $mini_head);
+    $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
+    $data = ['invoice_no' => $monitor];
+    $headers = [];
+
+    $dt11 = json_decode(httpPost($url, $data, $headers), true);
+$output = [];
+    if ($record == 'yes') {
+        if (isset($dt11['amount'])) {
+            $billAm = $dt11['amount'];
+        } elseif (isset($dt12['amount'])) {
+            $billAm = $dt12['amount'];
+        } else {
+            $billAm = 'NaN';
+        }
+
+        if (isset($dt12['status'])) {
+            $masterSt = $dt12['status'];
+        } else {
+            $masterSt = 'NaN';
+        }
+
+        if (isset($dt11['paid'])) {
+            if ($dt11['paid']) {
+                $regSt = 'true';
+            } else {
+                $regSt = 'false';
+            }
+        } else {
+            $regSt = 'NaN';
+        }
+        $dataToInsert = array(
+            "invoice_no" => $monitor,
+            "amount" => $billAm,
+            "master_status" => $masterSt,
+            "regular_status" => $regSt,
+            // Add more columns and values as needed
+        );
+        $stmt = $conn->prepare('SELECT COUNT(*) AS numrows FROM bypass WHERE invoice_no=:invoice_no');
+        $stmt->execute(['invoice_no' => $monitor]);
+        $dtCount = $stmt->fetch();
+        if ($dtCount['numrows'] < 1) {
+
+            // Call the insert method
+            $stmt = $conn->prepare('INSERT INTO bypass (invoice_no, amount, master_status, regular_status) VALUES (:invoice_no, :amount, :master_status, :regular_status)');
+            $stmt->execute($dataToInsert);
+            $output['insert_status'] = "Data inserted successfully recorded.";
+        } else {
+            $stmt = $conn->prepare('UPDATE bypass SET invoice_no=:invoice_no, amount=:amount, master_status=:master_status, regular_status=:regular_status WHERE invoice_no="'.$monitor.'"');
+            $stmt->execute($dataToInsert);
+            $output['insert_status'] = "Recorded Existed thus UPDATED!";
+        }
+    } else {
+        $output['insert_status'] = "Data insertion disabled!";
+    }
+
+    //$dt2 = 'Query proceessed!';
+    $htmlData = '<div class="row">
+    <div class="col-md-6">' . dt1($dt11, $head, $mini_head) . '</div>
+    <div class="col-md-6">' . dt1($dt12, $head, $mini_head) . '</div>
+    </div>';
+    
     $output['htmlData'] = $htmlData;
     $output['masterDb'] = $dt12;
     $output['regularDb'] = $dt11;
