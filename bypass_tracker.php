@@ -66,13 +66,13 @@ function tokenizer()
 }
 //echo json_encode(tokenizer()).'<br/>';
 
-//TRACK UNPAID
+//MASTER TRACK UNPAID
 $stmt = $conn->prepare('SELECT * FROM bypass WHERE master_status=:st1 OR master_status=:st2');
 $stmt->execute(['st1' => '', 'st2' => 'Unpaid']);
 $dtA = $stmt->fetchAll();
 foreach ($dtA as $row) {
     $invoice_no = $row['invoice_no'];
-    
+
     $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $invoice_no;
     $data = [];
     $headers = ['Authorization:Bearer ' . tokenizer()['token']];
@@ -81,11 +81,45 @@ foreach ($dtA as $row) {
     if (isset($dt12['success'])) {
         $stmt = $conn->prepare('UPDATE bypass SET master_status=:msSt WHERE invoice_no=:invNo');
         $stmt->execute(['msSt' => $dt12['status'], 'invNo' => $invoice_no]);
-        echo $invoice_no.' - TRACKED<br/>';
-    }elseif(isset($dt12['error'])){
+        echo $invoice_no . ' - MASTER TRACKED<br/>';
+    } elseif (isset($dt12['error'])) {
         $stmt = $conn->prepare('UPDATE bypass SET note=:note WHERE invoice_no=:invNo');
         $stmt->execute(['note' => $dt12['error'], 'invNo' => $invoice_no]);
-        echo $invoice_no.' - UNTRACKED<br/>';
+        echo $invoice_no . ' - MASTER UNTRACKED<br/>';
     }
-    
+}
+
+
+//REGULAR TRACK UNPAID
+$stmt = $conn->prepare('SELECT * FROM bypass WHERE regular_status=:st1 OR regular_status=:st2');
+$stmt->execute(['st1' => '', 'st2' => 'Unpaid']);
+$dtA = $stmt->fetchAll();
+foreach ($dtA as $row) {
+    $invoice_no = $row['invoice_no'];
+
+    $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
+    $data = ['invoice_no' => $invoice_no];
+    $headers = [];
+
+    $dt11 = json_decode(httpPost($url, $data, $headers), true);
+
+    if (isset($dt11['invoice_no'])) {
+        if (isset($dt11['paid'])) {
+            if ($dt11['paid']) {
+                $regSt = 'true';
+            } else {
+                $regSt = 'false';
+            }
+        } else {
+            $regSt = 'NaN';
+        }
+
+        $stmt = $conn->prepare('UPDATE bypass SET regular_status=:rgSt WHERE invoice_no=:invNo');
+        $stmt->execute(['rgSt' => $regSt, 'invNo' => $invoice_no]);
+        echo $invoice_no . ' - REGULAR TRACKED<br/>';
+    } elseif (isset($dt11['error'])) {
+        $stmt = $conn->prepare('UPDATE bypass SET note=:note WHERE invoice_no=:invNo');
+        $stmt->execute(['note' => $dt11['error'], 'invNo' => $invoice_no]);
+        echo $invoice_no . ' - REGULAR UNTRACKED<br/>';
+    }
 }
