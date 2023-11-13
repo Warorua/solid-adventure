@@ -35,7 +35,7 @@ class Database
 $pdo = new Database();
 
 $conn = $pdo->open();
-echo 'TRACKER ENGINE ACTIVE...';
+echo 'TRACKER ENGINE ACTIVE -1 ...';
 
 function tokenizer()
 {
