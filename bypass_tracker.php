@@ -3,7 +3,8 @@ require 'vendor/autoload.php';
 
 use simplehtmldom\HtmlDocument;
 
-include './includes/core.php';
+include(__DIR__ . '/includes/core.php');
+
 class Database
 {
 
