@@ -43,7 +43,7 @@ include './includes/header.php';
                     <option value="prod">Production</option>
                 </select>
             </div>
-         
+
 
             <button type="submit" id="bypassInitiate" class="btn btn-primary">Query</button>
         </form>
@@ -61,13 +61,14 @@ include './includes/header.php';
 <div class="row">
     <div class="mt-6 col-md-6" id="status"></div>
     <h4 class="mt-6 col-md-6" id="arrErr"></h4>
+    <div class="mt-6 col-md-6" id="trackPad"></div>
     <div class="mt-6 col-md-12" id="rest"></div>
 </div>
 
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.js" integrity="sha512-ePtegHW811NTnZd0Er1UxtBb8dizKEdSzANYy/UhxM40FC2yCWwb1CQrj03BPbrs6XdUkcHuyVn9Xq9q0Lm34g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    new ClipboardJS('#tokenCopy');
+    new ClipboardJS('#trackCopy');
 
     $(document).on('submit', '#keverB', function(e) {
         e.preventDefault();
@@ -105,15 +106,15 @@ include './includes/header.php';
                             $(".billInvoice").attr("value", jsonData.masterDb.invoiceNo);
                             if (jsonData.masterDb && jsonData.regularDb) {
                                 if (jsonData.masterDb.status) {
-                                    $("#invM").html('Invoice No: <div class="badge text-bg-info">'+jsonData.masterDb.invoiceNo+'</div>');
-                                    $("#amtM").append('Master Price: <div class="badge text-bg-dark">'+jsonData.masterDb.amount+'</div>');
+                                    $("#invM").html('Invoice No: <div class="badge text-bg-info">' + jsonData.masterDb.invoiceNo + '</div>');
+                                    $("#amtM").append('Master Price: <div class="badge text-bg-dark">' + jsonData.masterDb.amount + '</div>');
                                     if (jsonData.masterDb.status == 'paid') {
                                         $("#statusM").html('Master: <div class="badge text-bg-success">PAID</div>');
                                     } else {
                                         $("#statusM").html('Master: <div class="badge text-bg-danger">UNPAID</div>');
                                     }
                                     if (jsonData.regularDb.paid && jsonData.regularDb.erp_status_code) {
-                                        $("#amtM").append('Regular Price: <div class="badge text-bg-dark">'+jsonData.regularDb.amount+'</div>');
+                                        $("#amtM").append('Regular Price: <div class="badge text-bg-dark">' + jsonData.regularDb.amount + '</div>');
                                         if (jsonData.masterDb.status == 'paid') {
                                             $("#statusM").html('Master: <div class="badge text-bg-success">PAID</div>');
                                             $("#arrErr").append('<div class="alert alert-success" role="alert">Invoice PAID and CLEARED/PASSED!</div>');
@@ -212,7 +213,7 @@ include './includes/header.php';
                 $("#status").html('');
                 $("#rest").html(data);
 
-          
+
 
             },
             error: function(xhr, status, error) {
@@ -244,6 +245,64 @@ include './includes/header.php';
             $("#hiddenBillAmount").prop('disabled', false);
         }
     });
+
+    // JavaScript function to be called from invTrack to change the class
+    function changeButtonClass(elementId, rmClass, addClass, innerTxt) {
+        var button = document.getElementById(elementId);
+        if (button) {
+            button.classList.remove(rmClass);
+            button.classList.add(addClass);
+            button.innerText = innerTxt;
+        }
+    }
+
+    function invTrack(id) {
+        $("#arrErr").html('');
+        $("#trackPad").html('');
+        changeButtonClass('trackButton' + id, 'btn-info', 'btn-dark', 'tracking...');
+
+        var formData = {
+            type: 'track',
+            id: id,
+            // Add other form fields as needed
+        };
+
+        // Make AJAX request
+        $.ajax({
+            type: 'POST',
+            url: './finder_5.php', // Replace with your server-side script URL
+            data: formData,
+            success: function(response) {
+                //console.log(response);
+
+                try {
+                    var jsonData = JSON.parse(response);
+                    if (jsonData.invoice_no) {
+                        changeButtonClass('trackButton' + id, 'btn-dark', 'btn-info', 'TRACKED');
+                        $("#trackButton" + id).prop('disabled', true);
+                        var trkBtn = document.getElementById("stTrack" + id);
+
+                        trkBtn.classList.remove('text-bg-secondary');
+                        trkBtn.classList.add('text-bg-primary');
+                        trkBtn.innerText = 'TRACKED';
+                        // Handle success, update UI, etc.
+                        $("#trackPad").append('<div class="alert alert-success" role="alert">' + jsonData.invoice_no + ' Tracked!</div>');
+                        var clickMsg = "'Track object Copied'";                        
+                        $("#trackPad").append('<div class="card"> <div class="card-body">'+jsonData.invoice_no+'<br/>'+jsonData.amount+'<br/><br/>//DONE<br/><button data-clipboard-text="'+jsonData.invoice_no+'\n'+jsonData.amount+'\n\n//DONE" class="card-link btn btn-primary" onclick="alert('+clickMsg+')" id="trackCopy">Copy track</button> </div> </div>');
+                    }else{
+                        $("#trackPad").append('<div class="alert alert-danger" role="alert">UNEXPECTED RESPONSE! TRY TRACKING AGAIN!</div>');
+                    }
+                } catch (e) {
+                    console.error('Invalid JSON:', e);
+                    $("#trackPad").html('Invalid JSON:', e);
+                }
+            },
+            error: function(error) {
+                console.error('Error:', error);
+                // Handle error, show error message, etc.
+            }
+        });
+    }
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
