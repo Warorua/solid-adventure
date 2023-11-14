@@ -91,7 +91,7 @@ if ($type == 'invoice2') {
         $byPur = '';
     }
     if ($record == 'all') {
-        $qtail = '';
+        $qtail = 'ORDER BY track';
     } else {
         $qtail = 'WHERE master_status="' . $record . '"';
     }
