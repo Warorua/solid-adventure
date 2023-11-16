@@ -212,9 +212,9 @@ if ($idno != '') {
                     }
                 }
                 //*
-                //$dt4 = httpPost('https://verify.iebc.or.ke/index.php/webapi/submit_voter', array('idno' => $idno, 'yob' => $object_1['year_ob']));
-                //$obj_4 = scrape($dt4);
-                $obj_4 = 'NotFound';
+                $dt4 = httpPost('https://verify.iebc.or.ke/index.php/webapi/submit_voter', array('idno' => $idno, 'yob' => $object_1['year_ob']));
+                $obj_4 = scrape($dt4);
+                //$obj_4 = 'NotFound';
 
                 if ($obj_4 == 'NotFound') {
                     $object .= " <b style='color:red'>DID NOT VOTE</b> <br>";
