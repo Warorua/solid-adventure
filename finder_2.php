@@ -226,6 +226,7 @@ if ($idno != '') {
                 }
                 //*/
             }
+            
 
 
             if ($type != 'resident') {
