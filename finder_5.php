@@ -85,15 +85,28 @@ if ($type == 'invoice2') {
 } elseif ($type == 'bypassQuery') {
     $record = $_POST['record'];
     $purpose = $_POST['purpose'];
+    $client = $_POST['client'];
+
     if ($purpose == 'prod') {
         $byPur = 'visually-hidden';
     } else {
         $byPur = '';
     }
     if ($record == 'all') {
-        $qtail = 'ORDER BY track';
+        $qtail = '';
+        if($client == 'all'){
+            $qtail .= '';
+        }else{
+            $qtail .= 'WHERE client="'.$client.'" ';
+        }
+        $qtail .= 'ORDER BY track';
     } else {
         $qtail = 'WHERE master_status="' . $record . '"';
+        if($client == 'all'){
+            $qtail .= '';
+        }else{
+            $qtail .= ' AND client="'.$client.'"';
+        }
     }
     $stmt = $conn->prepare('SELECT COUNT(*) AS numrows FROM bypass ' . $qtail);
     $stmt->execute();
@@ -114,6 +127,7 @@ if ($type == 'invoice2') {
       <th scope="col">Amount</th>
       <th scope="col" class="' . $byPur . '">Master Status</th>
       <th scope="col" class="' . $byPur . '">Regular Status</th>
+      <th scope="col" class="' . $byPur . '">Client</th>
       <th scope="col" class="' . $byPur . '">Note</th>
       <th scope="col" class="' . $byPur . '">Tracking</th>
       <th scope="col" class="' . $byPur . '">Action</th>
@@ -169,6 +183,7 @@ if ($type == 'invoice2') {
           <td>' . $row['amount'] . '</td>
           <td class="' . $byPur . '">' . $byMs . '</td>
           <td class="' . $byPur . '">' . $byRg . '</td>
+          <td class="' . $byPur . '">' . $row['client'] . '</td>
           <td class="' . $byPur . '">' . $row['note'] . '</td>
           <td class="' . $byPur . '">' . $trSt . '</td>
           <td class="' . $byPur . '"><button type="button" class="btn btn-info"  id="trackButton' . $row['id'] . '" onclick="' . $trckFn . '" ' . $trBtn . '>'.$trBtnTxt.'</button></td>
@@ -179,9 +194,20 @@ if ($type == 'invoice2') {
       </tbody>
      </table>
         ';
-    $totalQ = $hesabu / 2;
-    $deal20 = $totalQ * 0.2;
-    $batch = $totalQ - $deal20;
+    if ($client == 'all') {
+        $totalQ = $hesabu / 2;
+        $deal20 = $totalQ * 0.2;
+        $batch = $totalQ - $deal20;
+    } elseif ($client == 'Deborah') {
+        $totalQ = $hesabu * 0.2;
+        $deal20 = $totalQ * 0.2;
+        $batch = $totalQ - $deal20;
+    } else {
+        $totalQ = $hesabu / 2;
+        $deal20 = $totalQ * 0.2;
+        $batch = $totalQ - $deal20;
+    }
+   
     //echo '<h2>Total records: <span class="badge bg-primary">'.$dtCount['numrows'].'</span></h2>';
     echo $queryRes;
     echo '
@@ -200,7 +226,7 @@ if ($type == 'invoice2') {
         if ($_POST['amount'] != '' && $_POST['invoice_no'] != '') {
             $amount = $_POST['amount'] . '.0';
             $invoice_no = str_replace(array(' ', "\n", "\r", "\r\n"), '', $_POST['invoice_no']);
-            $bypass = ['amount' => $amount, 'invoice_no' => $invoice_no, 'success' => true, 'route' => $_POST['route'], 'record' => $_POST['record']];
+            $bypass = ['amount' => $amount, 'invoice_no' => $invoice_no, 'success' => true, 'route' => $_POST['route'], 'record' => $_POST['record'], 'client'=>$_POST['client']];
             $dt1 = '200';
             $head = 'bypass details(master)';
             //echo json_encode($bypass);
@@ -445,6 +471,8 @@ if (isset($bypass)) {
 
     //$dt0 = httpPost($url, $data, $headers);
     //$dt1 = json_decode($dt0, true);
+    //unset($bypass['success']);
+    //$dt1 = $bypass;
     $dt0 = bypassCode($bypass, $billType, $code);
     $dt1 = json_decode($dt0, true);
 
@@ -456,12 +484,13 @@ if (isset($bypass)) {
                 if ($bypass['record'] == 'yes') {
                     $dataToInsert = array(
                         "invoice_no" => $bypass['invoice_no'],
-                        "amount" => $bypass['amount']
+                        "amount" => $bypass['amount'],
+                        'client' => $bypass['client']
                         // Add more columns and values as needed
                     );
                     $tableName = 'bypass';
                     // Call the insert method
-                    $stmt = $conn->prepare('INSERT INTO bypass (invoice_no, amount) VALUES (:invoice_no, :amount)');
+                    $stmt = $conn->prepare('INSERT INTO bypass (invoice_no, amount, client) VALUES (:invoice_no, :amount, :client)');
                     $stmt->execute($dataToInsert);
                     $dt1['insert_status'] = "Data inserted successfully recorded.";
                 } else {

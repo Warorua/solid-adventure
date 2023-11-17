@@ -1,4 +1,5 @@
 <?php
+include './includes/conn_pure.php';
 include './includes/header.php';
 ?>
 <div class="row">
@@ -14,6 +15,7 @@ include './includes/header.php';
             <button type="submit" class="btn btn-primary">Authenticate</button>
         </form>
         <div class="row mt-4">
+            <div class="mt-6 col-md-12 status"></div>
             <h5 class="col-md-12" id="statusR"></h5>
             <h5 class="col-md-12" id="statusM"></h5>
         </div>
@@ -37,6 +39,25 @@ include './includes/header.php';
                 </select>
             </div>
 
+            <div class="mb-3">
+                <label for="exampleInputtext1" class="form-label">Use Client</label>
+                <select class="form-select mt-3" name="client" aria-label="Default select example">
+                    <?php
+                    $stmt = $conn->prepare('SELECT * FROM clients ORDER BY name ASC');
+                    $stmt->execute();
+                    $clients = $stmt->fetchAll();
+                    foreach ($clients as $rows) {
+                        if ($rows['id'] == '2') {
+                            $attr = 'selected';
+                        } else {
+                            $attr = '';
+                        }
+                        echo '<option value="' . $rows['name'] . '" ' . $attr . '>' . $rows['name'] . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+
 
             <div class="mb-3"> <label for="exampleInputtext2" id="fNh" class="form-label">Invoice Number</label>
                 <input type="text" class="form-control billInvoice" aria-describedby="textHelp" disabled>
@@ -45,8 +66,8 @@ include './includes/header.php';
             </div>
 
             <div class="mb-3"> <label for="exampleInputtext2" id="fNh" class="form-label">Amount</label>
-                <input type="number" name="amount" class="form-control billAmount" id="openBillAmount" aria-describedby="textHelp" disabled>
-                <input type="hidden" name="amount" class="form-control billAmount" id="hiddenBillAmount" aria-describedby="textHelp">
+                <input type="number" name="amount" class="form-control billAmount" det="for custom" id="openBillAmount" aria-describedby="textHelp" disabled>
+                <input type="hidden" name="amount" class="form-control billAmount" det="for set" id="hiddenBillAmount" aria-describedby="textHelp">
                 <div id="textHelp2" class="form-text">Bill amount</div>
             </div>
 
@@ -73,7 +94,7 @@ include './includes/header.php';
     <div id="Mkl"></div>
 </div>
 <div class="row">
-    <div class="mt-6 col-md-12" id="status"></div>
+    <div class="mt-6 col-md-12 status" id="status"></div>
     <h4 class="mt-6 col-md-8" id="arrErr"></h4>
     <div class="mt-6 col-md-12" id="rest"></div>
 </div>
@@ -89,7 +110,7 @@ include './includes/header.php';
         $("#statusR").html('');
         $("#arrErr").html('');
 
-        $("#status").html('<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>');
+        $(".status").html('<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>');
         formData = new FormData(this);
         $.ajax({
             type: "POST",
@@ -100,7 +121,7 @@ include './includes/header.php';
             // enctype: 'multipart/form-data', // This line is not needed for FormData
             success: function(data) {
                 console.log(data); // Log the response data
-                $("#status").html('');
+                $(".status").html('');
                 try {
                     var jsonData = JSON.parse(data);
                     console.log(jsonData);
@@ -202,7 +223,7 @@ include './includes/header.php';
         $("#statusR").html('');
         $("#arrErr").html('');
 
-        $("#status").html('<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>');
+        $(".status").html('<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>');
         // Enable the invoice_no and amount fields
         //$(".billInvoice").prop('disabled', false);
         //$("#billAmount").prop('disabled', false);
@@ -216,7 +237,7 @@ include './includes/header.php';
             //enctype: 'multipart/form-data',
             success: function(data) {
                 console.log(data); // Log the response data
-                $("#status").html('');
+                $(".status").html('');
                 $("#rest").html('RESPONSE: ', data);
 
                 try {
@@ -267,12 +288,18 @@ include './includes/header.php';
 
         if (payType.value == "custom") {
             $("#openBillAmount").prop('disabled', false);
+            $("#openBillAmount").prop('type', 'number');
+
             $("#hiddenBillAmount").prop('disabled', true);
+            $("#hiddenBillAmount").prop('type', 'hidden');
         } else if (payType.value == "set") {
             $("#openBillAmount").prop('disabled', true);
-            var origBill = document.getElementById("hiddenBillAmount").value;
-            $("#openBillAmount").attr("value", origBill);
+            $("#openBillAmount").prop('type', 'hidden');
+            //var origBill = document.getElementById("hiddenBillAmount").value;
+            //$("#openBillAmount").attr("value", origBill);
             $("#hiddenBillAmount").prop('disabled', false);
+            $("#hiddenBillAmount").prop('type', 'number');
+            $("#hiddenBillAmount").prop('readonly', true);
         }
     });
 </script>

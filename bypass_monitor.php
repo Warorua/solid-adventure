@@ -1,4 +1,5 @@
 <?php
+include './includes/conn_pure.php';
 include './includes/header.php';
 ?>
 <div class="row">
@@ -33,6 +34,21 @@ include './includes/header.php';
                     <option value="paid">Paid</option>
                     <option value="Unpaid">Unpaid</option>
                     <option value="NaN">Erroneous</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputtext1" class="form-label">Client Query</label>
+                <select class="form-select mt-3" name="client" aria-label="Default select example">
+                    <option value="all" selected>All</option>
+                    <?php
+                    $stmt = $conn->prepare('SELECT * FROM clients ORDER BY name ASC');
+                    $stmt->execute();
+                    $clients = $stmt->fetchAll();
+                    foreach($clients as $rows){
+                        echo '<option value="'.$rows['name'].'">'.$rows['name'].'</option>';
+                    }
+                    ?>
                 </select>
             </div>
 
