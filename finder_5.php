@@ -195,16 +195,16 @@ if ($type == 'invoice2') {
      </table>
         ';
     if ($client == 'all') {
-        $totalQ = $hesabu / 2;
-        $deal20 = $totalQ * 0.2;
+        $totalQ = $hesabu * 0.45;
+        $deal20 = $hesabu * 0.08;
         $batch = $totalQ - $deal20;
     } elseif ($client == 'Deborah') {
         $totalQ = $hesabu * 0.2;
         $deal20 = $totalQ * 0.2;
         $batch = $totalQ - $deal20;
     } else {
-        $totalQ = $hesabu / 2;
-        $deal20 = $totalQ * 0.2;
+        $totalQ = $hesabu * 0.45;
+        $deal20 = $hesabu * 0.08;
         $batch = $totalQ - $deal20;
     }
    
