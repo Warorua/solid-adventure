@@ -195,11 +195,11 @@ if ($type == 'invoice2') {
      </table>
         ';
     if ($client == 'all') {
-        $totalQ = $hesabu * 0.45;
+        $totalQ = $hesabu * 0.50;
         $deal20 = $hesabu * 0.08;
-        $pcta = 'Total(45%): ';
-        $pctg = 'SG(8%): ';
-        $batchE = 'Batch(37%): ';
+        $pcta = 'Total(50%): ';
+        $pctg = 'SG(10%): ';
+        $batchE = 'Batch(40%): ';
         $autxa4 = '';
         $batch = $totalQ - $deal20;
     } elseif ($client == 'Deborah') {
@@ -215,12 +215,25 @@ if ($type == 'invoice2') {
         $auxa3 = '<a class="list-group-item list-group-item-action">Ground Team(10%): ' . number_format($totalB, 1) . '</a><a class="list-group-item list-group-item-action"></a>';
         $autxa4 = $auxa1 . $auxa2 . $auxa3;
         $batch = $totalQ - $deal20;
-    } else {
-        $totalQ = $hesabu * 0.45;
+    }  elseif ($client == 'Deborah') {
+        $totalA = $hesabu / 2;
+        $totalQ = $hesabu * 0.2;
+        $totalB = $hesabu * 0.1;
+        $deal20 = $totalQ * 0.2;
+        $pcta = '<b>Team B :</b> ';
+        $pctg = 'S.G(4%): ';
+        $batchE = 'Batch(16%): ';
+        $auxa1 = '<a class="list-group-item list-group-item-action">Total(100%): ' . number_format($totalA, 1) . '</a>';
+        $auxa2 = '<a class="list-group-item list-group-item-action">D.K(20%): ' . number_format($totalQ, 1) . '</a>';
+        $auxa3 = '<a class="list-group-item list-group-item-action">Ground Team(10%): ' . number_format($totalB, 1) . '</a><a class="list-group-item list-group-item-action"></a>';
+        $autxa4 = $auxa1 . $auxa2 . $auxa3;
+        $batch = $totalQ - $deal20;
+    }else {
+        $totalQ = $hesabu * 0.40;
         $deal20 = $hesabu * 0.08;
-        $pcta = 'Total(45%): ';
-        $pctg = 'S.G(8%): ';
-        $batchE = 'Batch(37%): ';
+        $pcta = 'Total(40%): ';
+        $pctg = 'S.G(6%): ';
+        $batchE = 'Batch(34%): ';
         $autxa4 = '';
         $batch = $totalQ - $deal20;
     }

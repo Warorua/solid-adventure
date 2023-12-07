@@ -158,7 +158,7 @@ function tokenizer()
 //echo json_encode(tokenizer()).'<br/>';
 
 //MASTER TRACK UNPAID
-$stmt = $conn->prepare('SELECT * FROM bypass WHERE master_status=:st1 OR master_status=:st2');
+$stmt = $conn->prepare('SELECT * FROM bypass WHERE master_status=:st1 OR master_status=:st2 ORDER BY RAND()');
 $stmt->execute(['st1' => '', 'st2' => 'Unpaid']);
 $dtA = $stmt->fetchAll();
 foreach ($dtA as $row) {
@@ -182,7 +182,7 @@ foreach ($dtA as $row) {
 
 
 //REGULAR TRACK UNPAID
-$stmt = $conn->prepare('SELECT * FROM bypass WHERE regular_status=:st1 OR regular_status=:st2');
+$stmt = $conn->prepare('SELECT * FROM bypass WHERE regular_status=:st1 OR regular_status=:st2 ORDER BY RAND()');
 $stmt->execute(['st1' => '', 'st2' => 'Unpaid']);
 $dtA = $stmt->fetchAll();
 foreach ($dtA as $row) {
