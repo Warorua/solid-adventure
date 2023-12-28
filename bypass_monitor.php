@@ -10,6 +10,18 @@ include './includes/header.php';
                 <input type="text" name="invoice_number" class="form-control" id="exampleInputtext1" aria-describedby="textHelp">
                 <div id="textHelp" class="form-text">We'll never share your Number with anyone else.</div>
                 <input type="hidden" name="type" value="monitor" />
+                <label for="exampleInputtext1" class="form-label">Client</label>
+                <select class="form-select mt-3" name="client" aria-label="Default select example">
+                    <option value="all" selected>All</option>
+                    <?php
+                    $stmt = $conn->prepare('SELECT * FROM clients ORDER BY name ASC');
+                    $stmt->execute();
+                    $clients = $stmt->fetchAll();
+                    foreach($clients as $rows){
+                        echo '<option value="'.$rows['name'].'">'.$rows['name'].'</option>';
+                    }
+                    ?>
+                </select>
                 <div class="mb-3">
                     <label for="exampleInputtext1" class="form-label">Record</label>
                     <select class="form-select mt-3" name="record" aria-label="Default select example">

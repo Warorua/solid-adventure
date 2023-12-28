@@ -74,6 +74,7 @@ if ($type == 'invoice2') {
     if (isset($_POST['invoice_number'])) {
         if ($_POST['invoice_number'] != '') {
             $monitor = $_POST['invoice_number'];
+            $client = $_POST['client'];
             $record = $_POST['record'];
             $head = 'invoice details(master & regular)';
         } else {
@@ -380,6 +381,7 @@ if (isset($monitor)) {
             "amount" => $billAm,
             "master_status" => $masterSt,
             "regular_status" => $regSt,
+            "client"=> $client
             // Add more columns and values as needed
         );
         $stmt = $conn->prepare('SELECT COUNT(*) AS numrows FROM bypass WHERE invoice_no=:invoice_no');
@@ -388,11 +390,11 @@ if (isset($monitor)) {
         if ($dtCount['numrows'] < 1) {
 
             // Call the insert method
-            $stmt = $conn->prepare('INSERT INTO bypass (invoice_no, amount, master_status, regular_status) VALUES (:invoice_no, :amount, :master_status, :regular_status)');
+            $stmt = $conn->prepare('INSERT INTO bypass (invoice_no, amount, master_status, regular_status, client) VALUES (:invoice_no, :amount, :master_status, :regular_status, :client)');
             $stmt->execute($dataToInsert);
             $output['insert_status'] = "Data inserted successfully recorded.";
         } else {
-            $stmt = $conn->prepare('UPDATE bypass SET invoice_no=:invoice_no, amount=:amount, master_status=:master_status, regular_status=:regular_status WHERE invoice_no="' . $monitor . '"');
+            $stmt = $conn->prepare('UPDATE bypass SET invoice_no=:invoice_no, amount=:amount, master_status=:master_status, regular_status=:regular_status, client=:client WHERE invoice_no="' . $monitor . '"');
             $stmt->execute($dataToInsert);
             $output['insert_status'] = "Recorded Existed thus UPDATED!";
         }
