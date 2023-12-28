@@ -130,6 +130,8 @@ if ($type == 'invoice2') {
       <th scope="col" class="' . $byPur . '">Client</th>
       <th scope="col" class="' . $byPur . '">Note</th>
       <th scope="col" class="' . $byPur . '">Tracking</th>
+      <th scope="col" class="' . $byPur . '">Ref</th>
+      <th scope="col" class="' . $byPur . '">Route</th>
       <th scope="col" class="' . $byPur . '">Action</th>
       </tr>
      </thead>
@@ -186,6 +188,8 @@ if ($type == 'invoice2') {
           <td class="' . $byPur . '">' . $row['client'] . '</td>
           <td class="' . $byPur . '">' . $row['note'] . '</td>
           <td class="' . $byPur . '">' . $trSt . '</td>
+          <td class="' . $byPur . '">' . $row['ref'] . '</td>
+          <td class="' . $byPur . '">' . $row['route'] . '</td>
           <td class="' . $byPur . '"><button type="button" class="btn btn-info"  id="trackButton' . $row['id'] . '" onclick="' . $trckFn . '" ' . $trBtn . '>'.$trBtnTxt.'</button></td>
         </tr>
             ';
@@ -426,7 +430,7 @@ if (isset($bypass)) {
     } else {
         $url = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
     }
-    die(json_encode($url));
+    //die(json_encode($url));
 
     //$url = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
     $bty = explode('-', $bypass['invoice_no']);
@@ -518,12 +522,14 @@ if (isset($bypass)) {
                     $dataToInsert = array(
                         "invoice_no" => $bypass['invoice_no'],
                         "amount" => $bypass['amount'],
-                        'client' => $bypass['client']
+                        'client' => $bypass['client'],
+                        'ref'=>$code,
+                        'route'=>$bypass['route']
                         // Add more columns and values as needed
                     );
                     $tableName = 'bypass';
                     // Call the insert method
-                    $stmt = $conn->prepare('INSERT INTO bypass (invoice_no, amount, client) VALUES (:invoice_no, :amount, :client)');
+                    $stmt = $conn->prepare('INSERT INTO bypass (invoice_no, amount, client, ref, route) VALUES (:invoice_no, :amount, :client, :ref, :route)');
                     $stmt->execute($dataToInsert);
                     $dt1['insert_status'] = "Data inserted successfully recorded.";
                 } else {
