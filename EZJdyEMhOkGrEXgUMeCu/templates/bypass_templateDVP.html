@@ -1,0 +1,106 @@
+<!-- Edit this file to change the layout of the detail view print preview page -->
+
+
+<div class="panel-heading"><h3 class="panel-title">
+	<strong><%%DETAIL_VIEW_TITLE%%></strong>
+	<div class="hidden-print pull-right">
+		<div class="btn-group">
+			<button type="button" id="print" onclick="window.print();" title="<%%TRANSLATION(Print)%%>" class="btn btn-primary"><i class="glyphicon glyphicon-print"></i> <%%TRANSLATION(Print)%%></button>
+			<button type="submit" id="back" title="<%%TRANSLATION(Cancel Printing)%%>" class="btn btn-default"><i class="glyphicon glyphicon-remove-circle"></i> <%%TRANSLATION(Cancel Printing)%%></button>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</h3></div>
+
+<div class="panel-body">
+	<fieldset class="form-horizontal">
+		<!-- Field: Id -->
+		<div class="form-group bypass-id" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Id</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(id)%%></div>
+			</div>
+		</div>
+		<!-- Field: Invoice_no -->
+		<div class="form-group bypass-invoice_no" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Invoice_no</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(invoice_no)%%></div>
+			</div>
+		</div>
+		<!-- Field: Amount -->
+		<div class="form-group bypass-amount" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Amount</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(amount)%%></div>
+			</div>
+		</div>
+		<!-- Field: Master_status -->
+		<div class="form-group bypass-master_status" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Master_status</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(master_status)%%></div>
+			</div>
+		</div>
+		<!-- Field: Regular_status -->
+		<div class="form-group bypass-regular_status" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Regular_status</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(regular_status)%%></div>
+			</div>
+		</div>
+		<!-- Field: Track -->
+		<div class="form-group bypass-track" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Track</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(track)%%></div>
+			</div>
+		</div>
+		<!-- Field: Note -->
+		<div class="form-group bypass-note" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Note</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(note)%%></div>
+			</div>
+		</div>
+		<!-- Field: Timestamp -->
+		<div class="form-group bypass-timestamp" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Timestamp</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(timestamp)%%></div>
+			</div>
+		</div>
+		<!-- Field: Client -->
+		<div class="form-group bypass-client" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Client</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><span id="client<%%RND1%%>"><%%COMBOTEXT(client)%%></span></div>
+			</div>
+		</div>
+		<!-- Field: Ref -->
+		<div class="form-group bypass-ref" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Ref</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(ref)%%></div>
+			</div>
+		</div>
+		<!-- Field: Route -->
+		<div class="form-group bypass-route" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Route</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(route)%%></div>
+			</div>
+		</div>
+	</fieldset>
+</div>
+<script>
+	$j(function() {
+		// render read-only checkboxes in DVP
+		$j('form input[type=checkbox]:not(.hidden):checked')
+			.addClass('hidden')
+			.after('<i class="glyphicon glyphicon-check"></i>');
+		$j('form input[type=checkbox]:not(.hidden):not(:checked)')
+			.addClass('hidden')
+			.after('<i class="glyphicon glyphicon-unchecked"></i>')
+	})
+</script>

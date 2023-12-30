@@ -1,0 +1,12 @@
+<!-- Edit this file to change the layout of each record in the table view -->
+<!-- To disable clicking of a field, remove the  and  formatters around it-->
+
+<!-- If you wish to hide the table view header that contains the column titles, -->
+<!-- add the following to the token_init() hook (in hooks/token.php file) -->
+<!--     $options->ShowTableHeader = 0;     -->
+
+		<td id="token-id-<%%VALUE(id)%%>" class="token-id text-right"><%%VALUE(id)%%></td>
+		<td id="token-name-<%%VALUE(id)%%>" class="token-name"><%%VALUE(name)%%></td>
+		<td id="token-cid-<%%VALUE(id)%%>" class="token-cid"><%%VALUE(cid)%%></td>
+		<td id="token-token-<%%VALUE(id)%%>" class="token-token"><%%VALUE(token)%%></td>
+		<td id="token-timestamp-<%%VALUE(id)%%>" class="token-timestamp"><%%VALUE(timestamp)%%></td>

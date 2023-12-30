@@ -1,0 +1,18 @@
+<!-- Edit this file to change the layout of each record in the table view -->
+<!-- To disable clicking of a field, remove the  and  formatters around it-->
+
+<!-- If you wish to hide the table view header that contains the column titles, -->
+<!-- add the following to the bypass_init() hook (in hooks/bypass.php file) -->
+<!--     $options->ShowTableHeader = 0;     -->
+
+		<td id="bypass-id-<%%VALUE(id)%%>" class="bypass-id text-right"><%%VALUE(id)%%></td>
+		<td id="bypass-invoice_no-<%%VALUE(id)%%>" class="bypass-invoice_no"><%%VALUE(invoice_no)%%></td>
+		<td id="bypass-amount-<%%VALUE(id)%%>" class="bypass-amount"><%%VALUE(amount)%%></td>
+		<td id="bypass-master_status-<%%VALUE(id)%%>" class="bypass-master_status"><%%VALUE(master_status)%%></td>
+		<td id="bypass-regular_status-<%%VALUE(id)%%>" class="bypass-regular_status"><%%VALUE(regular_status)%%></td>
+		<td id="bypass-track-<%%VALUE(id)%%>" class="bypass-track"><%%VALUE(track)%%></td>
+		<td id="bypass-note-<%%VALUE(id)%%>" class="bypass-note"><%%VALUE(note)%%></td>
+		<td id="bypass-timestamp-<%%VALUE(id)%%>" class="bypass-timestamp"><%%VALUE(timestamp)%%></td>
+		<td id="bypass-client-<%%VALUE(id)%%>" class="bypass-client"><%%VALUE(client)%%></td>
+		<td id="bypass-ref-<%%VALUE(id)%%>" class="bypass-ref"><%%VALUE(ref)%%></td>
+		<td id="bypass-route-<%%VALUE(id)%%>" class="bypass-route"><%%VALUE(route)%%></td>

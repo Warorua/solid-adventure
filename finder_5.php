@@ -95,18 +95,18 @@ if ($type == 'invoice2') {
     }
     if ($record == 'all') {
         $qtail = '';
-        if($client == 'all'){
+        if ($client == 'all') {
             $qtail .= '';
-        }else{
-            $qtail .= 'WHERE client="'.$client.'" ';
+        } else {
+            $qtail .= 'WHERE client="' . $client . '" ';
         }
         $qtail .= 'ORDER BY track';
     } else {
         $qtail = 'WHERE master_status="' . $record . '"';
-        if($client == 'all'){
+        if ($client == 'all') {
             $qtail .= '';
-        }else{
-            $qtail .= ' AND client="'.$client.'"';
+        } else {
+            $qtail .= ' AND client="' . $client . '"';
         }
     }
     $stmt = $conn->prepare('SELECT COUNT(*) AS numrows FROM bypass ' . $qtail);
@@ -175,7 +175,7 @@ if ($type == 'invoice2') {
         } else {
             $trSt = '<div class="badge text-bg-primary"  id="stTrack' . $row['id'] . '">TRACKED</div>';
             $trBtn = 'disabled';
-             $trBtnTxt = 'TRACKED';
+            $trBtnTxt = 'TRACKED';
         }
         $trckFn = "invTrack('" . $row['id'] . "')";
 
@@ -191,7 +191,7 @@ if ($type == 'invoice2') {
           <td class="' . $byPur . '">' . $trSt . '</td>
           <td class="' . $byPur . '">' . $row['ref'] . '</td>
           <td class="' . $byPur . '">' . $row['route'] . '</td>
-          <td class="' . $byPur . '"><button type="button" class="btn btn-info"  id="trackButton' . $row['id'] . '" onclick="' . $trckFn . '" ' . $trBtn . '>'.$trBtnTxt.'</button></td>
+          <td class="' . $byPur . '"><button type="button" class="btn btn-info"  id="trackButton' . $row['id'] . '" onclick="' . $trckFn . '" ' . $trBtn . '>' . $trBtnTxt . '</button></td>
         </tr>
             ';
     }
@@ -220,7 +220,7 @@ if ($type == 'invoice2') {
         $auxa3 = '<a class="list-group-item list-group-item-action">Ground Team(10%): ' . number_format($totalB, 1) . '</a><a class="list-group-item list-group-item-action"></a>';
         $autxa4 = $auxa1 . $auxa2 . $auxa3;
         $batch = $totalQ - $deal20;
-    }  elseif ($client == 'Deborah') {
+    } elseif ($client == 'Deborah') {
         $totalA = $hesabu / 2;
         $totalQ = $hesabu * 0.2;
         $totalB = $hesabu * 0.1;
@@ -233,7 +233,7 @@ if ($type == 'invoice2') {
         $auxa3 = '<a class="list-group-item list-group-item-action">Ground Team(10%): ' . number_format($totalB, 1) . '</a><a class="list-group-item list-group-item-action"></a>';
         $autxa4 = $auxa1 . $auxa2 . $auxa3;
         $batch = $totalQ - $deal20;
-    }else {
+    } else {
         $totalQ = $hesabu * 0.40;
         $deal20 = $hesabu * 0.08;
         $pcta = 'Total(40%): ';
@@ -242,9 +242,29 @@ if ($type == 'invoice2') {
         $autxa4 = '';
         $batch = $totalQ - $deal20;
     }
-   
-    //echo '<h2>Total records: <span class="badge bg-primary">'.$dtCount['numrows'].'</span></h2>';
     echo $queryRes;
+    $stmt = $conn->prepare("SELECT * FROM math LEFT JOIN clients ON math.client=clients.id WHERE name=:name");
+    $stmt->execute(['name' => $client]);
+    $math_cl = $stmt->fetchAll();
+    $mathObj = '';
+    foreach ($math_cl as $row) {
+        $opPerc = $row['perc']/100;
+        $opMath = $opPerc*$hesabu; 
+        $mathObj .= '<a class="list-group-item list-group-item-action">'.$row['abbr'].'('.$row['perc'].'%): ' . number_format($opMath, 1) . '</a>';
+    }
+    
+    echo '
+    <div class="list-group mb-6">
+   <a class="list-group-item list-group-item-action active" aria-current="true">
+   Batch:
+  </a>
+  ' . $mathObj . '
+ </div>
+    ';
+    //echo $mathObj;
+
+    //echo '<h2>Total records: <span class="badge bg-primary">'.$dtCount['numrows'].'</span></h2>';
+    /*
     echo '
         <div class="list-group mb-6">
        <a class="list-group-item list-group-item-action active" aria-current="true">
@@ -257,12 +277,13 @@ if ($type == 'invoice2') {
       <a class="list-group-item list-group-item-action">' . $batchE . number_format($batch, 1) . '</a>
      </div>
         ';
+        */
 } elseif ($type == 'bypass') {
     if (isset($_POST['amount']) && isset($_POST['invoice_no'])) {
         if ($_POST['amount'] != '' && $_POST['invoice_no'] != '') {
             $amount = $_POST['amount'] . '.0';
             $invoice_no = str_replace(array(' ', "\n", "\r", "\r\n"), '', $_POST['invoice_no']);
-            $bypass = ['amount' => $amount, 'invoice_no' => $invoice_no, 'success' => true, 'route' => $_POST['route'], 'record' => $_POST['record'], 'client'=>$_POST['client']];
+            $bypass = ['amount' => $amount, 'invoice_no' => $invoice_no, 'success' => true, 'route' => $_POST['route'], 'record' => $_POST['record'], 'client' => $_POST['client']];
             $dt1 = '200';
             $head = 'bypass details(master)';
             //echo json_encode($bypass);
@@ -381,7 +402,7 @@ if (isset($monitor)) {
             "amount" => $billAm,
             "master_status" => $masterSt,
             "regular_status" => $regSt,
-            "client"=> $client
+            "client" => $client
             // Add more columns and values as needed
         );
         $stmt = $conn->prepare('SELECT COUNT(*) AS numrows FROM bypass WHERE invoice_no=:invoice_no');
@@ -525,8 +546,8 @@ if (isset($bypass)) {
                         "invoice_no" => $bypass['invoice_no'],
                         "amount" => $bypass['amount'],
                         'client' => $bypass['client'],
-                        'ref'=>$code,
-                        'route'=>$bypass['route']
+                        'ref' => $code,
+                        'route' => $bypass['route']
                         // Add more columns and values as needed
                     );
                     $tableName = 'bypass';

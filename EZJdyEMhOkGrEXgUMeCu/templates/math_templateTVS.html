@@ -1,0 +1,12 @@
+<!-- Edit this file to change the layout of each record in the table view -->
+<!-- To disable clicking of a field, remove the  and  formatters around it-->
+
+<!-- If you wish to hide the table view header that contains the column titles, -->
+<!-- add the following to the math_init() hook (in hooks/math.php file) -->
+<!--     $options->ShowTableHeader = 0;     -->
+
+		<td id="math-id-<%%VALUE(id)%%>" class="math-id text-right"><%%VALUE(id)%%></td>
+		<td id="math-created_at-<%%VALUE(id)%%>" class="math-created_at"><%%VALUE(created_at)%%></td>
+		<td id="math-client-<%%VALUE(id)%%>" class="math-client"><%%VALUE(client)%%></td>
+		<td id="math-perc-<%%VALUE(id)%%>" class="math-perc"><%%VALUE(perc)%%></td>
+		<td id="math-abbr-<%%VALUE(id)%%>" class="math-abbr"><%%VALUE(abbr)%%></td>

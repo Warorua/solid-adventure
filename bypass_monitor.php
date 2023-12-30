@@ -4,6 +4,9 @@ include './includes/header.php';
 ?>
 <div class="row">
     <div class="col-md-6">
+        <div class="mb-3 mt-3">
+            <a class="btn btn-success" href="./EZJdyEMhOkGrEXgUMeCu">Live</a>
+        </div>
         <form class="mt-3" id="keverB" autocomplete="off">
             <div class="mb-3">
                 <label for="exampleInputtext1" class="form-label">Invoice Number</label>
