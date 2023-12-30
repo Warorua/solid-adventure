@@ -84,18 +84,18 @@
 				<!-- Field: Timestamp -->
 				<div class="form-group bypass-timestamp">
 					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3">Timestamp</label>
+					<label class="control-label col-lg-3" for="timestamp">Timestamp</label>
 					<div class="col-lg-9">
-						<div class="form-control-static" id="timestamp"><%%VALUE(timestamp)%%></div>
+						<input maxlength="200" type="text" class="form-control" name="timestamp" id="timestamp" value="<%%VALUE(timestamp)%%>">
 					</div>
 				</div>
 
 				<!-- Field: Client -->
 				<div class="form-group bypass-client">
 					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="client" data-parent_link="view_parent_modal">Client</label>
+					<label class="control-label col-lg-3">Client</label>
 					<div class="col-lg-9">
-						<div class="lookup-flex"><%%COMBO(client)%%><%%PLINK(client)%%><%%ADDNEW(clients)%%></div>
+						<div class="form-control-static" id="client"><%%VALUE(client)%%></div>
 					</div>
 				</div>
 

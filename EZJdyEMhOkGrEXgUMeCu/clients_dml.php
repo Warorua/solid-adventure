@@ -91,25 +91,6 @@ function clients_delete($selected_id, $AllowDeleteOfParents = false, $skipChecks
 			);
 	}
 
-	// child table: bypass
-	$res = sql("SELECT `id` FROM `clients` WHERE `id`='{$selected_id}'", $eo);
-	$id = db_fetch_row($res);
-	$rires = sql("SELECT COUNT(1) FROM `bypass` WHERE `client`='" . makeSafe($id[0]) . "'", $eo);
-	$rirow = db_fetch_row($rires);
-	if($rirow[0] && !$AllowDeleteOfParents && !$skipChecks) {
-		$RetMsg = $Translation["couldn't delete"];
-		$RetMsg = str_replace('<RelatedRecords>', $rirow[0], $RetMsg);
-		$RetMsg = str_replace('<TableName>', 'bypass', $RetMsg);
-		return $RetMsg;
-	} elseif($rirow[0] && $AllowDeleteOfParents && !$skipChecks) {
-		$RetMsg = $Translation['confirm delete'];
-		$RetMsg = str_replace('<RelatedRecords>', $rirow[0], $RetMsg);
-		$RetMsg = str_replace('<TableName>', 'bypass', $RetMsg);
-		$RetMsg = str_replace('<Delete>', '<input type="button" class="btn btn-danger" value="' . html_attr($Translation['yes']) . '" onClick="window.location = \'clients_view.php?SelectedID=' . urlencode($selected_id) . '&delete_x=1&confirmed=1&csrf_token=' . urlencode(csrf_token(false, true)) . '\';">', $RetMsg);
-		$RetMsg = str_replace('<Cancel>', '<input type="button" class="btn btn-success" value="' . html_attr($Translation[ 'no']) . '" onClick="window.location = \'clients_view.php?SelectedID=' . urlencode($selected_id) . '\';">', $RetMsg);
-		return $RetMsg;
-	}
-
 	// child table: math
 	$res = sql("SELECT `id` FROM `clients` WHERE `id`='{$selected_id}'", $eo);
 	$id = db_fetch_row($res);
@@ -265,22 +246,6 @@ function clients_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $Al
 		$filterOperator = Request::val('FilterOperator');
 		$filterValue = Request::val('FilterValue');
 	}
-
-	ob_start();
-	?>
-
-	<script>
-		// initial lookup values
-
-		jQuery(function() {
-			setTimeout(function() {
-			}, 50); /* we need to slightly delay client-side execution of the above code to allow AppGini.ajaxCache to work */
-		});
-	</script>
-	<?php
-
-	$lookups = str_replace('__RAND__', $rnd1, ob_get_clean());
-
 
 	// code for template based detail view forms
 

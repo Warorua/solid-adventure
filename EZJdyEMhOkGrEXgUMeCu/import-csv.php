@@ -5,7 +5,6 @@
 	// accept a record as an assoc array, return transformed row ready to insert to table
 	$transformFunctions = [
 		'bypass' => function($data, $options = []) {
-			if(isset($data['client'])) $data['client'] = pkGivenLookupText($data['client'], 'bypass', 'client');
 
 			return $data;
 		},

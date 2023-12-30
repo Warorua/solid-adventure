@@ -13,7 +13,7 @@ function math_insert(&$error_message = '') {
 	if(!$arrPerm['insert']) return false;
 
 	$data = [
-		'created_at' => Request::val('created_at', 'current_timestamp()'),
+		'created_at' => parseCode('<%%creationTimestamp%%>current_timestamp()', true, true),
 		'client' => Request::lookup('client', ''),
 		'perc' => Request::val('perc', ''),
 		'abbr' => Request::val('abbr', ''),
@@ -112,7 +112,6 @@ function math_update(&$selected_id, &$error_message = '') {
 	if(!check_record_permission('math', $selected_id, 'edit')) return false;
 
 	$data = [
-		'created_at' => Request::val('created_at', ''),
 		'client' => Request::lookup('client', ''),
 		'perc' => Request::val('perc', ''),
 		'abbr' => Request::val('abbr', ''),
@@ -412,7 +411,6 @@ function math_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $Allow
 	// set records to read only if user can't insert new records and can't edit current record
 	if(($selected_id && !$AllowUpdate && !$AllowInsert) || (!$selected_id && !$AllowInsert)) {
 		$jsReadOnly = '';
-		$jsReadOnly .= "\tjQuery('#created_at').replaceWith('<div class=\"form-control-static\" id=\"created_at\">' + (jQuery('#created_at').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#client').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\tjQuery('#client_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
 		$jsReadOnly .= "\tjQuery('#perc').replaceWith('<div class=\"form-control-static\" id=\"perc\">' + (jQuery('#perc').val() || '') + '</div>');\n";
@@ -458,8 +456,7 @@ function math_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $Allow
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(id)%%>', safe_html($urow['id']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(id)%%>', html_attr($row['id']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(id)%%>', urlencode($urow['id']), $templateCode);
-		if( $dvprint) $templateCode = str_replace('<%%VALUE(created_at)%%>', safe_html($urow['created_at']), $templateCode);
-		if(!$dvprint) $templateCode = str_replace('<%%VALUE(created_at)%%>', html_attr($row['created_at']), $templateCode);
+		$templateCode = str_replace('<%%VALUE(created_at)%%>', safe_html($urow['created_at']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(created_at)%%>', urlencode($urow['created_at']), $templateCode);
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(client)%%>', safe_html($urow['client']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(client)%%>', html_attr($row['client']), $templateCode);
@@ -473,8 +470,8 @@ function math_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $Allow
 	} else {
 		$templateCode = str_replace('<%%VALUE(id)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(id)%%>', urlencode(''), $templateCode);
-		$templateCode = str_replace('<%%VALUE(created_at)%%>', 'current_timestamp()', $templateCode);
-		$templateCode = str_replace('<%%URLVALUE(created_at)%%>', urlencode('current_timestamp()'), $templateCode);
+		$templateCode = str_replace('<%%VALUE(created_at)%%>', '<%%creationTimestamp%%>current_timestamp()', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(created_at)%%>', urlencode('<%%creationTimestamp%%>current_timestamp()'), $templateCode);
 		$templateCode = str_replace('<%%VALUE(client)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(client)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(perc)%%>', '', $templateCode);

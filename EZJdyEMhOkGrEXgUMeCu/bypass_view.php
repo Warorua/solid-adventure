@@ -26,7 +26,7 @@
 		"`bypass`.`track`" => "track",
 		"`bypass`.`note`" => "note",
 		"`bypass`.`timestamp`" => "timestamp",
-		"IF(    CHAR_LENGTH(`clients1`.`name`), CONCAT_WS('',   `clients1`.`name`), '') /* Client */" => "client",
+		"`bypass`.`client`" => "client",
 		"`bypass`.`ref`" => "ref",
 		"`bypass`.`route`" => "route",
 	];
@@ -40,7 +40,7 @@
 		6 => 6,
 		7 => 7,
 		8 => 8,
-		9 => '`clients1`.`name`',
+		9 => '`bypass`.`client`',
 		10 => 10,
 		11 => 11,
 	];
@@ -55,7 +55,7 @@
 		"`bypass`.`track`" => "track",
 		"`bypass`.`note`" => "note",
 		"`bypass`.`timestamp`" => "timestamp",
-		"IF(    CHAR_LENGTH(`clients1`.`name`), CONCAT_WS('',   `clients1`.`name`), '') /* Client */" => "client",
+		"`bypass`.`client`" => "client",
 		"`bypass`.`ref`" => "ref",
 		"`bypass`.`route`" => "route",
 	];
@@ -69,7 +69,7 @@
 		"`bypass`.`track`" => "Track",
 		"`bypass`.`note`" => "Note",
 		"`bypass`.`timestamp`" => "Timestamp",
-		"IF(    CHAR_LENGTH(`clients1`.`name`), CONCAT_WS('',   `clients1`.`name`), '') /* Client */" => "Client",
+		"`bypass`.`client`" => "Client",
 		"`bypass`.`ref`" => "Ref",
 		"`bypass`.`route`" => "Route",
 	];
@@ -84,15 +84,15 @@
 		"`bypass`.`track`" => "track",
 		"`bypass`.`note`" => "note",
 		"`bypass`.`timestamp`" => "timestamp",
-		"IF(    CHAR_LENGTH(`clients1`.`name`), CONCAT_WS('',   `clients1`.`name`), '') /* Client */" => "client",
+		"`bypass`.`client`" => "client",
 		"`bypass`.`ref`" => "ref",
 		"`bypass`.`route`" => "route",
 	];
 
 	// Lookup fields that can be used as filterers
-	$x->filterers = ['client' => 'Client', ];
+	$x->filterers = [];
 
-	$x->QueryFrom = "`bypass` LEFT JOIN `clients` as clients1 ON `clients1`.`id`=`bypass`.`client` ";
+	$x->QueryFrom = "`bypass` ";
 	$x->QueryWhere = '';
 	$x->QueryOrder = '';
 

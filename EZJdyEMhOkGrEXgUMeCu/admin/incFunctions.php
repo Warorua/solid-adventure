@@ -1053,7 +1053,7 @@
 						],
 					],
 					'created_at' => [
-						'appgini' => "TIMESTAMP NULL DEFAULT 'current_timestamp()'",
+						'appgini' => "TIMESTAMP NULL",
 						'info' => [
 							'caption' => 'Created_at',
 							'description' => '',
@@ -1067,7 +1067,7 @@
 						],
 					],
 					'perc' => [
-						'appgini' => "VARCHAR(255) NULL",
+						'appgini' => "INT NULL",
 						'info' => [
 							'caption' => 'Perc',
 							'description' => '',
@@ -2145,9 +2145,6 @@
 		 *             'parent table' => [main lookup fields in child]
 		 */
 		$parents = [
-			'bypass' => [
-				'clients' => ['client'],
-			],
 			'math' => [
 				'clients' => ['client'],
 			],
@@ -2326,7 +2323,6 @@
 		*/
 		$lookupQuery = [
 			'bypass' => [
-				'client' => 'SELECT `clients`.`id`, `clients`.`name` FROM `clients` ORDER BY 2',
 			],
 			'clients' => [
 			],

@@ -19,7 +19,7 @@ function bypass_insert(&$error_message = '') {
 		'regular_status' => Request::val('regular_status', ''),
 		'track' => Request::val('track', ''),
 		'note' => Request::val('note', ''),
-		'client' => Request::lookup('client', ''),
+		'timestamp' => Request::val('timestamp', 'current_timestamp()'),
 		'ref' => Request::val('ref', ''),
 		'route' => Request::val('route', ''),
 	];
@@ -123,7 +123,7 @@ function bypass_update(&$selected_id, &$error_message = '') {
 		'regular_status' => Request::val('regular_status', ''),
 		'track' => Request::val('track', ''),
 		'note' => Request::val('note', ''),
-		'client' => Request::lookup('client', ''),
+		'timestamp' => Request::val('timestamp', ''),
 		'ref' => Request::val('ref', ''),
 		'route' => Request::val('route', ''),
 	];
@@ -207,14 +207,11 @@ function bypass_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $All
 		$dvprint = true;
 	}
 
-	$filterer_client = Request::val('filterer_client');
 
 	// populate filterers, starting from children to grand-parents
 
 	// unique random identifier
 	$rnd1 = ($dvprint ? rand(1000000, 9999999) : '');
-	// combobox: client
-	$combo_client = new DataCombo;
 
 	if($selected_id) {
 		// mm: check member permissions
@@ -237,112 +234,13 @@ function bypass_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $All
 		if(!($row = db_fetch_array($res))) {
 			return error_message($Translation['No records found'], 'bypass_view.php', false);
 		}
-		$combo_client->SelectedData = $row['client'];
 		$urow = $row; /* unsanitized data */
 		$row = array_map('safe_html', $row);
 	} else {
 		$filterField = Request::val('FilterField');
 		$filterOperator = Request::val('FilterOperator');
 		$filterValue = Request::val('FilterValue');
-		$combo_client->SelectedData = $filterer_client;
 	}
-	$combo_client->HTML = '<span id="client-container' . $rnd1 . '"></span><input type="hidden" name="client" id="client' . $rnd1 . '" value="' . html_attr($combo_client->SelectedData) . '">';
-	$combo_client->MatchText = '<span id="client-container-readonly' . $rnd1 . '"></span><input type="hidden" name="client" id="client' . $rnd1 . '" value="' . html_attr($combo_client->SelectedData) . '">';
-
-	ob_start();
-	?>
-
-	<script>
-		// initial lookup values
-		AppGini.current_client__RAND__ = { text: "", value: "<?php echo addslashes($selected_id ? $urow['client'] : htmlspecialchars($filterer_client, ENT_QUOTES)); ?>"};
-
-		jQuery(function() {
-			setTimeout(function() {
-				if(typeof(client_reload__RAND__) == 'function') client_reload__RAND__();
-			}, 50); /* we need to slightly delay client-side execution of the above code to allow AppGini.ajaxCache to work */
-		});
-		function client_reload__RAND__() {
-		<?php if(($AllowUpdate || $AllowInsert) && !$dvprint) { ?>
-
-			$j("#client-container__RAND__").select2({
-				/* initial default value */
-				initSelection: function(e, c) {
-					$j.ajax({
-						url: 'ajax_combo.php',
-						dataType: 'json',
-						data: { id: AppGini.current_client__RAND__.value, t: 'bypass', f: 'client' },
-						success: function(resp) {
-							c({
-								id: resp.results[0].id,
-								text: resp.results[0].text
-							});
-							$j('[name="client"]').val(resp.results[0].id);
-							$j('[id=client-container-readonly__RAND__]').html('<span class="match-text" id="client-match-text">' + resp.results[0].text + '</span>');
-							if(resp.results[0].id == '<?php echo empty_lookup_value; ?>') { $j('.btn[id=clients_view_parent]').hide(); } else { $j('.btn[id=clients_view_parent]').show(); }
-
-
-							if(typeof(client_update_autofills__RAND__) == 'function') client_update_autofills__RAND__();
-						}
-					});
-				},
-				width: '100%',
-				formatNoMatches: function(term) { return '<?php echo addslashes($Translation['No matches found!']); ?>'; },
-				minimumResultsForSearch: 5,
-				loadMorePadding: 200,
-				ajax: {
-					url: 'ajax_combo.php',
-					dataType: 'json',
-					cache: true,
-					data: function(term, page) { return { s: term, p: page, t: 'bypass', f: 'client' }; },
-					results: function(resp, page) { return resp; }
-				},
-				escapeMarkup: function(str) { return str; }
-			}).on('change', function(e) {
-				AppGini.current_client__RAND__.value = e.added.id;
-				AppGini.current_client__RAND__.text = e.added.text;
-				$j('[name="client"]').val(e.added.id);
-				if(e.added.id == '<?php echo empty_lookup_value; ?>') { $j('.btn[id=clients_view_parent]').hide(); } else { $j('.btn[id=clients_view_parent]').show(); }
-
-
-				if(typeof(client_update_autofills__RAND__) == 'function') client_update_autofills__RAND__();
-			});
-
-			if(!$j("#client-container__RAND__").length) {
-				$j.ajax({
-					url: 'ajax_combo.php',
-					dataType: 'json',
-					data: { id: AppGini.current_client__RAND__.value, t: 'bypass', f: 'client' },
-					success: function(resp) {
-						$j('[name="client"]').val(resp.results[0].id);
-						$j('[id=client-container-readonly__RAND__]').html('<span class="match-text" id="client-match-text">' + resp.results[0].text + '</span>');
-						if(resp.results[0].id == '<?php echo empty_lookup_value; ?>') { $j('.btn[id=clients_view_parent]').hide(); } else { $j('.btn[id=clients_view_parent]').show(); }
-
-						if(typeof(client_update_autofills__RAND__) == 'function') client_update_autofills__RAND__();
-					}
-				});
-			}
-
-		<?php } else { ?>
-
-			$j.ajax({
-				url: 'ajax_combo.php',
-				dataType: 'json',
-				data: { id: AppGini.current_client__RAND__.value, t: 'bypass', f: 'client' },
-				success: function(resp) {
-					$j('[id=client-container__RAND__], [id=client-container-readonly__RAND__]').html('<span class="match-text" id="client-match-text">' + resp.results[0].text + '</span>');
-					if(resp.results[0].id == '<?php echo empty_lookup_value; ?>') { $j('.btn[id=clients_view_parent]').hide(); } else { $j('.btn[id=clients_view_parent]').show(); }
-
-					if(typeof(client_update_autofills__RAND__) == 'function') client_update_autofills__RAND__();
-				}
-			});
-		<?php } ?>
-
-		}
-	</script>
-	<?php
-
-	$lookups = str_replace('__RAND__', $rnd1, ob_get_clean());
-
 
 	// code for template based detail view forms
 
@@ -428,8 +326,7 @@ function bypass_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $All
 		$jsReadOnly .= "\tjQuery('#regular_status').replaceWith('<div class=\"form-control-static\" id=\"regular_status\">' + (jQuery('#regular_status').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#track').replaceWith('<div class=\"form-control-static\" id=\"track\">' + (jQuery('#track').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#note').replaceWith('<div class=\"form-control-static\" id=\"note\">' + (jQuery('#note').val() || '') + '</div>');\n";
-		$jsReadOnly .= "\tjQuery('#client').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
-		$jsReadOnly .= "\tjQuery('#client_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
+		$jsReadOnly .= "\tjQuery('#timestamp').replaceWith('<div class=\"form-control-static\" id=\"timestamp\">' + (jQuery('#timestamp').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#ref').replaceWith('<div class=\"form-control-static\" id=\"ref\">' + (jQuery('#ref').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('#route').replaceWith('<div class=\"form-control-static\" id=\"route\">' + (jQuery('#route').val() || '') + '</div>');\n";
 		$jsReadOnly .= "\tjQuery('.select2-container').hide();\n";
@@ -441,12 +338,9 @@ function bypass_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $All
 	}
 
 	// process combos
-	$templateCode = str_replace('<%%COMBO(client)%%>', $combo_client->HTML, $templateCode);
-	$templateCode = str_replace('<%%COMBOTEXT(client)%%>', $combo_client->MatchText, $templateCode);
-	$templateCode = str_replace('<%%URLCOMBOTEXT(client)%%>', urlencode($combo_client->MatchText), $templateCode);
 
 	/* lookup fields array: 'lookup field name' => ['parent table name', 'lookup field caption'] */
-	$lookup_fields = ['client' => ['clients', 'Client'], ];
+	$lookup_fields = [];
 	foreach($lookup_fields as $luf => $ptfc) {
 		$pt_perm = getTablePermissions($ptfc[0]);
 
@@ -497,10 +391,10 @@ function bypass_form($selected_id = '', $AllowUpdate = 1, $AllowInsert = 1, $All
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(note)%%>', safe_html($urow['note']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(note)%%>', html_attr($row['note']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(note)%%>', urlencode($urow['note']), $templateCode);
-		$templateCode = str_replace('<%%VALUE(timestamp)%%>', safe_html($urow['timestamp']), $templateCode);
+		if( $dvprint) $templateCode = str_replace('<%%VALUE(timestamp)%%>', safe_html($urow['timestamp']), $templateCode);
+		if(!$dvprint) $templateCode = str_replace('<%%VALUE(timestamp)%%>', html_attr($row['timestamp']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(timestamp)%%>', urlencode($urow['timestamp']), $templateCode);
-		if( $dvprint) $templateCode = str_replace('<%%VALUE(client)%%>', safe_html($urow['client']), $templateCode);
-		if(!$dvprint) $templateCode = str_replace('<%%VALUE(client)%%>', html_attr($row['client']), $templateCode);
+		$templateCode = str_replace('<%%VALUE(client)%%>', safe_html($urow['client']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(client)%%>', urlencode($urow['client']), $templateCode);
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(ref)%%>', safe_html($urow['ref']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(ref)%%>', html_attr($row['ref']), $templateCode);

@@ -106,7 +106,7 @@
 
 	function get_sql_fields($table_name) {
 		$sql_fields = [
-			'bypass' => "`bypass`.`id` as 'id', `bypass`.`invoice_no` as 'invoice_no', `bypass`.`amount` as 'amount', `bypass`.`master_status` as 'master_status', `bypass`.`regular_status` as 'regular_status', `bypass`.`track` as 'track', `bypass`.`note` as 'note', `bypass`.`timestamp` as 'timestamp', IF(    CHAR_LENGTH(`clients1`.`name`), CONCAT_WS('',   `clients1`.`name`), '') as 'client', `bypass`.`ref` as 'ref', `bypass`.`route` as 'route'",
+			'bypass' => "`bypass`.`id` as 'id', `bypass`.`invoice_no` as 'invoice_no', `bypass`.`amount` as 'amount', `bypass`.`master_status` as 'master_status', `bypass`.`regular_status` as 'regular_status', `bypass`.`track` as 'track', `bypass`.`note` as 'note', `bypass`.`timestamp` as 'timestamp', `bypass`.`client` as 'client', `bypass`.`ref` as 'ref', `bypass`.`route` as 'route'",
 			'clients' => "`clients`.`id` as 'id', `clients`.`created_at` as 'created_at', `clients`.`name` as 'name'",
 			'math' => "`math`.`id` as 'id', `math`.`created_at` as 'created_at', IF(    CHAR_LENGTH(`clients1`.`name`), CONCAT_WS('',   `clients1`.`name`), '') as 'client', `math`.`perc` as 'perc', `math`.`abbr` as 'abbr'",
 			'token' => "`token`.`id` as 'id', `token`.`name` as 'name', `token`.`cid` as 'cid', `token`.`token` as 'token', `token`.`timestamp` as 'timestamp'",
@@ -121,7 +121,7 @@
 
 	function get_sql_from($table_name, $skip_permissions = false, $skip_joins = false, $lower_permissions = false) {
 		$sql_from = [
-			'bypass' => "`bypass` LEFT JOIN `clients` as clients1 ON `clients1`.`id`=`bypass`.`client` ",
+			'bypass' => "`bypass` ",
 			'clients' => "`clients` ",
 			'math' => "`math` LEFT JOIN `clients` as clients1 ON `clients1`.`id`=`math`.`client` ",
 			'token' => "`token` ",
@@ -201,7 +201,7 @@
 			],
 			'math' => [
 				'id' => '',
-				'created_at' => 'current_timestamp()',
+				'created_at' => '',
 				'client' => '',
 				'perc' => '',
 				'abbr' => '',
@@ -903,7 +903,7 @@ EOT;
 
 		$css_links = <<<EOT
 
-			<link rel="stylesheet" href="{$prepend_path}resources/initializr/css/cerulean.css">
+			<link rel="stylesheet" href="{$prepend_path}resources/initializr/css/bootstrap.css">
 			<link rel="stylesheet" href="{$prepend_path}resources/lightbox/css/lightbox.css" media="screen">
 			<link rel="stylesheet" href="{$prepend_path}resources/select2/select2.css" media="screen">
 			<link rel="stylesheet" href="{$prepend_path}resources/timepicker/bootstrap-timepicker.min.css" media="screen">

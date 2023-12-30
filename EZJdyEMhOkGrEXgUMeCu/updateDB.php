@@ -26,7 +26,6 @@
 				`route` VARCHAR(255) NULL
 			) CHARSET utf8"
 		);
-		setupIndexes('bypass', ['client',]);
 
 		setupTable(
 			'clients', " 
@@ -43,11 +42,14 @@
 			CREATE TABLE IF NOT EXISTS `math` ( 
 				`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 				PRIMARY KEY (`id`),
-				`created_at` TIMESTAMP NULL DEFAULT 'current_timestamp()',
+				`created_at` TIMESTAMP NULL,
 				`client` INT(10) UNSIGNED NULL,
-				`perc` VARCHAR(255) NULL,
+				`perc` INT NULL,
 				`abbr` VARCHAR(255) NULL
-			) CHARSET utf8"
+			) CHARSET utf8", [
+				" ALTER TABLE `math` CHANGE `created_at` `created_at` TIMESTAMP NULL ",
+				" ALTER TABLE `math` CHANGE `perc` `perc` INT NULL ",
+			]
 		);
 		setupIndexes('math', ['client',]);
 

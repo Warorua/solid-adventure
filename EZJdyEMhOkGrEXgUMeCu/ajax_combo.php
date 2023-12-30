@@ -33,17 +33,6 @@
 	// drop-downs config
 	$lookups = [
 		'bypass' => [
-			'client' => [
-				'parent_table' => 'clients',
-				'parent_pk_field' => 'id',
-				'parent_caption' => '`clients`.`name`',
-				'parent_from' => '`clients` ',
-				'filterers' => [],
-				'custom_query' => 'SELECT `clients`.`id`, `clients`.`name` FROM `clients` ORDER BY 2',
-				'inherit_permissions' => false,
-				'list_type' => 0,
-				'not_null' => false,
-			],
 		],
 		'clients' => [
 		],

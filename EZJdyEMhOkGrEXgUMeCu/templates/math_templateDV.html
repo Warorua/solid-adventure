@@ -31,9 +31,9 @@
 				<!-- Field: Created_at -->
 				<div class="form-group math-created_at">
 					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="created_at">Created_at</label>
+					<label class="control-label col-lg-3">Created_at</label>
 					<div class="col-lg-9">
-						<input maxlength="19" type="text" class="form-control" name="created_at" id="created_at" value="<%%VALUE(created_at)%%>">
+						<div class="form-control-static" id="created_at"><%%VALUE(created_at)%%></div>
 					</div>
 				</div>
 
@@ -51,7 +51,7 @@
 					<hr class="hidden-md hidden-lg">
 					<label class="control-label col-lg-3" for="perc">Perc</label>
 					<div class="col-lg-9">
-						<input maxlength="255" type="text" class="form-control" name="perc" id="perc" value="<%%VALUE(perc)%%>">
+						<input type="text" class="form-control" name="perc" id="perc" value="<%%VALUE(perc)%%>">
 					</div>
 				</div>
 
@@ -105,9 +105,27 @@
 			/* enable DV action buttons to float on scrolling down the form */
 			enable_dvab_floating();
 
-			$j('#math_dv_container-loading').addClass('hidden');
-			$j('#math_dv_container').removeClass('hidden');
-			if(!$j('.table_view').length || $j('[name=SelectedID]').val().length) AppGini.focusFormElement('math', 'created_at');
+			if(!$j('.table_view').length || $j('[name=SelectedID]').val().length) {
+				AppGini.once({
+					condition: function() {
+						return $j('.form-group.math-client')
+									.find('.nicEdit-main, .select2-container, input[type=radio]')
+									.length > 0
+								// or read-only DV
+								|| (!$j('#update').length && !$j('#insert').length);
+					},
+					action: function() {
+						$j('#math_dv_container-loading').addClass('hidden');
+						$j('#math_dv_container').removeClass('hidden');
+						AppGini.focusFormElement('math', 'client');
+					},
+					timeout:  5000,
+					doActionOnTimeout:  true
+				});
+			} else {
+				$j('#math_dv_container-loading').addClass('hidden');
+				$j('#math_dv_container').removeClass('hidden');
+			}
 
 			$j('form').eq(0).change(function() {
 				if($j(this).data('already_changed')) return;

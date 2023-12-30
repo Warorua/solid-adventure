@@ -29,7 +29,7 @@
 		1 => '`math`.`id`',
 		2 => '`math`.`created_at`',
 		3 => '`clients1`.`name`',
-		4 => 4,
+		4 => '`math`.`perc`',
 		5 => 5,
 	];
 
