@@ -100,7 +100,7 @@ if ($type == 'invoice2') {
         } else {
             $qtail .= 'WHERE client="' . $client . '" ';
         }
-        $qtail .= 'ORDER BY track';
+        $qtail .= 'ORDER BY track, master_status';
     } else {
         $qtail = 'WHERE master_status="' . $record . '"';
         if ($client == 'all') {
