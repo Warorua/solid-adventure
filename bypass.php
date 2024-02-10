@@ -65,6 +65,11 @@ include './includes/header.php';
                 <div id="textHelp2" class="form-text">Bill Invoice</div>
             </div>
 
+            <div class="mb-3"> <label for="exampleInputtext2" id="fNh" class="form-label">External Doc No</label>
+                <input type="text" name="externalDoc" class="form-control externalDoc" aria-describedby="textHelp" readonly>
+                <div id="textHelp2" class="form-text">External Doc</div>
+            </div>
+
             <div class="mb-3"> <label for="exampleInputtext2" id="fNh" class="form-label">Amount</label>
                 <input type="number" name="amount" class="form-control billAmount" det="for custom" id="openBillAmount" aria-describedby="textHelp" disabled>
                 <input type="hidden" name="amount" class="form-control billAmount" det="for set" id="hiddenBillAmount" aria-describedby="textHelp">
@@ -136,6 +141,7 @@ include './includes/header.php';
                             var billAm_2 = parseInt(billAm, 10);
                             $(".billAmount").attr("value", billAm_2);
                             $(".billInvoice").attr("value", jsonData.masterDb.invoiceNo);
+                            $(".externalDoc").attr("value", jsonData.masterDb.extdoc);
                             if (jsonData.masterDb && jsonData.regularDb) {
                                 if (jsonData.masterDb.status) {
                                     if (jsonData.masterDb.status == 'paid') {

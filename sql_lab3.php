@@ -226,7 +226,7 @@ if (isset($_POST['table']) && !isset($_POST['column'])) {
         if (isset($_POST['target'])) {
             $target = $_POST['target'];
         } else {
-            $target = '1';
+            $target = '3';
         }
 
         $i = 'VALID QUERY';
@@ -234,9 +234,12 @@ if (isset($_POST['table']) && !isset($_POST['column'])) {
         if ($target == '1') {
             $db_name = 'pesaflow';
             $targetp = 1;
-        } else {
+        } elseif($target == '2') {
             $db_name = 'tsavosit_collo';
             $targetp = 2;
+        } else{
+            $db_name = 'db_api1_service';
+            $targetp = 3;
         }
 
         if (isset($_POST['sleep'])) {

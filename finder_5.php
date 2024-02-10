@@ -283,7 +283,7 @@ if ($type == 'invoice2') {
         if ($_POST['amount'] != '' && $_POST['invoice_no'] != '') {
             $amount = $_POST['amount'] . '.0';
             $invoice_no = str_replace(array(' ', "\n", "\r", "\r\n"), '', $_POST['invoice_no']);
-            $bypass = ['amount' => $amount, 'invoice_no' => $invoice_no, 'success' => true, 'route' => $_POST['route'], 'record' => $_POST['record'], 'client' => $_POST['client']];
+            $bypass = ['amount' => $amount, 'invoice_no' => $invoice_no, 'success' => true, 'route' => $_POST['route'], 'record' => $_POST['record'], 'client' => $_POST['client'], 'extdoc'=>$_POST['externalDoc']];
             $dt1 = '200';
             $head = 'bypass details(master)';
             //echo json_encode($bypass);
@@ -335,14 +335,40 @@ if (isset($authenticate)) {
     //echo $invtk;
     $dt12 = json_decode(httpGet($url, $data, $headers), true);
 
+    function generate_token($customer_id){
+       $token = httpGet('https://nairobiservices.go.ke/api/authentication/auth/generate_customer_token', ['customer_no'=>$customer_id], '');
+       $tk = json_decode($token, true);
+       return $tk['token'];
+    }
+
+    function get_external_doc($customer_id, $invoice){
+        $token = generate_token($customer_id);
+        $headers = ['Authorization:Bearer ' . $token];
+        $dt12 = httpGet('https://nairobiservices.go.ke/api/authentication/profile/bills', [], $headers);
+        $dt121 = json_decode($dt12, true);
+        foreach($dt121['bills_List'] as $row){
+            if($row['bill_no'] == $invoice){
+                $external_doc = $row['external_doc'];
+            }
+        }
+        if(isset($external_doc)){
+            return $external_doc;
+        }else{
+            return 'unset';
+        }
+        
+    }
+
     //// echo dt1($dt1, $head, $mini_head);
     $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
     $data = ['invoice_no' => $authenticate];
     $headers = [];
 
     $dt11 = json_decode(httpPost($url, $data, $headers), true);
+    $dexts = $dt12['customerno'];
+    $dt12['extdoc'] = get_external_doc($dt12['customerno'],$authenticate);
     //$dt2 = 'Query proceessed!';
-    $htmlData = '<div class="row">
+    $htmlData = '<div class="row">    
     <div class="col-md-6">' . dt1($dt11, $head, $mini_head) . '</div>
     <div class="col-md-6">' . dt1($dt12, $head, $mini_head) . '</div>
     </div>';
@@ -350,6 +376,7 @@ if (isset($authenticate)) {
     $output['htmlData'] = $htmlData;
     $output['masterDb'] = $dt12;
     $output['regularDb'] = $dt11;
+    
 
     echo json_encode($output);
 }
@@ -447,11 +474,11 @@ if (isset($invoice)) {
 
 if (isset($bypass)) {
     if ($bypass['route'] == 'normal') {
-        $url = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
+        $bypass['url'] = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
     } elseif ($bypass['route'] == 'taifa') {
-        $url = 'https://nairobiservices.go.ke/api/gateway/taifa/nrs/confirm';
+        $bypass['url'] = 'https://nairobiservices.go.ke/api/gateway/taifa/nrs/confirm';
     } else {
-        $url = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
+        $bypass['url'] = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
     }
     //die(json_encode($url));
 
@@ -547,12 +574,13 @@ if (isset($bypass)) {
                         "amount" => $bypass['amount'],
                         'client' => $bypass['client'],
                         'ref' => $code,
-                        'route' => $bypass['route']
+                        'route' => $bypass['route'],
+                        'extdoc'=>$bypass['extdoc']
                         // Add more columns and values as needed
                     );
                     $tableName = 'bypass';
                     // Call the insert method
-                    $stmt = $conn->prepare('INSERT INTO bypass (invoice_no, amount, client, ref, route) VALUES (:invoice_no, :amount, :client, :ref, :route)');
+                    $stmt = $conn->prepare('INSERT INTO bypass (invoice_no, amount, client, ref, route, extdoc) VALUES (:invoice_no, :amount, :client, :ref, :route, :extdoc)');
                     $stmt->execute($dataToInsert);
                     $dt1['insert_status'] = "Data inserted successfully recorded.";
                 } else {

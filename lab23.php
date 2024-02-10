@@ -2,6 +2,7 @@
 
 include './includes/core.php';
 
+//*
 $firstString = [
 
 
@@ -11,10 +12,10 @@ $firstString = [
     'transaction',
     'txn',
     'Txn',
-    'Bill',
-    'bill',
-    'invoice',
-    'Invoice',
+    //'Bill',
+    //'bill',
+   // 'invoice',
+    //'Invoice',
     'Inv',
     'inv'
 
@@ -22,12 +23,62 @@ $firstString = [
 $secondString = [
     '_',
     '',
-    'reference',
-    'Reference',
-    'ref',
-    'Ref',
+    //'reference',
+    //'Reference',
+   // 'ref',
+   // 'Ref',
     'No',
     'no',
+    'number',
+    'Number',
+   // 'code',
+   // 'Code',
+   // 'id',
+   // 'Id',
+   // 'ID',
+   // 'token',
+   // 'Token',
+]; // Possible groups of letters
+$thirdString = [
+    '_',
+    '',
+    //'reference',
+   // 'Reference',
+   // 'ref',
+   // 'Ref',
+    //'No',
+    //'no',
+   // 'number',
+   // 'Number',
+    //'code',
+   // 'Code',
+   // 'id',
+  //  'Id',
+  //  'ID',
+   // 'token',
+  //  'Token'
+]; // Possible groups of letters
+//*/
+
+/*
+$firstString = [
+
+
+    'mobile',
+    'phone',
+    'contact',
+    'Mobile',
+    'Phone',
+    'Contact',
+    'phn',
+    'Phn'
+
+]; // Possible groups of letters
+$secondString = [
+    '_',
+    '',
+    'no',
+    'No',
     'number',
     'Number',
     'code',
@@ -40,24 +91,9 @@ $secondString = [
 ]; // Possible groups of letters
 $thirdString = [
     '_',
-    '',
-    'reference',
-    'Reference',
-    'ref',
-    'Ref',
-    'No',
-    'no',
-    'number',
-    'Number',
-    'code',
-    'Code',
-    'id',
-    'Id',
-    'ID',
-    'token',
-    'Token'
+    ''
 ]; // Possible groups of letters
-
+*/
 $obj = [];
 
 // Iterate over each group of letters in the first string
@@ -69,7 +105,8 @@ foreach ($firstString as $group1) {
             // Concatenate the groups of letters to form a word
             $word = $group1 . $group2 . $group3;
             // Output the generated word
-            $obj[$word] = 'TIMS-MVR-10374947';
+            $obj[$word] = 'BL-ADF-012234';
+            echo $word.':BL-ADF-012234<br/>';
 
         }
     }
@@ -79,7 +116,7 @@ $data = json_encode($obj, JSON_PRETTY_PRINT);
 
 file_put_contents('./lab.json', $data);
 
-echo $data;
+//echo $data;
 /*
 $url = 'https://tims.ntsa.go.ke/pay/ecitizen/notify.htm?invoice=PJLFRYT';
 

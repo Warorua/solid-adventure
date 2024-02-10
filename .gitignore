@@ -18,6 +18,7 @@ fingerprintvalidater.json
 cookies/
 error/
 pftb/
+pftb2/
 database/
 includes/theSecurityTimeLimitTokenStorage223.json
 *.db

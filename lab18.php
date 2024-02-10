@@ -20,19 +20,20 @@ include './includes/sql_conn.php';
 
             <form class="mt-3" id="keverF" autocomplete="off">
                 <div class="mb-3">
-                                
+
                     <select class="form-select mt-3" id="userType2" aria-label="Default select example" name="target">
+                        <option value="3" selected>NRS</option>
                         <option value="2">KOTNOVA</option>
-                        <option value="1" selected>PF</option>
+                        <option value="1">PF</option>
                     </select>
 
-                  
+
                     <select class="form-select mt-3" id="userType5" aria-label="Default select example" name="method">
                         <option value="1">M1</option>
                         <option value="2" selected>M2</option>
                     </select>
 
-                    
+
                     <select class="form-select mt-3" id="userType3" aria-label="Default select example" name="func">
                         <option value="L" selected>Func L</option>
                         <option value="C">Func C</option>
@@ -53,7 +54,7 @@ include './includes/sql_conn.php';
                     <label for="exampleInputtext1" class="form-label">Column</label>
                     <input type="number" name="column" class="form-control" min="1" id="exampleInputtext1" aria-describedby="textHelp">
                     <div id="textHelp" class="form-text">We'll never share your ID with anyone else.</div>
-                   
+
                     <label for="exampleInputtext1" class="form-label">Sleep</label>
                     <input type="number" name="sleep" class="form-control" min="1" value="5" id="exampleInputtext1" aria-describedby="textHelp">
                     <div id="textHelp" class="form-text">We'll never share your ID with anyone else.</div>

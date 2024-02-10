@@ -13,7 +13,7 @@ class DigitalOcean
     //private $password = "AVNS_2LlwUW9Aa6fSkAOa4y0";
     //private $server = "mysql:host=45.84.206.68;dbname=tsavosit_collo";
     //private $username = "tsavosit_collo";
-    //private $password = "@fz8a06p[gj0";
+    //private $password = "db0hvY_uLPV7";
     private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
     protected $conn;
 

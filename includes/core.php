@@ -1723,7 +1723,7 @@ function bypassCode($bypass, $billType, $code)
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment',
+        CURLOPT_URL => $bypass['url'],
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,

