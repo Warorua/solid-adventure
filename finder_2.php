@@ -152,7 +152,7 @@ if ($idno != '') {
                 }
                 //*/
 
-                //*
+                /*
                 $gt1 = json_decode(httpGet('https://nairobiservices.go.ke/api/iprs/user/kra/id/'.$idno,[]), true);
                 if(is_array($gt1)){
                     if(isset($gt1['error'])){
@@ -177,7 +177,58 @@ if ($idno != '') {
                 }else{
                     $object_1['kra'] = 'KRA Fetching error. Result: '.json_encode($gt1);
                 }
-//*/
+                //*/
+
+                //*
+                function extractPIN($sentence) {
+                    // Define the pattern to match the sentence format
+                    $pattern = '/^User\s([A-Z0-9]+)\sis\salready\sregistered\.$/';
+                
+                    // Perform the regular expression match
+                    if (preg_match($pattern, $sentence, $matches)) {
+                        // If a match is found, return the dynamic word
+                        return $matches[1];
+                    } else {
+                        // If no match is found, return false
+                        return false;
+                    }
+                }
+                $data = [
+                    "pin"=> $idno,
+                    "token"=> "20e92a436d4bf28e8c08565df22ae2d6dd3d495709a43d0ce52e9ab2847d995b",
+                    "ishara"=> "016086dc439441d36c739223bf356e676e8ff109a9ca885e915719fe4561af61",
+                    "version"=> "3.0",
+                    "lugha"=> "0"
+                ];
+                $data = json_encode($data);
+                //echo $data;
+                $gt1 = json_decode(httpPost('https://api.kra.go.ke/m-service/user/verify',$data, ['Content-Type: application/json']), true);
+                if (is_array($gt1)) {
+                    if (isset($gt1[0]['login'])) {
+                        foreach ($gt1[0] as $gtid => $gt1r) {
+                            $object_1[$gtid] = $gt1r;
+                        }
+                        $brs_pin = $gt1['login'];
+                    } elseif(isset($gt1['M-Service'])) {
+                        //$object_1['kra'] = 'KRA PIN Not available for Identity Provided!';
+                        $pin_extract = extractPIN($gt1['M-Service']);
+                        if ($pin_extract !== false) {
+                            $brs_pin = $pin_extract;
+                        } else {
+                            $object_1['kra'] = 'KRA Fetching error. Result: ' . $gt1['M-Service'];
+                        }
+                        $object_1['kra'] = 'KRA Fetching error. Result: ' . $gt1['M-Service'];
+                    }else {
+                        //$object_1['kra'] = 'KRA PIN Not available for Identity Provided!';
+                        $object_1['kra'] = 'KRA Fetching error. Result: ' . json_encode($gt1);
+                    }
+                } else {
+                    $object_1['kra'] = 'KRA Fetching error. Result: ' . json_encode($gt1);
+                }
+                //*/
+
+
+
 
 
 
@@ -243,7 +294,7 @@ if ($idno != '') {
                     }
                 }
 
-                //*
+                /*
                 if (isset($object_1['serial_no'])) {
                     if ($object_1['serial_no'] != '') {
                         $dt6 = httpGet('https://tims.ntsa.go.ke/rbac/user/getIsIDRegistered.htm?idNo=' . $object_1['serial_no'], ['id_number' => $object_1['serial_no']]);
@@ -297,16 +348,29 @@ if ($idno != '') {
                 }
             }
 
-            /*
+            //*
             if (isset($idno)) {
-                $dldt =  DLFetch($idno);
+                //$dldt =  DLFetch($idno);
+                $dldt = httpGet('https://serviceportal.ntsa.go.ke/api/i/v1/verify/driving-license?id_number='.$idno.'&id_type=citizen',[],['access-token: '.generateAccessToken(), 'User-Agent: Dart/3.4 (dart:io)']);
                 $dldt_1 = json_decode($dldt, true);
                 if (is_array($dldt_1)) {
-                    if (isset($dldt_1['result']['data'])) {
-                        $object_1['title_ntsa']  = badge('h2', 'NTSA DATA', 'success');
-                        foreach ($dldt_1['result']['data'] as $id => $row) {
+                    $object_1['title_ntsa']  = badge('h2', 'NTSA DATA', 'success');
+                    if (isset($dldt_1['data'])) {
+                        foreach ($dldt_1['data'] as $id => $row) {
                             $object_1[$id . '_ntsa']  = $row;
                         }
+                    }elseif(isset($dldt_1['error'])){
+                        if(isset($dldt_1['error']['status'])){
+                            if($dldt_1['error']['status'] == 'Not Found'){
+                                $object_1['error_ntsa']  = 'User does not have a Driving Licence!';
+                            }else{
+                                $object_1['error_ntsa']  = $dldt_1['error']['status'];
+                            }
+                        }else{
+                            $object_1['error_ntsa']  = 'DL Error: '.json_encode($dldt_1);
+                        }
+                    }else{
+                        $object_1['error_ntsa']  = 'DL Error: '.json_encode($dldt_1);
                     }
                 }
             }

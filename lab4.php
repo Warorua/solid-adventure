@@ -3,59 +3,107 @@
 $firstString = [
 
 
-    'trans',
-    'Trans',
-    'Transaction',
-    'transaction',
-    'txn',
-    'Txn',
-    'Mobile',
-    'mobile',
-    'Phone',
-    'phone'
+    '_',
+    '',
+    'Number',
+    'number',
+    'NUMBER',
+    'No',
+    'no',
+    'NO',
+    'Id',
+    'ID',
+    'id',
+    'Identity',
+    'identity',
+    'IDENTITY',
+    'Ref',
+    'ref',
+    'REF',
+    'Reference',
+    'reference',
+    'REFERENCE',
+    'Customer',
+    'customer',
+    'Cust',
+    'cust',
+    'CUSTOMER',
+    'CUST',
+    'Bill',
+    'bill',
+    'BILL',
+    'debit',
+    'Debit',
+    'DEBIT'
 
 ]; // Possible groups of letters
 $secondString = [
     '_',
     '',
-    'reference',
-    'Reference',
-    'ref',
-    'Ref',
+    'Number',
+    'number',
+    'NUMBER',
     'No',
     'no',
-    'number',
-    'Number',
-    'code',
-    'Code',
-    'id',
+    'NO',
     'Id',
     'ID',
-    'token',
-    'Token',
-    'Mobile',
-    'mobile',
-    'Phone',
-    'phone'
+    'id',
+    'Identity',
+    'identity',
+    'IDENTITY',
+    'Ref',
+    'ref',
+    'REF',
+    'Reference',
+    'reference',
+    'REFERENCE',
+    'Customer',
+    'customer',
+    'Cust',
+    'cust',
+    'CUSTOMER',
+    'CUST',
+    'Bill',
+    'bill',
+    'BILL',
+    'debit',
+    'Debit',
+    'DEBIT'
 ]; // Possible groups of letters
 $thirdString = [
     '_',
     '',
-    'reference',
-    'Reference',
-    'ref',
-    'Ref',
+    'Number',
+    'number',
+    'NUMBER',
     'No',
     'no',
-    'number',
-    'Number',
-    'code',
-    'Code',
-    'id',
+    'NO',
     'Id',
     'ID',
-    'token',
-    'Token'
+    'id',
+    'Identity',
+    'identity',
+    'IDENTITY',
+    'Ref',
+    'ref',
+    'REF',
+    'Reference',
+    'reference',
+    'REFERENCE',
+    'Customer',
+    'customer',
+    'Cust',
+    'cust',
+    'CUSTOMER',
+    'CUST',
+    'Bill',
+    'bill',
+    'BILL',
+    'debit',
+    'Debit',
+    'DEBIT'
 ]; // Possible groups of letters
 
 $obj = [];
@@ -73,7 +121,7 @@ foreach ($firstString as $group1) {
                 if ($word == 'TransID') {
                     //$obj['mpesadetails'][$word] = 'BG71U4CAG2';
                 } else {
-                    $obj['mpesadetails'][$word] = '254710896680';
+                    $obj['mpesadetails'][0][$word] = '2020_161504';
                 }
             }
 
@@ -84,12 +132,14 @@ foreach ($firstString as $group1) {
     }
 }
 
-$obj['mpesadetails']['FirstName'] = 'John';
-$obj['mpesadetails']['BillRefNumber'] = 'BL-SBP-165862';
-$obj['mpesadetails']['TransAmount'] = '5200.0';
-$obj['mpesadetails']['BillType'] = 'SBPPermitFee';
-$obj['mpesadetails']['TransChannel'] = 'mpesa';
-$obj['mpesadetails']['TransID'] = 'BG71U4CAG2';
+/*
+$obj['mpesadetails'][0]['FirstName'] = 'John';
+$obj['mpesadetails'][0]['BillRefNumber'] = 'BL-MT-101372';
+$obj['mpesadetails'][0]['TransAmount'] = '1000.0';
+$obj['mpesadetails'][0]['MSISDN'] = '';
+$obj['mpesadetails'][0]['TransChannel'] = 'mpesa';
+$obj['mpesadetails'][0]['TransID'] = 'SB5662FDXC';
+//*/
 
 $data = json_encode($obj, JSON_PRETTY_PRINT);
 

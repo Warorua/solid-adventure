@@ -1510,8 +1510,30 @@ function read_NTSA_automkey()
 }
 
 
+function generateAccessToken()
+{
+    $data = [
+        "username" => "bombardier.devs.master@gmail.com",
+        "password" => "Godfrey2405&#",
+        "grant_type" => "password",
+        "scope" => "user.avatar user.info user.assert user.update"
+    ];
+    $data = json_encode($data);
 
-function DLFetch($user_id)
+    $gt1 = json_decode(httpPost('https://accounts.ecitizen.go.ke/oauth/access-token', $data, ['Content-Type: application/json', 'Authorization: Basic ZGNmYzMyMzkzNjY1MmE5MjZmZmM5YzQ0ZGFjZDQ3ZDc6WTVaYW50N2Jkei80czlLQ1lzVy9pejY2Z3dwN1p6d3hLbUNiSVhML2V5ND0=', 'User-Agent: Dart/3.4 (dart:io)']), true);
+    if (is_array($gt1)) {
+        if (isset($gt1['access_token'])) {
+            return $gt1['access_token'];
+        } else {
+            //$object_1['kra'] = 'KRA PIN Not available for Identity Provided!';
+            echo 'Error generating Access Token: '.json_encode($gt1);
+        }
+    } else {
+        echo 'Error generating Access Token: '.json_encode($gt1);
+    }
+}
+
+function DLFetch($user_id)//OLD DL FETCH FUNCTION
 {
     $NTSA_Token = read_NTSA_automkey();
     $dt2 =   httpGet('https://ntsa.pesaflow.com/dashboard/services/apply/32', [], ['Cookie: _automzero_key=' . $NTSA_Token . ';']);

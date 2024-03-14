@@ -101,6 +101,9 @@ if (isset($_COOKIE['visitorId'])) {
                 <li class="nav-item">
                     <a class="nav-link" href="mrw.php">Murang'a Women Data</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="aftermath_dash.php">AFTERMATH</a>
+                </li>
 
             </ul>
 
