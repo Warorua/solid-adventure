@@ -67,8 +67,8 @@ function randCode($length = 10)
 
     return $randomString;
 }
-$stmt = $conn->prepare("SELECT * FROM aftermath ORDER BY RAND()");
-$stmt->execute();
+$stmt = $conn->prepare("SELECT * FROM aftermath WHERE status=:status ORDER BY RAND()");
+$stmt->execute(['status'=>'0']);
 $am = $stmt->fetchAll();
 echo json_encode($am). '<br/>';
 foreach ($am as $row) {
