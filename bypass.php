@@ -74,7 +74,7 @@ include './includes/header.php';
 
             <div class="mb-3"> <label for="exampleInputtext2" id="fNh" class="form-label">Contact Number</label>
                 <input type="text" class="form-control contactNumber" aria-describedby="textHelp" disabled>
-                <input type="hidden" name="invoice_no" class="form-control contactNumber">
+                <input type="hidden" name="contactNumber" class="form-control contactNumber">
                 <div id="textHelp2" class="form-text">Contact Number</div>
             </div>
 

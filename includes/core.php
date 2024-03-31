@@ -1734,14 +1734,14 @@ function bypassCode($bypass, $billType, $code)
         CURLOPT_POSTFIELDS => '{
             "mpesadetails": {
                 "FirstName": "John",
-                "BillRefNumber": "'.$bypass['invoice_no'].'",
-                "TransAmount": "'.$bypass['amount'].'",
-                "BillType": "'.$billType.'",
+                "BillRefNumber": "' . $bypass['invoice_no'] . '",
+                "TransAmount": "' . $bypass['amount'] . '",
+                "BillType": "' . $billType . '",
                 "TransChannel": "mpesa",
-                "TransID": "'.$code.'"
+                "TransID": "' . $code . '"
             }
         }',
-        
+
         CURLOPT_HTTPHEADER => array(
             'Content-Type: application/json',
             'Cookie: csrftoken=VhxuGvVHOORIaTUKOqLGfkaUUuNP8IJ6hSkEUOsMU9NFU92RnfBn4EHWOlJeBekD; token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ODYzLCJzODIiLCJtb2JpbGVfbnVtYmVyIjoiMjU0NzExNTc2OTA5In0.DagH4XZzzA9tUNrZ3Ykg0zlrCEDXOzDFjes7k91yw4U'
@@ -1753,20 +1753,21 @@ function bypassCode($bypass, $billType, $code)
     curl_close($curl);
     return $response;
 }
-function generateMpesaCode() {
+function generateMpesaCode()
+{
     $alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $alphabet1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     $alphabet2 = '1234567890';
     $code = '';
-  
+
     // Year (Q for 2022, R for 2023, etc.)
     $currentYear = date('Y');
-    $code .= $alphabet[$currentYear - 2022+16];
-  
+    $code .= $alphabet[$currentYear - 2022 + 16];
+
     // Month (K for November, G for July, etc.)
     $currentMonth = date('n');
     $code .= $alphabet[$currentMonth - 1];
-  
+
     // Day (1 for 1st, 2 for 2nd, etc.)
     $currentDay = date('j');
     if ($currentDay > 9) {
@@ -1775,7 +1776,7 @@ function generateMpesaCode() {
     } else {
         $code .= $currentDay;
     }
-  
+
     /*
     // Transaction order (A for 10th, B for 11th, etc.)
     $currentTime = date('Hi');
@@ -1785,13 +1786,75 @@ function generateMpesaCode() {
     $code .= $transactionOrder;
     */
     $code .= $alphabet2[rand(0, strlen($alphabet2) - 1)];
-  
+
     //*
     // Complete the remaining characters to make the code 10 characters long
     while (strlen($code) < 10) {
-      $code .= $alphabet1[rand(0, strlen($alphabet1) - 1)];
+        $code .= $alphabet1[rand(0, strlen($alphabet1) - 1)];
     }
     //*/
-  
+
     return $code;
-  }
+}
+
+function splitName($fullName)
+{
+    // Trim any extra spaces from the name and split it into an array
+    $nameParts = explode(' ', trim($fullName));
+    // Initialize an array to hold first, middle, and last names
+    $name = ['first' => '', 'middle' => '', 'last' => ''];
+
+    // Depending on the number of parts, assign them accordingly
+    switch (count($nameParts)) {
+        case 1:
+            // Only one part, so it's the first name
+            $name['first'] = $nameParts[0];
+            break;
+        case 2:
+            // Two parts, so first and last names
+            $name['first'] = $nameParts[0];
+            $name['last'] = $nameParts[1];
+            break;
+        default:
+            // Three or more parts, so first, last, and the rest as middle names
+            $name['first'] = array_shift($nameParts); // Assign and remove the first item
+            $name['last'] = array_pop($nameParts); // Assign and remove the last item
+            $name['middle'] = implode(' ', $nameParts); // The rest are middle names
+            break;
+    }
+
+    return $name;
+}
+
+function normalizePhoneNumber($phoneNumber) {
+    // Remove any non-numeric characters (e.g., +, -, spaces)
+    $cleanedNumber = preg_replace('/\D/', '', $phoneNumber);
+
+    // Check if number starts with '254'
+    if (substr($cleanedNumber, 0, 3) == '254') {
+        // Number already starts with '254'
+        return $cleanedNumber;
+    } elseif (substr($cleanedNumber, 0, 1) == '0') {
+        // Number starts with '0', replace '0' with '254'
+        return '254' . substr($cleanedNumber, 1);
+    } elseif (strlen($cleanedNumber) == 9) {
+        // Number is 9 digits long, missing the country code '254'
+        return '254' . $cleanedNumber;
+    } else {
+        // Return the number as is if it doesn't match the above conditions
+        // You might want to handle this case differently depending on your needs
+        return $cleanedNumber;
+    }
+}
+
+function getCurrentTimeFormats() {
+    // Format without separators
+    $formatWithoutSeparators = date('YmdHis');
+    // Format with separators
+    $formatWithSeparators = date('Y-m-d H:i:s');
+
+    return [
+        'withoutSeparators' => $formatWithoutSeparators,
+        'withSeparators' => $formatWithSeparators,
+    ];
+}
