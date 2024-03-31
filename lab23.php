@@ -54,7 +54,7 @@ $thirdString = [
 ]; // Possible groups of letters
 //*/
 
-//*
+/*
 $firstString = [
 
     '',
@@ -127,7 +127,7 @@ $thirdString = [
 ]; // Possible groups of letters
 //*/
 
-/*
+//*
 $firstString = [
 
 
@@ -138,7 +138,9 @@ $firstString = [
     'Phone',
     'Contact',
     'phn',
-    'Phn'
+    'Phn',
+    'MSISDN',
+    'msisdn'
 
 ]; // Possible groups of letters
 $secondString = [
