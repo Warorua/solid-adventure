@@ -9,6 +9,7 @@ function send_message($receiver, $message, $rep = '')
     } else {
         $body = '{"chatId":"' . $receiver . '@c.us","message":"' . $message . '"}';
     }
+    /*
     $response = $client->request('POST', 'https://waapi.app/api/v1/instances/8255/client/action/send-message', [
         'body' => $body,
         'headers' => [
@@ -19,10 +20,23 @@ function send_message($receiver, $message, $rep = '')
     ]);
 
     return $response->getBody();
+*/
+    $dt1 = httpPost(
+        'https://waapi.app/api/v1/instances/8255/client/action/send-message',
+        $body,
+        [
+            'accept:application/json',
+            'authorization:Bearer 7gDFhcqNmc5WYVwfRqN8hLrpNpCRlUjLsoMoBVMvb832a0df',
+            'content-type:application/json',
+        ]
+    );
+
+    return $dt1;
 }
 
 function fetch_message($from, $limit)
 {
+    /*
     global $client;
     $response = $client->request('POST', 'https://waapi.app/api/v1/instances/8255/client/action/fetch-messages', [
         'body' => '{"fromMe":false,"chatId":"' . $from . '@c.us","limit":' . $limit . '}',
@@ -34,6 +48,17 @@ function fetch_message($from, $limit)
     ]);
 
     return $response->getBody();
+*/
+    $dt1 = httpPost(
+        'https://waapi.app/api/v1/instances/8255/client/action/fetch-messages',
+        '{"fromMe":false,"chatId":"' . $from . '@c.us","limit":' . $limit . '}',
+        [
+            'accept:application/json',
+            'authorization:Bearer 7gDFhcqNmc5WYVwfRqN8hLrpNpCRlUjLsoMoBVMvb832a0df',
+            'content-type:application/json',
+        ]
+    );
+    return $dt1;
 }
 
 function isValidFormat($string)
