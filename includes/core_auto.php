@@ -266,7 +266,8 @@ function normalizePhoneNumber($phoneNumber)
     }
 }
 
-function getCurrentTimeFormats() {
+function getCurrentTimeFormats()
+{
     // Format without separators
     $formatWithoutSeparators = date('YmdHis');
     // Format with separators
