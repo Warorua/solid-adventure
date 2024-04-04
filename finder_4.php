@@ -139,7 +139,7 @@ if ($type == 'bills') {
 
 if (isset($bills)) {
     $mini_head = 'BILL';
-    $url = 'https://nairobiservices.go.ke/api/authentication/profile/bills';
+    $url = 'http://192.168.100.116/authentication/profile/bills';
     $data = [];
     $headers = [
         'Authorization: Bearer ' . $_SESSION['token'],
@@ -149,7 +149,7 @@ if (isset($bills)) {
     $dt1 = json_decode(httpGet($url, $data, $headers), true);
     if (isset($dt1['error'])) {
         if ($dt1['error'] == 'Cannot get bills at the moment') {
-            $url = 'https://nairobiservices.go.ke/api/parking/parking/transactions';
+            $url = 'http://192.168.100.116/parking/parking/transactions';
             $dt1 = json_decode(httpGet($url, $data, $headers), true);
         }
     }
@@ -157,7 +157,7 @@ if (isset($bills)) {
 }
 
 if (isset($invoice2)) {
-    $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $invoice2;
+    $url = 'http://192.168.100.116/sbp/applications/get_invoice_details?invoice_no=' . $invoice2;
     $data = [];
     if (isset($_SESSION['token'])) {
         $invtk = $_SESSION['token'];
@@ -170,7 +170,7 @@ if (isset($invoice2)) {
     // echo dt1($dt1, $head, $mini_head);
 }
 if (isset($invoice3)) {
-    $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $invoice3;
+    $url = 'http://192.168.100.116/sbp/applications/get_invoice_details?invoice_no=' . $invoice3;
     $data = [];
     if (isset($_SESSION['token'])) {
         $invtk = $_SESSION['token'];
@@ -182,7 +182,7 @@ if (isset($invoice3)) {
     $dt12 = json_decode(httpGet($url, $data, $headers), true);
 
     //// echo dt1($dt1, $head, $mini_head);
-    $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
+    $url = 'http://192.168.100.116/authentication/bill/transaction/details';
     $data = ['invoice_no' => $invoice3];
     $headers = [];
 
@@ -195,7 +195,7 @@ if (isset($invoice3)) {
 }
 
 if (isset($invoice)) {
-    $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
+    $url = 'http://192.168.100.116/authentication/bill/transaction/details';
     $data = ['invoice_no' => $invoice];
     $headers = [];
 
@@ -204,94 +204,79 @@ if (isset($invoice)) {
 }
 
 if (isset($bypass)) {
-    $url = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
+    include './rejuv/conn.php';
+
+    $stmt2 = $conn2->prepare("SELECT id, paybillBal FROM mpesaTransactions ORDER BY id DESC LIMIT 1");
+    $stmt2->execute();
+    $up = $stmt2->fetch();
+
+    $newId = $up['id'] + 2;
+    $newBal = $up['paybillBal'] + 500;
+    $custname = splitName($bypass['custname']);
+    $custcont = normalizePhoneNumber($bypass['custcont']);
+    $timeFormats = getCurrentTimeFormats();
+
+    $bypass['url'] = 'http://192.168.100.116/gateway/taifa/nrs/affirm';
+
+    //die(json_encode($url));
+
+    //$url = 'http://192.168.100.116/authentication/bill/confirm_payment';
     $bty = explode('-', $bypass['invoice_no']);
     $bty[1] = strtoupper($bty[1]);
-    if ($bty[1] == 'SBP') {
-        $billType = 'SBPPermitFee';
-    } elseif ($bty[1] == 'FIC') {
-        $billType = 'EssServices';
-    } elseif ($bty[1] == 'FHL') {
-        $billType = 'FdHygene';
-    } elseif ($bty[1] == 'LR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'ADF') {
-        $billType = 'AdvertPermitFee';
-    } elseif ($bty[1] == 'HR') {
-        $billType = 'HouseRent';
-    } elseif ($bty[1] == 'GTC') {
-        $billType = 'TenancyApp';
-    } elseif ($bty[1] == 'FH') {
-        $billType = 'FoodHandling';
-    } elseif ($bty[1] == 'SE') {
-        $billType = 'ParkingFee';
-    } elseif ($bty[1] == 'HC') {
-        $billType = 'HealthCert';
-    } elseif ($bty[1] == 'GRR') {
-        $billType = 'RenovationRepair';
-    } elseif ($bty[1] == 'SBPC') {
-        $billType = 'UnderCharge';
-    } elseif ($bty[1] == 'LL') {
-        $billType = 'LiquorLicence';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'GGRT') {
-        $billType = 'GroundRent';
-    } elseif ($bty[1] == 'GLV') {
-        $billType = 'LValua';
-    } elseif ($bty[1] == 'PS') {
-        $billType = 'PSVSticker';
-    } elseif ($bty[1] == 'GESS') {
-        $billType = 'EssServices';
-    } elseif ($bty[1] == 'GINS') {
-        $billType = 'Instinspect';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } elseif ($bty[1] == 'GLR') {
-        $billType = 'LandRate';
-    } else {
-        $billType = '';
-    }
     $code = generateMpesaCode();
     $data = array(
+        "apiKey" => "",
+        "type" => "mpesa",
+        "billNumber" => (string) $bypass['invoice_no'],
+        "billAmount" => $bypass['amount'],
+        "phone" => (string) $custcont,
+        "transactionDate" => "",
+        "Field1" => null,
+        "Field2" => null,
+        "Field3" => null,
+        "Field4" => null,
+        "Field5" => null,
+        "bankdetails" => null,
         "mpesadetails" => array(
-            "FirstName" => (string) "John",
             "BillRefNumber" => (string) $bypass['invoice_no'],
-            "TransAmount" => (string) $bypass['amount'],
-            "BillType" => (string) $billType,
-            "TransChannel" => (string) "mpesa",
-            "TransID" => (string) $code
+            "BusinessShortCode" => "6060047",
+            "FirstName" => (string)str_replace("'",'',$custname['first']),
+            "LastName" => (string)str_replace("'",'',$custname['last']),
+            "MSISDN" => "",
+            "MiddleName" => (string)str_replace("'",'',$custname['middle']),
+            "OrgAccountBalance" => "0.00",
+            "ThirdPartyTransID" => "5627760",
+            "TransAmount" => $bypass['amount'],
+            "TransID" => (string) $code,
+            "TransTime" => (string)$timeFormats['withoutSeparators'],
+            "TransactionType" => "Pay Bill"
         )
     );
 
     $data = json_encode($data);
+    $sqldata = json_encode($data);
+   
 
     $headers = [];
 
     //$dt0 = httpPost($url, $data, $headers);
     //$dt1 = json_decode($dt0, true);
+    //unset($bypass['success']);
+    //$dt1 = $bypass;
+
+    $stmt2 = $conn2->prepare("insert into `mpesaTransactions` (`Confirmation Response`, `MpesaValidation`, `PushedComments`, `PushedToReconcile`, `accNo`, `amount`, `apiCode`, `comment`, `cont`, `id`, `logDate`, `mobileno`, `mpesaName`, `paybillBal`, `phone_number`, `receiptNo`, `resultoutput`, `shortCode`, `sid`, `status`, `transactionTime`, `validation Response`) values (NULL, 'COMPLETED', NULL, '0', '" . $bypass['invoice_no'] . "', " . $bypass['amount'] . ", '2dce510f562c9ab7ce24c6fe282b4f099e8e49be', 'Success', NULL, " . $newId . ", '" . $timeFormats['withSeparators'] . "', '" . $custcont . "', '" . str_replace("'",'',$bypass['custname']) . "', " . $newBal . ", '', '" . $code . "', '" . $sqldata . "', '6060047', NULL, 1, '" . $timeFormats['withoutSeparators'] . "', 'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction')");
+    $stmt2->execute();
+
+    $billType = "";
     $dt0 = bypassCode($bypass, $billType, $code);
     $dt1 = json_decode($dt0, true);
-    //$dt1 = [];
-    $dt1['code'] = $code;
-    $dt1['amount'] = $bypass['amount'];
     //$dt1 = $data;
     //echo $dt0;
      echo dt1($dt1, $head, $mini_head);
 }
 
 if (isset($number_plate)) {
-    $url1 = 'https://nairobiservices.go.ke/api/iprs/parking/ntsa/vehicle/' . $number_plate;
+    $url1 = 'http://192.168.100.116/iprs/parking/ntsa/vehicle/' . $number_plate;
 
     $dt3 = json_decode(httpGet($url1, []), true);
 
@@ -380,7 +365,7 @@ if (isset($trp)) {
 
 if (isset($psv_list)) {
     $mini_head = 'VEHICLE';
-    $url = 'https://nairobiservices.go.ke/api/parking/psv/vehicles';
+    $url = 'http://192.168.100.116/parking/psv/vehicles';
     $data = [];
     $headers = [
         'Authorization: Bearer ' . $_SESSION['token'],
@@ -394,7 +379,7 @@ if (isset($psv_list)) {
 
     if (isset($dt1['error'])) {
         if ($dt1['error'] == 'Cannot get bills at the moment') {
-            // $url = 'https://nairobiservices.go.ke/api/parking/parking/transactions';
+            // $url = 'http://192.168.100.116/parking/parking/transactions';
             // $dt1 = json_decode(httpGet($url, $data, $headers), true);
         }
     }
@@ -404,7 +389,7 @@ if (isset($psv_list)) {
 
 if (isset($psv_activation)) {
     $mini_head = 'REGISTER ENTRY';
-    $url = 'https://nairobiservices.go.ke/api/parking/psv/activation/details';
+    $url = 'http://192.168.100.116/parking/psv/activation/details';
     $data = [];
     $headers = [
         'Authorization: Bearer ' . $_SESSION['token'],
@@ -416,7 +401,7 @@ if (isset($psv_activation)) {
 
     if (isset($dt1['error'])) {
         if ($dt1['error'] == 'Cannot get bills at the moment') {
-            // $url = 'https://nairobiservices.go.ke/api/parking/parking/transactions';
+            // $url = 'http://192.168.100.116/parking/parking/transactions';
             // $dt1 = json_decode(httpGet($url, $data, $headers), true);
         }
     }

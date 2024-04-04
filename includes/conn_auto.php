@@ -1,11 +1,11 @@
 <?php
-class UPGW
+class AutoConn
 {
 
 
-    private $server = "mysql:host=192.168.0.65;dbname=upgw";
-    private $username = "root";
-    private $password = "happycoding";
+    private $server = "mysql:host=srv1140.hstgr.io;dbname=u854855859_auto_kever";
+    private $username = "u854855859_auto_kever";
+    private $password = "C#XQPoH*2q";
     private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
     protected $conn;
 
@@ -30,6 +30,6 @@ $start = date('Y-m-d H:i:s');
 //*
 
 
-$pdo = new UPGW();
+$pdo = new AutoConn();
 
-$conn2 = $pdo->open();
+$conn3 = $pdo->open();
