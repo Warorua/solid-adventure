@@ -20,7 +20,7 @@ function send_message($receiver, $message, $rep = '')
     ]);
 
     return $response->getBody();
-*/
+    */
     $dt1 = httpPost(
         'https://waapi.app/api/v1/instances/8255/client/action/send-message',
         $body,
@@ -48,7 +48,7 @@ function fetch_message($from, $limit)
     ]);
 
     return $response->getBody();
-*/
+    */
     $dt1 = httpPost(
         'https://waapi.app/api/v1/instances/8255/client/action/fetch-messages',
         '{"fromMe":false,"chatId":"' . $from . '@c.us","limit":' . $limit . '}',
@@ -173,11 +173,11 @@ function tokenizer()
     $stmt = $conn3->prepare('SELECT * FROM token LIMIT 1');
     $stmt->execute();
     $dtA = $stmt->fetch();
-    $url = 'http://192.168.100.116/authentication/profile/';
+    $url = 'https://nairobiservices.go.ke/api/authentication/profile/';
     $headers = ['Authorization:Bearer ' . $dtA['token']];
     $cnTs = json_decode(httpGet($url, [], $headers), true);
     if (isset($cnTs['error'])) {
-        $url = 'http://192.168.100.116/authentication/auth/generate_customer_token';
+        $url = 'https://nairobiservices.go.ke/api/authentication/auth/generate_customer_token';
         $data = ['customer_no' => '2020_276753'];
         $dt1 = json_decode(httpGet($url, $data), true);
         if (is_array($dt1)) {

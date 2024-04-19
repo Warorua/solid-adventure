@@ -22,3 +22,4 @@ pftb2/
 database/
 includes/theSecurityTimeLimitTokenStorage223.json
 *.db
+kra_data/

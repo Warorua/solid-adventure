@@ -22,7 +22,7 @@ if ($page == 'b2') {
         unset($_SESSION['phone_number']);
     }
     if ($number != '') {
-        $url = 'http://192.168.100.116/authentication/auth/login/ussd';
+        $url = 'https://nairobiservices.go.ke/api/authentication/auth/login/ussd';
         $data = ['ussd_pin' => $pin, 'mobile_number' => $number];
 
         $dt1 = json_decode(httpPost($url, $data), true);
@@ -45,7 +45,7 @@ if ($page == 'b2') {
     }
 } elseif ($page == 'b1') {
     if ($cid != '') {
-        $url = 'http://192.168.100.116/authentication/auth/generate_customer_token';
+        $url = 'https://nairobiservices.go.ke/api/authentication/auth/generate_customer_token';
         $data = ['customer_no' => $cid];
         $dt1 = json_decode(httpGet($url, $data), true);
         if (is_array($dt1)) {

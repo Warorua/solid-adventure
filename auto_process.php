@@ -1,4 +1,10 @@
 <?php
+/*
+197.232.37.194
+197.232.83.60
+http://197.232.94.197/
+http://197.232.94.195/
+197.248.131.78
 require 'vendor/autoload.php';
 
 include './includes/core_auto.php';
@@ -14,7 +20,7 @@ $stmt2->execute(['id' => $dt1['client']]);
 $dtt1 = $stmt2->fetch();
 
 //echo json_encode($dt1);
-$url = 'http://192.168.100.116/sbp/applications/get_invoice_details?invoice_no=' . $dt1['invoiceNo'];
+$url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $dt1['invoiceNo'];
 $data = [];
 $headers = ['Authorization:Bearer ' . tokenizer()['token']];
 //echo $invtk;
@@ -48,11 +54,11 @@ if (isset($validation['success'])) {
                         $timeFormats = getCurrentTimeFormats();
                         $bypassAmt = (float)$bypass['amount'];
 
-                        $bypass['url'] = 'http://192.168.100.116/gateway/taifa/nrs/affirm';
+                        $bypass['url'] = 'https://nairobiservices.go.ke/api/gateway/taifa/nrs/affirm';
 
                         //die(json_encode($url));
 
-                        //$url = 'http://192.168.100.116/authentication/bill/confirm_payment';
+                        //$url = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
                         $bty = explode('-', $bypass['invoice_no']);
                         $bty[1] = strtoupper($bty[1]);
                         $code = generateMpesaCode();
@@ -180,3 +186,4 @@ if (isset($validation['success'])) {
     send_message('254716912663', $messBody);
     updater($dt1['id'], $messBody, $status = '2');
 }
+//*/
