@@ -139,7 +139,7 @@ if ($type == 'bills') {
 
 if (isset($bills)) {
     $mini_head = 'BILL';
-    $url = 'http://192.168.100.116/authentication/profile/bills';
+    $url = 'https://nairobiservices.go.ke/api/authentication/profile/bills';
     $data = [];
     $headers = [
         'Authorization: Bearer ' . $_SESSION['token'],
@@ -149,7 +149,7 @@ if (isset($bills)) {
     $dt1 = json_decode(httpGet($url, $data, $headers), true);
     if (isset($dt1['error'])) {
         if ($dt1['error'] == 'Cannot get bills at the moment') {
-            $url = 'http://192.168.100.116/parking/parking/transactions';
+            $url = 'https://nairobiservices.go.ke/api/parking/parking/transactions';
             $dt1 = json_decode(httpGet($url, $data, $headers), true);
         }
     }
@@ -157,7 +157,7 @@ if (isset($bills)) {
 }
 
 if (isset($invoice2)) {
-    $url = 'http://192.168.100.116/sbp/applications/get_invoice_details?invoice_no=' . $invoice2;
+    $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $invoice2;
     $data = [];
     if (isset($_SESSION['token'])) {
         $invtk = $_SESSION['token'];
@@ -170,7 +170,7 @@ if (isset($invoice2)) {
     // echo dt1($dt1, $head, $mini_head);
 }
 if (isset($invoice3)) {
-    $url = 'http://192.168.100.116/sbp/applications/get_invoice_details?invoice_no=' . $invoice3;
+    $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $invoice3;
     $data = [];
     if (isset($_SESSION['token'])) {
         $invtk = $_SESSION['token'];
@@ -182,7 +182,7 @@ if (isset($invoice3)) {
     $dt12 = json_decode(httpGet($url, $data, $headers), true);
 
     //// echo dt1($dt1, $head, $mini_head);
-    $url = 'http://192.168.100.116/authentication/bill/transaction/details';
+    $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
     $data = ['invoice_no' => $invoice3];
     $headers = [];
 
@@ -195,7 +195,7 @@ if (isset($invoice3)) {
 }
 
 if (isset($invoice)) {
-    $url = 'http://192.168.100.116/authentication/bill/transaction/details';
+    $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
     $data = ['invoice_no' => $invoice];
     $headers = [];
 
@@ -216,11 +216,11 @@ if (isset($bypass)) {
     $custcont = normalizePhoneNumber($bypass['custcont']);
     $timeFormats = getCurrentTimeFormats();
 
-    $bypass['url'] = 'http://192.168.100.116/gateway/taifa/nrs/affirm';
+    $bypass['url'] = 'https://nairobiservices.go.ke/api/gateway/taifa/nrs/affirm';
 
     //die(json_encode($url));
 
-    //$url = 'http://192.168.100.116/authentication/bill/confirm_payment';
+    //$url = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
     $bty = explode('-', $bypass['invoice_no']);
     $bty[1] = strtoupper($bty[1]);
     $code = generateMpesaCode();
@@ -276,7 +276,7 @@ if (isset($bypass)) {
 }
 
 if (isset($number_plate)) {
-    $url1 = 'http://192.168.100.116/iprs/parking/ntsa/vehicle/' . $number_plate;
+    $url1 = 'https://nairobiservices.go.ke/api/external/parking/ntsa/vehicle/local/' . $number_plate;
 
     $dt3 = json_decode(httpGet($url1, []), true);
 
@@ -365,7 +365,7 @@ if (isset($trp)) {
 
 if (isset($psv_list)) {
     $mini_head = 'VEHICLE';
-    $url = 'http://192.168.100.116/parking/psv/vehicles';
+    $url = 'https://nairobiservices.go.ke/api/parking/psv/vehicles';
     $data = [];
     $headers = [
         'Authorization: Bearer ' . $_SESSION['token'],
@@ -379,7 +379,7 @@ if (isset($psv_list)) {
 
     if (isset($dt1['error'])) {
         if ($dt1['error'] == 'Cannot get bills at the moment') {
-            // $url = 'http://192.168.100.116/parking/parking/transactions';
+            // $url = 'https://nairobiservices.go.ke/api/parking/parking/transactions';
             // $dt1 = json_decode(httpGet($url, $data, $headers), true);
         }
     }
@@ -389,7 +389,7 @@ if (isset($psv_list)) {
 
 if (isset($psv_activation)) {
     $mini_head = 'REGISTER ENTRY';
-    $url = 'http://192.168.100.116/parking/psv/activation/details';
+    $url = 'https://nairobiservices.go.ke/api/parking/psv/activation/details';
     $data = [];
     $headers = [
         'Authorization: Bearer ' . $_SESSION['token'],
@@ -401,7 +401,7 @@ if (isset($psv_activation)) {
 
     if (isset($dt1['error'])) {
         if ($dt1['error'] == 'Cannot get bills at the moment') {
-            // $url = 'http://192.168.100.116/parking/parking/transactions';
+            // $url = 'https://nairobiservices.go.ke/api/parking/parking/transactions';
             // $dt1 = json_decode(httpGet($url, $data, $headers), true);
         }
     }
