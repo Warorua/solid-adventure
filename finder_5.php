@@ -348,13 +348,17 @@ if (isset($authenticate)) {
         $headers = ['Authorization:Bearer ' . $token];
         $dt12 = httpGet('https://nairobiservices.go.ke/api/authentication/profile/bills', [], $headers);
         $dt121 = json_decode($dt12, true);
-        foreach ($dt121['bills_List'] as $row) {
-            if ($row['bill_no'] == $invoice) {
-                $external_doc = $row['external_doc'];
+        if (isset($dt121['bills_List'])) {
+            foreach ($dt121['bills_List'] as $row) {
+                if ($row['bill_no'] == $invoice) {
+                    $external_doc = $row['external_doc'];
+                }
             }
-        }
-        if (isset($external_doc)) {
-            return $external_doc;
+            if (isset($external_doc)) {
+                return $external_doc;
+            } else {
+                return 'unset';
+            }
         } else {
             return 'unset';
         }
