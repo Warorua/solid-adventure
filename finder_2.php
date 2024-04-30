@@ -208,7 +208,7 @@ if ($idno != '') {
                         foreach ($gt1[0] as $gtid => $gt1r) {
                             $object_1[$gtid] = $gt1r;
                         }
-                        $brs_pin = $gt1['login'];
+                        $brs_pin = $gt1[0]['login'];
                     } elseif(isset($gt1['M-Service'])) {
                         //$object_1['kra'] = 'KRA PIN Not available for Identity Provided!';
                         $pin_extract = extractPIN($gt1['M-Service']);
