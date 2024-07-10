@@ -10,7 +10,7 @@ include './includes/core2.php';
 //$idno = '1075921';
 //$type = 'd';
 $idno = $_POST['idno'];
-$type = $_POST['type'];
+//$type = $_POST['type'];
 if (isset($_POST['fname'])) {
     if ($_POST['fname'] != '') {
         $fname = $_POST['fname'];
@@ -528,7 +528,16 @@ if (isset($object_1)) {
 }
 
 
-echo $object;
+if(isset($_GET['type'])){
+    if($_GET['type'] == 'json'){
+        
+    }else{
+        echo $object;
+    }
+}else{
+    echo $object;
+}
+
 
 //echo json_encode($obj_3).'<br/><br/>';
 
