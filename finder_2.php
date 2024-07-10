@@ -22,6 +22,7 @@ if (isset($_POST['fname'])) {
     }
 }
 
+
 $object = '';
 if ($idno != '') {
     if (!isset($fname)) {
