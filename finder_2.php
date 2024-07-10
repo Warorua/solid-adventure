@@ -401,8 +401,11 @@ if ($idno != '') {
 } else {
     $object .= 'id no needed';
 }
+
 if (isset($object_1)) {
+    
     if (is_array($object_1)) {
+        
         $oob = '';
         $oob .= '
     <table class="table table-striped-columns">
@@ -422,6 +425,7 @@ if (isset($object_1)) {
                     if ($id == 'title_ntsa') {
                         $oob .= '<tr><td class="text-center font-monospace">' . $row . '</td></tr>';
                     } else {
+                        $jsOt['ntsa'][$id] = $row;
                         $t1 = strtoupper(str_replace('_', ' ', $id));
                         $oob .= '<tr><th scope="row" style="color:green" class="font-monospace">' . $t1 . ' </th><td> ' . $row . '</td></tr>';
                     }
@@ -431,6 +435,7 @@ if (isset($object_1)) {
                     if ($id == 'title_nhif') {
                         $oob .= '<tr><td class="text-center font-monospace">' . $row . '</td></tr>';
                     } else {
+                        $jsOt['nhif'][$id] = $row;
                         $t1 = strtoupper(str_replace('_', ' ', $id));
                         $oob .= '<tr><th scope="row" style="color:blue" class="font-monospace">' . $t1 . ' </th><td> ' . $row . '</td></tr>';
                     }
@@ -438,6 +443,7 @@ if (isset($object_1)) {
                 //*/
                 else {
                     $t1 = strtoupper(str_replace('_', ' ', $id));
+                    $jsOt[$id] = $row;
                     $oob .= '<tr><th scope="row">' . $t1 . ' </th><td> ' . $row . '</td></tr>';
                 }
             }
@@ -504,7 +510,17 @@ if (isset($object_1)) {
         }
 
         $oob .= ' </tbody><table>';
-        echo $oob;
+
+        if(isset($_GET['type'])){
+            if($_GET['type'] == 'json'){
+                echo json_encode($jsOt);
+            }else{
+                echo $oob;
+            }
+        }else{
+           echo $oob; 
+        }
+        
     } else {
         echo $object_1;
     }
