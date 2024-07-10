@@ -111,16 +111,28 @@ function idNumberSearch($idno)
     $kra1 = idSearchKRA($idno);
     $dt1 = json_decode($kra1, true);
     //echo json_encode($kra1).' - 1<br/>';
-    echo ' Engine 1<br/>';
+    if (!isset($_GET['type'])) {
+        echo ' Engine 1<br/>';
+    }
+
     if (!isset($dt1['isValidNID'])) {
         //echo json_encode($dt1).' - 2<br/>';
-        echo 'Engine 2<br/>';
+        if (!isset($_GET['type'])) {
+            echo 'Engine 2<br/>';
+        }
+
         if ($dt1['isValidNID'] == null) {
             //echo json_encode($dt1).' - 3<br/>';
-            echo 'Engine 3<br/>';
+            if (!isset($_GET['type'])) {
+                echo 'Engine 3<br/>';
+            }
+
             if (!$dt1['isValidNID']) {
                 //echo json_encode($dt1).' - 4<br/>';
-                echo 'Engine 4<br/>';
+                if (!isset($_GET['type'])) {
+                    echo 'Engine 4<br/>';
+                }
+
                 $dt1 = json_decode(idSearchNRSPost($id_number), true);
                 if (isset($dt1['error'])) {
                     $dt2 = json_decode(idSearchNRSGet($id_number), true);
