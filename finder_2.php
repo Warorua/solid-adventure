@@ -10,7 +10,12 @@ include './includes/core2.php';
 //$idno = '1075921';
 //$type = 'd';
 $idno = $_POST['idno'];
-//$type = $_POST['type'];
+if (isset($_POST['type'])) {
+    $type = $_POST['type'];
+} else {
+    $type = '';
+}
+
 if (isset($_POST['fname'])) {
     if ($_POST['fname'] != '') {
         $fname = $_POST['fname'];
@@ -181,10 +186,11 @@ if ($idno != '') {
                 //*/
 
                 //*
-                function extractPIN($sentence) {
+                function extractPIN($sentence)
+                {
                     // Define the pattern to match the sentence format
                     $pattern = '/^User\s([A-Z0-9]+)\sis\salready\sregistered\.$/';
-                
+
                     // Perform the regular expression match
                     if (preg_match($pattern, $sentence, $matches)) {
                         // If a match is found, return the dynamic word
@@ -195,22 +201,22 @@ if ($idno != '') {
                     }
                 }
                 $data = [
-                    "pin"=> $idno,
-                    "token"=> "20e92a436d4bf28e8c08565df22ae2d6dd3d495709a43d0ce52e9ab2847d995b",
-                    "ishara"=> "016086dc439441d36c739223bf356e676e8ff109a9ca885e915719fe4561af61",
-                    "version"=> "3.0",
-                    "lugha"=> "0"
+                    "pin" => $idno,
+                    "token" => "20e92a436d4bf28e8c08565df22ae2d6dd3d495709a43d0ce52e9ab2847d995b",
+                    "ishara" => "016086dc439441d36c739223bf356e676e8ff109a9ca885e915719fe4561af61",
+                    "version" => "3.0",
+                    "lugha" => "0"
                 ];
                 $data = json_encode($data);
                 //echo $data;
-                $gt1 = json_decode(httpPost('https://api.kra.go.ke/m-service/user/verify',$data, ['Content-Type: application/json']), true);
+                $gt1 = json_decode(httpPost('https://api.kra.go.ke/m-service/user/verify', $data, ['Content-Type: application/json']), true);
                 if (is_array($gt1)) {
                     if (isset($gt1[0]['login'])) {
                         foreach ($gt1[0] as $gtid => $gt1r) {
                             $object_1[$gtid] = $gt1r;
                         }
                         $brs_pin = $gt1[0]['login'];
-                    } elseif(isset($gt1['M-Service'])) {
+                    } elseif (isset($gt1['M-Service'])) {
                         //$object_1['kra'] = 'KRA PIN Not available for Identity Provided!';
                         $pin_extract = extractPIN($gt1['M-Service']);
                         if ($pin_extract !== false) {
@@ -219,7 +225,7 @@ if ($idno != '') {
                             $object_1['kra'] = 'KRA Fetching error. Result: ' . $gt1['M-Service'];
                         }
                         $object_1['kra'] = 'KRA Fetching error. Result: ' . $gt1['M-Service'];
-                    }else {
+                    } else {
                         //$object_1['kra'] = 'KRA PIN Not available for Identity Provided!';
                         $object_1['kra'] = 'KRA Fetching error. Result: ' . json_encode($gt1);
                     }
@@ -278,7 +284,7 @@ if ($idno != '') {
                 }
                 //*/
             }
-            
+
 
 
             if ($type != 'resident') {
@@ -352,7 +358,7 @@ if ($idno != '') {
             //*
             if (isset($idno)) {
                 //$dldt =  DLFetch($idno);
-                $dldt = httpGet('https://serviceportal.ntsa.go.ke/api/i/v1/verify/driving-license?id_number='.$idno.'&id_type=citizen',[],['access-token: '.generateAccessToken(), 'User-Agent: Dart/3.4 (dart:io)']);
+                $dldt = httpGet('https://serviceportal.ntsa.go.ke/api/i/v1/verify/driving-license?id_number=' . $idno . '&id_type=citizen', [], ['access-token: ' . generateAccessToken(), 'User-Agent: Dart/3.4 (dart:io)']);
                 $dldt_1 = json_decode($dldt, true);
                 if (is_array($dldt_1)) {
                     $object_1['title_ntsa']  = badge('h2', 'NTSA DATA', 'success');
@@ -360,18 +366,18 @@ if ($idno != '') {
                         foreach ($dldt_1['data'] as $id => $row) {
                             $object_1[$id . '_ntsa']  = $row;
                         }
-                    }elseif(isset($dldt_1['error'])){
-                        if(isset($dldt_1['error']['status'])){
-                            if($dldt_1['error']['status'] == 'Not Found'){
+                    } elseif (isset($dldt_1['error'])) {
+                        if (isset($dldt_1['error']['status'])) {
+                            if ($dldt_1['error']['status'] == 'Not Found') {
                                 $object_1['error_ntsa']  = 'User does not have a Driving Licence!';
-                            }else{
+                            } else {
                                 $object_1['error_ntsa']  = $dldt_1['error']['status'];
                             }
-                        }else{
-                            $object_1['error_ntsa']  = 'DL Error: '.json_encode($dldt_1);
+                        } else {
+                            $object_1['error_ntsa']  = 'DL Error: ' . json_encode($dldt_1);
                         }
-                    }else{
-                        $object_1['error_ntsa']  = 'DL Error: '.json_encode($dldt_1);
+                    } else {
+                        $object_1['error_ntsa']  = 'DL Error: ' . json_encode($dldt_1);
                     }
                 }
             }
@@ -404,9 +410,9 @@ if ($idno != '') {
 }
 
 if (isset($object_1)) {
-    
+
     if (is_array($object_1)) {
-        
+
         $oob = '';
         $oob .= '
     <table class="table table-striped-columns">
@@ -512,29 +518,27 @@ if (isset($object_1)) {
 
         $oob .= ' </tbody><table>';
 
-        if(isset($_GET['type'])){
-            if($_GET['type'] == 'json'){
+        if (isset($_GET['type'])) {
+            if ($_GET['type'] == 'json') {
                 echo json_encode($jsOt);
-            }else{
+            } else {
                 echo $oob;
             }
-        }else{
-           echo $oob; 
+        } else {
+            echo $oob;
         }
-        
     } else {
         echo $object_1;
     }
 }
 
 
-if(isset($_GET['type'])){
-    if($_GET['type'] == 'json'){
-        
-    }else{
+if (isset($_GET['type'])) {
+    if ($_GET['type'] == 'json') {
+    } else {
         echo $object;
     }
-}else{
+} else {
     echo $object;
 }
 
