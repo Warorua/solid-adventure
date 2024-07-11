@@ -61,7 +61,7 @@ if (isset($_POST['taxPayerType'])) {
         $countyId = $_POST['countyId'];
         if ($countyId == '' || $countyId == null) {
             $countyId = 'NAAN';
-            $countyId = "AND WHERE county_id NOT LIKE :county_id ";
+            $countyObj = "AND WHERE county_id NOT LIKE :county_id ";
         } else {
             $countyObj = "AND WHERE county_id LIKE :county_id ";
         }
@@ -107,6 +107,8 @@ if (isset($_POST['taxPayerType'])) {
             $orderByObj = "ORDER BY STR_TO_DATE(birth_dt, '%d/%m/%Y %H:%i:%s') ".$orderTypeObj." ";
         }elseif($orderById == 'idnumber'){
             $orderByObj = 'ORDER BY nid_no '.$orderTypeObj.' ';
+        }else{
+            $orderByObj = '';
         }
     }else{
         $orderByObj = '';
