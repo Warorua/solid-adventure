@@ -25,8 +25,8 @@ if (isset($_POST['businessName'])) {
 
     $stmt = $conn4->prepare('SELECT * FROM kra_data WHERE business_name LIKE :business_name');
     $stmt->execute(['business_name' => '%' . $businessName . '%']);
-    $output = $stmt->fetchAll();
-    $output['data'] = $output;
+    $fetch = $stmt->fetchAll();
+    $output['data'] = $fetch;
     $output['count'] = count($output['data']);
     echo json_encode($output);
 } else {

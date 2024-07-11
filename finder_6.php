@@ -25,8 +25,8 @@ if (isset($_POST['idNumber'])) {
 
     $stmt = $conn4->prepare('SELECT * FROM vehiclePlate WHERE id_number LIKE :id_number');
     $stmt->execute(['id_number' => '%' . $idNo . '%']);
-    $output = $stmt->fetchAll();
-    $output['data'] = $output;
+    $fetch = $stmt->fetchAll();
+    $output['data'] = $fetch;
     $output['count'] = count($output['data']);
     echo json_encode($output);
 } else {
