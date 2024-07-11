@@ -28,7 +28,7 @@ if (isset($_POST['photo'])) {
         if ($dobLow == '' || $dobLow == null) {
             $dobLow = '1800-03-01';
         }
-    }else{
+    } else {
         $dobLow = '1800-03-01';
     }
 
@@ -37,7 +37,7 @@ if (isset($_POST['photo'])) {
         if ($dobHigh == '' || $dobHigh == null) {
             $dobHigh = '2024-03-01';
         }
-    }else{
+    } else {
         $dobHigh = '2024-03-01';
     }
 
@@ -51,8 +51,9 @@ if (isset($_POST['photo'])) {
         } else {
             $sexObj = "AND sex LIKE :sex ";
         }
-    }else{
-        $sexObj = '';
+    } else {
+        $sex = 'NA';
+        $sexObj = "AND sex NOT LIKE :sex ";
     }
 
 
@@ -65,8 +66,9 @@ if (isset($_POST['photo'])) {
         } else {
             $firstnameObj = "AND first_name LIKE :firstname_id ";
         }
-    }else{
-        $firstnameObj = '';
+    } else {
+        $firstnameId = 'NAAN';
+        $firstnameObj = "AND first_name NOT LIKE :firstname_id ";
     }
 
 
@@ -79,8 +81,9 @@ if (isset($_POST['photo'])) {
 
             $middlenameObj = "AND middle_name LIKE :middlename_id ";
         }
-    }else{
-        $middlenameObj = '';
+    } else {
+        $middlenameId = 'NAAN';
+        $middlenameObj = "AND middle_name NOT LIKE :middlename_id ";
     }
 
 
@@ -93,63 +96,64 @@ if (isset($_POST['photo'])) {
 
             $lastnameObj = "AND last_name LIKE :lastname_id ";
         }
-    }else{
-        $lastnameObj = '';
+    } else {
+        $lastnameId = 'NAAN';
+        $lastnameObj = "AND last_name NOT LIKE :lastname_id ";
     }
 
 
 
     if (isset($_POST['orderBy'])) {
-        if(isset($_POST['orderType'])){
+        if (isset($_POST['orderType'])) {
             $orderTypeId = $_POST['orderType'];
-            if($orderTypeId == '' || $orderTypeId == null){
+            if ($orderTypeId == '' || $orderTypeId == null) {
                 $orderTypeObj = 'ASC';
-            }elseif($orderTypeId == 'desc'){
+            } elseif ($orderTypeId == 'desc') {
                 $orderTypeObj = 'DESC';
-            }else{
+            } else {
                 $orderTypeObj = 'ASC';
             }
         }
         $orderById = $_POST['orderBy'];
-        if($orderById == 'random'){
+        if ($orderById == 'random') {
             $orderByObj = 'ORDER BY RAND() ';
-        }elseif($orderById == 'firstname'){
-            $orderByObj = 'ORDER BY first_name '.$orderTypeObj.' ';
-        }elseif($orderById == 'middlename'){
-            $orderByObj = 'ORDER BY middle_name '.$orderTypeObj.' ';
-        }elseif($orderById == 'lastname'){
-            $orderByObj = 'ORDER BY last_name '.$orderTypeObj.' ';
-        }elseif($orderById == 'dob'){
-            $orderByObj = "ORDER BY STR_TO_DATE(date_birth, '%d-%b-%y %H:%i:%s') ".$orderTypeObj." ";
-        }elseif($orderById == 'idnumber'){
-            $orderByObj = 'ORDER BY nat_reg_id '.$orderTypeObj.' ';
-        }else{
+        } elseif ($orderById == 'firstname') {
+            $orderByObj = 'ORDER BY first_name ' . $orderTypeObj . ' ';
+        } elseif ($orderById == 'middlename') {
+            $orderByObj = 'ORDER BY middle_name ' . $orderTypeObj . ' ';
+        } elseif ($orderById == 'lastname') {
+            $orderByObj = 'ORDER BY last_name ' . $orderTypeObj . ' ';
+        } elseif ($orderById == 'dob') {
+            $orderByObj = "ORDER BY STR_TO_DATE(date_birth, '%d-%b-%y %H:%i:%s') " . $orderTypeObj . " ";
+        } elseif ($orderById == 'idnumber') {
+            $orderByObj = 'ORDER BY nat_reg_id ' . $orderTypeObj . ' ';
+        } else {
             $orderByObj = '';
         }
-    }else{
+    } else {
         $orderByObj = '';
     }
 
     if (isset($_POST['limit'])) {
         $limitId = $_POST['limit'];
-        if(ctype_digit($limitId)){
-            $limitObj = 'LIMIT '.$limitId;
-        }else{
+        if (ctype_digit($limitId)) {
+            $limitObj = 'LIMIT ' . $limitId;
+        } else {
             $limitObj = '';
         }
-    }else{
+    } else {
         $limitObj = '';
     }
 
- //echo 'Script';
- //echo 'SELECT * FROM kra_data WHERE tax_payer_type = :photo ' . $dateObj . ' ' . $sexObj . ' ' . $firstnameObj . ' ' . $middlenameObj . ' '.$orderByObj.' '.$limitObj;
+    //echo 'Script';
+    //echo 'SELECT * FROM kra_data WHERE tax_payer_type = :photo ' . $dateObj . ' ' . $sexObj . ' ' . $firstnameObj . ' ' . $middlenameObj . ' '.$orderByObj.' '.$limitObj;
 
-    $stmt = $conn4->prepare('SELECT * FROM citizen_records WHERE photo IS NULL ' . $dateObj . ' ' . $sexObj . ' ' . $firstnameObj . ' ' . $middlenameObj . ' ' . $lastnameObj . ' '.$orderByObj.' '.$limitObj);
+    $stmt = $conn4->prepare('SELECT * FROM citizen_records WHERE photo IS NULL ' . $dateObj . ' ' . $sexObj . ' ' . $firstnameObj . ' ' . $middlenameObj . ' ' . $lastnameObj . ' ' . $orderByObj . ' ' . $limitObj);
     $stmt->execute(['dobLow' => $dobLow, 'dobHigh' => $dobHigh, 'sex' => '%' . $sex . '%', 'firstname_id' => '%' . $firstnameId . '%', 'middlename_id' => '%' . $middlenameId . '%', 'lastname_id' => '%' . $lastnameId . '%']);
     $fetch = $stmt->fetchAll();
     $output['data'] = $fetch;
     $output['count'] = count($output['data']);
-   
+
     echo json_encode($output);
 } else {
     $output['error'] = 'Required parameters not set!';
