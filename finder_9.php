@@ -118,11 +118,11 @@ if (isset($_POST['photo'])) {
         }elseif($orderById == 'middlename'){
             $orderByObj = 'ORDER BY middle_name '.$orderTypeObj.' ';
         }elseif($orderById == 'lastname'){
-            $orderByObj = 'ORDER BY sur_name '.$orderTypeObj.' ';
+            $orderByObj = 'ORDER BY last_name '.$orderTypeObj.' ';
         }elseif($orderById == 'dob'){
             $orderByObj = "ORDER BY STR_TO_DATE(date_birth, '%d-%b-%y %H:%i:%s') ".$orderTypeObj." ";
         }elseif($orderById == 'idnumber'){
-            $orderByObj = 'ORDER BY nid_no '.$orderTypeObj.' ';
+            $orderByObj = 'ORDER BY nat_reg_id '.$orderTypeObj.' ';
         }else{
             $orderByObj = '';
         }
