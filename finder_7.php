@@ -17,7 +17,7 @@ $output = [];
 if (isset($_POST['businessName'])) {
     $businessName = $_POST['businessName'];
 
-    if ($businessName == '' || $businessName == null || !ctype_digit($businessName)) {
+    if ($businessName == '' || $businessName == null) {
         $output['error'] = 'Invalid parameters set!';
         echo json_encode($output);
         die();
