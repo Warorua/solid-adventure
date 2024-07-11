@@ -125,14 +125,14 @@ if (isset($_POST['taxPayerType'])) {
         $limitObj = '';
     }
 
-
+ echo 'Script';
 
     $stmt = $conn4->prepare('SELECT * FROM kra_data WHERE tax_payer_type = :taxPayerType ' . $dateObj . ' ' . $genderObj . ' ' . $countyObj . ' ' . $districtObj . ' '.$orderByObj.' '.$limitObj);
     $stmt->execute(['taxPayerType'=>'INDI', 'dobLow' => $dobLow, 'dobHigh' => $dobHigh, 'gender' => '%' . $gender . '%', 'county_id' => '%' . $countyId . '%', 'district_id' => '%' . $districtId . '%']);
     $fetch = $stmt->fetchAll();
     $output['data'] = $fetch;
     $output['count'] = count($output['data']);
-    echo 'Script';
+   
     echo json_encode($output);
 } else {
     $output['error'] = 'Required parameters not set!';
