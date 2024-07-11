@@ -20,6 +20,7 @@ if (isset($_POST['idNumber'])) {
     if ($idNo == '' || $idNo == null || !is_int($idNo)) {
         $output['error'] = 'Invalid parameters set!';
         echo json_encode($output);
+        die();
     }
 
     $stmt = $conn4->prepare('SELECT * FROM vehiclePlate WHERE id_number LIKE :id_number');
