@@ -26,10 +26,10 @@ if (isset($_POST['taxPayerType'])) {
     if (isset($_POST['dateOfBirthLow'])) {
         $dobLow = $_POST['dateOfBirthLow'];
         if ($dobLow == '' || $dobLow == null) {
-            $dobLow = '1500-03-01';
+            $dobLow = '1800-03-01';
         }
     }else{
-        $dobLow = '1500-03-01';
+        $dobLow = '1800-03-01';
     }
 
     if (isset($_POST['dateOfBirthHigh'])) {
