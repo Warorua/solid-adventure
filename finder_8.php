@@ -132,6 +132,7 @@ if (isset($_POST['taxPayerType'])) {
     $fetch = $stmt->fetchAll();
     $output['data'] = $fetch;
     $output['count'] = count($output['data']);
+    echo 'Script';
     echo json_encode($output);
 } else {
     $output['error'] = 'Required parameters not set!';
