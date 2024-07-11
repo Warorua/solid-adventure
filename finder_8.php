@@ -41,15 +41,15 @@ if (isset($_POST['taxPayerType'])) {
         $dobHigh = '2024-03-01';
     }
 
-    $dateObj = "AND WHERE STR_TO_DATE(birth_dt, '%d/%m/%Y %H:%i:%s') BETWEEN :dobLow AND :dobHigh ";
+    $dateObj = "AND STR_TO_DATE(birth_dt, '%d/%m/%Y %H:%i:%s') BETWEEN :dobLow AND :dobHigh ";
 
     if (isset($_POST['gender'])) {
         $gender = $_POST['gender'];
         if ($gender == '' || $gender == null || $gender != 'M' || $gender != 'F') {
             $gender = 'NA';
-            $genderObj = "AND WHERE gender NOT LIKE :gender ";
+            $genderObj = "AND gender NOT LIKE :gender ";
         } else {
-            $genderObj = "AND WHERE gender LIKE :gender ";
+            $genderObj = "AND gender LIKE :gender ";
         }
     }else{
         $genderObj = '';
@@ -61,9 +61,9 @@ if (isset($_POST['taxPayerType'])) {
         $countyId = $_POST['countyId'];
         if ($countyId == '' || $countyId == null) {
             $countyId = 'NAAN';
-            $countyObj = "AND WHERE county_id NOT LIKE :county_id ";
+            $countyObj = "AND county_id NOT LIKE :county_id ";
         } else {
-            $countyObj = "AND WHERE county_id LIKE :county_id ";
+            $countyObj = "AND county_id LIKE :county_id ";
         }
     }else{
         $countyObj = '';
@@ -74,10 +74,10 @@ if (isset($_POST['taxPayerType'])) {
         $districtId = $_POST['districtId'];
         if ($districtId == '' || $districtId == null) {
             $districtId = 'NAAN';
-            $districtObj = "AND WHERE district_id NOT LIKE :district_id ";
+            $districtObj = "AND district_id NOT LIKE :district_id ";
         } else {
 
-            $districtObj = "AND WHERE district_id LIKE :district_id ";
+            $districtObj = "AND district_id LIKE :district_id ";
         }
     }else{
         $districtObj = '';
