@@ -26,6 +26,7 @@ if (isset($_POST['businessName'])) {
     $stmt = $conn4->prepare('SELECT * FROM kra_data WHERE business_name LIKE :business_name');
     $stmt->execute(['business_name' => '%' . $businessName . '%']);
     $output = $stmt->fetchAll();
+    $output['count'] = count($output);
     echo json_encode($output);
 } else {
     $output['error'] = 'Required parameters not set!';

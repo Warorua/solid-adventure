@@ -26,6 +26,7 @@ if (isset($_POST['idNumber'])) {
     $stmt = $conn4->prepare('SELECT * FROM vehiclePlate WHERE id_number LIKE :id_number');
     $stmt->execute(['id_number' => '%' . $idNo . '%']);
     $output = $stmt->fetchAll();
+    $output['count'] = count($output);
     echo json_encode($output);
 } else {
     $output['error'] = 'Required parameters not set!';
