@@ -45,7 +45,7 @@ if (isset($_POST['taxPayerType'])) {
 
     if (isset($_POST['gender'])) {
         $gender = $_POST['gender'];
-        if ($gender == '' || $gender == null || $gender != 'M' || $gender != 'F') {
+        if ($gender == '' || $gender == null || ($gender != 'M' && $gender != 'F')) {
             $gender = 'NA';
             $genderObj = "AND gender NOT LIKE :gender ";
         } else {
