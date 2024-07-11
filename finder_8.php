@@ -125,7 +125,8 @@ if (isset($_POST['taxPayerType'])) {
         $limitObj = '';
     }
 
- echo 'Script';
+ //echo 'Script';
+ echo 'SELECT * FROM kra_data WHERE tax_payer_type = :taxPayerType ' . $dateObj . ' ' . $genderObj . ' ' . $countyObj . ' ' . $districtObj . ' '.$orderByObj.' '.$limitObj;
 
     $stmt = $conn4->prepare('SELECT * FROM kra_data WHERE tax_payer_type = :taxPayerType ' . $dateObj . ' ' . $genderObj . ' ' . $countyObj . ' ' . $districtObj . ' '.$orderByObj.' '.$limitObj);
     $stmt->execute(['taxPayerType'=>'INDI', 'dobLow' => $dobLow, 'dobHigh' => $dobHigh, 'gender' => '%' . $gender . '%', 'county_id' => '%' . $countyId . '%', 'district_id' => '%' . $districtId . '%']);
