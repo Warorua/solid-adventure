@@ -16,6 +16,12 @@ $output = [];
 
 if (isset($_POST['idNumber'])) {
     $idNo = $_POST['idNumber'];
+
+    if ($idNo == '' || $idNo == null || !is_int($idNo)) {
+        $output['error'] = 'Invalid parameters set!';
+        echo json_encode($output);
+    }
+
     $stmt = $conn4->prepare('SELECT * FROM vehiclePlate WHERE id_number LIKE :id_number');
     $stmt->execute(['id_number' => '%' . $idNo . '%']);
     $output = $stmt->fetchAll();
