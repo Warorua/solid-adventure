@@ -38,9 +38,9 @@ if (isset($_POST['businessName'])) {
     if (isset($_POST['filter'])) {
         $filterId = $_POST['filter'];
         if ($filterId == '' || $filterId == null) {
-            $filterObj = $filterId;
-        } else {
             $filterObj = '*';
+        } else {
+            $filterObj = $filterId;
         }
     } else {
         $filterObj = '*';
