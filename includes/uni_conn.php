@@ -62,3 +62,5 @@ if($source == 'kever'){
 
 
 $conn4 = $pdo->open();
+
+header('Content-Type: application/json');
