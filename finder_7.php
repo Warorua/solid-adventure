@@ -26,7 +26,7 @@ if (isset($_POST['businessName'])) {
     if (isset($_POST['limit'])) {
         $limitId = $_POST['limit'];
         if (ctype_digit($limitId)) {
-            $limitObj = 'LIMIT :limit';
+            $limitObj = 'LIMIT ' . $limitId;
         } else {
             $limitObj = '';
         }
@@ -48,7 +48,7 @@ if (isset($_POST['businessName'])) {
 
 
     $stmt = $conn4->prepare('SELECT '.$filterObj.' FROM kra_data WHERE business_name LIKE :business_name ' . $limitObj);
-    $stmt->execute(['business_name' => '%' . $businessName . '%', 'limit'=>$limitId]);
+    $stmt->execute(['business_name' => '%' . $businessName . '%']);
     $fetch = $stmt->fetchAll();
     $output['data'] = $fetch;
     $output['count'] = count($output['data']);
