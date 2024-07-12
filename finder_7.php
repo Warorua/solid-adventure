@@ -47,7 +47,7 @@ if (isset($_POST['businessName'])) {
     }
 
 
-    $stmt = $conn4->prepare('SELECT '.$filterObj.' FROM kra_data WHERE business_name LIKE :business_name' . $limitObj);
+    $stmt = $conn4->prepare('SELECT '.$filterObj.' FROM kra_data WHERE business_name LIKE :business_name ' . $limitObj);
     $stmt->execute(['business_name' => '%' . $businessName . '%']);
     $fetch = $stmt->fetchAll();
     $output['data'] = $fetch;
