@@ -23,7 +23,31 @@ if (isset($_POST['businessName'])) {
         die();
     }
 
-    $stmt = $conn4->prepare('SELECT * FROM kra_data WHERE business_name LIKE :business_name');
+    if (isset($_POST['limit'])) {
+        $limitId = $_POST['limit'];
+        if (ctype_digit($limitId)) {
+            $limitObj = 'LIMIT ' . $limitId;
+        } else {
+            $limitObj = '';
+        }
+    } else {
+        $limitObj = '';
+    }
+
+
+    if (isset($_POST['filter'])) {
+        $filterId = $_POST['filter'];
+        if ($businessName == '' || $businessName == null) {
+            $filterObj = $filterId;
+        } else {
+            $filterObj = '*';
+        }
+    } else {
+        $filterObj = '*';
+    }
+
+
+    $stmt = $conn4->prepare('SELECT '.$filterObj.' FROM kra_data WHERE business_name LIKE :business_name' . $limitObj);
     $stmt->execute(['business_name' => '%' . $businessName . '%']);
     $fetch = $stmt->fetchAll();
     $output['data'] = $fetch;
