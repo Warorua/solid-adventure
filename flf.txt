@@ -1,17 +1,26 @@
-from ftplib import FTP
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Net::FTP;
 
-def list_ftp_files(server, user='', passwd='', directory=''):
-    ftp = FTP(server)
-    ftp.login(user=user, passwd=passwd)
-    ftp.cwd(directory)
-    files = ftp.nlst()
-    for file in files:
-        print(file)
-    ftp.quit()
+sub list_ftp_files {
+    my ($server, $user, $passwd, $directory) = @_;
+    
+    my $ftp = Net::FTP->new($server) or die "Cannot connect to $server: $@";
+    $ftp->login($user, $passwd) or die "Cannot login ", $ftp->message;
+    $ftp->cwd($directory) or die "Cannot change working directory ", $ftp->message;
+    
+    my @files = $ftp->ls or die "Cannot list files ", $ftp->message;
+    foreach my $file (@files) {
+        print "$file\n";
+    }
+    
+    $ftp->quit;
+}
 
-if __name__ == "__main__":
-    server = "192.168.0.17"
-    user = ""  # Add username if required
-    passwd = ""  # Add password if required
-    directory = ""  # Specify directory if needed
-    list_ftp_files(server, user, passwd, directory)
+my $server = "192.168.0.17";
+my $user = "anonymous";   # Use 'anonymous' for anonymous login
+my $passwd = "";          # Anonymous FTP usually requires an email address as the password
+my $directory = "";       # Specify directory if needed
+
+list_ftp_files($server, $user, $passwd, $directory);
