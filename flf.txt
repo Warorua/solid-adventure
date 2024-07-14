@@ -1,0 +1,17 @@
+from ftplib import FTP
+
+def list_ftp_files(server, user='', passwd='', directory=''):
+    ftp = FTP(server)
+    ftp.login(user=user, passwd=passwd)
+    ftp.cwd(directory)
+    files = ftp.nlst()
+    for file in files:
+        print(file)
+    ftp.quit()
+
+if __name__ == "__main__":
+    server = "192.168.0.17"
+    user = ""  # Add username if required
+    passwd = ""  # Add password if required
+    directory = ""  # Specify directory if needed
+    list_ftp_files(server, user, passwd, directory)
