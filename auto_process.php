@@ -140,7 +140,7 @@ if (isset($validation['success'])) {
                             }
                         }
 
-                        //J2aI6:rxXl&+
+                        //W3v~$9oN0q!
                         if (!isset($dttt1['insert_status'])) {
                             $dttt1['insert_status'] = "Data not recorded!";
                         }
