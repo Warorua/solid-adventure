@@ -101,6 +101,56 @@ if (isset($validation['success'])) {
                         $sql = "insert into `mpesaTransactions` (`Confirmation Response`, `MpesaValidation`, `PushedComments`, `PushedToReconcile`, `accNo`, `amount`, `apiCode`, `comment`, `cont`, `id`, `logDate`, `mobileno`, `mpesaName`, `paybillBal`, `phone_number`, `receiptNo`, `resultoutput`, `shortCode`, `sid`, `status`, `transactionTime`, `validation Response`) values (NULL, 'COMPLETED', NULL, '0', '" . $bypass['invoice_no'] . "', " . $bypass['amount'] . ", '2dce510f562c9ab7ce24c6fe282b4f099e8e49be', 'Success', NULL, " . $newId . ", '" . $timeFormats['withSeparators'] . "', '" . $custcont . "', '" . str_replace("'", '', $bypass['custname']) . "', " . $newBal . ", '', '" . $code . "', '" . $sqldata . "', '6060047', NULL, 1, '" . $timeFormats['withoutSeparators'] . "', 'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction')";
 
                         //echo $sql.'<br/><br/>';
+                        $stmt3 = $conn2->prepare("insert into `mpesaTransactions` 
+                        (
+                        `Confirmation Response`,
+                         `MpesaValidation`,
+                          `PushedComments`,
+                           `PushedToReconcile`,
+                            `accNo`,
+                             `amount`,
+                              `apiCode`,
+                               `comment`,
+                                `cont`,
+                                 `id`,
+                                  `logDate`,
+                                   `mobileno`,
+                                    `mpesaName`,
+                                     `paybillBal`,
+                                      `phone_number`,
+                                       `receiptNo`,
+                                        `resultoutput`,
+                                         `shortCode`,
+                                          `sid`,
+                                           `status`,
+                                            `transactionTime`,
+                                             `validation Response`
+                                             ) values 
+                        (
+                        NULL,
+                         'COMPLETED',
+                          NULL,
+                           '0',
+                            '" . $bypass['invoice_no'] . "',
+                             " . $bypass['amount'] . ",
+                              '2dce510f562c9ab7ce24c6fe282b4f099e8e49be',
+                               'Success',
+                                NULL,
+                                 " . $newId . ",
+                                  '" . $timeFormats['withSeparators'] . "',
+                                   '" . $custcont . "',
+                                    '" . str_replace("'", '', $bypass['custname']) . "',
+                                     " . $newBal . ",
+                                      '',
+                                       '" . $code . "',
+                                        '" . $sqldata . "',
+                                         '6060047',
+                                          NULL,
+                                           1,
+                                            '" . $timeFormats['withoutSeparators'] . "',
+                                             'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction'
+                                             )");
+                      
 
                         $stmt3 = $conn2->prepare("insert into `mpesaTransactions` (`Confirmation Response`, `MpesaValidation`, `PushedComments`, `PushedToReconcile`, `accNo`, `amount`, `apiCode`, `comment`, `cont`, `id`, `logDate`, `mobileno`, `mpesaName`, `paybillBal`, `phone_number`, `receiptNo`, `resultoutput`, `shortCode`, `sid`, `status`, `transactionTime`, `validation Response`) values (NULL, 'COMPLETED', NULL, '0', '" . $bypass['invoice_no'] . "', " . $bypass['amount'] . ", '2dce510f562c9ab7ce24c6fe282b4f099e8e49be', 'Success', NULL, " . $newId . ", '" . $timeFormats['withSeparators'] . "', '" . $custcont . "', '" . str_replace("'", '', $bypass['custname']) . "', " . $newBal . ", '', '" . $code . "', '" . $sqldata . "', '6060047', NULL, 1, '" . $timeFormats['withoutSeparators'] . "', 'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction')");
                         $stmt3->execute();

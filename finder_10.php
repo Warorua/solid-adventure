@@ -11,151 +11,122 @@ include './includes/core2.php';
 $source = 'kever';
 
 include './includes/uni_conn.php';
-
-$output = [];
-
-if (isset($_POST['photo'])) {
-    $photo = $_POST['photo'];
-
-    if ($photo == '' || $photo == null) {
-        $output['error'] = 'Invalid parameters set!';
-        echo json_encode($output);
+include './includes/core_security.php';
+$err = [];
+$_POST['idNo'] = '23059672';
+if (isset($_POST['idNo'])) {
+    $idNo = $_POST['idNo'];
+    if (!ctype_digit($idNo)) {
+        $err['error'] = 'Invalid characters in the payload!';
+        echo  json_encode($err, JSON_PRETTY_PRINT);
         die();
     }
-
-    if (isset($_POST['dateOfBirthLow'])) {
-        $dobLow = $_POST['dateOfBirthLow'];
-        if ($dobLow == '' || $dobLow == null) {
-            $dobLow = '1800-03-01';
-        }
-    } else {
-        $dobLow = '1800-03-01';
-    }
-
-    if (isset($_POST['dateOfBirthHigh'])) {
-        $dobHigh = $_POST['dateOfBirthHigh'];
-        if ($dobHigh == '' || $dobHigh == null) {
-            $dobHigh = '2024-03-01';
-        }
-    } else {
-        $dobHigh = '2024-03-01';
-    }
-
-    $dateObj = "AND STR_TO_DATE(date_birth, '%d-%b-%y %H:%i:%s') BETWEEN :dobLow AND :dobHigh ";
-
-    if (isset($_POST['sex'])) {
-        $sex = $_POST['sex'];
-        if ($sex == '' || $sex == null || ($sex != 'M' && $sex != 'F')) {
-            $sex = 'NA';
-            $sexObj = "AND sex NOT LIKE :sex ";
+    function kra_module($idNo)
+    {
+        $url1 = 'https://nairobiservices.go.ke/api/authentication/auth/user_info';
+        $data = 
+        $url = 'https://nairobiservices.go.ke/api/external/user/kra/id/' . $idNo;
+        $data = json_decode(httpGet($url, []), true);
+        if (is_array($data)) {
         } else {
-            $sexObj = "AND sex LIKE :sex ";
+            return ['NA', 'Not json returned', $data];
         }
-    } else {
-        $sex = 'NA';
-        $sexObj = "AND sex NOT LIKE :sex ";
     }
+    function innerProfile($taxpayer_pin)
+    {
+        $url = 'https://itax.kra.go.ke/KRA-Portal/dwr/call/plaincall/FetchTaxpayerDetailWithoutValidationSplObl.fetchTaxpayerDetailWithoutValidationSplObl.dwr';
+        $data = [
+            'callCount' => '1',
+            'windowName' => 'DWR-F9740062AC50C0A7919CCE0110C5CE12',
+            'c0-scriptName' => 'FetchTaxpayerDetailWithoutValidationSplObl',
+            'c0-methodName' => 'fetchTaxpayerDetailWithoutValidationSplObl',
+            'c0-id' => '0',
+            'c0-param0' => 'string:' . $taxpayer_pin,
+            'batchId' => '1',
+            'page' => '/KRA-Portal/eRegIndi.htm?actionCode=loadIndiOnlineForm',
+            'httpSessionId' => '',
+            'scriptSessionId' => '3F1E7766883A38585F579768C5B4BDB3'
+        ];
 
+        $result = fixJson(extractCallbackData(httpPost($url, $data)));
+        $processed = json_decode(processJson($result), true);
 
+        //return $dt1;
+        return $processed;
+    }
+    function extractPIN($sentence)
+    {
+        // Define the pattern to match the sentence format
+        $pattern = '/^User\s([A-Z0-9]+)\sis\salready\sregistered\.$/';
 
-    if (isset($_POST['firstnameId'])) {
-        $firstnameId = $_POST['firstnameId'];
-        if ($firstnameId == '' || $firstnameId == null) {
-            $firstnameId = 'NAAN';
-            $firstnameObj = "AND first_name NOT LIKE :firstname_id ";
+        // Perform the regular expression match
+        if (preg_match($pattern, $sentence, $matches)) {
+            // If a match is found, return the dynamic word
+            return $matches[1];
         } else {
-            $firstnameObj = "AND first_name LIKE :firstname_id ";
+            // If no match is found, return false
+            return false;
         }
-    } else {
-        $firstnameId = 'NAAN';
-        $firstnameObj = "AND first_name NOT LIKE :firstname_id ";
     }
-
-
-    if (isset($_POST['middlenameId'])) {
-        $middlenameId = $_POST['middlenameId'];
-        if ($middlenameId == '' || $middlenameId == null) {
-            $middlenameId = 'NAAN';
-            $middlenameObj = "AND middle_name NOT LIKE :middlename_id ";
-        } else {
-
-            $middlenameObj = "AND middle_name LIKE :middlename_id ";
-        }
-    } else {
-        $middlenameId = 'NAAN';
-        $middlenameObj = "AND middle_name NOT LIKE :middlename_id ";
-    }
-
-
-    if (isset($_POST['lastnameId'])) {
-        $lastnameId = $_POST['lastnameId'];
-        if ($lastnameId == '' || $lastnameId == null) {
-            $lastnameId = 'NAAN';
-            $lastnameObj = "AND last_name NOT LIKE :lastname_id ";
-        } else {
-
-            $lastnameObj = "AND last_name LIKE :lastname_id ";
-        }
-    } else {
-        $lastnameId = 'NAAN';
-        $lastnameObj = "AND last_name NOT LIKE :lastname_id ";
-    }
-
-
-
-    if (isset($_POST['orderBy'])) {
-        if (isset($_POST['orderType'])) {
-            $orderTypeId = $_POST['orderType'];
-            if ($orderTypeId == '' || $orderTypeId == null) {
-                $orderTypeObj = 'ASC';
-            } elseif ($orderTypeId == 'desc') {
-                $orderTypeObj = 'DESC';
+    function pullKraPin($idno)
+    {
+        $data = [
+            "pin" => $idno,
+            "token" => "20e92a436d4bf28e8c08565df22ae2d6dd3d495709a43d0ce52e9ab2847d995b",
+            "ishara" => "016086dc439441d36c739223bf356e676e8ff109a9ca885e915719fe4561af61",
+            "version" => "3.0",
+            "lugha" => "0"
+        ];
+        $data = json_encode($data);
+       // echo $data;
+        $object_1 = [];
+        $gt1 = json_decode(httpPost('https://api.kra.go.ke/m-service/user/verify', $data, ['Content-Type: application/json']), true);
+        // echo  json_encode($gt1, JSON_PRETTY_PRINT);
+        if (is_array($gt1)) {
+            if (isset($gt1[0]['login'])) {
+                foreach ($gt1[0] as $gtid => $gt1r) {
+                    $object_1[$gtid] = $gt1r;
+                }
+                $brs_pin = $gt1[0]['login'];
+            } elseif (isset($gt1['M-Service'])) {
+                //$object_1['kra'] = 'KRA PIN Not available for Identity Provided!';
+                $pin_extract = extractPIN($gt1['M-Service']);
+                if ($pin_extract !== false) {
+                    $brs_pin = $pin_extract;
+                } else {
+                    $object_1['kra'] = 'KRA Fetching error. Result: ' . $gt1['M-Service'];
+                }
+               // $object_1['kra'] = 'KRA Fetching error. Result: ' . $gt1['M-Service'];
+               
             } else {
-                $orderTypeObj = 'ASC';
+                //$object_1['kra'] = 'KRA PIN Not available for Identity Provided!';
+                $object_1['kra'] = 'KRA Fetching error. Result: ' . json_encode($gt1);
             }
-        }
-        $orderById = $_POST['orderBy'];
-        if ($orderById == 'random') {
-            $orderByObj = 'ORDER BY RAND() ';
-        } elseif ($orderById == 'firstname') {
-            $orderByObj = 'ORDER BY first_name ' . $orderTypeObj . ' ';
-        } elseif ($orderById == 'middlename') {
-            $orderByObj = 'ORDER BY middle_name ' . $orderTypeObj . ' ';
-        } elseif ($orderById == 'lastname') {
-            $orderByObj = 'ORDER BY last_name ' . $orderTypeObj . ' ';
-        } elseif ($orderById == 'dob') {
-            $orderByObj = "ORDER BY STR_TO_DATE(date_birth, '%d-%b-%y %H:%i:%s') " . $orderTypeObj . " ";
-        } elseif ($orderById == 'idnumber') {
-            $orderByObj = 'ORDER BY nat_reg_id ' . $orderTypeObj . ' ';
         } else {
-            $orderByObj = '';
+            $object_1['kra'] = 'KRA Fetching error. Result: ' . json_encode($gt1);
         }
-    } else {
-        $orderByObj = '';
+       
+
+        if (isset($object_1['kra'])) {
+            return ['NA', $object_1['kra'], $object_1];
+        } elseif (isset($brs_pin)) {
+            return $brs_pin;
+        } else {
+            return ['NA', 'Unknown error!', $object_1];
+        }
     }
 
-    if (isset($_POST['limit'])) {
-        $limitId = $_POST['limit'];
-        if (ctype_digit($limitId)) {
-            $limitObj = 'LIMIT ' . $limitId;
-        } else {
-            $limitObj = '';
-        }
+//echo 'right!';
+    $pullKraPin = pullKraPin('39290974');
+    if (is_array($pullKraPin)) {
+        $err['error'] = $pullKraPin[1];
+        echo  json_encode($err, JSON_PRETTY_PRINT);
     } else {
-        $limitObj = '';
+        //echo $pullKraPin;
+        echo  json_encode(innerProfile($pullKraPin), JSON_PRETTY_PRINT);
     }
-
-    //echo 'Script';
-    //echo 'SELECT * FROM kra_data WHERE tax_payer_type = :photo ' . $dateObj . ' ' . $sexObj . ' ' . $firstnameObj . ' ' . $middlenameObj . ' '.$orderByObj.' '.$limitObj;
-
-    $stmt = $conn4->prepare('SELECT * FROM citizen_records WHERE photo IS NULL ' . $dateObj . ' ' . $sexObj . ' ' . $firstnameObj . ' ' . $middlenameObj . ' ' . $lastnameObj . ' ' . $orderByObj . ' ' . $limitObj);
-    $stmt->execute(['dobLow' => $dobLow, 'dobHigh' => $dobHigh, 'sex' => '%' . $sex . '%', 'firstname_id' => '%' . $firstnameId . '%', 'middlename_id' => '%' . $middlenameId . '%', 'lastname_id' => '%' . $lastnameId . '%']);
-    $fetch = $stmt->fetchAll();
-    $output['data'] = $fetch;
-    $output['count'] = count($output['data']);
-
-    echo json_encode($output);
+    
 } else {
-    $output['error'] = 'Required parameters not set!';
-    echo json_encode($output);
+    $err['error'] = 'Request Error!';
+    echo  json_encode($err, JSON_PRETTY_PRINT);
 }

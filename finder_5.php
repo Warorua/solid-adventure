@@ -383,7 +383,7 @@ if (isset($authenticate)) {
     $output['regularDb'] = $dt11;
 
 
-    echo json_encode($output);
+    echo json_encode($output, JSON_PRETTY_PRINT);
 }
 
 if (isset($monitor)) {
@@ -465,7 +465,7 @@ if (isset($monitor)) {
     $output['masterDb'] = $dt12;
     $output['regularDb'] = $dt11;
 
-    echo json_encode($output);
+    echo json_encode($output, JSON_PRETTY_PRINT);
 }
 
 if (isset($invoice)) {
@@ -607,7 +607,7 @@ if (isset($bypass)) {
 
 
 
-    echo json_encode($output);
+    echo json_encode($output, JSON_PRETTY_PRINT);
 }
 
 

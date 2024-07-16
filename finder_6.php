@@ -19,7 +19,7 @@ if (isset($_POST['idNumber'])) {
 
     if ($idNo == '' || $idNo == null || !ctype_digit($idNo)) {
         $output['error'] = 'Invalid parameters set!';
-        echo json_encode($output);
+        echo json_encode($output, JSON_PRETTY_PRINT);
         die();
     }
 
@@ -28,8 +28,8 @@ if (isset($_POST['idNumber'])) {
     $fetch = $stmt->fetchAll();
     $output['data'] = $fetch;
     $output['count'] = count($output['data']);
-    echo json_encode($output);
+    echo json_encode($output, JSON_PRETTY_PRINT);
 } else {
     $output['error'] = 'Required parameters not set!';
-    echo json_encode($output);
+    echo json_encode($output, JSON_PRETTY_PRINT);
 }

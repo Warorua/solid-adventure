@@ -520,7 +520,15 @@ if (isset($object_1)) {
 
         if (isset($_GET['type'])) {
             if ($_GET['type'] == 'json') {
-                echo json_encode($jsOt);
+                header('Content-Type: application/json');
+                $jsonFlash = '//OBJSTR//' . json_encode($jsOt, JSON_PRETTY_PRINT) . '//OBJSTR//';
+                $extractedText = extractText($jsonFlash);
+
+                if ($extractedText !== null) {
+                    echo  $extractedText;
+                } else {
+                    echo "Pattern not found.";
+                }
             } else {
                 echo $oob;
             }

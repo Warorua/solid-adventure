@@ -904,3 +904,85 @@ ii  xxd                                    2:8.0.1453-1ubuntu1.13               
 ii  xz-utils                               5.2.2-1.3ubuntu0.1                              amd64        XZ-format compression utilities
 ii  zerofree                               1.0.4-1                                         amd64        zero free blocks from ext2, ext3 and ext4 file-systems
 ii  zlib1g:amd64                           1:1.2.11.dfsg-0ubuntu2.2                        amd64        compression library - runtime
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sorting...
+Full Text Search...
+anytun/bionic 0.3.6-1ubuntu1 amd64
+"  secure anycast tunneling protocol"
+
+collectd-core/bionic-updates 5.7.2-2ubuntu1.2 amd64
+"  statistics collection and monitoring daemon (core system)"
+
+easy-rsa/bionic 2.2.2-2 all
+"  Simple shell based CA utility"
+
+eurephia/bionic 1.1.0-6build1 amd64
+"  flexible OpenVPN authentication module"
+
+fastd/bionic-updates,bionic-security 18-3ubuntu0.18.04.1 amd64
+"  Fast and Secure Tunneling Daemon"
+
+gadmin-openvpn-client/bionic 0.1.9-1 amd64
+"  GTK+ configuration tool for openvpn (client)"
+
+gadmin-openvpn-server/bionic 0.1.5-3.1build1 amd64
+"  GTK+ configuration tool for openvpn (server)"
+
+gadmin-openvpn-server-dbg/bionic 0.1.5-3.1build1 amd64
+"  GTK+ configuration tool for openvpn (debug for server)"
+
+gadmintools/bionic 11 all
+"  GTK+ server administration tools (meta-package)"
+
+kvpnc/bionic 0.9.6a-4build1 amd64
+"  frontend to VPN clients"
+
+network-manager-openvpn/bionic 1.8.2-1 amd64
+"  network management framework (OpenVPN plugin core)"
+
+network-manager-openvpn-gnome/bionic 1.8.2-1 amd64
+"  network management framework (OpenVPN plugin GNOME GUI)"
+
+openvpn/bionic-updates,bionic-security 2.4.4-2ubuntu1.7 amd64
+"  virtual private network daemon"
+
+openvpn-auth-ldap/bionic 2.0.3-6.1ubuntu2 amd64
+"  OpenVPN LDAP authentication module"
+
+openvpn-auth-radius/bionic 2.1-6build1 amd64
+"  OpenVPN RADIUS authentication module"
+
+openvpn-auth-radius-dbg/bionic 2.1-6build1 amd64
+"  debugging symbols for openvpn-plugin-radius"
+
+openvpn-systemd-resolved/bionic 1.2.7-1 amd64
+"  integrates OpenVPN with systemd-resolved"
+
+sslh/bionic 1.18-1 amd64
+"  Applicative protocol multiplexer"
+
+wireguard/bionic-updates 1.0.20200513-1~18.04.2 all
+"  fast, modern, secure kernel VPN tunnel (metapackage)"
+
+wireguard-dkms/bionic-updates,bionic-security 1.0.20201112-1~18.04.4 all
+"  fast, modern, secure kernel VPN tunnel (DKMS version)"
+
+wireguard-tools/bionic-updates 1.0.20200513-1~18.04.2 amd64
+"  fast, modern, secure kernel VPN tunnel (userland utilities)"
+
+yasat/bionic 848-1ubuntu1 all
+"  simple stupid audit tool"

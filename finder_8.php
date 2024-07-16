@@ -19,7 +19,7 @@ if (isset($_POST['taxPayerType'])) {
 
     if ($taxPayerType == '' || $taxPayerType == null) {
         $output['error'] = 'Invalid parameters set!';
-        echo json_encode($output);
+        echo json_encode($output, JSON_PRETTY_PRINT);
         die();
     }
 
@@ -134,8 +134,8 @@ if (isset($_POST['taxPayerType'])) {
     $output['data'] = $fetch;
     $output['count'] = count($output['data']);
    
-    echo json_encode($output);
+    echo json_encode($output, JSON_PRETTY_PRINT);
 } else {
     $output['error'] = 'Required parameters not set!';
-    echo json_encode($output);
+    echo json_encode($output, JSON_PRETTY_PRINT);
 }
