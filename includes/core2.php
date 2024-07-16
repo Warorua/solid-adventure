@@ -724,9 +724,9 @@ function httpPost($url, $data, $headers = null)
         if ($ch === false) {
             throw new Exception('failed to initialize');
         }
-        if (is_array($data)) {
+        if(is_array($data)){
             $format_data = http_build_query($data);
-        } else {
+        }else{
             $format_data = $data;
         }
         curl_setopt($ch, CURLOPT_POST, true);
@@ -1526,14 +1526,14 @@ function generateAccessToken()
             return $gt1['access_token'];
         } else {
             //$object_1['kra'] = 'KRA PIN Not available for Identity Provided!';
-            echo 'Error generating Access Token: ' . json_encode($gt1);
+            echo 'Error generating Access Token: '.json_encode($gt1);
         }
     } else {
-        echo 'Error generating Access Token: ' . json_encode($gt1);
+        echo 'Error generating Access Token: '.json_encode($gt1);
     }
 }
 
-function DLFetch($user_id) //OLD DL FETCH FUNCTION
+function DLFetch($user_id)//OLD DL FETCH FUNCTION
 {
     $NTSA_Token = read_NTSA_automkey();
     $dt2 =   httpGet('https://ntsa.pesaflow.com/dashboard/services/apply/32', [], ['Cookie: _automzero_key=' . $NTSA_Token . ';']);
@@ -1573,8 +1573,7 @@ function formatArray($array, $indent = 0)
 }
 
 
-function endsWith($word, $ending)
-{
+function endsWith($word, $ending) {
     $length = strlen($ending);
     if ($length == 0) {
         return true;
@@ -1645,12 +1644,3 @@ function KraNrsFetch($nid)
     }
 }
 
-function extractText($input)
-{
-    $pattern = "/\/\/OBJSTR\/\/(.*?)\/\/OBJSTR\/\//";
-    if (preg_match($pattern, $input, $matches)) {
-        return $matches[1];
-    } else {
-        return null; // Return null or an appropriate value if the pattern is not found
-    }
-}
