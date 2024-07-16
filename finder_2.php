@@ -10,6 +10,12 @@ include './includes/core2.php';
 //$idno = '1075921';
 //$type = 'd';
 $idno = $_POST['idno'];
+if (!ctype_digit($idNo)) {
+    $err = [];
+    $err['error'] = 'Invalid characters in the payload!';
+    echo  json_encode($err, JSON_PRETTY_PRINT);
+    die();
+}
 if (isset($_POST['type'])) {
     $type = $_POST['type'];
 } else {

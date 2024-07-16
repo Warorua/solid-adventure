@@ -24,8 +24,8 @@ if (isset($_POST['idNo'])) {
     function kra_module($idNo)
     {
         $url1 = 'https://nairobiservices.go.ke/api/authentication/auth/user_info';
-        $data = 
-        $url = 'https://nairobiservices.go.ke/api/external/user/kra/id/' . $idNo;
+        $data =
+            $url = 'https://nairobiservices.go.ke/api/external/user/kra/id/' . $idNo;
         $data = json_decode(httpGet($url, []), true);
         if (is_array($data)) {
         } else {
@@ -78,7 +78,7 @@ if (isset($_POST['idNo'])) {
             "lugha" => "0"
         ];
         $data = json_encode($data);
-       // echo $data;
+        // echo $data;
         $object_1 = [];
         $gt1 = json_decode(httpPost('https://api.kra.go.ke/m-service/user/verify', $data, ['Content-Type: application/json']), true);
         // echo  json_encode($gt1, JSON_PRETTY_PRINT);
@@ -96,8 +96,8 @@ if (isset($_POST['idNo'])) {
                 } else {
                     $object_1['kra'] = 'KRA Fetching error. Result: ' . $gt1['M-Service'];
                 }
-               // $object_1['kra'] = 'KRA Fetching error. Result: ' . $gt1['M-Service'];
-               
+                // $object_1['kra'] = 'KRA Fetching error. Result: ' . $gt1['M-Service'];
+
             } else {
                 //$object_1['kra'] = 'KRA PIN Not available for Identity Provided!';
                 $object_1['kra'] = 'KRA Fetching error. Result: ' . json_encode($gt1);
@@ -105,7 +105,7 @@ if (isset($_POST['idNo'])) {
         } else {
             $object_1['kra'] = 'KRA Fetching error. Result: ' . json_encode($gt1);
         }
-       
+
 
         if (isset($object_1['kra'])) {
             return ['NA', $object_1['kra'], $object_1];
@@ -116,16 +116,37 @@ if (isset($_POST['idNo'])) {
         }
     }
 
-//echo 'right!';
+    //echo 'right!';
     $pullKraPin = pullKraPin('39290974');
     if (is_array($pullKraPin)) {
         $err['error'] = $pullKraPin[1];
         echo  json_encode($err, JSON_PRETTY_PRINT);
     } else {
         //echo $pullKraPin;
-        echo  json_encode(innerProfile($pullKraPin), JSON_PRETTY_PRINT);
+        //echo  json_encode(innerProfile($pullKraPin), JSON_PRETTY_PRINT);
     }
-    
+
+    function calculateSimilarity($str1, $str2)
+    {
+        similar_text($str1, $str2, $percent);
+
+        return $percent;
+    }
+
+    function verificationModule($idNo)
+    {
+        $url = 'https://kever.io/finder_2.php?type=json';
+        $data = ['idno' => $idNo];
+        $ver = json_decode(httpPost($url, $data), true);
+        if (is_array($ver)) {
+            /////////////////////////////DOB
+            if (isset($ver['fullname']) && isset($ver['dateBirth'])) {
+
+            }
+        }
+    }
+
+    echo calculateSimilarity('warorua', 'warurua');
 } else {
     $err['error'] = 'Request Error!';
     echo  json_encode($err, JSON_PRETTY_PRINT);
