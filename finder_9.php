@@ -113,6 +113,8 @@ if (isset($_POST['photo'])) {
             } else {
                 $orderTypeObj = 'ASC';
             }
+        }else{
+            $orderTypeObj = 'ASC';
         }
         $orderById = $_POST['orderBy'];
         if ($orderById == 'random') {
