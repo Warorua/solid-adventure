@@ -10,7 +10,7 @@ $source = 'sec';
 include './includes/uni_conn.php';
 include './includes/core_security.php';
 // Assuming the user credentials are valid and $userId is obtained
-session_start();
+//session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
@@ -41,4 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo json_encode($err['error'], JSON_PRETTY_PRINT);
         }
     }
+}else{
+    http_response_code(405); // Method Not Allowed
+    echo "Method Not Allowed";
+    exit();
 }
