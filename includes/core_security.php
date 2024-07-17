@@ -2,6 +2,7 @@
 require 'vendor/autoload.php';
 
 use \Firebase\JWT\JWT;
+use \Firebase\JWT\Key;
 
 function generateJWT($userId)
 {
@@ -17,7 +18,15 @@ function generateJWT($userId)
     return JWT::encode($payload, $key, $algorithm);
 }
 
-
+function verifyJWT($token) {
+    $key = "VyX2RvbWFpbi5jb20iLCJpYXQiOjE3MjExODM3MTksImV4cCI6MTcyMTE4NzMxOSwidX"; // Replace with your secret key
+    try {
+        $decoded = JWT::decode($token, new Key($key, 'HS256'));
+        return $decoded;
+    } catch (Exception $e) {
+        return null;
+    }
+}
 function calculateSimilarity($str1, $str2)
 {
     similar_text($str1, $str2, $percent);

@@ -34,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $userId = $user['user_id'];
             $jwt = generateJWT($userId);
 
+            setcookie("authToken", $jwt, time() + (3600 * 24), "/");
+
             header('Content-Type: application/json');
             echo json_encode(['token' => $jwt], JSON_PRETTY_PRINT);
         } else {
