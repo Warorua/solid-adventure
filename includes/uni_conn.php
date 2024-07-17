@@ -84,55 +84,56 @@ header('Content-Type: application/json');
 // In your protected endpoint
 $headers = apache_request_headers();
 
-if (isset($headers['Authorization'])) {
-    $authHeader = $headers['Authorization'];
-    $arr = explode(" ", $authHeader);
-    $jwt = $arr[1];
+if (!isset($authbypass)) {
+    if (isset($headers['Authorization'])) {
+        $authHeader = $headers['Authorization'];
+        $arr = explode(" ", $authHeader);
+        $jwt = $arr[1];
 
-    $decoded = verifyJWT($jwt);
-   
+        $decoded = verifyJWT($jwt);
 
-    if ($decoded) {
-        // Token is valid, proceed with your logic
-       //echo "Hello, User ID: " . $decoded['userId'];
-       $userId = $decoded['userId'];
-       
+
+        if ($decoded) {
+            // Token is valid, proceed with your logic
+            //echo "Hello, User ID: " . $decoded['userId'];
+            $userId = $decoded['userId'];
+        } else {
+            // Invalid token
+            http_response_code(401);
+            echo json_encode(['message' => 'Unauthorized'], JSON_PRETTY_PRINT);
+            die();
+        }
+    } elseif (isset($_COOKIE['authToken'])) {
+        $jwt = $_COOKIE['authToken'];
+        //echo $jwt;
+        $decoded = verifyJWT($jwt);
+        echo json_encode($decoded);
+        if ($decoded) {
+            // Token is valid, proceed with your logic
+            //echo "Hello, User ID: " . $decoded['userId'];
+            echo 'ok';
+            $userId = $decoded['userId'];
+            //echo $userId;
+        } else {
+            // Invalid token
+            http_response_code(401);
+            echo json_encode(['message' => 'Unauthorized'], JSON_PRETTY_PRINT);
+            die();
+        }
     } else {
-        // Invalid token
+        // No token provided
         http_response_code(401);
-        echo json_encode(['message' => 'Unauthorized'], JSON_PRETTY_PRINT);
+        echo json_encode(['message' => 'Authorization token not found'], JSON_PRETTY_PRINT);
         die();
     }
-} elseif(isset($_COOKIE['authToken'])){
-    $jwt = $_COOKIE['authToken'];
-    //echo $jwt;
-    $decoded = verifyJWT($jwt);
-     echo json_encode($decoded);
-    if ($decoded) {
-        // Token is valid, proceed with your logic
-        //echo "Hello, User ID: " . $decoded['userId'];
-        echo 'ok';
-        $userId = $decoded['userId'];
-        //echo $userId;
-    } else {
-        // Invalid token
-        http_response_code(401);
-        echo json_encode(['message' => 'Unauthorized'], JSON_PRETTY_PRINT);
-        die();
-    }
-}else {
-    // No token provided
-    http_response_code(401);
-    echo json_encode(['message' => 'Authorization token not found'], JSON_PRETTY_PRINT);
-    die();
 }
 
 
-if($source == 'kever'){
+if ($source == 'kever') {
     $pdo = new Kever();
-}elseif($source == 'pin_data'){
+} elseif ($source == 'pin_data') {
     $pdo = new pinData();
-}else{
+} else {
     $pdo = new Security();
 }
 

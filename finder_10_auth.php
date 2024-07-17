@@ -7,6 +7,8 @@ include './includes/core2.php';
 
 $source = 'sec';
 
+$authbypass = TRUE;
+
 include './includes/uni_conn.php';
 include './includes/core_security.php';
 // Assuming the user credentials are valid and $userId is obtained
