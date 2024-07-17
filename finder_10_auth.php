@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validate input
     if (empty($username) || empty($password)) {
         $err['error'] = "Please fill all fields.";
-        echo json_encode($err['error'], JSON_PRETTY_PRINT);
+        echo json_encode($err, JSON_PRETTY_PRINT);
     } else {
         // Check if username exists
         $stmt = $conn4->prepare("SELECT * FROM users WHERE username = :username");
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo json_encode(['token' => $jwt], JSON_PRETTY_PRINT);
         } else {
             $err['error'] = "Invalid username or password.";
-            echo json_encode($err['error'], JSON_PRETTY_PRINT);
+            echo json_encode($err, JSON_PRETTY_PRINT);
         }
     }
 }else{
