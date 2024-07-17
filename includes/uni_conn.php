@@ -1,4 +1,10 @@
 <?php
+require 'vendor/autoload.php';
+
+use \Firebase\JWT\JWT;
+use \Firebase\JWT\Key;
+
+
 class pinData
 {
 
@@ -84,6 +90,32 @@ header('Content-Type: application/json');
 // In your protected endpoint
 $headers = apache_request_headers();
 
+
+function generateJWT($userId)
+{
+    $key = "VyX2RvbWFpbi5jb20iLCJpYXQiOjE3MjExODM3MTksImV4cCI6MTcyMTE4NzMxOSwidX"; // Replace with your secret key
+    $payload = [
+        //'iss' => "your_domain.com", // Issuer
+        'iat' => time(), // Issued at
+        'exp' => time() + 3600, // Expiration time (e.g., 1 hour)
+        'userId' => $userId // Custom data
+    ];
+    $algorithm = 'HS256'; // Specify the algorithm
+
+    return JWT::encode($payload, $key, $algorithm);
+}
+
+function verifyJWT($token) {
+    $key = "VyX2RvbWFpbi5jb20iLCJpYXQiOjE3MjExODM3MTksImV4cCI6MTcyMTE4NzMxOSwidX"; // Replace with your secret key
+    try {
+        $decoded = JWT::decode($token, new Key($key, 'HS256'));
+        return (array) $decoded;
+    } catch (Exception $e) {
+        return null;
+    }
+}
+
+
 if (!isset($authbypass)) {
     if (isset($headers['Authorization'])) {
         $authHeader = $headers['Authorization'];
@@ -104,14 +136,14 @@ if (!isset($authbypass)) {
             die();
         }
     } elseif (isset($_COOKIE['authToken'])) {
-        $jwt = $_COOKIE['authToken'];
-        //echo $jwt;
+        $jwt = str_replace(' ','',$_COOKIE['authToken']);
         $decoded = verifyJWT($jwt);
-        echo json_encode($decoded);
+
+       // echo json_encode($decoded);
+
         if ($decoded) {
             // Token is valid, proceed with your logic
-            //echo "Hello, User ID: " . $decoded['userId'];
-            echo 'ok';
+            //echo "Hello, User ID: " . $decoded['userId']
             $userId = $decoded['userId'];
             //echo $userId;
         } else {

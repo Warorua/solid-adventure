@@ -1,32 +1,5 @@
 <?php
-require 'vendor/autoload.php';
 
-use \Firebase\JWT\JWT;
-use \Firebase\JWT\Key;
-
-function generateJWT($userId)
-{
-    $key = "VyX2RvbWFpbi5jb20iLCJpYXQiOjE3MjExODM3MTksImV4cCI6MTcyMTE4NzMxOSwidX"; // Replace with your secret key
-    $payload = [
-        //'iss' => "your_domain.com", // Issuer
-        'iat' => time(), // Issued at
-        'exp' => time() + 3600, // Expiration time (e.g., 1 hour)
-        'userId' => $userId // Custom data
-    ];
-    $algorithm = 'HS256'; // Specify the algorithm
-
-    return JWT::encode($payload, $key, $algorithm);
-}
-
-function verifyJWT($token) {
-    $key = "VyX2RvbWFpbi5jb20iLCJpYXQiOjE3MjExODM3MTksImV4cCI6MTcyMTE4NzMxOSwidX"; // Replace with your secret key
-    try {
-        $decoded = JWT::decode($token, new Key($key, 'HS256'));
-        return $decoded;
-    } catch (Exception $e) {
-        return null;
-    }
-}
 function calculateSimilarity($str1, $str2)
 {
     similar_text($str1, $str2, $percent);
@@ -209,44 +182,44 @@ function verificationModule($idNo)
 
             /////////////////////////CONTACT
             if (isset($ver['mobile_number'])) {
-                $qna['mobile']['p1']['qs'] = 'Complete this mobile number: '.obscureMobileNumber(str_replace('+', '', $ver['mobile_number']));
+                $qna['mobile']['p1']['qs'] = 'Complete this mobile number: ' . obscureMobileNumber(str_replace('+', '', $ver['mobile_number']));
                 $qna['mobile']['p1']['an'] = str_replace('+', '', $ver['mobile_number']);
                 $qna['mobile']['p1']['o1'] = obscureMobileNumber(str_replace('+', '', $ver['mobile_number']));
             }
 
             if (isset($ver['mobile_number_2'])) {
-                $qna['mobile']['p2']['qs'] = 'Complete this mobile number: '.obscureMobileNumber(str_replace('+', '', $ver['mobile_number_2']));
+                $qna['mobile']['p2']['qs'] = 'Complete this mobile number: ' . obscureMobileNumber(str_replace('+', '', $ver['mobile_number_2']));
                 $qna['mobile']['p2']['an'] = str_replace('+', '', $ver['mobile_number_2']);
                 $qna['mobile']['p2']['o1'] = obscureMobileNumber(str_replace('+', '', $ver['mobile_number_2']));
             }
 
             if (isset($ver['mobile_number_B'])) {
-                $qna['mobile']['p3']['qs'] = 'Complete this mobile number: '.obscureMobileNumber(str_replace('+', '', $ver['mobile_number_B']));
+                $qna['mobile']['p3']['qs'] = 'Complete this mobile number: ' . obscureMobileNumber(str_replace('+', '', $ver['mobile_number_B']));
                 $qna['mobile']['p3']['an'] = str_replace('+', '', $ver['mobile_number_B']);
                 $qna['mobile']['p3']['o1'] = obscureMobileNumber(str_replace('+', '', $ver['mobile_number_B']));
             }
 
             if (isset($ver['nhif']['phone_nhif'])) {
-                $qna['mobile']['p4']['qs'] = 'Complete this mobile number: '.obscureMobileNumber(str_replace('+', '', $ver['nhif']['phone_nhif']));
+                $qna['mobile']['p4']['qs'] = 'Complete this mobile number: ' . obscureMobileNumber(str_replace('+', '', $ver['nhif']['phone_nhif']));
                 $qna['mobile']['p4']['an'] = str_replace('+', '', $ver['nhif']['phone_nhif']);
                 $qna['mobile']['p4']['o1'] = obscureMobileNumber(str_replace('+', '', $ver['nhif']['phone_nhif']));
             }
 
             /////////////////////////////EMAIL
             if (isset($ver['main_email_1'])) {
-                $qna['email']['p1']['qs'] = 'Complete this email address: '.obscureEmail(str_replace(' ', '', $ver['main_email_1']));
+                $qna['email']['p1']['qs'] = 'Complete this email address: ' . obscureEmail(str_replace(' ', '', $ver['main_email_1']));
                 $qna['email']['p1']['an'] = str_replace(' ', '', $ver['main_email_1']);
                 $qna['email']['p1']['o1'] = obscureEmail(str_replace(' ', '', $ver['main_email_1']));
             }
 
             if (isset($ver['secondary_email_1'])) {
-                $qna['email']['p2']['qs'] = 'Complete this email address: '.obscureEmail(str_replace(' ', '', $ver['secondary_email_1']));
+                $qna['email']['p2']['qs'] = 'Complete this email address: ' . obscureEmail(str_replace(' ', '', $ver['secondary_email_1']));
                 $qna['email']['p2']['an'] = str_replace(' ', '', $ver['secondary_email_1']);
                 $qna['email']['p2']['o1'] = obscureEmail(str_replace(' ', '', $ver['secondary_email_1']));
             }
 
             if (isset($ver['nhif']['email_nhif'])) {
-                $qna['email']['p3']['qs'] = 'Complete this email address: '.obscureEmail(str_replace(' ', '', $ver['nhif']['email_nhif']));
+                $qna['email']['p3']['qs'] = 'Complete this email address: ' . obscureEmail(str_replace(' ', '', $ver['nhif']['email_nhif']));
                 $qna['email']['p3']['an'] = str_replace(' ', '', $ver['nhif']['email_nhif']);
                 $qna['email']['p3']['o1'] = obscureEmail(str_replace(' ', '', $ver['nhif']['email_nhif']));
             }
