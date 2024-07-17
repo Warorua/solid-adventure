@@ -262,11 +262,23 @@ function verificationModule($idNo)
                 ///////////////////////////
             }
         } elseif (isset($ver['error'])) {
+            http_response_code(503);
+            echo json_encode(['error' => $ver['error']], JSON_PRETTY_PRINT);
+            die();
         } else {
+            http_response_code(503);
+            echo json_encode(['message' => 'System Response Error! 1020'], JSON_PRETTY_PRINT);
+            die();
         }
     }
 
-    return json_encode($qna, JSON_PRETTY_PRINT);
+    if (isset($qna)) {
+        return json_encode($qna, JSON_PRETTY_PRINT);
+    } else {
+        http_response_code(503);
+        echo json_encode(['message' => 'System Response Error! 1122'], JSON_PRETTY_PRINT);
+        die();
+    }
 }
 
 

@@ -59,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Get the output
         $output = selectRandomItems($verifMod);
+        echo $output;
 
         // Print the output
         // echo json_encode($output, JSON_PRETTY_PRINT);

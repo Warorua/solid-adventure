@@ -3,7 +3,7 @@ require 'vendor/autoload.php';
 
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
-
+use \Firebase\JWT\ExpiredException;
 
 class pinData
 {
@@ -108,10 +108,23 @@ function generateJWT($userId)
 function verifyJWT($token) {
     $key = "VyX2RvbWFpbi5jb20iLCJpYXQiOjE3MjExODM3MTksImV4cCI6MTcyMTE4NzMxOSwidX"; // Replace with your secret key
     try {
+        // Decode the JWT
         $decoded = JWT::decode($token, new Key($key, 'HS256'));
-        return (array) $decoded;
+
+        // Convert the decoded object to an associative array
+        $decodedArray = json_decode(json_encode($decoded), true);
+
+        return $decodedArray;
+    } catch (ExpiredException $e) {
+        // Token has expired
+        http_response_code(401);
+        echo json_encode(['message' => 'Token has expired'], JSON_PRETTY_PRINT);
+       die();
     } catch (Exception $e) {
-        return null;
+        // Other errors
+        http_response_code(401);
+        echo json_encode(['message' => 'Token error!'], JSON_PRETTY_PRINT);
+        die();
     }
 }
 
