@@ -5,9 +5,9 @@ use \Firebase\JWT\JWT;
 
 function generateJWT($userId)
 {
-    $key = "your_secret_key"; // Replace with your secret key
+    $key = "VyX2RvbWFpbi5jb20iLCJpYXQiOjE3MjExODM3MTksImV4cCI6MTcyMTE4NzMxOSwidX"; // Replace with your secret key
     $payload = [
-        'iss' => "your_domain.com", // Issuer
+        //'iss' => "your_domain.com", // Issuer
         'iat' => time(), // Issued at
         'exp' => time() + 3600, // Expiration time (e.g., 1 hour)
         'userId' => $userId // Custom data
