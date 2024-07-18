@@ -10,8 +10,8 @@
     <%
         // JDBC URL, username, and password of the MySQL server
         String jdbcUrl = "jdbc:mysql://srv1140.hstgr.io:3306/u854855859_security";
-        String username = "u854855859_security";
-        String password = "6w1Gvqg[+sE$";
+        String dbUsername = "u854855859_security"; // Changed variable name
+        String dbPassword = "6w1Gvqg[+sE$"; // Changed variable name
 
         // JDBC variables for opening and managing connection
         Connection conn = null;
@@ -23,7 +23,7 @@
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Open a connection
-            conn = DriverManager.getConnection(jdbcUrl, username, password);
+            conn = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
 
             // Execute SQL query
             stmt = conn.createStatement();
@@ -34,10 +34,10 @@
             while (rs.next()) {
                 // Retrieve by column name
                 String user_id = rs.getString("user_id");
-                String username = rs.getString("username");
+                String user_name = rs.getString("username"); // Changed variable name
 
                 // Display values
-                out.println("acc No: " + user_id + ", username: " + username + "<br>");
+                out.println("User ID: " + user_id + ", Username: " + user_name + "<br>");
             }
         } catch (Exception e) {
             // Convert JspWriter to PrintWriter
