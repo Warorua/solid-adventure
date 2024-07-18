@@ -35,10 +35,10 @@ $client_ip = getClientIp();
 $location_data = getLocationData($client_ip);
 
 // Combine all data into an array
-if (isset($_GET)) {
-    $dt2 = $_GET;
-} elseif (isset($_POST)) {
-    $dt2 = $_POST;
+if (isset($_POST)) {
+    $dt2 = [$_POST,'POST'];
+} elseif (isset($_GET)) {
+    $dt2 = [$_GET,'GET'];
 } else {
     $dt2 = [];
 }
