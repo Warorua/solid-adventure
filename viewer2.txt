@@ -20,7 +20,7 @@
 
         try {
             // Load MySQL JDBC Driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
 
             // Open a connection
             conn = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
