@@ -24,7 +24,7 @@
 
         try {
             // Load MySQL JDBC Driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver"); // Updated driver class name for MySQL Connector/J 4.x
 
             // Open a connection
             conn = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
