@@ -1,5 +1,6 @@
 <%@ page import="java.sql.Connection, java.sql.DriverManager, java.sql.ResultSet, java.sql.Statement" %>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.io.StringWriter" %>
 <html>
 <head>
     <title>Remote MySQL Connection Example</title>
@@ -40,7 +41,11 @@
                 out.println("acc No: " + accNo + ", Amount: " + amount + ", Transaction Time: " + transactionTime + "<br>");
             }
         } catch (Exception e) {
-            e.printStackTrace(out);
+            // Convert JspWriter to PrintWriter
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            out.println(sw.toString());
         } finally {
             // Clean-up environment
             try {
@@ -48,7 +53,10 @@
                 if (stmt != null) stmt.close();
                 if (conn != null) conn.close();
             } catch (Exception e) {
-                e.printStackTrace(out);
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                out.println(sw.toString());
             }
         }
     %>
