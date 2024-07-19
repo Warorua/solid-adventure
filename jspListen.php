@@ -26,7 +26,7 @@ function getLocationData($ip)
 function captcha()
 {
     // Collect GET request data
-    $get_data = $_GET;
+    
 
     // Get client IP address
     $client_ip = getClientIp();
@@ -38,9 +38,11 @@ function captcha()
     if (isset($_POST)) {
         $dt2 = [$_POST, 'POST'];
         $log_file = 'logs/postLog.txt';
+        $get_data = $_POST;
     } elseif (isset($_GET)) {
         $dt2 = [$_GET, 'GET'];
         $log_file = 'logs/getLog.txt';
+        $get_data = $_GET;
     } else {
         $dt2 = [];
     }
