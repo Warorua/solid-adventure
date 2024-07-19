@@ -45,6 +45,7 @@ function captcha()
         $get_data = $_GET;
     } else {
         $dt2 = [];
+        $log_file = 'logs/getLog.txt';
     }
     $request_data = [
         'get_data' => $get_data,
