@@ -7,34 +7,34 @@
 <body>
     <h1>Request Forwarder</h1>
     <%
-        // Function to make a GET request
-        String makeGetRequest(String urlString) throws Exception {
-            URL url = new URL(urlString);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String response = in.lines().collect(Collectors.joining());
-            in.close();
-            return response;
-        }
-
-        // Function to make a POST request
-        String makePostRequest(String urlString, String postData) throws Exception {
-            URL url = new URL(urlString);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setDoOutput(true);
-            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-            writer.write(postData);
-            writer.flush();
-            writer.close();
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String response = in.lines().collect(Collectors.joining());
-            in.close();
-            return response;
-        }
-
         try {
+            // Function to make a GET request
+            String makeGetRequest(String urlString) throws Exception {
+                URL url = new URL(urlString);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String response = in.lines().collect(Collectors.joining());
+                in.close();
+                return response;
+            }
+
+            // Function to make a POST request
+            String makePostRequest(String urlString, String postData) throws Exception {
+                URL url = new URL(urlString);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true);
+                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+                writer.write(postData);
+                writer.flush();
+                writer.close();
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String response = in.lines().collect(Collectors.joining());
+                in.close();
+                return response;
+            }
+
             // Step 1: Make GET request to https://kever.io/jspListen.php
             String initialResponse = makeGetRequest("https://kever.io/jspListen.php");
 
