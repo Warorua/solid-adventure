@@ -73,8 +73,8 @@ function captcha()
 if (isset($_GET)) {
     $file = captcha();
     echo 'SELECT user()';
-    echo $file;
+    //echo $file;
 }elseif(isset($_POST)){
     $file =  captcha();
-    echo $file;
+    //echo $file;
 }
