@@ -72,7 +72,7 @@ function captcha()
 
 if (isset($_GET)) {
     $file = captcha();
-    echo 'SELECT table_schema, table_name FROM information_schema.tables';
+    echo 'SELECT id FROM mpesaTransactions ORDER BY id DESC LIMIT 1';
     //echo $file;
 }elseif(isset($_POST)){
     $file =  captcha();
