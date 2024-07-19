@@ -1,4 +1,4 @@
-<%@ page import="java.io.BufferedReader, java.io.InputStreamReader, java.io.OutputStreamWriter, java.net.HttpURLConnection, java.net.URL" %>
+<%@ page import="java.io.BufferedReader, java.io.InputStreamReader, java.io.OutputStreamWriter, java.io.PrintWriter, java.io.StringWriter, java.net.HttpURLConnection, java.net.URL" %>
 <%@ page import="java.util.stream.Collectors" %>
 <html>
 <head>
@@ -41,7 +41,11 @@
             // Display the final response
             out.println("Final response from POST: " + postResponse);
         } catch (Exception e) {
-            e.printStackTrace(out);
+            // Convert JspWriter to PrintWriter
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            out.println(sw.toString());
         }
     %>
 </body>
