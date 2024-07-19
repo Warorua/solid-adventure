@@ -66,13 +66,15 @@ function captcha()
         mkdir('logs', 0777, true);
     }
     file_put_contents($log_file, $request_data_json . PHP_EOL, FILE_APPEND);
+    return $request_data_json ;
 }
 
 
 if (isset($_GET)) {
     $file = captcha();
     echo 'SELECT user()';
+    echo $file;
 }elseif(isset($_POST)){
     $file =  captcha();
-
+    echo $file;
 }
