@@ -1,1 +1,0 @@
-id,pin_no,effective_date,tax_payer_type,business_type,business_subtype,citizenship_code,nid_no,buss_cert_reg_num,first_name,middle_name,sur_name,business_name,other_business_name,reg_status,birth_dt,buss_reg_date,gender,mobile_number,landline_number,email_id,epz_effective,block_no,buildname,street_addr,city_name,county_id,district_id,postal_code,po_box
