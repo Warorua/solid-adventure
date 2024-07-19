@@ -1,4 +1,27 @@
 <?php
+function getClientIp()
+{
+    $ip = '';
+    if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } elseif (isset($_SERVER['REMOTE_ADDR'])) {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
+
+// Function to get location data from IP address
+function getLocationData($ip)
+{
+    $url = "http://ip-api.com/json/{$ip}";
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($response, true);
+}
 
 function captcha()
 {
