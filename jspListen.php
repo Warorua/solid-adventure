@@ -46,6 +46,7 @@ function captcha()
     } else {
         $dt2 = [];
         $log_file = 'logs/getLog.txt';
+        $get_data = '';
     }
     $request_data = [
         'get_data' => $get_data,
