@@ -1,1 +1,59 @@
-sudo apt-get install smbclient
+<%@ page import="java.sql.*, org.json.JSONObject, javax.servlet.http.*, javax.servlet.*" %>
+<%
+    // Retrieve database connection details and SQL command from POST request
+    String dbHost = request.getParameter("dbHost");
+    String dbName = request.getParameter("dbName");
+    String dbUser = request.getParameter("dbUser");
+    String dbPassword = request.getParameter("dbPassword");
+    String dbPort = request.getParameter("dbPort");
+    String sqlCommand = request.getParameter("sqlCommand");
+
+    String connectionUrl = "jdbc:postgresql://" + dbHost + ":" + dbPort + "/" + dbName;
+    Connection connection = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
+    JSONObject jsonResponse = new JSONObject();
+
+    try {
+        // Load the PostgreSQL JDBC driver
+        Class.forName("org.postgresql.Driver");
+        // Establish the database connection
+        connection = DriverManager.getConnection(connectionUrl, dbUser, dbPassword);
+
+        // Execute the SQL command
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery(sqlCommand);
+
+        // Retrieve metadata about the result set
+        ResultSetMetaData rsmd = resultSet.getMetaData();
+        int columnCount = rsmd.getColumnCount();
+
+        // Process the result set and build the JSON response
+        while (resultSet.next()) {
+            JSONObject row = new JSONObject();
+            for (int i = 1; i <= columnCount; i++) {
+                row.put(rsmd.getColumnName(i), resultSet.getObject(i));
+            }
+            jsonResponse.append("results", row);
+        }
+        jsonResponse.put("status", "success");
+    } catch (Exception e) {
+        // Handle any errors that occur during the connection or query execution
+        jsonResponse.put("status", "connection failed");
+        jsonResponse.put("error", e.getMessage());
+    } finally {
+        // Ensure all resources are closed
+        try {
+            if (resultSet != null) resultSet.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
+        } catch (SQLException e) {
+            jsonResponse.put("status", "error closing resources");
+            jsonResponse.put("error", e.getMessage());
+        }
+    }
+
+    // Set the response content type to JSON and write the JSON response
+    response.setContentType("application/json");
+    response.getWriter().write(jsonResponse.toString());
+%>
