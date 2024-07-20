@@ -1,1 +1,2 @@
-LD_LIBRARY_PATH=webapps/smbclient/usr/lib/x86_64-linux-gnu/samba ./webapps/smbclient/usr/bin/smbclient //192.168.0.64/share -U username -c 'ls'
+sudo su - super
+whoami
