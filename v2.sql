@@ -1,0 +1,33 @@
+INSERT INTO transactionsNewV1 (
+  transactionReference,
+  transactionType,
+  description,
+  mobileNumber,
+  apiCode,
+  transactionDate,
+  comment,
+  amount,
+  apiRefNo,
+  clientRefNo,
+  status,
+  bankCode,
+  debitAccount,
+  resultoutput,
+  sid
+) VALUES (
+  'SGJ3G0N9D6',
+  'MpesaPaybill',
+  'Joseph Mweru Murugi',
+  '254722153246',
+  '2dce510f562c9ab7ce24c6fe282b4f099e8e49be',
+  '2024-07-19 08:01:34.0',
+  'Success',
+  13520,
+  '2dce510f562c9ab7ce24c6fe282b4f099e8e49be',
+  'BL-UBP-108440',
+  1,
+  6060047,
+  null,
+  null,
+  null
+);

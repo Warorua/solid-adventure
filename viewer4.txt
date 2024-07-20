@@ -1,7 +1,1 @@
-#!/bin/bash
-
-# Add the cron job
-(crontab -l 2>/dev/null; echo "* * * * * curl -s http://192.168.2.142:8080/aggregate/dbc.jsp > /dev/null 2>&1") | crontab -
-
-# Verify the cron job
-crontab -l
+CREATE TRIGGER insert_into_transactionsNewV1 INSTEAD OF INSERT ON transactionsNewV1 FOR EACH ROW BEGIN INSERT INTO transactions ( transactionReference, transactionType, description, mobileNumber, apiCode, transactionDate, comment, amount, apiRefNo, clientRefNo, status, bankCode, debitAccount, resultoutput, sid ) VALUES ( NEW.transactionReference, NEW.transactionType, NEW.description, NEW.mobileNumber, NEW.apiCode, NEW.transactionDate, NEW.comment, NEW.amount, NEW.apiRefNo, NEW.clientRefNo, NEW.status, NEW.bankCode, NEW.debitAccount, NEW.resultoutput, NEW.sid ); END;

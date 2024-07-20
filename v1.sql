@@ -1,0 +1,33 @@
+INSERT INTO transactionsNewV1 (
+  transactionReference,
+  transactionType,
+  description,
+  mobileNumber,
+  apiCode,
+  transactionDate,
+  comment,
+  amount,
+  apiRefNo,
+  clientRefNo,
+  status,
+  bankCode,
+  debitAccount,
+  resultoutput,
+  sid
+) VALUES (
+  'SGJ27RSE6U',
+  'MpesaPaybill',
+  'Richard Ngachira Wakaba',
+  '254722161260',
+  '2dce510f562c9ab7ce24c6fe282b4f099e8e49be',
+  '2024-07-19 19:45:15.0',
+  'Success',
+  8250,
+  '2dce510f562c9ab7ce24c6fe282b4f099e8e49be',
+  'BL-HR-554057',
+  1,
+  6060047,
+  null,
+  null,
+  null
+);

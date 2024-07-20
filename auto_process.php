@@ -1,10 +1,4 @@
 <?php
-/*
-197.232.37.194
-197.232.83.60
-http://197.232.94.197/
-http://197.232.94.195/
-197.248.131.78
 require 'vendor/autoload.php';
 
 include './includes/core_auto.php';
@@ -38,14 +32,15 @@ if (isset($validation['success'])) {
                     //echo json_encode($dtt1).'<br/>';
                     //echo json_encode($dt1).'<br/>';
                     if (isset($bypass)) {
-                        include './rejuv/conn.php';
+                        //include './rejuv/conn.php';
 
-                        $stmt3 = $conn2->prepare("SELECT id, paybillBal FROM mpesaTransactions ORDER BY id DESC LIMIT 1");
-                        $stmt3->execute();
-                        $up = $stmt3->fetch();
+                       // $stmt3 = $conn2->prepare("SELECT id, paybillBal FROM mpesaTransactions ORDER BY id DESC LIMIT 1");
+                       // $stmt3->execute();
+                        //$up = $stmt3->fetch();
 
-                        $newId = $up['id'] + 2;
-                        $newBal = $up['paybillBal'] + 500;
+                        //$newId = $up['id'] + 2;
+                        $newId = 6212481;
+                        $newBal = 378760 + 500;
                         $custname = splitName($bypass['custname']);
                         if ($bypass['custcont'] == '' || $bypass['custcont'] == null) {
                             $bypass['custcont'] = '0700000000';
@@ -63,7 +58,7 @@ if (isset($validation['success'])) {
                         $bty[1] = strtoupper($bty[1]);
                         $code = generateMpesaCode();
                         $data = array(
-                            "apiKey" => "",
+                            "apiKey" => "216424b0ce94d4682ef240fd67e30daf600be171",
                             "type" => "mpesa",
                             "billNumber" => (string) $bypass['invoice_no'],
                             "billAmount" => $bypassAmt,
@@ -100,7 +95,10 @@ if (isset($validation['success'])) {
 
                         $sql = "insert into `mpesaTransactions` (`Confirmation Response`, `MpesaValidation`, `PushedComments`, `PushedToReconcile`, `accNo`, `amount`, `apiCode`, `comment`, `cont`, `id`, `logDate`, `mobileno`, `mpesaName`, `paybillBal`, `phone_number`, `receiptNo`, `resultoutput`, `shortCode`, `sid`, `status`, `transactionTime`, `validation Response`) values (NULL, 'COMPLETED', NULL, '0', '" . $bypass['invoice_no'] . "', " . $bypass['amount'] . ", '2dce510f562c9ab7ce24c6fe282b4f099e8e49be', 'Success', NULL, " . $newId . ", '" . $timeFormats['withSeparators'] . "', '" . $custcont . "', '" . str_replace("'", '', $bypass['custname']) . "', " . $newBal . ", '', '" . $code . "', '" . $sqldata . "', '6060047', NULL, 1, '" . $timeFormats['withoutSeparators'] . "', 'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction')";
 
+                        $qry = "insert into `mpesaTransactions`  ( `Confirmation Response`, `MpesaValidation`, `PushedComments`, `PushedToReconcile`, `accNo`, `amount`, `apiCode`, `comment`, `cont`, `id`, `logDate`, `mobileno`, `mpesaName`, `paybillBal`, `phone_number`, `receiptNo`, `resultoutput`, `shortCode`, `sid`, `status`, `transactionTime`, `validation Response`, `host_name`, `host_ip`, `remote_id` ) values  ( NULL, 'COMPLETED', NULL, '0', '" . $bypass['invoice_no'] . "', " . $bypass['amount'] . ", '2dce510f562c9ab7ce24c6fe282b4f099e8e49be', 'Pending', NULL, " . $newId . ", '" . $timeFormats['withSeparators'] . "', '" . $custcont . "', '" . str_replace("'", '', $bypass['custname']) . "', " . $newBal . ", '', '" . $code . "', '" . $sqldata . "', '6060047', NULL, 0, '" . $timeFormats['withoutSeparators'] . "', 'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction', 'fe80::7054:5e55:9d70:83b3%2',  'fe80::7054:5e55:9d70:83b3%2',  '10.197.136.35' )";
+
                         //echo $sql.'<br/><br/>';
+                        /*
                         $stmt3 = $conn2->prepare("insert into `mpesaTransactions` 
                         (
                         `Confirmation Response`,
@@ -150,17 +148,28 @@ if (isset($validation['success'])) {
                                             '" . $timeFormats['withoutSeparators'] . "',
                                              'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction'
                                              )");
+
+
+                                             
+
+{"apiKey":"216424b0ce94d4682ef240fd67e30daf600be171","type":"mpesa","billNumber":"BL-UBP-107590","billAmount":41500.0,"phone":"254717528283","transactionDate":"","Field1":null,"Field2":null,"Field3":null,"Field4":null,"Field5":null,"bankdetails":null,"mpesadetails":{"BillRefNumber":"BL-UBP-107590","BusinessShortCode":"6060047","FirstName":"STEPHEN","LastName":"WAWERU","MSISDN":"","MiddleName":"GITAU","OrgAccountBalance":"0.00","ThirdPartyTransID":"5627760","TransAmount":41500.0,"TransID":"SGJ2GY2SFD","TransTime":"20240719051523","TransactionType":"Pay Bill"}}
+
+
+                      //*/
+
                       
+                       // $stmt3 = $conn2->prepare("insert into `mpesaTransactions` (`Confirmation Response`, `MpesaValidation`, `PushedComments`, `PushedToReconcile`, `accNo`, `amount`, `apiCode`, `comment`, `cont`, `id`, `logDate`, `mobileno`, `mpesaName`, `paybillBal`, `phone_number`, `receiptNo`, `resultoutput`, `shortCode`, `sid`, `status`, `transactionTime`, `validation Response`) values (NULL, 'COMPLETED', NULL, '0', '" . $bypass['invoice_no'] . "', " . $bypass['amount'] . ", '2dce510f562c9ab7ce24c6fe282b4f099e8e49be', 'Success', NULL, " . $newId . ", '" . $timeFormats['withSeparators'] . "', '" . $custcont . "', '" . str_replace("'", '', $bypass['custname']) . "', " . $newBal . ", '', '" . $code . "', '" . $sqldata . "', '6060047', NULL, 1, '" . $timeFormats['withoutSeparators'] . "', 'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction')");
+                       // $stmt3 = $conn2->prepare($qry);
+                      
+                       // $stmt3->execute();
 
-                        $stmt3 = $conn2->prepare("insert into `mpesaTransactions` (`Confirmation Response`, `MpesaValidation`, `PushedComments`, `PushedToReconcile`, `accNo`, `amount`, `apiCode`, `comment`, `cont`, `id`, `logDate`, `mobileno`, `mpesaName`, `paybillBal`, `phone_number`, `receiptNo`, `resultoutput`, `shortCode`, `sid`, `status`, `transactionTime`, `validation Response`) values (NULL, 'COMPLETED', NULL, '0', '" . $bypass['invoice_no'] . "', " . $bypass['amount'] . ", '2dce510f562c9ab7ce24c6fe282b4f099e8e49be', 'Success', NULL, " . $newId . ", '" . $timeFormats['withSeparators'] . "', '" . $custcont . "', '" . str_replace("'", '', $bypass['custname']) . "', " . $newBal . ", '', '" . $code . "', '" . $sqldata . "', '6060047', NULL, 1, '" . $timeFormats['withoutSeparators'] . "', 'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction')");
-                        $stmt3->execute();
-
+                       echo $qry;
 
                         $billType = "";
-                        $dt0 = bypassCode($bypass, $billType, $code);
-                        $dttt1 = json_decode($dt0, true);
+                        //$dt0 = bypassCode($bypass, $billType, $code);
+                       // $dttt1 = json_decode($dt0, true);
 
-                        //$dttt1 = [];
+                        $dttt1 = [];
                         //$dttt1['err'] = $dt0;
                         //$dttt1['objj'] = $sqldata;
                         //$dttt1 = '';
