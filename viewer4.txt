@@ -1,2 +1,1 @@
-sudo su - super
-whoami
+sudo apt-get install smbclient
