@@ -8,6 +8,20 @@
     String dbPort = request.getParameter("dbPort");
     String sqlCommand = request.getParameter("sqlCommand");
 
+    // Debugging: Print out parameters to ensure they are being received
+    out.println("dbHost: " + dbHost + "<br>");
+    out.println("dbName: " + dbName + "<br>");
+    out.println("dbUser: " + dbUser + "<br>");
+    out.println("dbPassword: " + dbPassword + "<br>");
+    out.println("dbPort: " + dbPort + "<br>");
+    out.println("sqlCommand: " + sqlCommand + "<br>");
+
+    // Check if any parameter is missing
+    if (dbHost == null || dbName == null || dbUser == null || dbPassword == null || dbPort == null || sqlCommand == null) {
+        out.println("<p>Missing required parameters. Please ensure all fields are filled.</p>");
+        return;
+    }
+
     String connectionUrl = "jdbc:postgresql://" + dbHost + ":" + dbPort + "/" + dbName;
     Connection connection = null;
     Statement statement = null;
