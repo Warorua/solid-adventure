@@ -17,16 +17,15 @@
     out.println("sqlCommand: " + sqlCommand + "<br>");
 
     // Check if any parameter is missing
-    if (dbHost == null || dbName == null || dbUser == null || dbPassword == null || dbPort == null || sqlCommand == null) {
+    if (dbHost == null || dbName == null || dbUser == null || dbPort == null || sqlCommand == null) {
         out.println("<p>Missing required parameters. Please ensure all fields are filled.</p>");
         return;
     }
 
-    String connectionUrl = "jdbc:postgresql://" + dbHost + ":" + dbPort + "/" + dbName;
+    String connectionUrl = "jdbc:postgresql://" + dbHost + ":" + dbPort + "/" + dbName + "?extra_float_digits=0";
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-
 
     try {
         // Load the PostgreSQL JDBC driver
