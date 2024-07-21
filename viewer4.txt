@@ -35,7 +35,6 @@
         Properties props = new Properties();
         props.setProperty("user", dbUser);
         props.setProperty("password", dbPassword);
-        props.setProperty("extra_float_digits", "0");
 
         // Establish the database connection
         connection = DriverManager.getConnection(connectionUrl, props);
