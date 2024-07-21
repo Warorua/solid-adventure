@@ -1,6 +1,6 @@
 <%@ page import="java.sql.*, java.util.Properties, javax.servlet.http.*, javax.servlet.*" %>
 <%
-    // Retrieve database connection details and SQL command from POST request 001
+    // Retrieve database connection details and SQL command from POST request
     String dbHost = request.getParameter("dbHost");
     String dbName = request.getParameter("dbName");
     String dbUser = request.getParameter("dbUser");
@@ -22,14 +22,14 @@
         return;
     }
 
-    String connectionUrl = "jdbc:postgresql://" + dbHost + ":" + dbPort + "/" + dbName;
+    String connectionUrl = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName;
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
 
     try {
-        // Load the PostgreSQL JDBC driver
-        Class.forName("org.postgresql.Driver");
+        // Load the MySQL JDBC driver
+        Class.forName("com.mysql.jdbc.Driver");
 
         // Establish the database connection with customized properties
         Properties props = new Properties();
