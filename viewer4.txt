@@ -1,6 +1,6 @@
 <%@ page import="java.sql.*, java.util.Properties, javax.servlet.http.*, javax.servlet.*" %>
 <%
-    // Retrieve database connection details and SQL command from POST request
+    // Retrieve database connection details and SQL command from POST request 001
     String dbHost = request.getParameter("dbHost");
     String dbName = request.getParameter("dbName");
     String dbUser = request.getParameter("dbUser");
@@ -31,12 +31,12 @@
         // Load the PostgreSQL JDBC driver
         Class.forName("org.postgresql.Driver");
 
-        // Set up connection properties
+        // Establish the database connection with customized properties
         Properties props = new Properties();
         props.setProperty("user", dbUser);
         props.setProperty("password", dbPassword);
 
-        // Establish the database connection
+        // Establish the connection
         connection = DriverManager.getConnection(connectionUrl, props);
 
         // Execute the SQL command
