@@ -27,6 +27,7 @@
     Statement statement = null;
     ResultSet resultSet = null;
 
+
     try {
         // Load the PostgreSQL JDBC driver
         Class.forName("org.postgresql.Driver");
