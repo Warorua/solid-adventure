@@ -1,4 +1,4 @@
-<%@ page import="java.sql.*, javax.servlet.http.*, javax.servlet.*" %>
+<%@ page import="java.sql.*, java.util.Properties, javax.servlet.http.*, javax.servlet.*" %>
 <%
     // Retrieve database connection details and SQL command from POST request
     String dbHost = request.getParameter("dbHost");
@@ -22,7 +22,7 @@
         return;
     }
 
-    String connectionUrl = "jdbc:postgresql://" + dbHost + ":" + dbPort + "/" + dbName + "?extra_float_digits=0";
+    String connectionUrl = "jdbc:postgresql://" + dbHost + ":" + dbPort + "/" + dbName;
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
@@ -30,8 +30,15 @@
     try {
         // Load the PostgreSQL JDBC driver
         Class.forName("org.postgresql.Driver");
+
+        // Set up connection properties
+        Properties props = new Properties();
+        props.setProperty("user", dbUser);
+        props.setProperty("password", dbPassword);
+        props.setProperty("extra_float_digits", "0");
+
         // Establish the database connection
-        connection = DriverManager.getConnection(connectionUrl, dbUser, dbPassword);
+        connection = DriverManager.getConnection(connectionUrl, props);
 
         // Execute the SQL command
         statement = connection.createStatement();
