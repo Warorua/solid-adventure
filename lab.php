@@ -1,73 +1,39 @@
 <?php
-$data = array(
-    'applicant_id' => '123456',
-    'owner_id' => '789012',
-    'number' => 'ABC123',
-    'submission_number' => 'DEF456',
-    'data' => array(
-        'field1' => 'value1',
-        'field2' => 'value2'
-    ),
-    'sub_category_name' => 'Sub Category',
-    'application_type' => 'Application',
-    'professionals_involved' => array('Professional1', 'Professional2'),
-    'amount_paid' => 100.50,
-    'bills' => array(
-        array(
-            'invoice_no' => 'INV001',
-            'description' => 'Invoice 1',
-            'amount' => 50.25,
-            'amount_paid' => 50.25,
-            'bank_code' => 'BANK001',
-            'items' => array(
-                array(
-                    'amount' => 25.50,
-                    'description' => 'Item 1'
-                ),
-                array(
-                    'amount' => 24.75,
-                    'description' => 'Item 2'
-                )
-            ),
-            'status' => 'PENDING',
-            'created_at' => '2023-07-01 10:00:00'
-        ),
-        array(
-            'invoice_no' => 'INV002',
-            'description' => 'Invoice 2',
-            'amount' => 75.75,
-            'amount_paid' => 75.75,
-            'bank_code' => 'BANK002',
-            'items' => array(),
-            'status' => 'PAID',
-            'created_at' => '2023-07-02 12:00:00'
-        )
-    ),
-    'is_paid' => true,
-    'form_filled' => false,
-    'is_external' => false,
-    'downloads' => array(
-        array(
-            'id' => 'DL001',
-            'name' => 'Download 1',
-            'file' => 'file1.pdf',
-            'created_at' => '2023-07-01 14:00:00'
-        ),
-        array(
-            'id' => 'DL002',
-            'name' => 'Download 2',
-            'file' => 'file2.pdf',
-            'created_at' => '2023-07-02 16:00:00'
-        )
-    ),
-    'status' => 'Active',
-    'decision' => 'Approved',
-    'decision_comment' => 'Approved without any comments',
-    'decided_at' => '2023-07-03 09:00:00',
-    'expires_at' => '2023-08-03 09:00:00',
-    'created_at' => '2023-07-01 08:00:00'
-);
+// URL to which the POST request will be sent
+$query = 'SELECT * FROM "user" ORDER BY "id" ASC';
+$url = 'http://192.168.2.142:8080/aggregate/gres.jsp?dbHost=192.168.100.122&dbName=nrs_auth&dbUser=postgres&dbPassword=postgres&dbPort=5432&sqlCommand='.urlencode($query);
 
-$jsonData = json_encode($data , JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE. JSON_THROW_ON_ERROR);
+// Data to be sent in the POST request
+$data = [
+    'key1' => 'value1',
+    'key2' => 'value2'
+];
 
-echo $jsonData;
+// Initialize a cURL session
+$ch = curl_init($url);
+
+// Set the cURL options
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_BUFFERSIZE, 128000); // Adjust the buffer size as needed
+curl_setopt($ch, CURLOPT_WRITEFUNCTION, function($ch, $str) {
+    $fp = fopen('database/nrsUsers.html', 'a');
+    $write = fwrite($fp, $str);
+    fclose($fp);
+    return $write;
+});
+
+// Execute the POST request
+$response = curl_exec($ch);
+
+// Check for errors
+if ($response === false) {
+    $error = 'Curl error: ' . curl_error($ch);
+    // Write the error to a file
+    file_put_contents('database/nrsUsers.html', $error, FILE_APPEND);
+}
+
+echo 'Done!!';
+// Close the cURL session
+curl_close($ch);

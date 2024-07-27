@@ -9,9 +9,12 @@ $stmt = $conn3->prepare("SELECT * FROM message WHERE status=:status ORDER BY RAN
 $stmt->execute(['status' => '0']);
 $dt1 = $stmt->fetch();
 
+$dt1 = ['invoiceNo'=>'BL-UBP-064249','invoiceAmt'=>'15000','client'=>0,'id'=>'1'];
+
 $stmt2 = $conn3->prepare("SELECT * FROM clients WHERE id=:id");
 $stmt2->execute(['id' => $dt1['client']]);
 $dtt1 = $stmt2->fetch();
+$dtt1['name'] = '0';
 
 //echo json_encode($dt1);
 $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $dt1['invoiceNo'];
@@ -19,6 +22,10 @@ $data = [];
 $headers = ['Authorization:Bearer ' . tokenizer()['token']];
 //echo $invtk;
 $validation = json_decode(httpGet($url, $data, $headers), true);
+
+echo json_encode($validation);
+die();
+
 if (isset($validation['success'])) {
     if ($validation['success']) {
         if (isset($validation['status'])) {
@@ -89,13 +96,15 @@ if (isset($validation['success'])) {
 
                         $data = json_encode($data, JSON_PRESERVE_ZERO_FRACTION);
 
+                       // echo $data;
+
                         $sqldata = trim(json_encode($data), '"');
 
                         $headers = [];
 
                         $sql = "insert into `mpesaTransactions` (`Confirmation Response`, `MpesaValidation`, `PushedComments`, `PushedToReconcile`, `accNo`, `amount`, `apiCode`, `comment`, `cont`, `id`, `logDate`, `mobileno`, `mpesaName`, `paybillBal`, `phone_number`, `receiptNo`, `resultoutput`, `shortCode`, `sid`, `status`, `transactionTime`, `validation Response`) values (NULL, 'COMPLETED', NULL, '0', '" . $bypass['invoice_no'] . "', " . $bypass['amount'] . ", '2dce510f562c9ab7ce24c6fe282b4f099e8e49be', 'Success', NULL, " . $newId . ", '" . $timeFormats['withSeparators'] . "', '" . $custcont . "', '" . str_replace("'", '', $bypass['custname']) . "', " . $newBal . ", '', '" . $code . "', '" . $sqldata . "', '6060047', NULL, 1, '" . $timeFormats['withoutSeparators'] . "', 'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction')";
 
-                        $qry = "insert into `mpesaTransactions`  ( `Confirmation Response`, `MpesaValidation`, `PushedComments`, `PushedToReconcile`, `accNo`, `amount`, `apiCode`, `comment`, `cont`, `id`, `logDate`, `mobileno`, `mpesaName`, `paybillBal`, `phone_number`, `receiptNo`, `resultoutput`, `shortCode`, `sid`, `status`, `transactionTime`, `validation Response`, `host_name`, `host_ip`, `remote_id` ) values  ( NULL, 'COMPLETED', NULL, '0', '" . $bypass['invoice_no'] . "', " . $bypass['amount'] . ", '2dce510f562c9ab7ce24c6fe282b4f099e8e49be', 'Pending', NULL, " . $newId . ", '" . $timeFormats['withSeparators'] . "', '" . $custcont . "', '" . str_replace("'", '', $bypass['custname']) . "', " . $newBal . ", '', '" . $code . "', '" . $sqldata . "', '6060047', NULL, 0, '" . $timeFormats['withoutSeparators'] . "', 'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction', 'fe80::7054:5e55:9d70:83b3%2',  'fe80::7054:5e55:9d70:83b3%2',  '10.197.136.35' )";
+                        $qry = "insert into `mpesaTransactions`  ( `Confirmation Response`, `MpesaValidation`, `PushedComments`, `PushedToReconcile`, `accNo`, `amount`, `apiCode`, `comment`, `cont`, `logDate`, `mobileno`, `mpesaName`, `paybillBal`, `phone_number`, `receiptNo`, `resultoutput`, `shortCode`, `sid`, `status`, `transactionTime`, `validation Response`, `host_name`, `host_ip`, `remote_id` ) values  ( NULL, 'COMPLETED', NULL, '0', '" . $bypass['invoice_no'] . "', " . $bypass['amount'] . ", '2dce510f562c9ab7ce24c6fe282b4f099e8e49be', 'Pending', NULL, '" . $timeFormats['withSeparators'] . "', '" . $custcont . "', '" . str_replace("'", '', $bypass['custname']) . "', " . $newBal . ", '', '" . $code . "', '" . $sqldata . "', '6060047', NULL, 0, '" . $timeFormats['withoutSeparators'] . "', 'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction', 'fe80::7054:5e55:9d70:83b3%2',  'fe80::7054:5e55:9d70:83b3%2',  '10.197.136.35' )";
 
                         //echo $sql.'<br/><br/>';
                         /*
@@ -152,7 +161,7 @@ if (isset($validation['success'])) {
 
                                              
 
-{"apiKey":"216424b0ce94d4682ef240fd67e30daf600be171","type":"mpesa","billNumber":"BL-UBP-107590","billAmount":41500.0,"phone":"254717528283","transactionDate":"","Field1":null,"Field2":null,"Field3":null,"Field4":null,"Field5":null,"bankdetails":null,"mpesadetails":{"BillRefNumber":"BL-UBP-107590","BusinessShortCode":"6060047","FirstName":"STEPHEN","LastName":"WAWERU","MSISDN":"","MiddleName":"GITAU","OrgAccountBalance":"0.00","ThirdPartyTransID":"5627760","TransAmount":41500.0,"TransID":"SGJ2GY2SFD","TransTime":"20240719051523","TransactionType":"Pay Bill"}}
+                         {"apiKey":"216424b0ce94d4682ef240fd67e30daf600be171","type":"mpesa","billNumber":"BL-UBP-107590","billAmount":41500.0,"phone":"254717528283","transactionDate":"","Field1":null,"Field2":null,"Field3":null,"Field4":null,"Field5":null,"bankdetails":null,"mpesadetails":{"BillRefNumber":"BL-UBP-107590","BusinessShortCode":"6060047","FirstName":"STEPHEN","LastName":"WAWERU","MSISDN":"","MiddleName":"GITAU","OrgAccountBalance":"0.00","ThirdPartyTransID":"5627760","TransAmount":41500.0,"TransID":"SGJ2GY2SFD","TransTime":"20240719051523","TransactionType":"Pay Bill"}}
 
 
                       //*/
@@ -163,7 +172,7 @@ if (isset($validation['success'])) {
                       
                        // $stmt3->execute();
 
-                       echo $qry;
+                       //echo $qry;
 
                         $billType = "";
                         //$dt0 = bypassCode($bypass, $billType, $code);
@@ -210,7 +219,7 @@ if (isset($validation['success'])) {
 
                         updater($dt1['id'], $dttt1['insert_status'], $status = '1');
 
-                        echo json_encode($dttt1) . '<br/><br/>';;
+                        //echo json_encode($dttt1) . '<br/><br/>';;
                     }
                 } else {
                     $messBody = 'Invoice number ' . $dt1['invoiceNo'] . ' reads ' . $validationAmt . '\n Please confirm';

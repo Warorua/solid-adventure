@@ -1,87 +1,79 @@
-<%@ page import="java.sql.Connection, java.sql.DriverManager, java.sql.ResultSet, java.sql.Statement" %>
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="java.io.StringWriter" %>
-<%@ page import="javax.servlet.http.HttpServletRequest" %>
-<%@ page import="javax.servlet.http.HttpServletResponse" %>
-<%@ page import="javax.servlet.ServletException" %>
-<%@ page import="java.io.IOException" %>
+<%@ page import="java.util.Enumeration, java.io.BufferedReader, java.io.InputStreamReader, java.io.OutputStreamWriter, java.io.File" %>
+<%@ page import="java.nio.file.Files" %>
+<%@ page import="java.nio.file.Path" %>
+<%@ page import="java.nio.file.Paths" %>
+<%@ page import="java.io.InputStream, java.net.URLDecoder" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Remote MySQL Connection Example</title>
+    <meta charset="UTF-8">
+    <title>Request Handler</title>
 </head>
 <body>
-    <h1>Data from Remote MySQL Database</h1>
+    <h1>Request Details</h1>
+
     <%
-        // JDBC URL, username, and password of the MySQL server
-        String jdbcUrl = "jdbc:mysql://192.168.0.65:3306/upgw";
-        String dbUsername = "root";
-        String dbPassword = "happycoding";
+        // Get request parameters
+        String targetUrl = request.getParameter("url");
+        String headers = request.getParameter("headers");
+        String payload = request.getParameter("payload");
+        String method = request.getParameter("method");
 
-        // JDBC variables for opening and managing connection
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
+        out.println("<h2>Request Method</h2>");
+        out.println("<p>" + method + "</p>");
 
-        try {
-            // Load MySQL JDBC Driver
-            Class.forName("com.mysql.jdbc.Driver"); // Updated driver class name for MySQL Connector/J 4.x
+        out.println("<h2>Request URL</h2>");
+        out.println("<p>" + targetUrl + "</p>");
 
-            // Open a connection
-            conn = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
+        out.println("<h2>Request Headers</h2>");
+        out.println("<pre>" + headers + "</pre>");
 
-            // Get the SQL command from the POST request
-            String sql = request.getParameter("sqlCommand");
-            if (sql == null || sql.trim().isEmpty()) {
-                out.println("No SQL command provided.");
-                return;
-            }
+        out.println("<h2>Request Payload</h2>");
+        out.println("<pre>" + payload + "</pre>");
 
-            // Execute SQL query
-            stmt = conn.createStatement();
-            boolean isResultSet = stmt.execute(sql);
+        // Create the curl command
+        StringBuilder curlCommand = new StringBuilder("curl --verbose -X ");
+        curlCommand.append(method).append(" '").append(targetUrl).append("' ");
 
-            if (isResultSet) {
-                // Process the result set
-                rs = stmt.getResultSet();
-                int columnCount = rs.getMetaData().getColumnCount();
-
-                // Print column names
-                for (int i = 1; i <= columnCount; i++) {
-                    out.print(rs.getMetaData().getColumnName(i) + "\t");
-                }
-                out.println("<br>");
-
-                // Print rows
-                while (rs.next()) {
-                    for (int i = 1; i <= columnCount; i++) {
-                        out.print(rs.getString(i) + "\t");
-                    }
-                    out.println("<br>");
-                }
-            } else {
-                // Print update count
-                int updateCount = stmt.getUpdateCount();
-                out.println("Update Count: " + updateCount);
-            }
-        } catch (Exception e) {
-            // Convert JspWriter to PrintWriter
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-            out.println(sw.toString());
-        } finally {
-            // Clean-up environment
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
-            } catch (Exception e) {
-                StringWriter sw = new StringWriter();
-                PrintWriter pw = new PrintWriter(sw);
-                e.printStackTrace(pw);
-                out.println(sw.toString());
+        // Add headers to the curl command
+        if (headers != null && !headers.isEmpty()) {
+            String[] headersArray = headers.split(",");
+            for (String header : headersArray) {
+                curlCommand.append("-H '").append(header).append("' ");
             }
         }
+
+        // Add payload to the curl command if the method supports it
+        if (payload != null && !payload.isEmpty() && (method.equalsIgnoreCase("POST") || method.equalsIgnoreCase("PUT"))) {
+            curlCommand.append("--data '").append(payload).append("' ");
+        }
+
+        // Execute the curl command and capture the output
+        String[] cmd = { "sh", "-c", curlCommand.toString() };
+        Process process = Runtime.getRuntime().exec(cmd);
+
+        // Read the output of the curl command
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        StringBuilder output = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            output.append(line).append("\n");
+        }
+
+        // Read the error stream of the curl command
+        BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+        while ((line = errorReader.readLine()) != null) {
+            output.append(line).append("\n");
+        }
+
+        // Wait for the process to complete
+        int exitCode = process.waitFor();
+        output.append("\nExit Code: ").append(exitCode);
+
+        // Display the output of the curl command
+        out.println("<h2>Curl Output</h2>");
+        out.println("<pre>" + output.toString() + "</pre>");
     %>
 </body>
 </html>
