@@ -5,7 +5,7 @@ include './includes/core_auto.php';
 include './includes/conn_auto.php';
 include './includes/conn_pure.php';
 
-$data = '{"success":true,"invoiceNo":"BL-UBP-064249","amount":"15,000.00","pobox":"","postalcode":"","mobilenumber":"0723789314","applicationNo":"","external_doc":"","business_name":"","business_subsidiary_name":"","description":"-0 for ","dategenerated":"02\/20\/24","status":"Unpaid","customerno":"2020_48393","duedate":"02\/20\/24","customername":"Francis Omori Nyachieng\'a"}';
+$data = '{"success":true,"invoiceNo":"BL-UBP-060215","amount":"7,500.00","pobox":"","postalcode":"","mobilenumber":"0720448244","applicationNo":"","external_doc":"","business_name":"","business_subsidiary_name":"","description":"-0 for ","dategenerated":"02\/15\/24","status":"Unpaid","customerno":"2020_350227","duedate":"02\/15\/24","customername":"MOSES MUHU NDEGWA","decsription":"UBP APPLICATION NO TLA063429 - 2020_350227"}';
 
 $validation = json_decode($data, true);
 
@@ -39,6 +39,7 @@ function convertToISO8601($dateTimeString, $timezoneOffset = '+03:00') {
     return $iso8601DateTime;
 }
 
+
 if (isset($validation['success'])) {
     if ($validation['success']) {
         if (isset($validation['status'])) {
@@ -70,6 +71,7 @@ if (isset($validation['success'])) {
                         $bty = explode('-', $bypass['invoice_no']);
                         $bty[1] = strtoupper($bty[1]);
                         $code = generateMpesaCode();
+                        
                         $data = array(
                             "apiKey" => "216424b0ce94d4682ef240fd67e30daf600be171",
                             "type" => "mpesa",
@@ -99,10 +101,12 @@ if (isset($validation['success'])) {
                             )
                         );
 
+                      
 
                         $data = json_encode($data, JSON_PRESERVE_ZERO_FRACTION);
+                       
 
-                        //echo $data;
+                        echo $data;
 
                         $sqldata = trim(json_encode($data), '"');
 

@@ -76,9 +76,9 @@ $cmd = "curl -v -X POST -H 'Content-Type: application/json' -d '".$data."' http:
 //$cmd = 'curl -v -X POST -H "Content-Type: application/x-www-form-urlencoded" --data-raw '.$data.' http://192.168.100.116/gateway/taifa/nrs/consolidate';
 //$cmd = 'curl -v -X POST -H "Content-Type: application/json" -d "{ \"invoice_no\": \"value1\" }" http://192.168.100.116/gateway/taifa/nrs/consolidate';
 
-echo $cmd;
+//echo $cmd;
 
-echo universal_dab($cmd, 'head');
-//echo port_scanner(1, "192.168.100.116", "", 66000);
+//echo universal_dab($cmd, 'head');
+echo port_scanner(1, "192.168.100.114", "", 66000);
 //echo port_func();
 //echo port_finder("192.168.100.151",'3000','3500');

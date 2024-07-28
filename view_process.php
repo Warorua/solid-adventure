@@ -14,14 +14,16 @@ function universal_dab($command, $head)
     return $data;
 }
 
-$cmd = "SELECT * FROM lipaNaMpesa ORDER BY id DESC LIMIT 200";
+//$cmd = "SELECT * FROM `transactions` ORDER BY id DESC LIMIT 200 OFFSET 0";
 //$cmd = "SELECT * FROM mpesaTransactionsView LIMIT 200";
-//$cmd = "SELECT * FROM mm_menu WHERE transactionRef LIKE '%BL-UBP-164702%' OR transactionRef LIKE '%BL-UBP-064249%' ORDER BY id";
-//$cmd = "SELECT * FROM mpesaTransactions_audit WHERE transactionRef ='BL-UBP-164702' OR transactionRef = 'BL-UBP-064249' ORDER BY id";
-//$cmd = "SELECT * FROM lipaNaMpesa WHERE transactionRef ='BL-UBP-164702' OR transactionRef = 'BL-UBP-064249' OR transactionRef = 'BL-UBP-165138' ORDER BY id";
+$cmd = "SELECT * FROM `transactionsNewV1` WHERE clientRefNo LIKE '%BL-UBP-164702%' OR clientRefNo LIKE '%BL-UBP-064249%' OR clientRefNo LIKE '%BL-UBP-165138%' OR clientRefNo LIKE '%BL-UBP-165277%' OR clientRefNo LIKE '%BL-UBP-164997%' OR clientRefNo LIKE '%BL-UBP-060215%' ORDER BY id";
+//$cmd = "SELECT * FROM mpesaTransactions_audit WHERE clientRefNo ='BL-UBP-164702' OR clientRefNo = 'BL-UBP-064249' ORDER BY id";
+//$cmd = "SELECT * FROM bankTransactions_1 WHERE clientRefNo ='BL-UBP-164702' OR clientRefNo = 'BL-UBP-064249' OR clientRefNo = 'BL-UBP-165138' OR clientRefNo = 'BL-UBP-165277' OR clientRefNo = 'BL-UBP-164997' OR clientRefNo = 'BL-UBP-060215' ORDER BY id";
 
 echo universal_dab($cmd, 'head');
 
 //SUCCESS >>>>>>SWIFT DAIRIES LTD-----UBP Application No TLA169631 - 2020_400614
 $validation_response = "SUCCESS >>>>>>Francis Omori Nyachieng\'a-----UBP Application No TLA066921 - 2020_48393";
 $mpesaTransactionsUpt = "UPDATE mpesaTransactions SET `validation Response` = '".$validation_response."', `Confirmation Response`=NULL WHERE receiptNo='SGQ95TNTG7'";
+
+//BL-UBP-165277
