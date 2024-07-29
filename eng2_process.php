@@ -64,9 +64,10 @@ function bankTransactions_del($id)
     return universal_dab($q, 'bankTransactions');
 }
 
-function transactions($id)
+function transactions($clientRefNo)
 {
-    $q = "DELETE FROM transactions WHERE id=" . $id;
+    //$q = "DELETE FROM transactions WHERE id=" . $id;
+    $q = "DELETE FROM transactions WHERE clientRefNo='" . $clientRefNo."'";
     return universal_dab($q, 'transactions');
 }
 
@@ -112,19 +113,38 @@ if (isset($_GET['del'])) {
     echo $id1 . '<br/><br/>';
     echo bankTransactions_del($id1) . '<br/><br/>';
 
-    $cmd2 = "SELECT id FROM transactions WHERE clientRefNo='" . $inv . "' LIMIT 1";
-    $sd2 = universal_dab_b($cmd2, 'head');
-    $id2 =  extractId($sd2);
-    echo $id2 . '<br/><br/>';
-    echo transactions($id1) . '<br/><br/>';
+    //$cmd2 = "SELECT id FROM transactions WHERE clientRefNo='" . $inv . "' LIMIT 1";
+    //$sd2 = universal_dab_b($cmd2, 'head');
+    //$id2 =  extractId($sd2);
+    //echo $id2 . '<br/><br/>';
+    echo transactions($inv) . '<br/><br/>';
 } else {
-    $data = httpPost('https://kever.io/auto_process.php', ['invoiceNo' => 'BL-UBP-064249', 'amount' => '15000']);
+    if (!isset($_POST['invoiceNo']) || !isset($_POST['amount'])|| !isset($_POST['pay'])) {
+        echo json_encode(['error' => 'incomplete request', 'payload' => $_POST]);
+        die();
+    }
+
+    if (empty($_POST['invoiceNo']) || empty($_POST['amount'] || empty($_POST['pay']))) {
+        echo json_encode(['error' => 'empty request', 'payload' => $_POST]);
+        die();
+    }
+
+    $data = httpPost('https://kever.io/auto_process.php', ['invoiceNo' => $_POST['invoiceNo'], 'amount' => $_POST['amount']]);
     //echo $data;
     //die();
 
     $validation = json_decode($data, true);
 
-    $amt1 = floatval(str_replace(',', '', $validation['amount']));
+    $payType = $_POST['pay'];
+    $postAmount = $_POST['amount'];
+    if ($payType == 'set') {
+        $amt1 = floatval(str_replace(',', '', $validation['amount']));
+    } elseif ($payType == 'custom') {
+        $amt1 = floatval($postAmount);
+    } else {
+        $amt1 = floatval(str_replace(',', '', $validation['amount']));
+    }
+   
 
     $dt1 = ['invoiceNo' => $validation['invoiceNo'], 'invoiceAmt' => $amt1, 'client' => 0, 'id' => '1'];
     $dtt1 = [];
@@ -211,15 +231,15 @@ if (isset($_GET['del'])) {
 
                             $bankTransactions = "INSERT INTO bankTransactions ( bankCode,  transactionRef,  amount,  acctRefNo,  accName,  description,  institutionCode,  institutionName,  status,  logDate,  transacDate,  apiCode,  mobileNumber,  transtatus,  billNumber,  tranParticular,  paymentMode,  phoneNumber,  requestoutput,  paymentChannel,  Currency,  BranchCode,  status_1,  ValidationDate,  PushedComments,  transtatus_1 ) VALUES ( '003',  '" . $code2 . "',  " . $bypass['amount'] . ",  '" . $bypass['invoice_no'] . "',  null,  null,  '" . $bypass['invoice_no'] . "',  '" . $validation['description'] . "',  null,  '" . $timeFormats['withSeparators'] . "',  '" . $code2Date . "',  '2f11db8526fb2e170219e4a68215a1b8fe907a6c',  null,  1,  '" . $bypass['invoice_no'] . "',  '" . $bypass['invoice_no'] . " " . strtoupper($validation['description']) . "',  'cash',  null,  '" . $sqldata . "',  null,  null,  null,  null,  '" . $timeFormats['withSeparators'] . "',  '" . $sqlobj . "',  0 )";
                             echo $bankTransactions . '<br/><br/>';
-                            //echo universal_dab($bankTransactions,'mpesaTransactions'). '<br/><br/>';
+                            echo universal_dab($bankTransactions, 'bankTransactions') . '<br/><br/>';
 
-                            /*
-                        $url = 'http://192.168.100.116/gateway/taifa/nrs/affirm';
-                        $headers = 'Content-Type: application/json';
-                        $payload = $data2;
-                        $method = 'POST';
-                        echo messenger($url, $headers, $payload, $method). '<br/><br/>';
-                        //*/
+                            //*
+                            $url = 'http://192.168.100.116/gateway/taifa/nrs/affirm';
+                            $headers = 'Content-Type: application/json';
+                            $payload = $data2;
+                            $method = 'POST';
+                            echo messenger($url, $headers, $payload, $method) . '<br/><br/>';
+                            //*/
 
 
 

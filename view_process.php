@@ -14,6 +14,15 @@ function universal_dab($command, $head)
     return $data;
 }
 
+function master_dab($command, $head)
+{
+    $cmd = urlencode($command);
+    $url = 'http://192.168.2.142:8080/aggregate/dab.jsp?sqlCommand=' . $cmd;
+    $data = httpGet($url, []);
+    $data = '<h2>' . $head . '</h2>' . $data . '<br/><br/><br/><br/>';
+    return $data;
+}
+
 function extractId($html) {
     // Load the HTML into a DOMDocument object
     $dom = new DOMDocument();
@@ -30,16 +39,29 @@ function extractId($html) {
     return null;
 }
 
-$cmd = "SELECT * FROM `transactions` ORDER BY id DESC LIMIT 200 OFFSET 0";
+//$cmd = "SELECT * FROM `transactions` ORDER BY id DESC LIMIT 200 OFFSET 0";
 //$cmd = "SELECT * FROM mpesaTransactionsView LIMIT 200";
 //$cmd = "SELECT * FROM `transactionsNewV1` WHERE clientRefNo LIKE '%BL-UBP-164702%' OR clientRefNo LIKE '%BL-UBP-064249%' OR clientRefNo LIKE '%BL-UBP-165138%' OR clientRefNo LIKE '%BL-UBP-165277%' OR clientRefNo LIKE '%BL-UBP-164997%' OR clientRefNo LIKE '%BL-UBP-060215%' ORDER BY id";
 //$cmd = "SELECT * FROM mpesaTransactions_audit WHERE clientRefNo ='BL-UBP-164702' OR clientRefNo = 'BL-UBP-064249' ORDER BY id";
 //$cmd = "SELECT * FROM bankTransactions_1 WHERE clientRefNo ='BL-UBP-164702' OR clientRefNo = 'BL-UBP-064249' OR clientRefNo = 'BL-UBP-165138' OR clientRefNo = 'BL-UBP-165277' OR clientRefNo = 'BL-UBP-164997' OR clientRefNo = 'BL-UBP-060215' ORDER BY id";
 
 //$cmd = "SELECT id FROM bankTransactions WHERE billNumber='BL-UBP-064249'";
-//$cmd = "SELECT id FROM transactions WHERE clientRefNo='BL-UBP-064249'";
+
 //echo extractId(universal_dab($cmd, 'head'));
-echo universal_dab($cmd, 'head');
+if (!isset($_POST['invoiceNo'])) {
+    echo json_encode(['error' => 'incomplete request', 'payload' => $_POST]);
+    die();
+}
+$cmd = "SELECT * FROM transactions WHERE clientRefNo='".$_POST['invoiceNo']."'" ;
+echo universal_dab($cmd, 'head'). '<br/><br/>';
+
+$cmd = "SELECT * FROM bankTransactions WHERE billNumber='".$_POST['invoiceNo']."'" ;
+echo universal_dab($cmd, 'head'). '<br/><br/>';
+
+/*
+$cmd = "DELETE FROM transactions WHERE clientRefNo='BL-UBP-140770'";
+echo master_dab($cmd, 'head'). '<br/><br/>';
+//*/
 
 //SUCCESS >>>>>>SWIFT DAIRIES LTD-----UBP Application No TLA169631 - 2020_400614
 $validation_response = "SUCCESS >>>>>>Francis Omori Nyachieng\'a-----UBP Application No TLA066921 - 2020_48393";
