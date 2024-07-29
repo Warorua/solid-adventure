@@ -12,7 +12,7 @@ function messenger($url, $headers = '', $payload = '', $method = 'GET')
     return $data;
 }
 
-//*
+/*
 $url = 'http://192.168.100.116/gateway/taifa/nrs/affirm';
 $headers = 'Content-Type: application/json';
 $payload = '{"apiKey":"","type":null,"billNumber":"BL-UBP-060215","billAmount":"7500.0","phone":"null","transactionDate":"28-07-2024 00:00:00","Field1":null,"Field2":null,"Field3":null,"Field4":null,"Field5":null,"bankdetails":{"accountNumber":"202407281118028514","bankName":"Equity Bank","debitAccount":"BL-UBP-060215","debitCustName":"BL-UBP-060215 UBP APPLICATION NO TLA063429 - 2020_350227","bankReference":"202407281118028514","customerReference":"BL-UBP-060215","paymentMode":"cash"},"mpesadetails":null}';
@@ -27,7 +27,7 @@ $method = 'POST';
 //*/
 
 
-/*
+//*
 $url = 'http://192.168.100.59/api/bills/xyz/';
 $headers = '';
 $payload = '';

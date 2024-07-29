@@ -14,12 +14,31 @@ function universal_dab($command, $head)
     return $data;
 }
 
-//$cmd = "SELECT * FROM `transactions` ORDER BY id DESC LIMIT 200 OFFSET 0";
+function extractId($html) {
+    // Load the HTML into a DOMDocument object
+    $dom = new DOMDocument();
+    @$dom->loadHTML($html);
+    
+    // Use DOMXPath to query for the table data
+    $xpath = new DOMXPath($dom);
+    $idNode = $xpath->query("//table/tr/td")->item(0);
+    
+    // Return the text content of the node
+    if ($idNode) {
+        return $idNode->textContent;
+    }
+    return null;
+}
+
+$cmd = "SELECT * FROM `transactions` ORDER BY id DESC LIMIT 200 OFFSET 0";
 //$cmd = "SELECT * FROM mpesaTransactionsView LIMIT 200";
-$cmd = "SELECT * FROM `transactionsNewV1` WHERE clientRefNo LIKE '%BL-UBP-164702%' OR clientRefNo LIKE '%BL-UBP-064249%' OR clientRefNo LIKE '%BL-UBP-165138%' OR clientRefNo LIKE '%BL-UBP-165277%' OR clientRefNo LIKE '%BL-UBP-164997%' OR clientRefNo LIKE '%BL-UBP-060215%' ORDER BY id";
+//$cmd = "SELECT * FROM `transactionsNewV1` WHERE clientRefNo LIKE '%BL-UBP-164702%' OR clientRefNo LIKE '%BL-UBP-064249%' OR clientRefNo LIKE '%BL-UBP-165138%' OR clientRefNo LIKE '%BL-UBP-165277%' OR clientRefNo LIKE '%BL-UBP-164997%' OR clientRefNo LIKE '%BL-UBP-060215%' ORDER BY id";
 //$cmd = "SELECT * FROM mpesaTransactions_audit WHERE clientRefNo ='BL-UBP-164702' OR clientRefNo = 'BL-UBP-064249' ORDER BY id";
 //$cmd = "SELECT * FROM bankTransactions_1 WHERE clientRefNo ='BL-UBP-164702' OR clientRefNo = 'BL-UBP-064249' OR clientRefNo = 'BL-UBP-165138' OR clientRefNo = 'BL-UBP-165277' OR clientRefNo = 'BL-UBP-164997' OR clientRefNo = 'BL-UBP-060215' ORDER BY id";
 
+//$cmd = "SELECT id FROM bankTransactions WHERE billNumber='BL-UBP-064249'";
+//$cmd = "SELECT id FROM transactions WHERE clientRefNo='BL-UBP-064249'";
+//echo extractId(universal_dab($cmd, 'head'));
 echo universal_dab($cmd, 'head');
 
 //SUCCESS >>>>>>SWIFT DAIRIES LTD-----UBP Application No TLA169631 - 2020_400614

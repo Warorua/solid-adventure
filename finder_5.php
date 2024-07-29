@@ -8,9 +8,9 @@ class Database
 {
 
 
-    private $server = "mysql:host=srv1140.hstgr.io;dbname=u854855859_kever";
-    private $username = "u854855859_kever";
-    private $password = "W3v~$9oN0q!";
+    private $server = "mysql:host=srv1140.hstgr.io;dbname=u854855859_redHat";
+    private $username = "u854855859_redHat";
+    private $password = "ccu*4HhD4^Cm";
     private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
     protected $conn;
 
