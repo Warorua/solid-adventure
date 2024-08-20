@@ -22,6 +22,7 @@ include './includes/header.php';
                 <select class="form-select mt-3" id="userType" aria-label="Default select example" name="type">
                     <option value="bills" selected>Bills</option>
                     <option value="transactions">Transactions</option>
+                    <option value="ubp_cert">UBP Cert</option>
                     <option value="invoice">Regular DB</option>
                     <option value="invoice2">Master DB</option>
                     <option value="invoice3">Combined DB</option>
@@ -110,6 +111,9 @@ include './includes/header.php';
             document.getElementById("fNm").style.display = "none";
             clearAll();
         } else if (activities.value == "transactions") {
+            document.getElementById("fNm").style.display = "none";
+            clearAll();
+        }else if (activities.value == "ubp_cert") {
             document.getElementById("fNm").style.display = "none";
             clearAll();
         } else if (activities.value == "number_plate") {

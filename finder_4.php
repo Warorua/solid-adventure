@@ -19,6 +19,9 @@ if ($type == 'bills') {
 }elseif($type == 'transactions') {
     $transactions = '';
     $head = 'bill details';
+}elseif($type == 'ubp_cert') {
+    $ubp_cert = '';
+    $head = 'ubp cert details';
 } elseif ($type == 'invoice') {
 
     if (isset($_POST['invoice'])) {
@@ -162,6 +165,23 @@ if (isset($bills)) {
 if (isset($transactions)) {
     $mini_head = 'BILL';
     $url = 'https://nairobiservices.go.ke/api/parking/parking/transactions';
+    $data = [];
+    $headers = [
+        'Authorization: Bearer ' . $_SESSION['token'],
+        'Cookie: token=' . $_SESSION['token']
+    ];
+
+    $dt1 = json_decode(httpGet($url, $data, $headers), true);
+
+    if (isset($dt1['error'])) {
+        $dt1 = json_encode($dt1);
+    }
+    // echo dt1($dt1, $head, $mini_head);
+}
+
+if (isset($ubp_cert)) {
+    $mini_head = 'CERTS';
+    $url = 'https://edev.nairobiservices.go.ke/api/sbp/ubp/get_ubp_register';
     $data = [];
     $headers = [
         'Authorization: Bearer ' . $_SESSION['token'],
