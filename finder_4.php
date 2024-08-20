@@ -16,7 +16,7 @@ $mini_head = 'HEAD';
 if ($type == 'bills') {
     $bills = '';
     $head = 'bill details';
-}elseif($type == 'bills') {
+}elseif($type == 'transactions') {
     $transactions = '';
     $head = 'bill details';
 } elseif ($type == 'invoice') {
