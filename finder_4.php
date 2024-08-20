@@ -16,6 +16,9 @@ $mini_head = 'HEAD';
 if ($type == 'bills') {
     $bills = '';
     $head = 'bill details';
+}elseif($type == 'bills') {
+    $transactions = '';
+    $head = 'bill details';
 } elseif ($type == 'invoice') {
 
     if (isset($_POST['invoice'])) {
@@ -152,6 +155,23 @@ if (isset($bills)) {
             $url = 'https://nairobiservices.go.ke/api/parking/parking/transactions';
             $dt1 = json_decode(httpGet($url, $data, $headers), true);
         }
+    }
+    // echo dt1($dt1, $head, $mini_head);
+}
+
+if (isset($transactions)) {
+    $mini_head = 'BILL';
+    $url = 'https://nairobiservices.go.ke/api/parking/parking/transactions';
+    $data = [];
+    $headers = [
+        'Authorization: Bearer ' . $_SESSION['token'],
+        'Cookie: token=' . $_SESSION['token']
+    ];
+
+    $dt1 = json_decode(httpGet($url, $data, $headers), true);
+
+    if (isset($dt1['error'])) {
+        $dt1 = json_encode($dt1);
     }
     // echo dt1($dt1, $head, $mini_head);
 }

@@ -39,23 +39,21 @@ function extractId($html) {
     return null;
 }
 
-//$cmd = "SELECT * FROM `transactions` ORDER BY id DESC LIMIT 200 OFFSET 0";
-//$cmd = "SELECT * FROM mpesaTransactionsView LIMIT 200";
+$cmd = "SELECT * FROM `transactions` ORDER BY id DESC LIMIT 500 OFFSET 0";
+//$cmd = "SELECT * FROM `mpesaTransactions` ORDER BY id DESC LIMIT 200 OFFSET 0";
+//$cmd = "SELECT * FROM `mpesaTransactions` ORDER BY id DESC LIMIT 200 OFFSET 500";
+//$cmd = "SELECT * FROM `mpesaTransactions` WHERE `mobileno` LIKE '%721303137%' ORDER BY id DESC LIMIT 200";
+$cmd = "SELECT * FROM `transactions` WHERE `comment`='COMPLETED' ORDER BY id DESC LIMIT 500 OFFSET 0";
+//$cmd = "SELECT * FROM `transactions` WHERE `comment`='COMPLETED' AND `bankCode`='003' ORDER BY id DESC LIMIT 500 OFFSET 0";
+//$cmd = "SELECT * FROM `transactions` WHERE `mobileNumber` LIKE '%727828772%' ORDER BY id DESC LIMIT 500 OFFSET 0";
+//$cmd = "SELECT * FROM `transactions` WHERE `inserted_by`='root@192.168.0.1' ORDER BY id DESC LIMIT 500 OFFSET 0";
+//$cmd  "SELECT * FROM mpesaTransactionsView LIMIT 200";
 //$cmd = "SELECT * FROM `transactionsNewV1` WHERE clientRefNo LIKE '%BL-UBP-164702%' OR clientRefNo LIKE '%BL-UBP-064249%' OR clientRefNo LIKE '%BL-UBP-165138%' OR clientRefNo LIKE '%BL-UBP-165277%' OR clientRefNo LIKE '%BL-UBP-164997%' OR clientRefNo LIKE '%BL-UBP-060215%' ORDER BY id";
 //$cmd = "SELECT * FROM mpesaTransactions_audit WHERE clientRefNo ='BL-UBP-164702' OR clientRefNo = 'BL-UBP-064249' ORDER BY id";
 //$cmd = "SELECT * FROM bankTransactions_1 WHERE clientRefNo ='BL-UBP-164702' OR clientRefNo = 'BL-UBP-064249' OR clientRefNo = 'BL-UBP-165138' OR clientRefNo = 'BL-UBP-165277' OR clientRefNo = 'BL-UBP-164997' OR clientRefNo = 'BL-UBP-060215' ORDER BY id";
 
-//$cmd = "SELECT id FROM bankTransactions WHERE billNumber='BL-UBP-064249'";
+//$cmd = "SELECT * FROM bankTransactions ORDER BY id DESC LIMIT 500 OFFSET 0";
 
-//echo extractId(universal_dab($cmd, 'head'));
-if (!isset($_POST['invoiceNo'])) {
-    echo json_encode(['error' => 'incomplete request', 'payload' => $_POST]);
-    die();
-}
-$cmd = "SELECT * FROM transactions WHERE clientRefNo='".$_POST['invoiceNo']."'" ;
-echo universal_dab($cmd, 'head'). '<br/><br/>';
-
-$cmd = "SELECT * FROM bankTransactions WHERE billNumber='".$_POST['invoiceNo']."'" ;
 echo universal_dab($cmd, 'head'). '<br/><br/>';
 
 /*

@@ -34,10 +34,20 @@ $data2 = array('reference' => $dt1['invoiceNo'], 'bankdetails' => array(''=>''))
 $rt_1 = httpPost($url2, json_encode($data2),['Content-Type: application/json']);
 $descObj = json_decode($rt_1, true);
 
+
+
+
+
 if (isset($descObj['validationDetails'])) {
     $validation['description'] = $descObj['validationDetails']['billDescription'];
 } else {
-    $validation['description'] = '';
+    $url2 = 'https://nairobiservices.go.ke/api/authentication/bill/validate/invoice?invoice_number=' . $dt1['invoiceNo'];
+    $validation2 = json_decode(httpGet($url2, $data, []), true);
+    if (isset($validation2['Status'])) {
+        $validation['description'] = $validation2['invoice_description'];
+    } else {
+        $validation['description'] = '';
+    }
 }
 
 

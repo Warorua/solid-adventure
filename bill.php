@@ -21,6 +21,7 @@ include './includes/header.php';
                 <label for="exampleInputtext1" class="form-label">Requests</label>
                 <select class="form-select mt-3" id="userType" aria-label="Default select example" name="type">
                     <option value="bills" selected>Bills</option>
+                    <option value="transactions">Transactions</option>
                     <option value="invoice">Regular DB</option>
                     <option value="invoice2">Master DB</option>
                     <option value="invoice3">Combined DB</option>
@@ -106,6 +107,9 @@ include './includes/header.php';
             $("#nmeF").html('<input type="text" name="invoice" class="form-control" id="exampleInputtext2" aria-describedby="textHelp">');
             document.getElementById("fNm").style.display = "";
         } else if (activities.value == "bills") {
+            document.getElementById("fNm").style.display = "none";
+            clearAll();
+        } else if (activities.value == "transactions") {
             document.getElementById("fNm").style.display = "none";
             clearAll();
         } else if (activities.value == "number_plate") {

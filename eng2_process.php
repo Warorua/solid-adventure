@@ -5,6 +5,14 @@ include './includes/core_auto.php';
 include './includes/conn_auto.php';
 include './includes/conn_pure.php';
 
+function recLog($invoice, $data, $sql)
+{
+    global $conn;
+    $stmt = $conn->prepare("INSERT INTO recLog (`inv`,`data`,`sql`) VALUES (:inv, :data, :sql)");
+    $stmt->execute(['inv' => $invoice, 'data' => $data, 'sql' => $sql]);
+    $response = $stmt->fetch();
+    return $response;
+}
 //$data = '{"success":true,"invoiceNo":"BL-UBP-060215","amount":"7,500.00","pobox":"","postalcode":"","mobilenumber":"0720448244","applicationNo":"","external_doc":"","business_name":"","business_subsidiary_name":"","description":"-0 for ","dategenerated":"02\/15\/24","status":"Unpaid","customerno":"2020_350227","duedate":"02\/15\/24","customername":"MOSES MUHU NDEGWA","description":"UBP APPLICATION NO TLA063429 - 2020_350227"}';
 function universal_dab($command, $head)
 {
@@ -67,7 +75,7 @@ function bankTransactions_del($id)
 function transactions($clientRefNo)
 {
     //$q = "DELETE FROM transactions WHERE id=" . $id;
-    $q = "DELETE FROM transactions WHERE clientRefNo='" . $clientRefNo."'";
+    $q = "DELETE FROM transactions WHERE clientRefNo='" . $clientRefNo . "'";
     return universal_dab($q, 'transactions');
 }
 
@@ -119,7 +127,7 @@ if (isset($_GET['del'])) {
     //echo $id2 . '<br/><br/>';
     echo transactions($inv) . '<br/><br/>';
 } else {
-    if (!isset($_POST['invoiceNo']) || !isset($_POST['amount'])|| !isset($_POST['pay'])) {
+    if (!isset($_POST['invoiceNo']) || !isset($_POST['amount']) || !isset($_POST['pay'])) {
         echo json_encode(['error' => 'incomplete request', 'payload' => $_POST]);
         die();
     }
@@ -144,7 +152,7 @@ if (isset($_GET['del'])) {
     } else {
         $amt1 = floatval(str_replace(',', '', $validation['amount']));
     }
-   
+
 
     $dt1 = ['invoiceNo' => $validation['invoiceNo'], 'invoiceAmt' => $amt1, 'client' => 0, 'id' => '1'];
     $dtt1 = [];
@@ -217,12 +225,13 @@ if (isset($_GET['del'])) {
                                 "balance" => number_format($bypassAmt, 1, '.', '')
                             );
 
-                            $comment =
 
-                                $data2 = json_encode($data2, JSON_PRESERVE_ZERO_FRACTION);
+
+                            $data2 = json_encode($data2, JSON_PRESERVE_ZERO_FRACTION);
                             $obj2 = json_encode($obj2, JSON_PRESERVE_ZERO_FRACTION);
 
                             echo $data2 . '<br/><br/>';
+
 
                             $sqldata = trim(json_encode($data2), '"');
                             $sqlobj = trim(json_encode($obj2), '"');
@@ -233,6 +242,8 @@ if (isset($_GET['del'])) {
                             echo $bankTransactions . '<br/><br/>';
                             echo universal_dab($bankTransactions, 'bankTransactions') . '<br/><br/>';
 
+
+
                             //*
                             $url = 'http://192.168.100.116/gateway/taifa/nrs/affirm';
                             $headers = 'Content-Type: application/json';
@@ -242,7 +253,7 @@ if (isset($_GET['del'])) {
                             //*/
 
 
-
+                            echo recLog($bypass['invoice_no'], $data2, $bankTransactions);
 
 
                             //echo bankTransactions_del(162618);
