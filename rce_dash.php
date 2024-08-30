@@ -64,7 +64,7 @@ include './includes/header.php';
                             id: id
                         },
                         success: function(response) {
-                            if (response !== '') {
+                            if (response !== 'EMPTY') {
                                 $('#resultOutput').html('<h2>Result:</h2> ' + response);
                             } else {
                                 checkResult(id); // Keep checking

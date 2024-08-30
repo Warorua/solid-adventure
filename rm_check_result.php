@@ -45,7 +45,7 @@ if (isset($_POST['id'])) {
         echo base64_decode($row['result']);
         //echo  base64_decode($row['result']);
     } else {
-        echo '';
+        echo 'EMPTY';
     }
 }
 
