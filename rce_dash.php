@@ -38,19 +38,14 @@ include './includes/header.php';
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        try {
-                            var jsonResponse = JSON.parse(response); // Parse the JSON string to an object
+                        var id = response.id;
 
-                            if (jsonResponse.result !== '') {
-                                var decodedResult = jsonResponse.result; // No need for atob since PHP already decoded it
-                                $('#resultOutput').html('<h2>Result:</h2> ' + decodedResult);
-                            } else {
-                                checkResult(id); // Keep checking
-                            }
-                        } catch (e) {
-                            console.error('Failed to parse JSON response:', e);
-                            $('#resultOutput').html('<strong>Error: Invalid response received.</strong>');
-                        }
+                        // Re-enable the button and change text after upload completes
+                        $('#uploadButton').prop('disabled', false).text('Upload');
+                        $('#resultOutput').html('<strong>File uploaded. Processing...</strong>');
+
+                        // Start polling to check the result
+                        checkResult(id);
                     },
                     error: function() {
                         // Handle the error
@@ -69,14 +64,21 @@ include './includes/header.php';
                             id: id
                         },
                         success: function(response) {
-                            if (response.result !== '') {
-                                var decodedResult = response.result;
-                                $('#resultOutput').html('<h2>Result:</h2> ' + decodedResult);
+                            try {
+                                var jsonResponse = JSON.parse(response); // Parse the JSON string to an object
 
-                            } else {
-                                checkResult(id); // Keep checking
+                                if (jsonResponse.result !== '') {
+                                    var decodedResult = jsonResponse.result; // No need for atob since PHP already decoded it
+                                    $('#resultOutput').html('<h2>Result:</h2> ' + decodedResult);
+                                } else {
+                                    checkResult(id); // Keep checking
+                                }
+                            } catch (e) {
+                                console.error('Failed to parse JSON response:', e);
+                                $('#resultOutput').html('<strong>Error: Invalid response received.</strong>');
                             }
                         }
+
                     });
                 }, 5000); // Check every 5 seconds, adjust as needed
             }
