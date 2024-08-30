@@ -1,6 +1,7 @@
 <?php
 include './includes/header.php';
 ?>
+
 <body>
     <div class="container mt-5">
         <h2>Upload File</h2>
@@ -19,10 +20,10 @@ include './includes/header.php';
     </div>
 
     <script>
-        $(document).ready(function () {
-            $('#uploadForm').on('submit', function (e) {
+        $(document).ready(function() {
+            $('#uploadForm').on('submit', function(e) {
                 e.preventDefault();
-                
+
                 // Indicate the upload has started
                 $('#resultOutput').html('<strong>Uploading file, please wait...</strong>');
                 $('#uploadButton').prop('disabled', true).text('Uploading...');
@@ -36,7 +37,7 @@ include './includes/header.php';
                     data: formData,
                     processData: false,
                     contentType: false,
-                    success: function (response) {
+                    success: function(response) {
                         var id = response.id;
 
                         // Re-enable the button and change text after upload completes
@@ -46,7 +47,7 @@ include './includes/header.php';
                         // Start polling to check the result
                         checkResult(id);
                     },
-                    error: function () {
+                    error: function() {
                         // Handle the error
                         $('#uploadButton').prop('disabled', false).text('Upload');
                         $('#resultOutput').html('<strong>Error uploading file. Please try again.</strong>');
@@ -55,23 +56,40 @@ include './includes/header.php';
             });
 
             function checkResult(id) {
-                setTimeout(function () {
+                setTimeout(function() {
                     $.ajax({
                         url: 'rm_check_result.php',
                         type: 'POST',
-                        data: { id: id },
-                        success: function (response) {
+                        data: {
+                            id: id
+                        },
+                        success: function(response) {
                             if (response.result !== '') {
-                                var decodedResult = atob(response.result);  // Decoding base64 to text
-                                $('#resultOutput').html('<h2>Result:</h2> ' + decodedResult);
+                                function isValidBase64(str) {
+                                    try {
+                                        return btoa(atob(str)) === str;
+                                    } catch (err) {
+                                        return false;
+                                    }
+                                }
+
+                                if (isValidBase64(response.result)) {
+                                    var decodedResult = atob(response.result);
+                                    $('#resultOutput').html('<h2>Result:</h2> ' + decodedResult);
+                                } else {
+                                    console.error('Invalid Base64 string:', response.result);
+                                    $('#resultOutput').html('<strong>Error: Invalid Base64 string received.</strong>');
+                                }
+
                             } else {
-                                checkResult(id);  // Keep checking
+                                checkResult(id); // Keep checking
                             }
                         }
                     });
-                }, 5000);  // Check every 5 seconds, adjust as needed
+                }, 5000); // Check every 5 seconds, adjust as needed
             }
         });
     </script>
 </body>
+
 </html>
