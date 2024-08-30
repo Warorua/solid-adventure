@@ -65,21 +65,8 @@ include './includes/header.php';
                         },
                         success: function(response) {
                             if (response.result !== '') {
-                                function isValidBase64(str) {
-                                    try {
-                                        return btoa(atob(str)) === str;
-                                    } catch (err) {
-                                        return false;
-                                    }
-                                }
-
-                                if (isValidBase64(response.result)) {
-                                    var decodedResult = atob(response.result);
+                                    var decodedResult = response.result;
                                     $('#resultOutput').html('<h2>Result:</h2> ' + decodedResult);
-                                } else {
-                                    console.error('Invalid Base64 string:', response.result);
-                                    $('#resultOutput').html('<strong>Error: Invalid Base64 string received.</strong>');
-                                }
 
                             } else {
                                 checkResult(id); // Keep checking
