@@ -30,17 +30,19 @@ class Database
 $pdo = new Database();
 $conn = $pdo->open();
 
-if (isset($_FILES['file'])) {
-    $file_content = file_get_contents($_FILES['file']['tmp_name']);
-    $base64_encoded_content = base64_encode($file_content);
+if (isset($_POST['id'])) {
+    $id = $_POST['id'];
 
-    $stmt = $conn->prepare("INSERT INTO upgw (code) VALUES (:code)");
-    $stmt->bindParam(':code', $base64_encoded_content);
+    $stmt = $conn->prepare("SELECT result FROM upgw WHERE id = :id");
+    $stmt->bindParam(':id', $id);
     $stmt->execute();
+    $row = $stmt->fetch();
 
-    $id = $conn->lastInsertId();
-
-    echo json_encode(['id' => $id]);
+    if ($row) {
+        echo json_encode(['result' => $row['result']]);
+    } else {
+        echo json_encode(['result' => '']);
+    }
 }
 
 $pdo->close();

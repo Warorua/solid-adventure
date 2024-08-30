@@ -27,7 +27,7 @@ include './includes/header.php';
                 formData.append('file', $('#fileInput')[0].files[0]);
 
                 $.ajax({
-                    url: 'upload.php',
+                    url: 'rm_exec.php',
                     type: 'POST',
                     data: formData,
                     processData: false,
@@ -44,7 +44,7 @@ include './includes/header.php';
             function checkResult(id) {
                 setTimeout(function () {
                     $.ajax({
-                        url: 'check_result.php',
+                        url: 'rm_check_result.php',
                         type: 'POST',
                         data: { id: id },
                         success: function (response) {
