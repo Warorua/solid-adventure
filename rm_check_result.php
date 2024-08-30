@@ -38,10 +38,17 @@ if (isset($_POST['id'])) {
     $row = $stmt->fetch();
 
     if (isset($row['result']) && $row['result'] !== NULL) {
-        echo base64_decode($row['result']);  // Directly return the decoded result
+        $decodedResult = base64_decode($row['result'], true);  // Use true to suppress errors
+    
+        if ($decodedResult === false) {
+            echo 'Decoding Failed';  // If decoding fails, output this
+        } else {
+            echo $decodedResult;  // Output the decoded result
+        }
     } else {
         echo 'EMPTY';  // Return 'EMPTY' if no result is found
     }
+    
 } else {
     echo 'Script Error!';  // Handle case where 'id' is not set
 }
