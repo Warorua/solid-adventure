@@ -32,14 +32,14 @@ $conn = $pdo->open();
 
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
-    $id = json_decode($id,true);
+    $id = json_decode($id, true);
     $id = $id['id'];
 
     $stmt = $conn->prepare("SELECT * FROM upgw WHERE id = :id");
     $stmt->execute(["id" => $id]);
     $row = $stmt->fetch();
 
-    if (isset($row['result'])) {
+    if (array_key_exists('result', $row)) {
         if ($row['result'] !== NULL) {
             $decodedResult = base64_decode($row['result'], true);  // Use true to suppress errors
 
@@ -49,10 +49,10 @@ if (isset($_POST['id'])) {
                 echo $decodedResult;  // Output the decoded result
             }
         } else {
-            echo 'EMPTY';  // Return 'EMPTY' if no result is found
+            echo 'EMPTY';  // Handle null result case
         }
     } else {
-        echo 'Result not set! -- ID: '.$id.'<br/>'.json_encode($row);  // Return 'EMPTY' if no result is found
+        echo 'Result field does not exist in the array! -- ID: ' . $id . '<br/>' . json_encode($row);  // Debug output if result is not set at all
     }
 } else {
     echo 'Script Error!';  // Handle case where 'id' is not set
