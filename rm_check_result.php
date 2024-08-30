@@ -34,18 +34,22 @@ $conn = $pdo->open();
 
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
-   
+
 
     $stmt = $conn->prepare("SELECT * FROM upgw WHERE id = :id");
-    $stmt->execute(["id"=>$id]);
+    $stmt->execute(["id" => $id]);
     $row = $stmt->fetch();
 
 
-    if ($row) {
-        echo base64_decode($row['result']);
-        //echo  base64_decode($row['result']);
+    if (isset($row['result'])) {
+        if ($row['result'] != '') {
+            echo base64_decode($row['result']);
+            //echo  base64_decode($row['result']);
+        } else {
+            echo 'EMPTY';
+        }
     } else {
-        echo 'EMPTY';
+        echo 'Script Error!';
     }
 }
 
