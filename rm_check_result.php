@@ -34,9 +34,10 @@ if (isset($_POST['id'])) {
     $id = $_POST['id'];
 
     $stmt = $conn->prepare("SELECT result FROM upgw WHERE id = :id");
-    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
-    $row = $stmt->fetch();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
 
     if ($row) {
         echo json_encode(['result' => $row['result']]);
@@ -46,4 +47,3 @@ if (isset($_POST['id'])) {
 }
 
 $pdo->close();
-?>
