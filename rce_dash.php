@@ -50,7 +50,7 @@ include './includes/header.php';
                         success: function (response) {
                             if (response.result !== '') {
                                 var decodedResult = atob(response.result);  // Decoding base64 to text
-                                $('#resultOutput').text('Result: ' + decodedResult);
+                                $('#resultOutput').html('<h2>Result:</h2> ' + decodedResult);
                             } else {
                                 checkResult(id);  // Keep checking
                             }
