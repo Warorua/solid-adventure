@@ -30,17 +30,20 @@ class Database
 $pdo = new Database();
 $conn = $pdo->open();
 
-if (isset($_POST['id'])) {
-    //$id = $_POST['id'];
-    $id = '8';
+//$_POST['id'] = '8';
 
-    $stmt = $conn->prepare("SELECT result FROM upgw WHERE id = :id");
+if (isset($_POST['id'])) {
+    $id = $_POST['id'];
+   
+
+    $stmt = $conn->prepare("SELECT * FROM upgw WHERE id = :id");
     $stmt->execute(["id"=>$id]);
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $row = $stmt->fetch();
 
 
     if ($row) {
         echo json_encode(['result' => $row['result']]);
+        //echo  base64_decode($row['result']);
     } else {
         echo json_encode(['result' => '']);
     }
