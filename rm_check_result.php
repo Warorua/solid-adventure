@@ -52,7 +52,7 @@ if (isset($_POST['id'])) {
             echo 'EMPTY';  // Return 'EMPTY' if no result is found
         }
     } else {
-        echo 'Result not set! -- ID: '.$id;  // Return 'EMPTY' if no result is found
+        echo 'Result not set! -- ID: '.$id.'<br/>'.json_encode($row);  // Return 'EMPTY' if no result is found
     }
 } else {
     echo 'Script Error!';  // Handle case where 'id' is not set
