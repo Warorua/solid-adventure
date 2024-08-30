@@ -42,7 +42,7 @@ if (isset($_POST['id'])) {
 
 
     if (isset($row['result'])) {
-        if ($row['result'] != '') {
+        if ($row['result'] != NULL) {
             echo base64_decode($row['result']);
             //echo  base64_decode($row['result']);
         } else {
