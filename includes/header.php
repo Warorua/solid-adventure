@@ -104,6 +104,9 @@ if (isset($_COOKIE['visitorId'])) {
                 <li class="nav-item">
                     <a class="nav-link" href="aftermath_dash.php">AFTERMATH</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="rce_dash.php">RCE</a>
+                </li>
 
             </ul>
 

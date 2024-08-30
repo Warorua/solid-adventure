@@ -30,11 +30,11 @@ $method = 'POST';
 //*
 //$url = 'http://192.168.0.69:8080/docs/manager-howto.html#Deploy_A_New_Application_Archive_(WAR)_Remotely';
 //$url = 'http://192.168.0.79/nrs/';
-//$url = 'http://192.168.0.154:8002/';
+$url = 'http://192.168.62.3';
 //$url = 'http://192.168.0.64:6063/upgw/WS/UPGW/Codeunit/UPGW';
-$url = 'http://192.168.0.64:59445/tools/APISOURCE/CoopKCBB2BIntegration/.vs/CoopKcbintergation/config/applicationhost.config';
-$headers = 'Authorization: Basic QWRtaW5pc3RyYXRvcjokdG4zbXlAcCQ=';
-//$headers = '';
+//$url = 'http://192.168.0.64:59445/tools/APISOURCE/CoopKCBB2BIntegration/.vs/CoopKcbintergation/config/applicationhost.config';
+//$headers = 'Authorization: Basic QWRtaW5pc3RyYXRvcjokdG4zbXlAcCQ=';
+$headers = '';
 $payload = '';
 $method = 'GET';
 //*/
