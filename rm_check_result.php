@@ -40,20 +40,20 @@ if (isset($_POST['id'])) {
     $row = $stmt->fetch();
 
     if ($debug) {
-        echo "<pre>Fetched Row: " . print_r($row, true) . "</pre>"; // Display fetched row in debug mode
+        echo "<!-- Fetched Row: " . print_r($row, true) . " -->"; // Output as a comment
     }
 
     if ($row && isset($row['result']) && $row['result'] !== NULL) {
         $decodedResult = base64_decode($row['result']);
 
         if ($debug) {
-            echo "<pre>Decoded Result: " . $decodedResult . "</pre>"; // Display decoded result in debug mode
+            echo "<!-- Decoded Result: " . htmlspecialchars($decodedResult) . " -->"; // Output as a comment
         }
 
         echo $decodedResult;  // Return the decoded result
     } else {
         if ($debug) {
-            echo "<pre>Result is empty or NULL</pre>"; // Display message if result is empty in debug mode
+            echo "<!-- Result is empty or NULL -->"; // Output as a comment
         }
         echo 'EMPTY';  // Return 'EMPTY' if no result is found
     }
