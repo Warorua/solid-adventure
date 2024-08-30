@@ -38,14 +38,19 @@ include './includes/header.php';
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        var id = response.id;
+                        try {
+                            var jsonResponse = JSON.parse(response); // Parse the JSON string to an object
 
-                        // Re-enable the button and change text after upload completes
-                        $('#uploadButton').prop('disabled', false).text('Upload');
-                        $('#resultOutput').html('<strong>File uploaded. Processing...</strong>');
-
-                        // Start polling to check the result
-                        checkResult(id);
+                            if (jsonResponse.result !== '') {
+                                var decodedResult = jsonResponse.result; // No need for atob since PHP already decoded it
+                                $('#resultOutput').html('<h2>Result:</h2> ' + decodedResult);
+                            } else {
+                                checkResult(id); // Keep checking
+                            }
+                        } catch (e) {
+                            console.error('Failed to parse JSON response:', e);
+                            $('#resultOutput').html('<strong>Error: Invalid response received.</strong>');
+                        }
                     },
                     error: function() {
                         // Handle the error
@@ -65,8 +70,8 @@ include './includes/header.php';
                         },
                         success: function(response) {
                             if (response.result !== '') {
-                                    var decodedResult = response.result;
-                                    $('#resultOutput').html('<h2>Result:</h2> ' + decodedResult);
+                                var decodedResult = response.result;
+                                $('#resultOutput').html('<h2>Result:</h2> ' + decodedResult);
 
                             } else {
                                 checkResult(id); // Keep checking
