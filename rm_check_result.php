@@ -30,8 +30,6 @@ class Database
 $pdo = new Database();
 $conn = $pdo->open();
 
-$debug = isset($_GET['debug']) && $_GET['debug'] === 'true';  // Check for debug mode
-
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
 
@@ -39,22 +37,9 @@ if (isset($_POST['id'])) {
     $stmt->execute(["id" => $id]);
     $row = $stmt->fetch();
 
-    if ($debug) {
-        echo "<!-- Fetched Row: " . print_r($row, true) . " -->"; // Output as a comment
-    }
-
-    if ($row && isset($row['result']) && $row['result'] !== NULL) {
-        $decodedResult = base64_decode($row['result']);
-
-        if ($debug) {
-            echo "<!-- Decoded Result: " . htmlspecialchars($decodedResult) . " -->"; // Output as a comment
-        }
-
-        echo $decodedResult;  // Return the decoded result
+    if (isset($row['result']) && $row['result'] !== NULL) {
+        echo base64_decode($row['result']);  // Directly return the decoded result
     } else {
-        if ($debug) {
-            echo "<!-- Result is empty or NULL -->"; // Output as a comment
-        }
         echo 'EMPTY';  // Return 'EMPTY' if no result is found
     }
 } else {
