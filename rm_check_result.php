@@ -42,10 +42,10 @@ if (isset($_POST['id'])) {
 
 
     if ($row) {
-        echo json_encode(['result' => base64_decode($row['result'])]);
+        echo base64_decode($row['result']);
         //echo  base64_decode($row['result']);
     } else {
-        echo json_encode(['result' => '']);
+        echo '';
     }
 }
 
