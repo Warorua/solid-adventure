@@ -30,28 +30,20 @@ class Database
 $pdo = new Database();
 $conn = $pdo->open();
 
-//$_POST['id'] = '8';
-
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
-
 
     $stmt = $conn->prepare("SELECT * FROM upgw WHERE id = :id");
     $stmt->execute(["id" => $id]);
     $row = $stmt->fetch();
 
-
-    if (isset($row['result'])) {
-        if ($row['result'] != NULL) {
-            //echo base64_decode($row['result']);
-            //echo  base64_decode($row['result']);
-            echo 'hereee';
-        } else {
-            echo 'EMPTY';
-        }
+    if (isset($row['result']) && $row['result'] !== NULL) {
+        echo base64_decode($row['result']);  // Directly return the decoded result
     } else {
-        echo 'Script Error!';
+        echo 'EMPTY';  // Return 'EMPTY' if no result is found
     }
+} else {
+    echo 'Script Error!';  // Handle case where 'id' is not set
 }
 
 $pdo->close();

@@ -38,7 +38,7 @@ include './includes/header.php';
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        var id = response.id;
+                        var id = response; // Assume the response is just the ID (as plain text)
 
                         // Re-enable the button and change text after upload completes
                         $('#uploadButton').prop('disabled', false).text('Upload');
@@ -64,13 +64,14 @@ include './includes/header.php';
                             id: id
                         },
                         success: function(response) {
+                            console.log('Polling response:', response); // Debugging line
+
                             if (response !== 'EMPTY') {
                                 $('#resultOutput').html('<h2>Result:</h2> ' + response);
                             } else {
-                                checkResult(id); // Keep checking
+                                checkResult(id); // Keep checking if the result is empty
                             }
                         }
-
                     });
                 }, 5000); // Check every 5 seconds, adjust as needed
             }
