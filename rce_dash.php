@@ -64,18 +64,10 @@ include './includes/header.php';
                             id: id
                         },
                         success: function(response) {
-                            try {
-                                var jsonResponse = JSON.parse(response); // Parse the JSON string to an object
-
-                                if (jsonResponse.result !== '') {
-                                    var decodedResult = jsonResponse.result; // No need for atob since PHP already decoded it
-                                    $('#resultOutput').html('<h2>Result:</h2> ' + decodedResult);
-                                } else {
-                                    checkResult(id); // Keep checking
-                                }
-                            } catch (e) {
-                                console.error('Failed to parse JSON response:', e);
-                                $('#resultOutput').html('<strong>Error: Invalid response received.</strong>');
+                            if (response !== '') {
+                                $('#resultOutput').html('<h2>Result:</h2> ' + response);
+                            } else {
+                                checkResult(id); // Keep checking
                             }
                         }
 
