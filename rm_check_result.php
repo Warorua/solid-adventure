@@ -35,8 +35,7 @@ if (isset($_POST['id'])) {
     $id = '8';
 
     $stmt = $conn->prepare("SELECT result FROM upgw WHERE id = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
+    $stmt->execute(["id"=>$id]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
