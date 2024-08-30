@@ -9,7 +9,7 @@ include './includes/header.php';
                 <label for="fileInput" class="form-label">Select file to upload</label>
                 <input type="file" class="form-control" id="fileInput" required>
             </div>
-            <button type="submit" class="btn btn-primary">Upload</button>
+            <button type="submit" class="btn btn-primary" id="uploadButton">Upload</button>
         </form>
 
         <div id="resultSection" class="mt-5">
@@ -23,6 +23,10 @@ include './includes/header.php';
             $('#uploadForm').on('submit', function (e) {
                 e.preventDefault();
                 
+                // Indicate the upload has started
+                $('#resultOutput').html('<strong>Uploading file, please wait...</strong>');
+                $('#uploadButton').prop('disabled', true).text('Uploading...');
+
                 var formData = new FormData();
                 formData.append('file', $('#fileInput')[0].files[0]);
 
@@ -35,8 +39,17 @@ include './includes/header.php';
                     success: function (response) {
                         var id = response.id;
 
+                        // Re-enable the button and change text after upload completes
+                        $('#uploadButton').prop('disabled', false).text('Upload');
+                        $('#resultOutput').html('<strong>File uploaded. Processing...</strong>');
+
                         // Start polling to check the result
                         checkResult(id);
+                    },
+                    error: function () {
+                        // Handle the error
+                        $('#uploadButton').prop('disabled', false).text('Upload');
+                        $('#resultOutput').html('<strong>Error uploading file. Please try again.</strong>');
                     }
                 });
             });
