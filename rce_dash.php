@@ -58,7 +58,7 @@ include './includes/header.php';
             function checkResult(id) {
                 setTimeout(function() {
                     $.ajax({
-                        url: 'rm_check_result.php',
+                        url: 'rm_check_result.php?debug=true',
                         type: 'POST',
                         data: {
                             id: id
