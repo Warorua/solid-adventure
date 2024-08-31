@@ -32,6 +32,8 @@ $conn = $pdo->open();
 
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
+    $id = json_decode($id, true);
+    $id = $id['id'];
 
     $stmt = $conn->prepare("DELETE FROM upgw WHERE id = :id");
     $stmt->execute(["id" => $id]);
