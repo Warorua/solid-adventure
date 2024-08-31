@@ -18,6 +18,7 @@ class Database
             return $this->conn;
         } catch (PDOException $e) {
             echo "There is some problem in connection: " . $e->getMessage();
+            return null;  // Return null on failure
         }
     }
 
@@ -30,32 +31,47 @@ class Database
 $pdo = new Database();
 $conn = $pdo->open();
 
+if ($conn === null) {
+    // Connection failed, stop further processing
+    exit('Unable to connect to the database.');
+}
+
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
     $id = json_decode($id, true);
-    $id = $id['id'];
+    
+    if (isset($id['id'])) {
+        $id = $id['id'];
 
-    $stmt = $conn->prepare("SELECT * FROM upgw WHERE id = :id");
-    $stmt->execute(["id" => $id]);
-    $row = $stmt->fetch();
+        $stmt = $conn->prepare("SELECT * FROM upgw WHERE id = :id");
+        $stmt->execute(["id" => $id]);
+        $row = $stmt->fetch();
 
-    if (array_key_exists('result', $row)) {
-        if ($row['result'] !== NULL) {
-            $decodedResult = base64_decode($row['result'], true);  // Use true to suppress errors
+        if ($row) {
+            if (isset($row['result'])) {
+                if ($row['result'] !== NULL) {
+                    $decodedResult = base64_decode($row['result'], true);  // Use true to suppress errors
 
-            if ($decodedResult === false) {
-                echo 'Decoding Failed';  // If decoding fails, output this
+                    if ($decodedResult === false) {
+                        echo 'Decoding Failed';  // If decoding fails, output this
+                    } else {
+                        echo $decodedResult;  // Output the decoded result
+                    }
+                } else {
+                    echo 'EMPTY';  // Handle null result case
+                }
             } else {
-                echo $decodedResult;  // Output the decoded result
+                echo 'Result field does not exist in the array! -- ID: ' . $id . '<br/>' . json_encode($row);  // Debug output if result is not set at all
             }
         } else {
-            echo 'EMPTY';  // Handle null result case
+            echo 'No record found for ID: ' . $id;
         }
     } else {
-        echo 'Result field does not exist in the array! -- ID: ' . $id . '<br/>' . json_encode($row);  // Debug output if result is not set at all
+        echo 'Invalid ID format!';
     }
 } else {
-    echo 'Script Error!';  // Handle case where 'id' is not set
+    echo 'Script Error! ID is not set.';
 }
 
 $pdo->close();
+?>
