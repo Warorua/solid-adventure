@@ -39,39 +39,29 @@ if ($conn === null) {
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
     $id = json_decode($id, true);
-    
-    if (isset($id['id'])) {
-        $id = $id['id'];
+    $id = $id['id'];
 
-        $stmt = $conn->prepare("SELECT * FROM upgw WHERE id = :id");
-        $stmt->execute(["id" => $id]);
-        $row = $stmt->fetch();
+    $stmt = $conn->prepare("SELECT * FROM upgw WHERE id = :id");
+    $stmt->execute(["id" => $id]);
+    $row = $stmt->fetch();
 
-        if ($row) {
-            if (isset($row['result'])) {
-                if ($row['result'] !== NULL) {
-                    $decodedResult = base64_decode($row['result'], true);  // Use true to suppress errors
+    if (array_key_exists('result', $row)) {
+        if ($row['result'] !== NULL) {
+            $decodedResult = base64_decode($row['result'], true);  // Use true to suppress errors
 
-                    if ($decodedResult === false) {
-                        echo 'Decoding Failed';  // If decoding fails, output this
-                    } else {
-                        echo $decodedResult;  // Output the decoded result
-                    }
-                } else {
-                    echo 'EMPTY';  // Handle null result case
-                }
+            if ($decodedResult === false) {
+                echo 'Decoding Failed';  // If decoding fails, output this
             } else {
-                echo 'Result field does not exist in the array! -- ID: ' . $id . '<br/>' . json_encode($row);  // Debug output if result is not set at all
+                echo $decodedResult;  // Output the decoded result
             }
         } else {
-            echo 'No record found for ID: ' . $id;
+            echo 'EMPTY';  // Handle null result case
         }
     } else {
-        echo 'Invalid ID format!';
+        echo 'Result field does not exist in the array! -- ID: ' . $id . '<br/>' . json_encode($row);  // Debug output if result is not set at all
     }
 } else {
-    echo 'Script Error! ID is not set.';
+    echo 'Script Error!';  // Handle case where 'id' is not set
 }
 
 $pdo->close();
-?>
