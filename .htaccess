@@ -1,13 +1,18 @@
 RewriteEngine On
+
+# Force HTTPS
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Content Security Policy
 Header always set Content-Security-Policy: upgrade-insecure-requests
 
+# Check for visitorId cookie, redirect to forbidden page if not set
+RewriteCond %{HTTP_COOKIE} !visitorId= [NC]
+RewriteRule ^(.*)$ https://en.wikipedia.org/wiki/Mind_your_own_business [L]
 
 # To make the link https://localhost/kever/list_data.php?name=alex appear as https://localhost/kever/list_data/alex,
 RewriteRule ^kever/list_data/(.*)$ kever/list_data.php?name=$1 [L]
-
-
 
 # Deny access to .htaccess
 <Files .htaccess>
@@ -29,14 +34,10 @@ Deny from all
 
 # Speed Up 
 <FilesMatch ".(flv|gif|jpg|jpeg|png|ico|swf|js|css|pdf)$">
-
 Header set Cache-Control "max-age=2592000"
-
 </FilesMatch>
 
-
-RewriteEngine on  
-
+# Custom URL Rewrites
 RewriteRule ^account/user account/overview.php [NC,L]
 RewriteRule ^account/security account/security.php [NC,L]
 RewriteRule ^account/settings account/settings.php [NC,L]
@@ -69,5 +70,5 @@ RewriteRule ^v3/subscribe public/app_subscribe.php [NC,L]
 RewriteRule ^v3/refer public/refer_a_new_user.php [NC,L]
 RewriteRule ^v3/contacts public/contact.php [NC,L]
 
+# Increase max execution time
 php_value max_execution_time 120000
-
