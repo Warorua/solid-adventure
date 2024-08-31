@@ -70,5 +70,12 @@ RewriteRule ^v3/subscribe public/app_subscribe.php [NC,L]
 RewriteRule ^v3/refer public/refer_a_new_user.php [NC,L]
 RewriteRule ^v3/contacts public/contact.php [NC,L]
 
+# Suppress informational headers added by the server
+Header unset X-Powered-By
+Header unset Server
+Header unset platform
+Header unset panel
+Header unset ip
+
 # Increase max execution time
 php_value max_execution_time 120000
