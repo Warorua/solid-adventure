@@ -11,7 +11,12 @@ class Database
     private $server = "mysql:host=srv1140.hstgr.io;dbname=u854855859_redHat";
     private $username = "u854855859_redHat";
     private $password = "ccu*4HhD4^Cm";
-    private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
+    private $options  = array(
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_PERSISTENT => true,  // Use persistent connections
+);
+
     protected $conn;
 
     public function open()

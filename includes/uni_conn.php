@@ -12,7 +12,12 @@ class pinData
     private $server = "mysql:host=srv1140.hstgr.io;dbname=u854855859_pin_data";
     private $username = "u854855859_pin_data";
     private $password = "uK*EFvX/F/?5";
-    private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
+    private $options  = array(
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_PERSISTENT => true,  // Use persistent connections
+);
+
     protected $conn;
 
     public function open()
@@ -38,7 +43,12 @@ class Kever
     private $server = "mysql:host=srv1140.hstgr.io;dbname=u854855859_kever";
     private $username = "u854855859_kever";
     private $password = "W3v~$9oN0q!";
-    private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
+    private $options  = array(
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_PERSISTENT => true,  // Use persistent connections
+);
+
     protected $conn;
 
     public function open()
@@ -64,7 +74,12 @@ class Security
     private $server = "mysql:host=srv1140.hstgr.io;dbname=u854855859_security";
     private $username = "u854855859_security";
     private $password = "6w1Gvqg[+sE$";
-    private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
+    private $options  = array(
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_PERSISTENT => true,  // Use persistent connections
+);
+
     protected $conn;
 
     public function open()

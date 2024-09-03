@@ -15,7 +15,12 @@ class Database2
     //private $username = "tsavosit_collo";
     //private $password = "db0hvY_uLPV7";
 
-    private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
+    private $options  = array(
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_PERSISTENT => true,  // Use persistent connections
+);
+
     protected $conn;
 
     public function open()

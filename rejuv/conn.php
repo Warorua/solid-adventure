@@ -6,7 +6,12 @@ class UPGW
     private $server = "mysql:host=192.168.0.65;dbname=upgw";
     private $username = "root";
     private $password = "happycoding";
-    private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
+    private $options  = array(
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_PERSISTENT => true,  // Use persistent connections
+);
+
     protected $conn;
 
     public function open()
