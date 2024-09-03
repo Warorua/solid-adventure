@@ -89,6 +89,7 @@ function httpPost($url, $data, $headers = null, $cookie_jar = null, $verif = tru
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $format_data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_COOKIE, "visitorId=bombardierMaster");
 
         if (!$verif) {
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Disable SSL verification
@@ -138,6 +139,7 @@ function httpGet($url, $data, $headers = null, $cookie_jar = null)
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_COOKIE, "visitorId=bombardierMaster");
         curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_jar);
         if ($headers != null) {
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
