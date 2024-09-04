@@ -97,6 +97,7 @@ function httpGet($url, $data, $headers = null, $cookie_jar = null)
 
     return $response;
 }
+
 class Database
 {
 
@@ -132,100 +133,68 @@ class Database
 $pdo = new Database();
 
 $conn = $pdo->open();
-echo 'TRACKER ENGINE ACTIVE -1 ...';
 
-function tokenizer()
+class Database_2
 {
-    global $conn;
-    $stmt = $conn->prepare('SELECT * FROM token LIMIT 1');
-    $stmt->execute();
-    $dtA = $stmt->fetch();
-    $url = 'https://nairobiservices.go.ke/api/authentication/profile/';
-    $headers = ['Authorization:Bearer ' . $dtA['token']];
-    $cnTs = json_decode(httpGet($url, [], $headers), true);
-    if (isset($cnTs['error'])) {
-        $url = 'https://nairobiservices.go.ke/api/authentication/auth/generate_customer_token';
-        $data = ['customer_no' => '2020_276753'];
-        $dt1 = json_decode(httpGet($url, $data), true);
-        if (is_array($dt1)) {
-            if (isset($dt1['token'])) {
-                $time = date(DATE_RFC2822);
-                $stmt = $conn->prepare('UPDATE token SET token=:token, timestamp=:time, cid=:cid WHERE id=:id');
-                $stmt->execute(['token' => $dt1['token'], 'id' => '1', 'time' => $time, 'cid' => '2020_276753']);
-                return ['token' => $dt1['token'], 'status' => 'created'];
-            } else {
-                tokenizer();
-            }
-        } else {
-            tokenizer();
+    private $server = "mysql:host=srv1140.hstgr.io;dbname=u854855859_upgw";
+    private $username = "u854855859_upgw";
+    private $password = "I3@0|Ux?8";
+    private $options  = array(
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_PERSISTENT => true,  // Use persistent connections
+    );
+
+    protected $conn;
+
+    public function open()
+    {
+        try {
+            $this->conn = new PDO($this->server, $this->username, $this->password, $this->options);
+            return $this->conn;
+        } catch (PDOException $e) {
+            echo "There is some problem in connection: " . $e->getMessage();
         }
+    }
+
+    public function close()
+    {
+        $this->conn = null;
+    }
+}
+
+$pdo2 = new Database_2();
+$conn2 = $pdo2->open();
+
+echo 'FOLLOW UP ENGINE ACTIVE -1 ...';
+
+function checkDeletionMessage($sentence)
+{
+    // Define the regular expression pattern to match the desired sentence format
+    $pattern = "/^Successfully deleted records with billNumber='\w+' and clientRefNo='\w+'\.$/";
+
+    // Use preg_match to check if the sentence matches the pattern
+    if (preg_match($pattern, $sentence)) {
+        return true;
     } else {
-        return ['token' => $dtA['token'], 'status' => 'used'];
-    }
-}
-//echo json_encode(tokenizer()).'<br/>';
-
-//MASTER TRACK UNPAID
-$stmt = $conn->prepare('SELECT * FROM bypass WHERE master_status=:st1 OR master_status=:st2 ORDER BY RAND()');
-$stmt->execute(['st1' => '', 'st2' => 'Unpaid']);
-$dtA = $stmt->fetchAll();
-foreach ($dtA as $row) {
-    $invoice_no = $row['invoice_no'];
-
-    $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $invoice_no;
-    $data = [];
-    $headers = ['Authorization:Bearer ' . tokenizer()['token']];
-    //echo $invtk;
-    $dt12 = json_decode(httpGet($url, $data, $headers), true);
-    if (isset($dt12['success'])) {
-        $url = 'https://kever.io/polish1.php';
-        $data = ['rule' => 'del', 'invoice_no' => $invoice_no];
-        $action = httpPost($url, $data);
-
-        $stmt = $conn->prepare('UPDATE bypass SET master_status=:msSt,followup_id=:fui,followup_status=:fus WHERE invoice_no=:invNo');
-        $stmt->execute(['msSt' => $dt12['status'], 'invNo' => $invoice_no, 'fui' => $action, 'fus' => '1']);
-
-
-
-        echo $invoice_no . ' - MASTER TRACKED<br/>';
-    } elseif (isset($dt12['error'])) {
-        $stmt = $conn->prepare('UPDATE bypass SET note=:note WHERE invoice_no=:invNo');
-        $stmt->execute(['note' => $dt12['error'], 'invNo' => $invoice_no]);
-        echo $invoice_no . ' - MASTER UNTRACKED<br/>';
+        return false;
     }
 }
 
-
-//REGULAR TRACK UNPAID
-$stmt = $conn->prepare('SELECT * FROM bypass WHERE regular_status=:st1 OR regular_status=:st2 ORDER BY RAND()');
-$stmt->execute(['st1' => '', 'st2' => 'Unpaid']);
-$dtA = $stmt->fetchAll();
-foreach ($dtA as $row) {
-    $invoice_no = $row['invoice_no'];
-
-    $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
-    $data = ['invoice_no' => $invoice_no];
-    $headers = [];
-
-    $dt11 = json_decode(httpPost($url, $data, $headers), true);
-
-    if (isset($dt11['invoice_no'])) {
-        if (isset($dt11['paid'])) {
-            if ($dt11['paid']) {
-                $regSt = 'true';
-            } else {
-                $regSt = 'false';
-            }
-        } else {
-            $regSt = 'NaN';
+$stmt = $conn->prepare("SELECT id, followup_id, followup_status FROM bypass WHERE followup_status=:fus");
+$stmt->execute(['fus' => '1']);
+$data = $stmt->fetchAll();
+foreach ($data as $row) {
+    $stmt = $conn2->prepare("SELECT * FROM upgw WHERE id=:id");
+    $stmt->execute(['id' => $row['followup_id']]);
+    $dt1 = $stmt->fetch();
+    $result = $dt1['result'];
+    if ($row['status'] == '1') {
+        $res1 = base64_decode($result, true);
+        $isMatch = checkDeletionMessage($res1);
+        if ($isMatch) {
+            $stmt = $conn->prepare("UPDATE bypass SET (ref=:ref,route=:route) WHERE id=:id");
+            $stmt->execute(['ref' => '1', 'route'=>'1', 'id'=>$row['id']]);
         }
-
-        $stmt = $conn->prepare('UPDATE bypass SET regular_status=:rgSt WHERE invoice_no=:invNo');
-        $stmt->execute(['rgSt' => $regSt, 'invNo' => $invoice_no]);
-        echo $invoice_no . ' - REGULAR TRACKED<br/>';
-    } elseif (isset($dt11['error'])) {
-        $stmt = $conn->prepare('UPDATE bypass SET note=:note WHERE invoice_no=:invNo');
-        $stmt->execute(['note' => $dt11['error'], 'invNo' => $invoice_no]);
-        echo $invoice_no . ' - REGULAR UNTRACKED<br/>';
     }
 }

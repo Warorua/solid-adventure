@@ -7,10 +7,10 @@ class AutoConn
     private $username = "u854855859_auto_kever";
     private $password = "C#XQPoH*2q";
     private $options  = array(
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_PERSISTENT => true,  // Use persistent connections
-);
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_PERSISTENT => true,  // Use persistent connections
+    );
 
     protected $conn;
 

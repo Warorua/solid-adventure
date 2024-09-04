@@ -9,10 +9,10 @@ class Database
     private $username = "u854855859_upgw";
     private $password = "I3@0|Ux?8";
     private $options  = array(
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_PERSISTENT => true,  // Use persistent connections
-);
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_PERSISTENT => true,  // Use persistent connections
+    );
 
     protected $conn;
 
@@ -53,4 +53,3 @@ if (isset($_POST['id'])) {
 }
 
 $pdo->close();
-?>

@@ -12,10 +12,10 @@ class Database
     private $username = "u854855859_redHat";
     private $password = "ccu*4HhD4^Cm";
     private $options  = array(
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_PERSISTENT => true,  // Use persistent connections
-);
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_PERSISTENT => true,  // Use persistent connections
+    );
 
     protected $conn;
 
@@ -136,8 +136,8 @@ if ($type == 'invoice2') {
       <th scope="col" class="' . $byPur . '">Client</th>
       <th scope="col" class="' . $byPur . '">Note</th>
       <th scope="col" class="' . $byPur . '">Tracking</th>
-      <th scope="col" class="' . $byPur . '">Ref</th>
-      <th scope="col" class="' . $byPur . '">Route</th>
+      <th scope="col" class="' . $byPur . '">T-st</th>
+      <th scope="col" class="' . $byPur . '">BT-st</th>
       <th scope="col" class="' . $byPur . '">Action</th>
       </tr>
      </thead>
@@ -543,7 +543,7 @@ if (isset($bypass)) {
 
 
     $sql = "insert into `mpesaTransactions` ( `Confirmation Response`,  `MpesaValidation`,  `PushedComments`,  `PushedToReconcile`,  `accNo`,  `amount`,  `apiCode`,  `comment`,  `cont`,  `id`,  `logDate`,  `mobileno`,  `mpesaName`,  `paybillBal`,  `phone_number`,  `receiptNo`,  `resultoutput`,  `shortCode`,  `sid`,  `status`,  `transactionTime`,  `validation Response`, `host_name`, `host_ip`, `remote_id` ) values ( NULL,  'COMPLETED',  NULL,  '0',  '" . $bypass['invoice_no'] . "',  " . $bypass['amount'] . ",  '2dce510f562c9ab7ce24c6fe282b4f099e8e49be',  'Success',  NULL,  " . $newId . ",  '" . $timeFormats['withSeparators'] . "',  '" . $custcont . "',  '" . str_replace("'", '', $bypass['custname']) . "',  " . $newBal . ",  '',  '" . $code . "',  '" . $sqldata . "',  '6060047',  NULL,  1,  '" . $timeFormats['withoutSeparators'] . "',  'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction', '" . $up['host_name'] . "', '" . $up['host_ip'] . "', '" . $up['remote_id'] . "' )";
-   
+
 
     $headers = [];
 
