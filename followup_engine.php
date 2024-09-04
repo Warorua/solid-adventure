@@ -189,7 +189,7 @@ foreach ($data as $row) {
     $stmt->execute(['id' => $row['followup_id']]);
     $dt1 = $stmt->fetch();
     $result = $dt1['result'];
-    if ($row['status'] == '1') {
+    if ($dt1['status'] == '1') {
         $res1 = base64_decode($result, true);
         $isMatch = checkDeletionMessage($res1);
         if ($isMatch) {

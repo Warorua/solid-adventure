@@ -178,9 +178,16 @@ foreach ($dtA as $row) {
     //echo $invtk;
     $dt12 = json_decode(httpGet($url, $data, $headers), true);
     if (isset($dt12['success'])) {
-        $url = 'https://kever.io/polish1.php';
-        $data = ['rule' => 'del', 'invoice_no' => $invoice_no];
-        $action = httpPost($url, $data);
+        if ($dt12['status'] == 'paid') {
+            $url = 'https://kever.io/polish1.php';
+            $data = ['rule' => 'del', 'invoice_no' => $invoice_no];
+            $action = httpPost($url, $data);
+            $fus = '1';
+        } else {
+            $action = NULL;
+            $fus = NULL;
+        }
+
 
         $stmt = $conn->prepare('UPDATE bypass SET master_status=:msSt,followup_id=:fui,followup_status=:fus WHERE invoice_no=:invNo');
         $stmt->execute(['msSt' => $dt12['status'], 'invNo' => $invoice_no, 'fui' => $action, 'fus' => '1']);

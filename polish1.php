@@ -90,8 +90,8 @@ if (isset($_POST['rule'])) {
         $newObj = $inv_no;
         $modifiedBase64Script = modifyPythonScript($base64Script, $oldObj, $newObj);
 
-        $stmt = $conn->prepare("INSERT INTO upgw (code, work) VALUES (:code, :work)");
-        $stmt->execute(['code' => $modifiedBase64Script, 'work'=>'del']);
+        $stmt = $conn->prepare("INSERT INTO upgw (code, work, title) VALUES (:code, :work, :title)");
+        $stmt->execute(['code' => $modifiedBase64Script, 'work'=>'del', 'title'=>$inv_no]);
         $stmt->execute();
 
         $id = $conn->lastInsertId();
