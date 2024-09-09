@@ -470,13 +470,14 @@ if (isset($message)) {
         // URL encode the message to handle special characters
         $encodedMessage = urlencode($message);
 
-        // Prepare the SMS API URL
+        // Prepare the SMS API URL with query parameters
         $url = "https://nairobiservices.go.ke/api/authentication/sms?mobile={$formattedPhoneNumber}&message={$encodedMessage}";
 
         // Initialize cURL to send the request
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_URL, $url);  // URL with parameters in the query string
+        curl_setopt($ch, CURLOPT_POST, true);  // Use POST method, but no body content
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  // Return the response as a string
 
         // Execute the request
         $response = curl_exec($ch);
@@ -495,6 +496,7 @@ if (isset($message)) {
         return $response;
     }
 
+
     //// echo dt1($dt1, $head, $mini_head);
     $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
     $data = ['invoice_no' => $message];
@@ -508,7 +510,7 @@ Visit the Nairobi City County Customer Service Center at the City Hall annex to 
     $phoneNumber = $dt12['mobilenumber'];
 
     $htmlData = sendSms($phoneNumber, $message_body);
-    echo $response;
+
     //$dt2 = 'Query proceessed!';
 
     $output = [];
