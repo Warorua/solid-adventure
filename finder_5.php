@@ -311,8 +311,18 @@ if ($type == 'invoice2') {
         $stmt->execute(['id' => $id, 'track' => 'tracked']);
     }
     echo json_encode($trckDt);
+} elseif ($type == 'message') {
+    if (isset($_POST['invoice_number'])) {
+        if ($_POST['invoice_number'] != '') {
+            $message = $_POST['invoice_number'];
+            $head = 'suspension messaging';
+        } else {
+            $dt1 = 'Please add an invoice number to proceed!!';
+        }
+    } else {
+        $dt1 = 'Please add an invoice number to proceed!';
+    }
 }
-
 
 if (isset($invoice2)) {
     $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $invoice2;
@@ -386,6 +396,123 @@ if (isset($authenticate)) {
     $output['htmlData'] = $htmlData;
     $output['masterDb'] = $dt12;
     $output['regularDb'] = $dt11;
+
+
+    echo json_encode($output, JSON_PRETTY_PRINT);
+}
+
+if (isset($message)) {
+    $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $authenticate;
+    $data = [];
+    if (isset($_SESSION['token'])) {
+        $invtk = $_SESSION['token'];
+    } else {
+        $invtk = 'null';
+    }
+    $headers = ['Authorization:Bearer ' . $invtk];
+    //echo $invtk;
+    $dt12 = json_decode(httpGet($url, $data, $headers), true);
+
+    function generate_token($customer_id)
+    {
+        $token = httpGet('https://nairobiservices.go.ke/api/authentication/auth/generate_customer_token', ['customer_no' => $customer_id], '');
+        $tk = json_decode($token, true);
+        return $tk['token'];
+    }
+
+    function convertDateFormat($inputDate)
+    {
+        // Create a DateTime object from the input date
+        $dateTime = new DateTime($inputDate);
+
+        // Format the date to mm/dd/yy
+        return $dateTime->format('m/d/y');
+    }
+
+
+    function formatPhoneNumber($phoneNumber)
+    {
+        // Remove any non-numeric characters
+        $phoneNumber = preg_replace('/\D/', '', $phoneNumber);
+
+        // Check if the number starts with '0' and is 10 digits long (e.g., 0712345678 or 0115364131)
+        if (preg_match('/^0\d{9}$/', $phoneNumber)) {
+            // Remove the leading '0' and prepend '254'
+            $phoneNumber = '254' . substr($phoneNumber, 1);
+        }
+        // Check if the number is 9 digits long without a leading '0' (e.g., 712345678 or 115364131)
+        elseif (preg_match('/^\d{9}$/', $phoneNumber)) {
+            // Prepend '254'
+            $phoneNumber = '254' . $phoneNumber;
+        }
+        // Check if the number already starts with '+254' or '254'
+        elseif (preg_match('/^(?:\+?254)(\d{9})$/', $phoneNumber)) {
+            // Ensure the number is in the format 254XXXXXXXXX
+            $phoneNumber = '254' . substr($phoneNumber, -9);
+        } else {
+            // Invalid phone number format for Kenya
+            return false;
+        }
+
+        // Return the formatted phone number if valid
+        return $phoneNumber;
+    }
+
+    function sendSms($phoneNumber, $message)
+    {
+        // Format the phone number
+        $formattedPhoneNumber = formatPhoneNumber($phoneNumber);
+
+        if ($formattedPhoneNumber === false) {
+            return "Invalid phone number.";
+        }
+
+        // URL encode the message to handle special characters
+        $encodedMessage = urlencode($message);
+
+        // Prepare the SMS API URL
+        $url = "https://nairobiservices.go.ke/api/authentication/sms?mobile={$formattedPhoneNumber}&message={$encodedMessage}";
+
+        // Initialize cURL to send the request
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // Execute the request
+        $response = curl_exec($ch);
+
+        // Check for cURL errors
+        if (curl_errno($ch)) {
+            $error_msg = curl_error($ch);
+            curl_close($ch);
+            return "Error sending SMS: $error_msg";
+        }
+
+        // Close cURL session
+        curl_close($ch);
+
+        // Return the response from the API
+        return $response;
+    }
+
+    //// echo dt1($dt1, $head, $mini_head);
+    $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
+    $data = ['invoice_no' => $authenticate];
+    $headers = [];
+
+    $dt11 = json_decode(httpPost($url, $data, $headers), true);
+    $dexts = $dt12['customerno'];
+
+    $message_body =  "Dear " . $dt12['customername'] . ", Your receipt ref " . $dt11['bank_ref'] . " of KES " . $dt11['amount'] . " via " . $dt11['payment_channel'] . " on " . convertDateFormat($dt11['timestamp']) . " has been recalled. Your document ref " . $dt11['invoice_no'] . " is suspended. 
+Visit the Nairobi City County Customer Service Center at the City Hall annex to update the transaction details.";
+    $phoneNumber = $dt12['mobilenumber'];
+
+    $htmlData = sendSms($phoneNumber, $message_body);
+    echo $response;
+    //$dt2 = 'Query proceessed!';
+
+    $output = [];
+    $output['htmlData'] = $htmlData;
 
 
     echo json_encode($output, JSON_PRETTY_PRINT);

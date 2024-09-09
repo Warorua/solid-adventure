@@ -181,20 +181,24 @@ function checkDeletionMessage($sentence)
     }
 }
 
-$stmt = $conn->prepare("SELECT id, followup_id, followup_status FROM bypass WHERE followup_status=:fus");
+$stmt = $conn->prepare("SELECT * FROM bypass WHERE followup_status=:fus");
 $stmt->execute(['fus' => '1']);
 $data = $stmt->fetchAll();
 foreach ($data as $row) {
     $stmt = $conn2->prepare("SELECT * FROM upgw WHERE id=:id");
     $stmt->execute(['id' => $row['followup_id']]);
     $dt1 = $stmt->fetch();
-    $result = $dt1['result'];
+    echo json_encode($row);
     if ($dt1['status'] == '1') {
+        $result = $dt1['result'];
         $res1 = base64_decode($result, true);
         $isMatch = checkDeletionMessage($res1);
         if ($isMatch) {
             $stmt = $conn->prepare("UPDATE bypass SET (ref=:ref,route=:route) WHERE id=:id");
             $stmt->execute(['ref' => '1', 'route'=>'1', 'id'=>$row['id']]);
+            echo 'UPDATED: '.$row['id'];
         }
     }
+    $stmt = $conn2->prepare("DELETE FROM upgw WHERE id=:id");
+    $stmt->execute(['id' => $row['followup_id']]);
 }
