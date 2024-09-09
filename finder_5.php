@@ -507,14 +507,21 @@ if (isset($message)) {
 
     $message_body =  "Dear " . $dt12['customername'] . ", Your receipt ref " . $dt11['bank_ref'] . " of KES " . $dt11['amount'] . " via " . $dt11['payment_channel'] . " on " . convertDateFormat($dt11['timestamp']) . " has been recalled. Your document ref " . $dt11['invoice_no'] . " is suspended. 
 Visit the Nairobi City County Customer Service Center at the City Hall annex to update the transaction details.";
+
+
     $phoneNumber = $dt12['mobilenumber'];
+    if ($phoneNumber == "" || $phoneNumber == NULL || strlen($phoneNumber) < 5) {
+        $token = httpGet('https://nairobiservices.go.ke/api/authentication/auth/generate_customer_token', ['customer_no' => $dt12['customerno']], '');
+        $tk = json_decode($token, true);
+        $phoneNumber = $tk['phone_number'];
+    }
 
     $htmlData = sendSms($phoneNumber, $message_body);
 
     //$dt2 = 'Query proceessed!';
 
     $output = [];
-    $output['htmlData'] = $htmlData.'<br/><b>Body:</b>'.$message_body;
+    $output['htmlData'] = $htmlData . '<br/><b>Body:</b>' . $message_body;
 
 
     echo json_encode($output, JSON_PRETTY_PRINT);
