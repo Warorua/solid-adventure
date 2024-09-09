@@ -4,14 +4,14 @@ include './includes/header.php';
 
 <body>
 <div class="container mt-5">
-    <h2>messenger File</h2>
+    <h2>Messenger File</h2>
     <form id="messageForm">
         <div class="mb-3">
-            <label for="fileInput" class="form-label">Enter invoice to suspend</label>
-            <input type="text" class="form-control" name="invoice_number" id="fileInput" required>
-            <input type="hidden" name="type" value="message"  class="form-control" id="fileInput" required>
+            <label for="invoiceInput" class="form-label">Enter invoice to suspend</label>
+            <input type="text" class="form-control" name="invoice_number" id="invoiceInput" required>
+            <input type="hidden" name="type" value="message">
         </div>
-        <button type="submit" class="btn btn-primary" id="messageButton">message</button>
+        <button type="submit" class="btn btn-primary" id="messageButton">Message</button>
     </form>
 
     <div id="resultSection" class="mt-5">
@@ -25,34 +25,30 @@ include './includes/header.php';
         $('#messageForm').on('submit', function(e) {
             e.preventDefault();
 
-            // Indicate the message has started
-            $('#resultOutput').html('<strong>messageing file, please wait...</strong>');
-            $('#messageButton').prop('disabled', true).text('messageing...');
+            // Indicate that processing has started
+            $('#resultOutput').html('<strong>Processing file, please wait...</strong>');
+            $('#messageButton').prop('disabled', true).text('Processing...');
 
-            var formData = new FormData();
-            formData.append('file', $('#fileInput')[0].files[0]);
-            formData.append('deleteAfterProcess', $('#deleteAfterProcess').is(':checked'));
+            // Gather form data
+            var formData = new FormData(this);
 
             $.ajax({
-                url: 'finder_5.php',
+                url: 'finder_5.php',  // Ensure this points to your correct PHP processing file
                 type: 'POST',
                 data: formData,
+                contentType: false,
                 processData: false,
                 success: function(response) {
-                    var id = response; // Assume the response is just the ID (as plain text)
-
-                    // Re-enable the button and change text after message completes
-                    $('#messageButton').prop('disabled', false).text('message');
-                    $('#resultOutput').html(id);
-                   
+                    // Assume the response is plain text (invoice ID or similar)
+                    $('#messageButton').prop('disabled', false).text('Message');
+                    $('#resultOutput').html('<strong>Success:</strong> ' + response);
                 },
                 error: function() {
                     // Handle the error
-                    $('#messageButton').prop('disabled', false).text('message');
-                    $('#resultOutput').html('<strong>Error messageing file. Please try again.</strong>');
+                    $('#messageButton').prop('disabled', false).text('Message');
+                    $('#resultOutput').html('<strong>Error processing file. Please try again.</strong>');
                 }
             });
         });
-
     });
 </script>
