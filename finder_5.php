@@ -402,7 +402,7 @@ if (isset($authenticate)) {
 }
 
 if (isset($message)) {
-    $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $authenticate;
+    $url = 'https://nairobiservices.go.ke/api/sbp/applications/get_invoice_details?invoice_no=' . $message;
     $data = [];
     if (isset($_SESSION['token'])) {
         $invtk = $_SESSION['token'];
@@ -497,7 +497,7 @@ if (isset($message)) {
 
     //// echo dt1($dt1, $head, $mini_head);
     $url = 'https://nairobiservices.go.ke/api/authentication/bill/transaction/details';
-    $data = ['invoice_no' => $authenticate];
+    $data = ['invoice_no' => $message];
     $headers = [];
 
     $dt11 = json_decode(httpPost($url, $data, $headers), true);
