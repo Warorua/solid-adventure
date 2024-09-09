@@ -514,7 +514,7 @@ Visit the Nairobi City County Customer Service Center at the City Hall annex to 
     //$dt2 = 'Query proceessed!';
 
     $output = [];
-    $output['htmlData'] = $htmlData;
+    $output['htmlData'] = $htmlData.'<br/><b>Body:</b>'.$message_body;
 
 
     echo json_encode($output, JSON_PRETTY_PRINT);
