@@ -190,7 +190,7 @@ function get_external_doc($invoice, $token)
 
 //MASTER TRACK UNPAID
 $stmt = $conn->prepare("SELECT * FROM bypass WHERE master_status=:st2 AND invoice_no LIKE '%UBP%' AND cert_status != :crtSt ORDER BY RAND() LIMIT 3");
-$stmt->execute(['st2' => 'paid','crtSt'=>5]);
+$stmt->execute(['st2' => 'paid', 'crtSt' => 5]);
 $dtA = $stmt->fetchAll();
 foreach ($dtA as $row) {
     $invoice_no = $row['invoice_no'];
@@ -222,34 +222,25 @@ foreach ($dtA as $row) {
 
             if (isset($dt1['error'])) {
                 $dt1 = json_encode($dt1);
+                $cert_status = NULL;
+                $cert_obj = NULL;
             } elseif (isset($dt1['success'])) {
                 if (isset($dt1['UBP_Register'])) {
                     foreach ($dt1['UBP_Register'] as $row2) {
                         if ($row2['ubp_no'] == $external_doc) {
-                            $cert_status = $row['cert_status']+1;
+                            $cert_status = $row['cert_status'] + 1;
                             $cert_obj = base64_encode(json_encode($row2));
                         }
                     }
                 }
             }
             // echo dt1($dt1, $head, $mini_head);
-        } else {
-            $action = NULL;
-            $fus = NULL;
+            
+
+            $stmt = $conn->prepare('UPDATE bypass SET extdoc=:extdoc, cert_status=:cert_status, cert_obj=:cert_obj WHERE invoice_no=:invNo');
+            $stmt->execute(['invNo' => $invoice_no, 'extdoc' => $external_doc, 'cert_status' => $cert_status, 'cert_obj' => $cert_obj]);
+
+            echo $invoice_no . ' - MASTER TRACKED - ' . $cert_status . '<br/>';
         }
-
-        if (!isset($cert_status)) {
-            $cert_status = NULL;
-            $cert_obj = NULL;
-        }
-
-        $stmt = $conn->prepare('UPDATE bypass SET extdoc=:extdoc, cert_status=:cert_status, cert_obj=:cert_obj WHERE invoice_no=:invNo');
-        $stmt->execute(['invNo' => $invoice_no, 'extdoc' => $external_doc, 'cert_status' => $cert_status, 'cert_obj'=>$cert_obj]);
-
-        echo $invoice_no . ' - MASTER TRACKED - '.$cert_status.'<br/>';
-    } elseif (isset($dt12['error'])) {
-        $stmt = $conn->prepare('UPDATE bypass SET note=:note WHERE invoice_no=:invNo');
-        $stmt->execute(['note' => $dt12['error'], 'invNo' => $invoice_no]);
-        echo $invoice_no . ' - MASTER UNTRACKED<br/>';
-    }
+    } 
 }
