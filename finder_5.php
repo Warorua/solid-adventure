@@ -187,16 +187,16 @@ if ($type == 'invoice2') {
         $inv_mon = explode('-', strtoupper($row['invoice_no']));
         if ($inv_mon[1] == 'UBP') {
             if ($row['cert_status'] >= 5) {
-                $cert_stt = '<div class="badge text-bg-success">AFFIRMED</div>';
-            } elseif($row['cert_status'] >= 1) {
-                $cert_stt = '<div class="badge text-bg-primary">GENERATED '.$row['cert_status'].'</div>';
-            }else {
+                $cert_stt = '<div class="btn btn-success open-modal" data-id="' . $row['id'] . '">AFFIRMED</div>';
+            } elseif ($row['cert_status'] >= 1) {
+                $cert_stt = '<div class="btn btn-primary open-modal" data-id="' . $row['id'] . '">GENERATED ' . $row['cert_status'] . '</div>';
+            } else {
                 $cert_stt = '<div class="badge text-bg-danger">NULL</div>';
             }
         } else {
             $cert_stt = '<div class="badge text-bg-secondary">--NA--</div>';
         }
-        
+
 
         $queryRes .= '
         <tr>
@@ -335,6 +335,16 @@ if ($type == 'invoice2') {
         }
     } else {
         $dt1 = 'Please add an invoice number to proceed!';
+    }
+} elseif ($type == 'cert_obj') {
+    if (isset($_POST['id'])) {
+        $bypass_id = $_POST['id'];
+        $stmt = $conn->prepare('SELECT cert_obj FROM bypass WHERE id=:id');
+        $stmt->execute(['id' => $bypass_id]);
+        $bypass_cert_obj = $stmt->fetch();
+        echo $bypass_cert_obj['cert_obj'];
+    } else {
+        $dt1 = 'Wrong protocol!';
     }
 }
 

@@ -96,9 +96,53 @@ include './includes/header.php';
     <div class="mt-6 col-md-12" id="rest"></div>
 </div>
 
+<!-- Modal Structure -->
+<div class="modal fade" id="dataModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Decoded Base64 Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="decodedData">Loading...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.js" integrity="sha512-ePtegHW811NTnZd0Er1UxtBb8dizKEdSzANYy/UhxM40FC2yCWwb1CQrj03BPbrs6XdUkcHuyVn9Xq9q0Lm34g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    $(document).ready(function() {
+        // Handle the modal button click event
+        $('.open-modal').on('click', function() {
+            var id = $(this).data('id'); // Get the ID from the button's data attribute
+            
+            // Show the modal
+            var modal = new bootstrap.Modal(document.getElementById('dataModal'));
+            modal.show();
+
+            // Fetch the base64 content from the server
+            $.ajax({
+                url: './finder_5.php', // The server script to fetch base64 data
+                method: 'POST',
+                data: { id: id, type: 'cert_obj'},
+                success: function(response) {
+                    // Decode the base64 response and display it in the modal
+                    var decodedData = atob(response); // Decode base64 to string
+                    $('#decodedData').text(decodedData); // Display the decoded data in modal
+                },
+                error: function() {
+                    $('#decodedData').text('Error fetching data.'); // Handle errors
+                }
+            });
+        });
+    });
+
     new ClipboardJS('#trackCopy');
 
     $(document).on('submit', '#keverB', function(e) {
