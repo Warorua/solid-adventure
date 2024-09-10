@@ -189,8 +189,8 @@ function get_external_doc($invoice, $token)
 //echo json_encode(tokenizer()).'<br/>';
 
 //MASTER TRACK UNPAID
-$stmt = $conn->prepare("SELECT * FROM bypass WHERE master_status=:st2 AND invoice_no LIKE '%UBP%' AND cert_status IS NULL ORDER BY RAND() LIMIT 3");
-$stmt->execute(['st2' => 'paid']);
+$stmt = $conn->prepare("SELECT * FROM bypass WHERE master_status=:st2 AND invoice_no LIKE '%UBP%' AND cert_status != :crtSt ORDER BY RAND() LIMIT 3");
+$stmt->execute(['st2' => 'paid','crtSt'=>5]);
 $dtA = $stmt->fetchAll();
 foreach ($dtA as $row) {
     $invoice_no = $row['invoice_no'];
@@ -226,7 +226,7 @@ foreach ($dtA as $row) {
                 if (isset($dt1['UBP_Register'])) {
                     foreach ($dt1['UBP_Register'] as $row2) {
                         if ($row2['ubp_no'] == $external_doc) {
-                            $cert_status = 'ACTIVE';
+                            $cert_status = $row['invoice_no']+1;
                         }
                     }
                 }

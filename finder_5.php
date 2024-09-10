@@ -186,9 +186,11 @@ if ($type == 'invoice2') {
 
         $inv_mon = explode('-', strtoupper($row['invoice_no']));
         if ($inv_mon[1] == 'UBP') {
-            if ($row['cert_status'] == 'ACTIVE') {
-                $cert_stt = '<div class="badge text-bg-success">GENERATED</div>';
-            } else {
+            if ($row['cert_status'] >= 5) {
+                $cert_stt = '<div class="badge text-bg-success">AFFIRMED</div>';
+            } elseif($row['cert_status'] >= 1) {
+                $cert_stt = '<div class="badge text-bg-primary">GENERATED '.$row['cert_status'].'</div>';
+            }else {
                 $cert_stt = '<div class="badge text-bg-danger">NULL</div>';
             }
         } else {
