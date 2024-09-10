@@ -98,13 +98,13 @@ include './includes/header.php';
 
 <!-- Modal Structure -->
 <div class="modal fade" id="dataModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable"> <!-- Added scrollable class -->
+    <div class="modal-dialog modal-lg modal-dialog-scrollable"> <!-- Added large modal class -->
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalLabel">Decoded Base64 Data</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="max-height: 400px; overflow-y: auto;"> <!-- Ensure scroll and max-height -->
+            <div class="modal-body" style="max-height: 600px; overflow-y: auto;"> <!-- Adjusted max-height -->
                 <p id="decodedData">Loading...</p>
             </div>
             <div class="modal-footer">
@@ -113,6 +113,7 @@ include './includes/header.php';
         </div>
     </div>
 </div>
+
 
 
 </div>
