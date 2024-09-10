@@ -137,7 +137,7 @@ if ($type == 'invoice2') {
       <th scope="col" class="' . $byPur . '">Note</th>
       <th scope="col" class="' . $byPur . '">Tracking</th>
       <th scope="col" class="' . $byPur . '">T-st</th>
-      <th scope="col" class="' . $byPur . '">BT-st</th>
+      <th scope="col">Cert</th>
       <th scope="col" class="' . $byPur . '">Action</th>
       </tr>
      </thead>
@@ -195,7 +195,7 @@ if ($type == 'invoice2') {
           <td class="' . $byPur . '">' . $row['note'] . '</td>
           <td class="' . $byPur . '">' . $trSt . '</td>
           <td class="' . $byPur . '">' . $row['ref'] . '</td>
-          <td class="' . $byPur . '">' . $row['route'] . '</td>
+          <td>' . $row['cert_status'] . '</td>
           <td class="' . $byPur . '"><button type="button" class="btn btn-info"  id="trackButton' . $row['id'] . '" onclick="' . $trckFn . '" ' . $trBtn . '>' . $trBtnTxt . '</button></td>
         </tr>
             ';
