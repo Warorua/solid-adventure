@@ -96,6 +96,8 @@ include './includes/header.php';
     <div class="mt-6 col-md-12" id="rest"></div>
 </div>
 
+</div>
+
 <!-- Modal Structure -->
 <div class="modal fade" id="dataModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable"> <!-- Added large modal class -->
@@ -114,9 +116,6 @@ include './includes/header.php';
     </div>
 </div>
 
-
-
-</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.js" integrity="sha512-ePtegHW811NTnZd0Er1UxtBb8dizKEdSzANYy/UhxM40FC2yCWwb1CQrj03BPbrs6XdUkcHuyVn9Xq9q0Lm34g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
   
