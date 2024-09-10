@@ -220,10 +220,11 @@ foreach ($dtA as $row) {
 
             $dt1 = json_decode(httpGet($url, $data, $headers), true);
 
+            $cert_status = NULL;
+            $cert_obj = NULL;
+            
             if (isset($dt1['error'])) {
                 $dt1 = json_encode($dt1);
-                $cert_status = NULL;
-                $cert_obj = NULL;
             } elseif (isset($dt1['success'])) {
                 if (isset($dt1['UBP_Register'])) {
                     foreach ($dt1['UBP_Register'] as $row2) {
@@ -235,12 +236,12 @@ foreach ($dtA as $row) {
                 }
             }
             // echo dt1($dt1, $head, $mini_head);
-            
+
 
             $stmt = $conn->prepare('UPDATE bypass SET extdoc=:extdoc, cert_status=:cert_status, cert_obj=:cert_obj WHERE invoice_no=:invNo');
             $stmt->execute(['invNo' => $invoice_no, 'extdoc' => $external_doc, 'cert_status' => $cert_status, 'cert_obj' => $cert_obj]);
 
             echo $invoice_no . ' - MASTER TRACKED - ' . $cert_status . '<br/>';
         }
-    } 
+    }
 }
