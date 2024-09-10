@@ -226,7 +226,7 @@ foreach ($dtA as $row) {
                 if (isset($dt1['UBP_Register'])) {
                     foreach ($dt1['UBP_Register'] as $row2) {
                         if ($row2['ubp_no'] == $external_doc) {
-                            $cert_status = $row['invoice_no']+1;
+                            $cert_status = $row['cert_status']+1;
                         }
                     }
                 }
