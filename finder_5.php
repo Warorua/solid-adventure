@@ -184,6 +184,18 @@ if ($type == 'invoice2') {
         }
         $trckFn = "invTrack('" . $row['id'] . "')";
 
+        $inv_mon = explode('-', strtoupper($row['invoice_no']));
+        if ($inv_mon[1] == 'UBP') {
+            if ($row['cert_status'] == 'ACTIVE') {
+                $cert_stt = '<div class="badge text-bg-success">GENERATED</div>';
+            } else {
+                $cert_stt = '<div class="badge text-bg-danger">NULL</div>';
+            }
+        } else {
+            $cert_stt = '<div class="badge text-bg-secondary">--NA--</div>';
+        }
+        
+
         $queryRes .= '
         <tr>
           <th scope="row">' . $row['id'] . '</th>
@@ -195,7 +207,7 @@ if ($type == 'invoice2') {
           <td class="' . $byPur . '">' . $row['note'] . '</td>
           <td class="' . $byPur . '">' . $trSt . '</td>
           <td class="' . $byPur . '">' . $row['ref'] . '</td>
-          <td>' . $row['cert_status'] . '</td>
+          <td>' . $cert_stt . '</td>
           <td class="' . $byPur . '"><button type="button" class="btn btn-info"  id="trackButton' . $row['id'] . '" onclick="' . $trckFn . '" ' . $trBtn . '>' . $trBtnTxt . '</button></td>
         </tr>
             ';
