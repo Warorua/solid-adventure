@@ -227,6 +227,7 @@ foreach ($dtA as $row) {
                     foreach ($dt1['UBP_Register'] as $row2) {
                         if ($row2['ubp_no'] == $external_doc) {
                             $cert_status = $row['cert_status']+1;
+                            $cert_obj = base64_encode(json_encode($row2));
                         }
                     }
                 }
@@ -239,10 +240,11 @@ foreach ($dtA as $row) {
 
         if (!isset($cert_status)) {
             $cert_status = NULL;
+            $cert_obj = NULL;
         }
 
-        $stmt = $conn->prepare('UPDATE bypass SET extdoc=:extdoc, cert_status=:cert_status WHERE invoice_no=:invNo');
-        $stmt->execute(['invNo' => $invoice_no, 'extdoc' => $external_doc, 'cert_status' => $cert_status]);
+        $stmt = $conn->prepare('UPDATE bypass SET extdoc=:extdoc, cert_status=:cert_status, cert_obj=:cert_obj WHERE invoice_no=:invNo');
+        $stmt->execute(['invNo' => $invoice_no, 'extdoc' => $external_doc, 'cert_status' => $cert_status, 'cert_obj'=>$cert_obj]);
 
         echo $invoice_no . ' - MASTER TRACKED - '.$cert_status.'<br/>';
     } elseif (isset($dt12['error'])) {
