@@ -39,11 +39,11 @@ function extractId($html) {
     return null;
 }
 
-$cmd = "SELECT * FROM `transactions` ORDER BY id DESC LIMIT 500 OFFSET 0";
+//$cmd = "SELECT * FROM `transactions` ORDER BY id DESC LIMIT 500 OFFSET 0";
 //$cmd = "SELECT * FROM `mpesaTransactions` ORDER BY id DESC LIMIT 200 OFFSET 0";
 //$cmd = "SELECT * FROM `mpesaTransactions` ORDER BY id DESC LIMIT 200 OFFSET 500";
 //$cmd = "SELECT * FROM `mpesaTransactions` WHERE `mobileno` LIKE '%721303137%' ORDER BY id DESC LIMIT 200";
-//$cmd = "SELECT * FROM `transactions` WHERE `comment`='COMPLETED' ORDER BY id DESC LIMIT 500 OFFSET 0";
+$cmd = "SELECT * FROM `transactions` WHERE `comment`='COMPLETED' ORDER BY id DESC LIMIT 500 OFFSET 0";
 //$cmd = "SELECT * FROM `transactions` WHERE `comment`='COMPLETED' AND `bankCode`='003' ORDER BY id DESC LIMIT 500 OFFSET 0";
 //$cmd = "SELECT * FROM `transactions` WHERE `mobileNumber` LIKE '%720664431%' ORDER BY id DESC LIMIT 500 OFFSET 0";
 //$cmd = "SELECT * FROM `transactions` WHERE `inserted_by`='root@192.168.0.1' ORDER BY id DESC LIMIT 500 OFFSET 0";

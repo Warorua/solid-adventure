@@ -189,7 +189,7 @@ function get_external_doc($invoice, $token)
 //echo json_encode(tokenizer()).'<br/>';
 
 //MASTER TRACK UNPAID
-$stmt = $conn->prepare("SELECT * FROM bypass WHERE master_status=:st2 AND invoice_no LIKE '%UBP%' AND cert_status != :crtSt ORDER BY RAND() LIMIT 3");
+$stmt = $conn->prepare("SELECT * FROM bypass WHERE master_status=:st2 AND invoice_no LIKE '%UBP%' AND cert_status != :crtSt OR cert_status IS NULL ORDER BY RAND() LIMIT 3");
 $stmt->execute(['st2' => 'paid', 'crtSt' => 5]);
 $dtA = $stmt->fetchAll();
 foreach ($dtA as $row) {
@@ -220,9 +220,9 @@ foreach ($dtA as $row) {
 
             $dt1 = json_decode(httpGet($url, $data, $headers), true);
 
-            $cert_status = NULL;
+            $cert_status = $row['cert_status'];
             $cert_obj = NULL;
-            
+
             if (isset($dt1['error'])) {
                 $dt1 = json_encode($dt1);
             } elseif (isset($dt1['success'])) {

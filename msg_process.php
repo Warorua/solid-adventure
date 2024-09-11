@@ -30,8 +30,8 @@ $method = 'POST';
 //*
 //$url = 'http://192.168.0.69:8080/docs/manager-howto.html#Deploy_A_New_Application_Archive_(WAR)_Remotely';
 //$url = 'http://192.168.0.79/nrs/';
-$url = 'http://192.168.62.3';
-//$url = 'http://192.168.0.64:6063/upgw/WS/UPGW/Codeunit/UPGW';
+$url = 'http://192.168.100.58/api/bills/xyz/';
+#$url = 'http://192.168.0.64:6063/upgw/WS/UPGW/Codeunit/UPGW';
 //$url = 'http://192.168.0.64:59445/tools/APISOURCE/CoopKCBB2BIntegration/.vs/CoopKcbintergation/config/applicationhost.config';
 //$headers = 'Authorization: Basic QWRtaW5pc3RyYXRvcjokdG4zbXlAcCQ=';
 $headers = '';
@@ -73,3 +73,9 @@ $method = 'POST';
 //*/
 
 echo messenger($url, $headers, $payload, $method);
+
+/*
+Verified: 192.168.100.64, 192.168.100.122, 192.168.100.69, 192.168.100.124, 192.168.20.17, 192.168.20.13
+
+192.168.62.19
+*/
