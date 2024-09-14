@@ -178,10 +178,9 @@ if (isset($_POST['type'])) {
 
 
 
-        $bankTransactions = "INSERT INTO bankTransactions ( bankCode,  transactionRef,  amount,  acctRefNo,  accName,  description,  institutionCode,  institutionName,  status,  logDate,  transacDate,  apiCode,  mobileNumber,  transtatus,  billNumber,  tranParticular,  paymentMode,  phoneNumber,  requestoutput,  paymentChannel,  Currency,  BranchCode,  status_1,  ValidationDate,  PushedComments,  transtatus_1 ) VALUES ( '003',  '" . $code2 . "',  " . $bypass['amount'] . ",  '" . $bypass['invoice_no'] . "',  null,  null,  '" . $bypass['invoice_no'] . "',  '" . $validation['description'] . "',  null,  '" . $timeFormats['withSeparators'] . "',  '" . $code2Date . "',  '2f11db8526fb2e170219e4a68215a1b8fe907a6c',  null,  1,  '" . $bypass['invoice_no'] . "',  '" . $bypass['invoice_no'] . " " . strtoupper($validation['description']) . "',  'cash',  null,  '" . $sqldata . "',  null,  null,  null,  null,  '" . $timeFormats['withSeparators'] . "',  '" . $sqlobj . "',  0 )";
+        $bankTransactions = "INSERT INTO bankTransactions ( bankCode,  transactionRef,  amount,  acctRefNo,  accName,  description,  institutionCode,  institutionName,  status,  logDate,  transacDate,  apiCode,  mobileNumber,  transtatus,  billNumber,  tranParticular,  paymentMode,  phoneNumber,  requestoutput,  paymentChannel,  Currency,  BranchCode,  status_1,  ValidationDate,  PushedComments,  transtatus_1, inserted_by) VALUES ( '003',  '" . $code2 . "',  " . $bypass['amount'] . ",  '" . $bypass['invoice_no'] . "',  null,  null,  '" . $bypass['invoice_no'] . "',  '" . $validation['description'] . "',  null,  '" . $timeFormats['withSeparators'] . "',  '" . $code2Date . "',  '2f11db8526fb2e170219e4a68215a1b8fe907a6c',  null,  0,  '" . $bypass['invoice_no'] . "',  '" . $bypass['invoice_no'] . " " . strtoupper($validation['description']) . "',  'cash',  null,  '" . $sqldata . "',  null,  null,  null,  null,  '" . $timeFormats['withSeparators'] . "',  '" . $sqlobj . "',  0 , 'root@192.168.0.64')";
         echo $bankTransactions . '<br/><br/>';
         echo universal_dab($bankTransactions, 'bankTransactions') . '<br/><br/>';
-
     } else {
         $data2 = json_encode($data2, JSON_PRESERVE_ZERO_FRACTION);
     }
