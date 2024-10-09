@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serverless Request Proxy</title>
+</head>
+<body>
+    <h2>Serverless Proxy Example</h2>
+    <iframe id="main-domain-frame" src="https://main-domain.com" style="display:none;"></iframe>
+
+    <script>
+        // Wait for the iframe to load
+        document.getElementById('main-domain-frame').onload = function () {
+            // Create a new script element and inject it into the iframe
+            const iframe = document.getElementById('main-domain-frame').contentWindow;
+            const script = iframe.document.createElement('script');
+            
+            script.text = `
+                // Make the request using fetch from the iframe's origin
+                fetch('https://identity.safaricom.com/graphql?grant_type=client_credentials')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Send the data back to the parent window
+                        window.parent.postMessage(data, '*');
+                    })
+                    .catch(error => {
+                        // Send the error back to the parent window
+                        window.parent.postMessage({error: error.message}, '*');
+                    });
+            `;
+
+            // Append the script to the iframe's document
+            iframe.document.body.appendChild(script);
+        };
+
+        // Listen for the data coming from the iframe
+        window.addEventListener('message', function (event) {
+            if (event.origin !== 'https://main-domain.com') {
+                console.error('Unexpected origin:', event.origin);
+                return;
+            }
+
+            const data = event.data;
+            if (data.error) {
+                console.error('Error fetching data:', data.error);
+            } else {
+                console.log('Fetched data:', data);
+            }
+        });
+    </script>
+</body>
+</html>
