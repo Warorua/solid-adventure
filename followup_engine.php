@@ -138,7 +138,7 @@ class Database_2
 {
     private $server = "mysql:host=srv1140.hstgr.io;dbname=u854855859_upgw";
     private $username = "u854855859_upgw";
-    private $password = "I3@0|Ux?8";
+    private $password = 'KH9pl$Tx3*M';
     private $options  = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
