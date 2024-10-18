@@ -5,9 +5,9 @@ include './includes/conn_auto.php';
 
 class Database
 {
-    private $server = "mysql:host=srv1140.hstgr.io;dbname=u854855859_upgw";
-    private $username = "u854855859_upgw";
-    private $password = 'KH9pl$Tx3*M';
+    private $server = "mysql:host=srv677.hstgr.io;dbname=u117204720_deepwoods";
+    private $username = "u117204720_deepwoods";
+    private $password = 'Wj9|10g0oN';
     private $options  = array(
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

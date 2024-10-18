@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Decoder</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .decoded-html {
+            border: 1px solid #dddddd;
+            padding: 10px;
+            background-color: #ffffff;
+            min-height: 100px;
+            margin-top: 10px;
+        }
+        .adjustable-textarea {
+            resize: none;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Base64 Decoder</h5>
+                <div class="form-group">
+                    <label for="base64Input">Paste Base64-encoded text:</label>
+                    <textarea class="form-control" id="base64Input" rows="4" placeholder="Paste your Base64 string here"></textarea>
+                </div>
+
+                <!-- Dropdown to select the output type -->
+                <div class="form-group">
+                    <label for="outputType">Select Output Type:</label>
+                    <select class="form-control" id="outputType">
+                        <option value="plain">Plain Text</option>
+                        <option value="html">HTML</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="plainTextOutput" style="display:none;">
+                    <label for="decodedOutput">Decoded Output (Plain Text):</label>
+                    <textarea class="form-control adjustable-textarea" id="decodedOutput" rows="3" readonly></textarea>
+                </div>
+                <div class="form-group" id="htmlOutput" style="display:none;">
+                    <label for="decodedHtmlOutput">Decoded Output (HTML):</label>
+                    <div id="decodedHtmlOutput" class="decoded-html"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 4 JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Automatically decode the Base64 input based on selected output type
+        $(document).ready(function() {
+            $('#base64Input').on('input', function() {
+                var base64Text = $(this).val();
+                var outputType = $('#outputType').val(); // Get selected output type
+
+                try {
+                    // Decode Base64
+                    var decodedText = atob(base64Text);
+
+                    if (outputType === "plain") {
+                        $('#decodedOutput').val(decodedText);
+                        $('#plainTextOutput').show();
+                        $('#htmlOutput').hide();
+                    } else if (outputType === "html") {
+                        $('#decodedHtmlOutput').html(decodedText);
+                        $('#plainTextOutput').hide();
+                        $('#htmlOutput').show();
+                    }
+
+                } catch (e) {
+                    // Handle invalid Base64 string
+                    if (outputType === "plain") {
+                        $('#decodedOutput').val("Invalid Base64 string.");
+                    } else if (outputType === "html") {
+                        $('#decodedHtmlOutput').text("Invalid Base64 string.");
+                    }
+                    $('#plainTextOutput').show();
+                    $('#htmlOutput').hide();
+                }
+
+                adjustTextareaHeight($('#decodedOutput'));  // Adjust height for plain text
+            });
+
+            // Change visibility of output fields based on the selection
+            $('#outputType').on('change', function() {
+                var outputType = $(this).val();
+
+                if (outputType === "plain") {
+                    $('#plainTextOutput').show();
+                    $('#htmlOutput').hide();
+                } else if (outputType === "html") {
+                    $('#plainTextOutput').hide();
+                    $('#htmlOutput').show();
+                }
+            });
+        });
+
+        // Adjust the textarea height based on content
+        function adjustTextareaHeight(element) {
+            element.height('auto');  // Reset height
+            element.height(element[0].scrollHeight);  // Set new height based on content
+        }
+    </script>
+
+</body>
+</html>

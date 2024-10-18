@@ -1,0 +1,21 @@
+import http.client
+
+# Create a connection
+conn = http.client.HTTPSConnection("dgmbmgjxgnczpetprmxfs1utu4hreiiek.oast.fun")
+
+# Send a GET request
+conn.request("GET", "/posts/1")
+
+# Get the response
+response = conn.getresponse()
+
+# Read the response data
+data = response.read()
+
+# Print the status code and the response content
+print(f"Status Code: {response.status}")
+print("Response Content:")
+print(data.decode("utf-8"))
+
+# Close the connection
+conn.close()

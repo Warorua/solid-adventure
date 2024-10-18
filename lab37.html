@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File to Base64 Encoder</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .encoded-output {
+            white-space: pre-wrap; /* Preserves formatting */
+            word-wrap: break-word; /* Prevents long lines from overflowing */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">File to Base64 Encoder</h5>
+                <div class="form-group">
+                    <label for="fileInput">Select a file to encode:</label>
+                    <input type="file" class="form-control-file" id="fileInput">
+                </div>
+                <div class="form-group">
+                    <label for="encodedOutput">Base64 Encoded Output:</label>
+                    <textarea class="form-control encoded-output" id="encodedOutput" rows="8" readonly></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 4 JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // When a file is selected, encode it as Base64
+        $('#fileInput').on('change', function() {
+            var file = this.files[0]; // Get the selected file
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var base64String = e.target.result.split(',')[1]; // Get Base64 part
+                    $('#encodedOutput').val(base64String); // Display Base64-encoded content in textarea
+                };
+                reader.readAsDataURL(file); // Read file as Data URL (Base64)
+            }
+        });
+    </script>
+
+</body>
+</html>
