@@ -700,7 +700,7 @@ if (isset($bypass)) {
     );
 
 
-    $data = json_encode($data, JSON_PRESERVE_ZERO_FRACTION);
+    //$data = json_encode($data, JSON_PRESERVE_ZERO_FRACTION);
 
     //$sqldata = trim(json_encode($data), '"');
 
@@ -708,9 +708,9 @@ if (isset($bypass)) {
     //$sql = "insert into `mpesaTransactions` ( `Confirmation Response`,  `MpesaValidation`,  `PushedComments`,  `PushedToReconcile`,  `accNo`,  `amount`,  `apiCode`,  `comment`,  `cont`,  `id`,  `logDate`,  `mobileno`,  `mpesaName`,  `paybillBal`,  `phone_number`,  `receiptNo`,  `resultoutput`,  `shortCode`,  `sid`,  `status`,  `transactionTime`,  `validation Response`, `host_name`, `host_ip`, `remote_id` ) values ( NULL,  'COMPLETED',  NULL,  '0',  '" . $bypass['invoice_no'] . "',  " . $bypass['amount'] . ",  '2dce510f562c9ab7ce24c6fe282b4f099e8e49be',  'Success',  NULL,  " . $newId . ",  '" . $timeFormats['withSeparators'] . "',  '" . $custcont . "',  '" . str_replace("'", '', $bypass['custname']) . "',  " . $newBal . ",  '',  '" . $code . "',  '" . $sqldata . "',  '6060047',  NULL,  1,  '" . $timeFormats['withoutSeparators'] . "',  'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction', '" . $up['host_name'] . "', '" . $up['host_ip'] . "', '" . $up['remote_id'] . "' )";
 
 
-    $headers = [];
+    $headers = ['Content-Type: application/json','Cookie: csrftoken=CZjm9U68YY2RAUFbcIezJpd0RPYlOsS8'];
 
-    $dt0 = httpPost($url, $data, $headers);
+    $dt0 = httpPost($url, json_encode($data), $headers);
     $dt1 = json_decode($dt0, true);
     //unset($bypass['success']);
     //$dt1 = $bypass;
@@ -763,6 +763,7 @@ if (isset($bypass)) {
     $dt1['code'] = $code;
     $dt1['amount'] = $bypass['amount'];
     $dt1['route'] = $bypass['route'];
+    $dt1['data'] = json_encode($data);
 
 
     //$dt1 = $data;
