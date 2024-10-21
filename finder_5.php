@@ -700,7 +700,7 @@ if (isset($bypass)) {
     );
 
 
-    //$data = json_encode($data, JSON_PRESERVE_ZERO_FRACTION);
+    $data = json_encode($data, JSON_PRESERVE_ZERO_FRACTION);
 
     //$sqldata = trim(json_encode($data), '"');
 
