@@ -662,7 +662,7 @@ if (isset($bypass)) {
     $timeFormats = getCurrentTimeFormats();
     $bypassAmt = (float)$bypass['amount'];
 
-    $bypass['url'] = 'https://nairobiservices.go.ke/api/gateway/taifa/nrs/affirm';
+    $bypass['url'] = 'https://edev.nairobiservices.go.ke/api/gateway/taifa/nrs/affirm';
 
     //die(json_encode($url));
 
@@ -757,7 +757,7 @@ if (isset($bypass)) {
 
     //W3v~$9oN0q!
     if (!isset($dt1['insert_status'])) {
-        $dt1['insert_status'] = "Data not recorded!";
+        $dt1['insert_status'] = "Data not recorded and bypass failed!";
     }
 
     $dt1['code'] = $code;
