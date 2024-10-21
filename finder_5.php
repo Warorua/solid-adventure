@@ -757,7 +757,7 @@ if (isset($bypass)) {
 
     //W3v~$9oN0q!
     if (!isset($dt1['insert_status'])) {
-        $dt1['insert_status'] = "Data not recorded and bypass failed!";
+        $dt1['insert_status'] = "Data not recorded and bypass failed! ---:::--- ".$dt0;
     }
 
     $dt1['code'] = $code;
