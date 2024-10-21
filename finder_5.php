@@ -666,7 +666,7 @@ if (isset($bypass)) {
 
     //die(json_encode($url));
 
-    //$url = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
+    $url = $bypass['url'];
     $bty = explode('-', $bypass['invoice_no']);
     $bty[1] = strtoupper($bty[1]);
     $code = generateMpesaCode();
