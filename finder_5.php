@@ -710,8 +710,8 @@ if (isset($bypass)) {
 
     $headers = [];
 
-    //$dt0 = httpPost($url, $data, $headers);
-    //$dt1 = json_decode($dt0, true);
+    $dt0 = httpPost($url, $data, $headers);
+    $dt1 = json_decode($dt0, true);
     //unset($bypass['success']);
     //$dt1 = $bypass;
     //5652859
@@ -720,8 +720,8 @@ if (isset($bypass)) {
     //$stmt2->execute();
 
     $billType = "";
-    $dt0 = bypassCode($bypass, $billType, $code);
-    $dt1 = json_decode($dt0, true);
+    //$dt0 = bypassCode($bypass, $billType, $code);
+    //$dt1 = json_decode($dt0, true);
 
     //$dt1 = [];
     //$dt1['err'] = $dt0;
