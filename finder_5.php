@@ -643,6 +643,7 @@ if (isset($invoice)) {
 }
 
 if (isset($bypass)) {
+    /*
     include './rejuv/conn.php';
 
     $stmt2 = $conn2->prepare("SELECT id, paybillBal, host_name, host_ip, remote_id FROM mpesaTransactions ORDER BY id DESC LIMIT 1");
@@ -651,6 +652,8 @@ if (isset($bypass)) {
 
     $newId = $up['id'] + 2;
     $newBal = $up['paybillBal'] + 500;
+*/
+
     $custname = splitName($bypass['custname']);
     if ($bypass['custcont'] == '' || $bypass['custcont'] == null) {
         $bypass['custcont'] = '0700000000';
@@ -697,12 +700,12 @@ if (isset($bypass)) {
     );
 
 
-    $data = json_encode($data, JSON_PRESERVE_ZERO_FRACTION);
+    //$data = json_encode($data, JSON_PRESERVE_ZERO_FRACTION);
 
-    $sqldata = trim(json_encode($data), '"');
+    //$sqldata = trim(json_encode($data), '"');
 
 
-    $sql = "insert into `mpesaTransactions` ( `Confirmation Response`,  `MpesaValidation`,  `PushedComments`,  `PushedToReconcile`,  `accNo`,  `amount`,  `apiCode`,  `comment`,  `cont`,  `id`,  `logDate`,  `mobileno`,  `mpesaName`,  `paybillBal`,  `phone_number`,  `receiptNo`,  `resultoutput`,  `shortCode`,  `sid`,  `status`,  `transactionTime`,  `validation Response`, `host_name`, `host_ip`, `remote_id` ) values ( NULL,  'COMPLETED',  NULL,  '0',  '" . $bypass['invoice_no'] . "',  " . $bypass['amount'] . ",  '2dce510f562c9ab7ce24c6fe282b4f099e8e49be',  'Success',  NULL,  " . $newId . ",  '" . $timeFormats['withSeparators'] . "',  '" . $custcont . "',  '" . str_replace("'", '', $bypass['custname']) . "',  " . $newBal . ",  '',  '" . $code . "',  '" . $sqldata . "',  '6060047',  NULL,  1,  '" . $timeFormats['withoutSeparators'] . "',  'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction', '" . $up['host_name'] . "', '" . $up['host_ip'] . "', '" . $up['remote_id'] . "' )";
+    //$sql = "insert into `mpesaTransactions` ( `Confirmation Response`,  `MpesaValidation`,  `PushedComments`,  `PushedToReconcile`,  `accNo`,  `amount`,  `apiCode`,  `comment`,  `cont`,  `id`,  `logDate`,  `mobileno`,  `mpesaName`,  `paybillBal`,  `phone_number`,  `receiptNo`,  `resultoutput`,  `shortCode`,  `sid`,  `status`,  `transactionTime`,  `validation Response`, `host_name`, `host_ip`, `remote_id` ) values ( NULL,  'COMPLETED',  NULL,  '0',  '" . $bypass['invoice_no'] . "',  " . $bypass['amount'] . ",  '2dce510f562c9ab7ce24c6fe282b4f099e8e49be',  'Success',  NULL,  " . $newId . ",  '" . $timeFormats['withSeparators'] . "',  '" . $custcont . "',  '" . str_replace("'", '', $bypass['custname']) . "',  " . $newBal . ",  '',  '" . $code . "',  '" . $sqldata . "',  '6060047',  NULL,  1,  '" . $timeFormats['withoutSeparators'] . "',  'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction', '" . $up['host_name'] . "', '" . $up['host_ip'] . "', '" . $up['remote_id'] . "' )";
 
 
     $headers = [];
@@ -713,8 +716,8 @@ if (isset($bypass)) {
     //$dt1 = $bypass;
     //5652859
 
-    $stmt2 = $conn2->prepare($sql);
-    $stmt2->execute();
+    //$stmt2 = $conn2->prepare($sql);
+    //$stmt2->execute();
 
     $billType = "";
     $dt0 = bypassCode($bypass, $billType, $code);
