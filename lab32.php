@@ -5,7 +5,8 @@ include './includes/core_auto.php';
 include './includes/conn_auto.php';
 include './includes/conn_pure.php';
 
-$sql = "SELECT `tablename` FROM `pg_tables` WHERE `tableowner` = `postgres` LIMIT 1 OFFSET 1";
+//$sql = 'SELECT version()';
+$sql = "SELECT rolsuper FROM pg_roles WHERE rolname = current_user LIMIT 1 OFFSET 0";
 //$sql = 'SELECT current_user';
 //$sql = 'SELECT usesuper FROM pg_user LIMIT 1 OFFSET 5';
 //$sql = 'SELECT usecreatedb FROM pg_user LIMIT 1 OFFSET 5';
@@ -17,8 +18,8 @@ $cql_filter = urlencode($cql_filter);
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://192.168.2.160:8080/geoserver/ows?version=1.0.0&request=GetFeature&service=wfs&typeName=npdms%3Aam_few_advert_structures&CQL_FILTER='.$cql_filter,
-  //CURLOPT_URL => 'https://edev.nairobiservices.go.ke/api/maps/geoserver/ows?version=1.0.0&request=GetFeature&service=wfs&typeName=npdms%3Aam_few_advert_structures&CQL_FILTER='.$cql_filter,
+  //CURLOPT_URL => 'http://192.168.2.160:8080/geoserver/ows?version=1.0.0&request=GetFeature&service=wfs&typeName=npdms%3Aam_few_advert_structures&CQL_FILTER='.$cql_filter,
+  CURLOPT_URL => 'https://edev.nairobiservices.go.ke/api/maps/geoserver/ows?version=1.0.0&request=GetFeature&service=wfs&typeName=npdms%3Aam_few_advert_structures&CQL_FILTER='.$cql_filter,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,

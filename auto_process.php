@@ -4,13 +4,15 @@ require 'vendor/autoload.php';
 include './includes/core_auto.php';
 include './includes/conn_auto.php';
 include './includes/conn_pure.php';
-
+header('Content-Type: application/json',true,200);
 $stmt = $conn3->prepare("SELECT * FROM message WHERE status=:status ORDER BY RAND() LIMIT 1");
 $stmt->execute(['status' => '0']);
 $dt1 = $stmt->fetch();
 
 if(!isset($_POST['invoiceNo']) || !isset($_POST['amount'])){
+    header('Content-Type: application/json',true,500);
     echo json_encode(['error'=>'Incomplete request','payload'=>$_POST]);
+    die();
 }
 
 $dt1 = ['invoiceNo' => $_POST['invoiceNo'], 'invoiceAmt' => $_POST['amount'], 'client' => 0, 'id' => '1'];
