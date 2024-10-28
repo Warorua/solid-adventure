@@ -395,6 +395,7 @@ if (isset($_GET['del'])) {
                                 $payload = ['payload'=>base64_encode($data2)];
                                 //echo messenger($url, $headers, $payload, $method) . '<br/><br/>';
                                 $recon = httpPost($url, $payload);
+                                echo $recon;
                                 //*/
 
 
@@ -407,6 +408,7 @@ if (isset($_GET['del'])) {
                                     $payload = ['payload'=>base64_encode($data2)];
                                     //echo messenger($url, $headers, $payload, $method) . '<br/><br/>';
                                     $recon = httpPost($url, $payload);
+                                    echo $recon;
                                     //*/
 
 

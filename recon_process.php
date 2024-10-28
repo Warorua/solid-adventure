@@ -13,8 +13,9 @@ if (isset($_POST['payload'])) {
     $headers = 'Content-Type: application/json';
     $method = 'POST';
     //echo messenger($url, $headers, $payload, $method) . '<br/><br/>';
-    $recon = httpPost($url, $payload, $headers);
+    $recon = httpPost($url, $payload, [$headers]);
     echo $recon;
 }else{
     echo 'Incomplete request!';
+    
 }
