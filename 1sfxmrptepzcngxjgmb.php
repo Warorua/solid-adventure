@@ -73,5 +73,5 @@ if ($token && $parseKey) {
 $dt1 = ['get' => $_GET];
 
 // Log the system action
-log_system($itemLog, $message);
+log_system($itemLog, $message, true);
 

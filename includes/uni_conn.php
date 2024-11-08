@@ -13,10 +13,10 @@ class pinData
     private $username = "u854855859_pin_data";
     private $password = "uK*EFvX/F/?5";
     private $options  = array(
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_PERSISTENT => true,  // Use persistent connections
-);
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_PERSISTENT => true,  // Use persistent connections
+    );
 
     protected $conn;
 
@@ -44,10 +44,10 @@ class Kever
     private $username = "u854855859_kever";
     private $password = "W3v~$9oN0q!";
     private $options  = array(
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_PERSISTENT => true,  // Use persistent connections
-);
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_PERSISTENT => true,  // Use persistent connections
+    );
 
     protected $conn;
 
@@ -75,10 +75,10 @@ class Security
     private $username = "u854855859_security";
     private $password = "6w1Gvqg[+sE$";
     private $options  = array(
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_PERSISTENT => true,  // Use persistent connections
-);
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_PERSISTENT => true,  // Use persistent connections
+    );
 
     protected $conn;
 
@@ -120,15 +120,21 @@ function generateJWT($userId)
     return JWT::encode($payload, $key, $algorithm);
 }
 
-function log_system($item, $message){
+function log_system($item, $message, $customUser = false)
+{
     global $conn4;
-    global $userId;
-    $stmt = $conn4->prepare("INSERT INTO logs (`user`, `item`, `message`) VALUES (:user, :item, :message)");
-        $stmt->execute(['user' => $userId, 'item' => $item, 'message' => $message]);
+    if (!$customUser) {
+        global $userId;
+    } else {
+        $userId = $_SERVER['REMOTE_ADDR'];
+    }
 
+    $stmt = $conn4->prepare("INSERT INTO logs (`user`, `item`, `message`) VALUES (:user, :item, :message)");
+    $stmt->execute(['user' => $userId, 'item' => $item, 'message' => $message]);
 }
 
-function verifyJWT($token) {
+function verifyJWT($token)
+{
     $key = "VyX2RvbWFpbi5jb20iLCJpYXQiOjE3MjExODM3MTksImV4cCI6MTcyMTE4NzMxOSwidX"; // Replace with your secret key
     try {
         // Decode the JWT
@@ -142,7 +148,7 @@ function verifyJWT($token) {
         // Token has expired
         http_response_code(401);
         echo json_encode(['message' => 'Token has expired'], JSON_PRETTY_PRINT);
-       die();
+        die();
     } catch (Exception $e) {
         // Other errors
         http_response_code(401);
@@ -172,10 +178,10 @@ if (!isset($authbypass)) {
             die();
         }
     } elseif (isset($_COOKIE['authToken'])) {
-        $jwt = str_replace(' ','',$_COOKIE['authToken']);
+        $jwt = str_replace(' ', '', $_COOKIE['authToken']);
         $decoded = verifyJWT($jwt);
 
-       // echo json_encode($decoded);
+        // echo json_encode($decoded);
 
         if ($decoded) {
             // Token is valid, proceed with your logic
