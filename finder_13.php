@@ -37,7 +37,7 @@ if (!empty($requestBody)) {
         //echo "Token: " . $token . PHP_EOL;
         //echo "Parse Key: " . $parseKey . PHP_EOL;
 
-        $stmt = $conn4->prepare("INSERT INTO callback (token, key, status) VALUES (:token, :key, :status)");
+        $stmt = $conn4->prepare("INSERT INTO callback (`token`, `key`, `status`) VALUES (:token, :key, :status)");
         $stmt->execute(['token' => $token, 'key' => $parseKey, 'status' => '1']);
     } else {
         echo "Required fields 'output' or 'parseKey' not found in the request." . PHP_EOL;
