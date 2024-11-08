@@ -34,6 +34,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ga_secret = $gAuth->generateSecret();
     $ga_secret = base64_encode($ga_secret);
     $user_obj = [];
+    if(isset($userId)){
+        $stmt = $conn4->prepare("SELECT FROM users WHERE user_id = :user_id");
+        $stmt->execute(['user_id'=>$userId]);
+        $adm_obj = $stmt->fetch();
+        if($adm_obj['role'] != '0'){
+            http_response_code(401);
+            echo "Forbidden Request!";
+            exit();
+        }
+    }
     // Store the new user in the database (replace with actual DB logic)
     //$stmt = $conn4->prepare("SELECT * FROM users WHERE username = :username");
     $stmt = $conn4->prepare("INSERT INTO users (username, password, ga_secret) VALUES (?, ?, ?)");
