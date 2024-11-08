@@ -39,6 +39,7 @@ class ComposerStaticInit5cfb40fc7ec05b5db2beb6194ddf4f1c
         array (
             'Symfony\\Component\\Process\\' => 26,
             'Sunspikes\\Ratelimit\\' => 20,
+            'Sonata\\GoogleAuthenticator\\' => 27,
         ),
         'P' => 
         array (
@@ -60,6 +61,7 @@ class ComposerStaticInit5cfb40fc7ec05b5db2beb6194ddf4f1c
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
+            'Google\\Authenticator\\' => 21,
         ),
         'F' => 
         array (
@@ -104,6 +106,10 @@ class ComposerStaticInit5cfb40fc7ec05b5db2beb6194ddf4f1c
         array (
             0 => __DIR__ . '/..' . '/sunspikes/php-ratelimiter/src',
         ),
+        'Sonata\\GoogleAuthenticator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/google-authenticator/src',
+        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
@@ -141,6 +147,10 @@ class ComposerStaticInit5cfb40fc7ec05b5db2beb6194ddf4f1c
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Google\\Authenticator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sonata-project/google-authenticator/src',
         ),
         'Firebase\\JWT\\' => 
         array (
