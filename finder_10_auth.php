@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             setcookie("authToken", $jwt, time() + (3600 * 24), "/");
 
             header('Content-Type: application/json');
-            echo json_encode(['token' => $jwt], JSON_PRETTY_PRINT);
+            echo json_encode(['token' => $jwt,'ga_secret'=>$user['ga_secret']], JSON_PRETTY_PRINT);
         } else {
             $err['error'] = "Invalid username or password.";
             echo json_encode($err, JSON_PRETTY_PRINT);
