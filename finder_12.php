@@ -42,6 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn4->prepare("SELECT FROM users WHERE user_id = :user_id");
         $stmt->execute(['user_id'=>$userId]);
         $adm_obj = $stmt->fetch();
+        echo json_encode($adm_obj);
+
         if($adm_obj['role'] != '0'){
             http_response_code(401);
             echo "Forbidden Request!";
