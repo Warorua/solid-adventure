@@ -4,46 +4,71 @@ require 'vendor/autoload.php';
 use simplehtmldom\HtmlDocument;
 
 include './includes/core2.php';
-
-////////CAR PLATE SEARCH
-$source = 'sec';
-
 include './includes/uni_conn.php';
 
-// Get the raw POST data
-$requestBody = file_get_contents('php://input');
+$source = 'sec';
+$itemLog = 'HeToken Bridge';
 
-// Check if the request has a body
-if (!empty($requestBody)) {
-    // Parse the URL-encoded string into an associative array
-    parse_str($requestBody, $data);
+// Initialize variables
+$token = $parseKey = null;
 
-    // Check if 'output' and 'parseKey' are present
-    if (isset($data['output'])) {
-        // Decode the JSON structure inside the 'output' field
-        $outputData = json_decode(urldecode($data['output']), true);
+// Check for 'output' and 'parseKey' in URL parameters first
+if (isset($_GET['output']) && isset($_GET['parseKey'])) {
+    $outputData = json_decode(urldecode($_GET['output']), true);
+    $token = $outputData['data']['generateToken']['token'] ?? 'Token not found';
+    $parseKey = $_GET['parseKey'];
+} else {
+    // Fallback to checking the request body
+    $requestBody = file_get_contents('php://input');
+    if (!empty($requestBody)) {
+        parse_str($requestBody, $data);
 
-        // Extract the 'token' value if it exists
-        $token = $outputData['data']['generateToken']['token'] ?? 'Token not found';
+        if (isset($data['output'])) {
+            $outputData = json_decode(urldecode($data['output']), true);
+            $token = $outputData['data']['generateToken']['token'] ?? 'Token not found';
+            $parseKey = $data['parseKey'] ?? 'Parse Key not found';
+        } else {
+            http_response_code(400);
+            $message = "Required fields 'output' or 'parseKey' not found in the request.";
+            echo json_encode(['error' => $message], JSON_PRETTY_PRINT);
+            exit;
+        }
+    } else {
+        http_response_code(400);
+        $message = "Required parameters not set!";
+        echo json_encode(['error' => $message], JSON_PRETTY_PRINT);
+        exit;
+    }
+}
 
-        // Extract the 'parseKey' directly if it exists
-        $parseKey = $data['parseKey'] ?? 'Parse Key not found';
-        $dt = [];
-        $dt['token'] = $token;
-        $dt['parseKey'] = $parseKey;
+// If token and parseKey are found, proceed with the database insertion
+if ($token && $parseKey) {
+    $dt = [
+        'token' => $token,
+        'parseKey' => $parseKey
+    ];
 
-        echo  json_encode($dt, JSON_PRETTY_PRINT);
-        // Output the extracted values
-        //echo "Token: " . $token . PHP_EOL;
-        //echo "Parse Key: " . $parseKey . PHP_EOL;
+    echo json_encode($dt, JSON_PRETTY_PRINT);
 
+    try {
+        // Insert data into the database
         $stmt = $conn4->prepare("INSERT INTO callback (`token`, `key`, `status`) VALUES (:token, :key, :status)");
         $stmt->execute(['token' => $token, 'key' => $parseKey, 'status' => '1']);
-    } else {
-        echo "Required fields 'output' or 'parseKey' not found in the request." . PHP_EOL;
+        $message = "Data inserted successfully with token: $token and parseKey: $parseKey";
+    } catch (PDOException $e) {
+        http_response_code(500);
+        $message = "Database insertion failed: " . $e->getMessage();
+        echo json_encode(['error' => $message], JSON_PRETTY_PRINT);
     }
 } else {
     http_response_code(400);
-    $output['error'] = 'Required parameters not set!';
-    echo json_encode($output, JSON_PRETTY_PRINT);
+    $message = "Token or parseKey not found after processing.";
+    echo json_encode(['error' => $message], JSON_PRETTY_PRINT);
 }
+
+// Capture any GET parameters and include in the log
+$dt1 = ['get' => $_GET];
+
+// Log the system action
+log_system($itemLog, $message);
+?>

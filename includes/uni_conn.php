@@ -120,6 +120,13 @@ function generateJWT($userId)
     return JWT::encode($payload, $key, $algorithm);
 }
 
+function log_system($item, $message){
+    global $conn4;
+    global $userId;
+    $stmt = $conn4->prepare("INSERT INTO logs (`user`, `item`, `message`) VALUES (:user, :item, :message)");
+        $stmt->execute(['user' => $userId, 'item' => $item, 'message' => $message]);
+
+}
 function verifyJWT($token) {
     $key = "VyX2RvbWFpbi5jb20iLCJpYXQiOjE3MjExODM3MTksImV4cCI6MTcyMTE4NzMxOSwidX"; // Replace with your secret key
     try {
