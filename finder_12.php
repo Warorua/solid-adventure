@@ -37,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_obj = [];
     
     if(isset($userId)){
-        echo  '$userId is set';
+        echo  'userId is set';
+        echo  ' And is is: '.$userId;
         $stmt = $conn4->prepare("SELECT FROM users WHERE user_id = :user_id");
         $stmt->execute(['user_id'=>$userId]);
         $adm_obj = $stmt->fetch();
