@@ -30,7 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hash the password
 
     // Generate a Google Authenticator secret
+    function generateRandomId() {
+        // Generate a random number, you can set limits as desired
+        $random_number = mt_rand(0, 999); // Adjust range as needed for your ID requirements
     
+        // Format the number to fit "96_1" pattern
+        return sprintf('96_%d', $random_number);
+    }
+
     $gAuth = new GoogleAuthenticator();
     $ga_secret = $gAuth->generateSecret();
     $ga_secret = base64_encode($ga_secret);
@@ -57,8 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo  $userId;
     // Store the new user in the database (replace with actual DB logic)
     //$stmt = $conn4->prepare("SELECT * FROM users WHERE username = :username");
-    $stmt = $conn4->prepare("INSERT INTO users (username, password, ga_secret) VALUES (:username, :pass, :ga)");
-    if ($stmt->execute(['username'=>$username, 'pass'=>$password, 'ga'=>$ga_secret])) {
+    $stmt = $conn4->prepare("INSERT INTO users (user_id, username, password, ga_secret) VALUES (:user_id, :username, :pass, :ga)");
+    if ($stmt->execute(['user_id'=>generateRandomId(),'username'=>$username, 'pass'=>$password, 'ga'=>$ga_secret])) {
         // Generate QR code for Google Authenticator setup
         $qrCodeUrl = GoogleQrUrl::generate('PKestrel' . $username, $ga_secret);
 
