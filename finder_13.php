@@ -28,14 +28,17 @@ if (!empty($requestBody)) {
 
         // Extract the 'parseKey' directly if it exists
         $parseKey = $data['parseKey'] ?? 'Parse Key not found';
+        $dt = [];
+        $dt['token'] = $token;
+        $dt['parseKey'] = $parseKey;
 
+        echo  json_encode($dt, JSON_PRETTY_PRINT);
         // Output the extracted values
-        echo "Token: " . $token . PHP_EOL;
-        echo "Parse Key: " . $parseKey . PHP_EOL;
+        //echo "Token: " . $token . PHP_EOL;
+        //echo "Parse Key: " . $parseKey . PHP_EOL;
 
         $stmt = $conn4->prepare("INSERT INTO callback (token, key, status) VALUES (:token, :key, :status)");
-        $stmt->execute(['token'=>$token,'key'=>$parseKey,'status'=>'1']);
-
+        $stmt->execute(['token' => $token, 'key' => $parseKey, 'status' => '1']);
     } else {
         echo "Required fields 'output' or 'parseKey' not found in the request." . PHP_EOL;
     }
@@ -44,4 +47,3 @@ if (!empty($requestBody)) {
     $output['error'] = 'Required parameters not set!';
     echo json_encode($output, JSON_PRETTY_PRINT);
 }
-
