@@ -30,12 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hash the password
 
     // Generate a Google Authenticator secret
-    echo  'here';
+    
     $gAuth = new GoogleAuthenticator();
     $ga_secret = $gAuth->generateSecret();
     $ga_secret = base64_encode($ga_secret);
     $user_obj = [];
-    echo  'here2';
+    echo  $ga_secret;
     if(isset($userId)){
         $stmt = $conn4->prepare("SELECT FROM users WHERE user_id = :user_id");
         $stmt->execute(['user_id'=>$userId]);
