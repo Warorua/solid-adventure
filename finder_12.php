@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Generate a Google Authenticator secret
     function generateRandomId() {
         // Generate a random number, you can set limits as desired
-        $random_number = mt_rand(0, 999); // Adjust range as needed for your ID requirements
+        $random_number = mt_rand(6, 999); // Adjust range as needed for your ID requirements
     
         // Format the number to fit "96_1" pattern
         return sprintf('96_%d', $random_number);
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Bad request 1";
         exit();
     }
-    echo  $userId;
+    //echo  $userId;
     // Store the new user in the database (replace with actual DB logic)
     //$stmt = $conn4->prepare("SELECT * FROM users WHERE username = :username");
     $stmt = $conn4->prepare("INSERT INTO users (user_id, username, password, ga_secret) VALUES (:user_id, :username, :pass, :ga)");
