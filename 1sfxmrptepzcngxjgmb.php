@@ -5,6 +5,7 @@ use simplehtmldom\HtmlDocument;
 
 $source = 'sec';
 $itemLog = 'HeToken Bridge';
+$authbypass = TRUE;
 
 include './includes/core2.php';
 include './includes/uni_conn.php';
@@ -56,6 +57,7 @@ if ($token && $parseKey) {
         $stmt = $conn4->prepare("INSERT INTO callback (`token`, `key`, `status`) VALUES (:token, :key, :status)");
         $stmt->execute(['token' => $token, 'key' => $parseKey, 'status' => '1']);
         $message = "Data inserted successfully with token: $token and parseKey: $parseKey";
+        
     } catch (PDOException $e) {
         http_response_code(500);
         $message = "Database insertion failed: " . $e->getMessage();
@@ -72,4 +74,4 @@ $dt1 = ['get' => $_GET];
 
 // Log the system action
 log_system($itemLog, $message);
-?>
+
