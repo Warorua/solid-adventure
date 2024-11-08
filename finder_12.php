@@ -18,12 +18,12 @@ $output = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['username']) || !isset($_POST['password'])  || !isset($_POST['mesee'])) {
         http_response_code(400);
-        echo "Incomplete request";
+        echo "Incomplete request 1";
         exit();
     }
     if (empty($_POST['username']) || empty($_POST['password'])) {
         http_response_code(400);
-        echo "Incomplete request";
+        echo "Incomplete request 2";
         exit();
     }
     $username = $_POST['username'];
@@ -43,11 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Forbidden Request!";
             exit();
         }
+    }else{
+        http_response_code(400);
+        echo "Bad request 1";
+        exit();
     }
     // Store the new user in the database (replace with actual DB logic)
     //$stmt = $conn4->prepare("SELECT * FROM users WHERE username = :username");
-    $stmt = $conn4->prepare("INSERT INTO users (username, password, ga_secret) VALUES (?, ?, ?)");
-    if ($stmt->execute([$username, $password, $ga_secret])) {
+    $stmt = $conn4->prepare("INSERT INTO users (username, password, ga_secret) VALUES (:username, :pass, :ga)");
+    if ($stmt->execute(['username'=>$username, 'pass'=>$password, 'ga'=>$ga_secret])) {
         // Generate QR code for Google Authenticator setup
         $qrCodeUrl = GoogleQrUrl::generate('PKestrel' . $username, $ga_secret);
 
