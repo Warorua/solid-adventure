@@ -20,13 +20,19 @@ if (isset($_GET['parsekey'])) {
     $stmt = $conn4->prepare("SELECT * FROM callback WHERE `key` = :key");
     $stmt->execute(['key' => $parseKey]);
     $adm_obj = $stmt->fetch();
-    if ($adm_obj['status'] == '1') {
+    if (isset($adm_obj['status'])) {
+        if ($adm_obj['status'] == '1') {
 
-        $dt['status'] = true;
-        $dt['key'] = htmlspecialchars($parseKey);
-        $dt['token'] = $adm_obj['token'];
-        
-        echo json_encode($dt, JSON_PRETTY_PRINT);
+            $dt['status'] = true;
+            $dt['key'] = htmlspecialchars($parseKey);
+            $dt['token'] = $adm_obj['token'];
+
+            echo json_encode($dt, JSON_PRETTY_PRINT);
+        } else {
+            $dt['status'] = false;
+            $dt['key'] = htmlspecialchars($parseKey);
+            echo json_encode($dt, JSON_PRETTY_PRINT);
+        }
     } else {
         $dt['status'] = false;
         $dt['key'] = htmlspecialchars($parseKey);
