@@ -127,6 +127,7 @@ function log_system($item, $message){
         $stmt->execute(['user' => $userId, 'item' => $item, 'message' => $message]);
 
 }
+
 function verifyJWT($token) {
     $key = "VyX2RvbWFpbi5jb20iLCJpYXQiOjE3MjExODM3MTksImV4cCI6MTcyMTE4NzMxOSwidX"; // Replace with your secret key
     try {

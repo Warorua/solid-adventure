@@ -3,11 +3,12 @@ require 'vendor/autoload.php';
 
 use simplehtmldom\HtmlDocument;
 
+$source = 'sec';
+$itemLog = 'HeToken Bridge';
+
 include './includes/core2.php';
 include './includes/uni_conn.php';
 
-$source = 'sec';
-$itemLog = 'HeToken Bridge';
 
 // Initialize variables
 $token = $parseKey = null;
