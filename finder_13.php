@@ -24,6 +24,8 @@ if (isset($_GET['parsekey'])) {
 
         $dt['status'] = true;
         $dt['key'] = htmlspecialchars($parseKey);
+        $dt['token'] = $adm_obj['token'];
+        
         echo json_encode($dt, JSON_PRETTY_PRINT);
     } else {
         $dt['status'] = false;
