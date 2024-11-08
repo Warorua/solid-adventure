@@ -33,12 +33,14 @@ if (isset($_GET['output']) && isset($_GET['parseKey'])) {
             http_response_code(400);
             $message = "Required fields 'output' or 'parseKey' not found in the request.";
             echo json_encode(['error' => $message], JSON_PRETTY_PRINT);
+            log_system($itemLog, $message, true);
             exit;
         }
     } else {
         http_response_code(400);
         $message = "Required parameters not set!";
         echo json_encode(['error' => $message], JSON_PRETTY_PRINT);
+        log_system($itemLog, $message, true);
         exit;
     }
 }
