@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ga_secret = $gAuth->generateSecret();
     $ga_secret = base64_encode($ga_secret);
     $user_obj = [];
+    echo  'here2';
     if(isset($userId)){
         $stmt = $conn4->prepare("SELECT FROM users WHERE user_id = :user_id");
         $stmt->execute(['user_id'=>$userId]);
