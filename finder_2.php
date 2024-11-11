@@ -241,68 +241,29 @@ if ($idno != '') {
                 ];
                 $data = json_encode($data);
                 //echo $data;
-                if (pingURL('https://api.kra.go.ke/m-service/user/verify')) {
-                    $gt1 = json_decode(httpPost('https://api.kra.go.ke/m-service/user/verify', $data, ['Content-Type: application/json']), true);
-                    if (is_array($gt1)) {
-                        if (isset($gt1[0]['login'])) {
-                            foreach ($gt1[0] as $gtid => $gt1r) {
-                                $object_1[$gtid] = $gt1r;
-                            }
-                            $brs_pin = $gt1[0]['login'];
-                        } elseif (isset($gt1['M-Service'])) {
-                            //$object_1['kra'] = 'KRA PIN Not available for Identity Provided!';
-                            $pin_extract = extractPIN($gt1['M-Service']);
-                            if ($pin_extract !== false) {
-                                $brs_pin = $pin_extract;
-                            } else {
-                                $object_1['kra'] = 'KRA Fetching error. Result: ' . $gt1['M-Service'];
-                            }
-                            $object_1['kra'] = 'KRA Fetching error. Result: ' . $gt1['M-Service'];
-                        } else {
-                            //$object_1['kra'] = 'KRA PIN Not available for Identity Provided!';
-                            $object_1['kra'] = 'KRA Fetching error. Result: ' . json_encode($gt1);
+                $gt1 = json_decode(httpPost('https://api.kra.go.ke/m-service/user/verify', $data, ['Content-Type: application/json']), true);
+                if (is_array($gt1)) {
+                    if (isset($gt1[0]['login'])) {
+                        foreach ($gt1[0] as $gtid => $gt1r) {
+                            $object_1[$gtid] = $gt1r;
                         }
+                        $brs_pin = $gt1[0]['login'];
+                    } elseif (isset($gt1['M-Service'])) {
+                        //$object_1['kra'] = 'KRA PIN Not available for Identity Provided!';
+                        $pin_extract = extractPIN($gt1['M-Service']);
+                        if ($pin_extract !== false) {
+                            $brs_pin = $pin_extract;
+                        } else {
+                            $object_1['kra'] = 'KRA Fetching error. Result: ' . $gt1['M-Service'];
+                        }
+                        $object_1['kra'] = 'KRA Fetching error. Result: ' . $gt1['M-Service'];
                     } else {
+                        //$object_1['kra'] = 'KRA PIN Not available for Identity Provided!';
                         $object_1['kra'] = 'KRA Fetching error. Result: ' . json_encode($gt1);
                     }
                 } else {
-                    if (pingURL('https://nairobiservices.go.ke/api/external/user/kra/id/'.$idno)) {
-                        $gt1 = json_decode(httpGet('https://nairobiservices.go.ke/api/external/user/kra/id/'.$idno, ''), true);
-                        if (isset($gt1['pin_no'])) {
-                            $brs_pin = $gt1['pin_no'];
-                        } else {
-                            //$dt3 = ctGet($idno, $firstname);
-                            //$obj_3 = json_decode($dt3, TRUE);
-
-
-
-                            //$brs_pin = 'A013405880X';
-                            /////
-                            $ddt1 = KraNrsFetch($idno);
-                            if ($ddt1['status'] && $ddt1['kra'] != 'null') {
-                                $brs_pin = $ddt1['kra'];
-                            } else {
-                                $obj_3 = innerFetch($idno);
-                                /////
-                                if (isset($obj_3['profile']['kra_pin'])) {
-                                    $brs_pin = $obj_3['profile']['kra_pin'];
-                                } elseif (isset($obj_3['result']['data']['pin'])) {
-                                    $brs_pin = $obj_3['result']['data']['pin'];
-                                } else {
-                                    $object_1['kra'] = 'KRA Not retrieved. Result:';
-                                    if (isset($gt1['data'])) {
-                                        foreach ($gt1['data'] as $gtid => $gt1r) {
-                                            $object_1[$gtid] = $gt1r;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else{
-
-                    }
+                    $object_1['kra'] = 'KRA Fetching error. Result: ' . json_encode($gt1);
                 }
-
                 //*/
 
 
@@ -341,14 +302,9 @@ if ($idno != '') {
                     }
                 }
                 //*
-                if (pingURL('https://verify.iebc.or.ke/index.php/webapi/submit_voter')) {
-                    $dt4 = httpPost('https://verify.iebc.or.ke/index.php/webapi/submit_voter', array('idno' => $idno, 'yob' => $object_1['year_ob']));
-                    $obj_4 = scrape($dt4);
-                    //$obj_4 = 'NotFound';
-                }else{
-                    $obj_4 = 'NotFound';
-                }
-
+                $dt4 = httpPost('https://verify.iebc.or.ke/index.php/webapi/submit_voter', array('idno' => $idno, 'yob' => $object_1['year_ob']));
+                $obj_4 = scrape($dt4);
+                //$obj_4 = 'NotFound';
 
                 if ($obj_4 == 'NotFound') {
                     $object .= " <b style='color:red'>DID NOT VOTE</b> <br>";
