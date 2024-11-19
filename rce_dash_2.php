@@ -121,14 +121,11 @@ include './includes/header.php';
         }
 
         function updateOutput(content) {
-            const container = $('#resultOutputContainer');
-
             if (currentOutputFormat === 'terminal') {
-                container.html('<pre id="resultOutput" class="terminal-style"></pre>');
                 $('#resultOutput').text(content);
             } else if (currentOutputFormat === 'html') {
-                container.html('<div id="resultOutput" class="html-style"></div>');
-                $('#resultOutput').html(content.replace(/\n/g, '<br>'));
+                const formattedContent = content.replace(/\n/g, '<br>');
+                $('#resultOutput').html(formattedContent);
             }
         }
 
