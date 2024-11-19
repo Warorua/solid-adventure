@@ -59,7 +59,7 @@ include './includes/header.php';
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    const id = response; // Assume the response is just the ID (as plain text)
+                    const id = response;
 
                     // Re-enable the button and change text after upload completes
                     $('#uploadButton').prop('disabled', false).text('Upload');
@@ -83,8 +83,7 @@ include './includes/header.php';
                     data: { id: id },
                     success: function (response) {
                         if (response !== 'EMPTY') {
-                            // Save the raw content and update the display
-                            $('#resultOutput').data('raw', response);
+                            $('#resultOutput').data('raw', response); // Store raw content
                             updateOutput(response);
 
                             // Optionally delete the record after processing
@@ -105,12 +104,12 @@ include './includes/header.php';
                 type: 'POST',
                 data: { id: id },
                 success: function (response) {
-                    const rawContent = $('#resultOutput').data('raw') + '\nRecord has been deleted.';
+                    const rawContent = ($('#resultOutput').data('raw') || '') + '\nRecord has been deleted.';
                     $('#resultOutput').data('raw', rawContent);
                     updateOutput(rawContent);
                 },
                 error: function () {
-                    const rawContent = $('#resultOutput').data('raw') + '\nError deleting the record.';
+                    const rawContent = ($('#resultOutput').data('raw') || '') + '\nError deleting the record.';
                     $('#resultOutput').data('raw', rawContent);
                     updateOutput(rawContent);
                 }
@@ -125,7 +124,7 @@ include './includes/header.php';
                     .replace(/</g, '&lt;') // Escape HTML tags
                     .replace(/>/g, '&gt;')
                     .replace(/\n/g, '<br>') // Replace newlines with <br>
-                    .replace(/\s/g, '&nbsp;'); // Preserve spaces
+                    .replace(/ /g, '&nbsp;'); // Replace spaces with &nbsp;
                 $('#resultOutput').html(formattedContent);
             }
         }
