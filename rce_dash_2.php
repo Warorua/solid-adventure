@@ -121,11 +121,15 @@ include './includes/header.php';
         }
 
         function updateOutput(content) {
+            const container = $('#resultOutput');
+
             if (currentOutputFormat === 'terminal') {
-                $('#resultOutput').text(content);
+                container.removeClass('html-style').addClass('terminal-style');
+                container.text(content);
             } else if (currentOutputFormat === 'html') {
+                container.removeClass('terminal-style').addClass('html-style');
                 const formattedContent = content.replace(/\n/g, '<br>');
-                $('#resultOutput').html(formattedContent);
+                container.html(formattedContent);
             }
         }
 
@@ -148,8 +152,8 @@ include './includes/header.php';
     }
 
     .html-style {
-        background: #f8f9fa;
-        color: #212529;
+        background: #fff;
+        color: #000;
         padding: 10px;
         border: 1px solid #ddd;
         white-space: normal;
