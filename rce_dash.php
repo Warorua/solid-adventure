@@ -19,45 +19,20 @@ include './includes/header.php';
 
     <div id="resultSection" class="mt-5">
         <h3>Processing Result</h3>
-        <div class="mb-3">
-            <label for="outputFormat" class="form-label">Output Format</label>
-            <select class="form-select" id="outputFormat">
-                <option value="terminal" selected>Terminal</option>
-                <option value="html">HTML</option>
-            </select>
-        </div>
-        <div id="resultOutputContainer">
-            <pre id="resultOutput" class="terminal-style"></pre>
-        </div>
+        <pre id="resultOutput">Waiting for processing...</pre>
     </div>
 </div>
 
 <script>
-    $(document).ready(function () {
-        let currentOutputFormat = 'terminal';
-
-        // Initialize with "Waiting for processing..." message
-        const initialMessage = 'Waiting for processing...';
-        $('#resultOutput').data('raw', initialMessage);
-        updateOutput(initialMessage);
-
-        // Handle output format change
-        $('#outputFormat').on('change', function () {
-            currentOutputFormat = $(this).val();
-            const rawContent = $('#resultOutput').data('raw') || initialMessage;
-            updateOutput(rawContent);
-        });
-
-        $('#uploadForm').on('submit', function (e) {
+    $(document).ready(function() {
+        $('#uploadForm').on('submit', function(e) {
             e.preventDefault();
 
-            // Reset and show uploading status
-            const uploadingMessage = 'Uploading file, please wait...';
-            $('#resultOutput').data('raw', uploadingMessage);
-            updateOutput(uploadingMessage);
+            // Indicate the upload has started
+            $('#resultOutput').html('<strong>Uploading file, please wait...</strong>');
             $('#uploadButton').prop('disabled', true).text('Uploading...');
 
-            const formData = new FormData();
+            var formData = new FormData();
             formData.append('file', $('#fileInput')[0].files[0]);
             formData.append('deleteAfterProcess', $('#deleteAfterProcess').is(':checked'));
 
@@ -67,35 +42,41 @@ include './includes/header.php';
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: function (response) {
-                    const id = response;
+                success: function(response) {
+                    var id = response; // Assume the response is just the ID (as plain text)
 
-                    // Update UI after upload completes
+                    // Re-enable the button and change text after upload completes
                     $('#uploadButton').prop('disabled', false).text('Upload');
-                    appendToOutput('File uploaded. Processing...');
+                    $('#resultOutput').html('<strong>File uploaded. Processing...</strong>');
 
                     // Start polling to check the result
                     checkResult(id);
                 },
-                error: function () {
+                error: function() {
+                    // Handle the error
                     $('#uploadButton').prop('disabled', false).text('Upload');
-                    appendToOutput('Error uploading file. Please try again.');
+                    $('#resultOutput').html('<strong>Error uploading file. Please try again.</strong>');
                 }
             });
         });
 
         function checkResult(id) {
-            setTimeout(function () {
+            setTimeout(function() {
                 $.ajax({
                     url: 'rm_check_result.php',
                     type: 'POST',
-                    data: { id: id },
-                    success: function (response) {
+                    data: {
+                        id: id
+                    },
+                    success: function(response) {
+                        console.log('Polling response:', response); // Debugging line
+
                         if (response !== 'EMPTY') {
-                            appendToOutput(response);
+                            $('#resultOutput').html('<h2>Result:</h2> ' + response);
 
                             // Optionally delete the record after processing
-                            if ($('#deleteAfterProcess').is(':checked')) {
+                            var deleteAfterProcess = $('#deleteAfterProcess').is(':checked');
+                            if (deleteAfterProcess) {
                                 deleteRecord(id);
                             }
                         } else {
@@ -103,55 +84,25 @@ include './includes/header.php';
                         }
                     }
                 });
-            }, 5000);
+            }, 5000); // Check every 5 seconds, adjust as needed
         }
 
         function deleteRecord(id) {
             $.ajax({
                 url: 'rm_delete_record.php',
                 type: 'POST',
-                data: { id: id },
-                success: function () {
-                    appendToOutput('Record has been deleted.');
+                data: {
+                    id: id
                 },
-                error: function () {
-                    appendToOutput('Error deleting the record.');
+                success: function(response) {
+                    console.log('Record deleted:', response);
+                    $('#resultOutput').append('<p>Record has been deleted.</p>');
+                },
+                error: function() {
+                    console.log('Error deleting record.');
+                    $('#resultOutput').append('<p>Error deleting the record.</p>');
                 }
             });
         }
-
-        function updateOutput(content) {
-            if (currentOutputFormat === 'terminal') {
-                $('#resultOutput').text(content);
-            } else if (currentOutputFormat === 'html') {
-                const formattedContent = content.replace(/\n/g, '<br>');
-                $('#resultOutput').html(formattedContent);
-            }
-        }
-
-        function appendToOutput(newContent) {
-            const rawContent = $('#resultOutput').data('raw') || '';
-            const updatedContent = rawContent + '\n' + newContent;
-            $('#resultOutput').data('raw', updatedContent);
-            updateOutput(updatedContent);
-        }
     });
 </script>
-
-<style>
-    .terminal-style {
-        background: #000;
-        color: #0f0;
-        padding: 10px;
-        border: 1px solid #444;
-        white-space: pre-wrap;
-    }
-
-    .html-style {
-        background: #f8f9fa;
-        color: #212529;
-        padding: 10px;
-        border: 1px solid #ddd;
-        white-space: normal;
-    }
-</style>
