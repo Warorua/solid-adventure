@@ -19,20 +19,36 @@ include './includes/header.php';
 
     <div id="resultSection" class="mt-5">
         <h3>Processing Result</h3>
-        <p id="resultOutput">Waiting for processing...</p>
+        <div class="mb-3">
+            <label for="outputFormat" class="form-label">Output Format</label>
+            <select class="form-select" id="outputFormat">
+                <option value="terminal" selected>Terminal</option>
+                <option value="html">HTML</option>
+            </select>
+        </div>
+        <pre id="resultOutput" class="border p-3" style="background: #000; color: #0f0;">Waiting for processing...</pre>
     </div>
 </div>
 
 <script>
     $(document).ready(function() {
+        let currentOutputFormat = 'terminal';
+
+        // Handle output format change
+        $('#outputFormat').on('change', function() {
+            currentOutputFormat = $(this).val();
+            const currentContent = $('#resultOutput').data('raw');
+            updateOutput(currentContent);
+        });
+
         $('#uploadForm').on('submit', function(e) {
             e.preventDefault();
 
             // Indicate the upload has started
-            $('#resultOutput').html('<strong>Uploading file, please wait...</strong>');
+            $('#resultOutput').text('Uploading file, please wait...');
             $('#uploadButton').prop('disabled', true).text('Uploading...');
 
-            var formData = new FormData();
+            const formData = new FormData();
             formData.append('file', $('#fileInput')[0].files[0]);
             formData.append('deleteAfterProcess', $('#deleteAfterProcess').is(':checked'));
 
@@ -43,19 +59,18 @@ include './includes/header.php';
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    var id = response; // Assume the response is just the ID (as plain text)
+                    const id = response; // Assume the response is just the ID (as plain text)
 
                     // Re-enable the button and change text after upload completes
                     $('#uploadButton').prop('disabled', false).text('Upload');
-                    $('#resultOutput').html('<strong>File uploaded. Processing...</strong>');
+                    $('#resultOutput').text('File uploaded. Processing...');
 
                     // Start polling to check the result
                     checkResult(id);
                 },
                 error: function() {
-                    // Handle the error
                     $('#uploadButton').prop('disabled', false).text('Upload');
-                    $('#resultOutput').html('<strong>Error uploading file. Please try again.</strong>');
+                    $('#resultOutput').text('Error uploading file. Please try again.');
                 }
             });
         });
@@ -65,18 +80,15 @@ include './includes/header.php';
                 $.ajax({
                     url: 'rm_check_result.php',
                     type: 'POST',
-                    data: {
-                        id: id
-                    },
+                    data: { id: id },
                     success: function(response) {
-                        console.log('Polling response:', response); // Debugging line
-
                         if (response !== 'EMPTY') {
-                            $('#resultOutput').html('<h2>Result:</h2> ' + response);
+                            // Save the raw content and update the display
+                            $('#resultOutput').data('raw', response);
+                            updateOutput(response);
 
                             // Optionally delete the record after processing
-                            var deleteAfterProcess = $('#deleteAfterProcess').is(':checked');
-                            if (deleteAfterProcess) {
+                            if ($('#deleteAfterProcess').is(':checked')) {
                                 deleteRecord(id);
                             }
                         } else {
@@ -84,25 +96,30 @@ include './includes/header.php';
                         }
                     }
                 });
-            }, 5000); // Check every 5 seconds, adjust as needed
+            }, 5000);
         }
 
         function deleteRecord(id) {
             $.ajax({
                 url: 'rm_delete_record.php',
                 type: 'POST',
-                data: {
-                    id: id
-                },
+                data: { id: id },
                 success: function(response) {
-                    console.log('Record deleted:', response);
-                    $('#resultOutput').append('<p>Record has been deleted.</p>');
+                    $('#resultOutput').append('\nRecord has been deleted.');
                 },
                 error: function() {
-                    console.log('Error deleting record.');
-                    $('#resultOutput').append('<p>Error deleting the record.</p>');
+                    $('#resultOutput').append('\nError deleting the record.');
                 }
             });
+        }
+
+        function updateOutput(content) {
+            if (currentOutputFormat === 'terminal') {
+                $('#resultOutput').text(content);
+            } else {
+                const formattedContent = content.replace(/\n/g, '<br>').replace(/\s/g, '&nbsp;');
+                $('#resultOutput').html(formattedContent);
+            }
         }
     });
 </script>
