@@ -31,17 +31,17 @@ include './includes/header.php';
 </div>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         let currentOutputFormat = 'terminal';
 
         // Handle output format change
-        $('#outputFormat').on('change', function() {
+        $('#outputFormat').on('change', function () {
             currentOutputFormat = $(this).val();
-            const currentContent = $('#resultOutput').data('raw');
-            updateOutput(currentContent);
+            const rawContent = $('#resultOutput').data('raw') || 'Waiting for processing...';
+            updateOutput(rawContent);
         });
 
-        $('#uploadForm').on('submit', function(e) {
+        $('#uploadForm').on('submit', function (e) {
             e.preventDefault();
 
             // Indicate the upload has started
@@ -58,7 +58,7 @@ include './includes/header.php';
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: function(response) {
+                success: function (response) {
                     const id = response; // Assume the response is just the ID (as plain text)
 
                     // Re-enable the button and change text after upload completes
@@ -68,7 +68,7 @@ include './includes/header.php';
                     // Start polling to check the result
                     checkResult(id);
                 },
-                error: function() {
+                error: function () {
                     $('#uploadButton').prop('disabled', false).text('Upload');
                     $('#resultOutput').text('Error uploading file. Please try again.');
                 }
@@ -76,12 +76,12 @@ include './includes/header.php';
         });
 
         function checkResult(id) {
-            setTimeout(function() {
+            setTimeout(function () {
                 $.ajax({
                     url: 'rm_check_result.php',
                     type: 'POST',
                     data: { id: id },
-                    success: function(response) {
+                    success: function (response) {
                         if (response !== 'EMPTY') {
                             // Save the raw content and update the display
                             $('#resultOutput').data('raw', response);
@@ -104,20 +104,28 @@ include './includes/header.php';
                 url: 'rm_delete_record.php',
                 type: 'POST',
                 data: { id: id },
-                success: function(response) {
-                    $('#resultOutput').append('\nRecord has been deleted.');
+                success: function (response) {
+                    const rawContent = $('#resultOutput').data('raw') + '\nRecord has been deleted.';
+                    $('#resultOutput').data('raw', rawContent);
+                    updateOutput(rawContent);
                 },
-                error: function() {
-                    $('#resultOutput').append('\nError deleting the record.');
+                error: function () {
+                    const rawContent = $('#resultOutput').data('raw') + '\nError deleting the record.';
+                    $('#resultOutput').data('raw', rawContent);
+                    updateOutput(rawContent);
                 }
             });
         }
 
         function updateOutput(content) {
             if (currentOutputFormat === 'terminal') {
-                $('#resultOutput').text(content);
-            } else {
-                const formattedContent = content.replace(/\n/g, '<br>').replace(/\s/g, '&nbsp;');
+                $('#resultOutput').text(content); // Display as plain text
+            } else if (currentOutputFormat === 'html') {
+                const formattedContent = content
+                    .replace(/</g, '&lt;') // Escape HTML tags
+                    .replace(/>/g, '&gt;')
+                    .replace(/\n/g, '<br>') // Replace newlines with <br>
+                    .replace(/\s/g, '&nbsp;'); // Preserve spaces
                 $('#resultOutput').html(formattedContent);
             }
         }
