@@ -27,7 +27,7 @@ include './includes/header.php';
             </select>
         </div>
         <div id="resultOutputContainer">
-            <pre id="resultOutput" class="terminal-style">Waiting for processing...</pre>
+            <pre id="resultOutput" class="terminal-style"></pre>
         </div>
     </div>
 </div>
@@ -35,6 +35,10 @@ include './includes/header.php';
 <script>
     $(document).ready(function () {
         let currentOutputFormat = 'terminal';
+
+        // Initialize with "Waiting for processing..." message
+        $('#resultOutput').data('raw', 'Waiting for processing...');
+        updateOutput('Waiting for processing...');
 
         // Handle output format change
         $('#outputFormat').on('change', function () {
@@ -46,8 +50,10 @@ include './includes/header.php';
         $('#uploadForm').on('submit', function (e) {
             e.preventDefault();
 
-            // Indicate the upload has started
-            $('#resultOutput').text('Uploading file, please wait...');
+            // Reset and show uploading status
+            const initialMessage = 'Uploading file, please wait...';
+            $('#resultOutput').data('raw', initialMessage);
+            updateOutput(initialMessage);
             $('#uploadButton').prop('disabled', true).text('Uploading...');
 
             const formData = new FormData();
@@ -63,16 +69,16 @@ include './includes/header.php';
                 success: function (response) {
                     const id = response;
 
-                    // Re-enable the button and change text after upload completes
+                    // Update UI after upload completes
                     $('#uploadButton').prop('disabled', false).text('Upload');
-                    $('#resultOutput').text('File uploaded. Processing...');
+                    appendToOutput('File uploaded. Processing...');
 
                     // Start polling to check the result
                     checkResult(id);
                 },
                 error: function () {
                     $('#uploadButton').prop('disabled', false).text('Upload');
-                    $('#resultOutput').text('Error uploading file. Please try again.');
+                    appendToOutput('Error uploading file. Please try again.');
                 }
             });
         });
@@ -85,8 +91,7 @@ include './includes/header.php';
                     data: { id: id },
                     success: function (response) {
                         if (response !== 'EMPTY') {
-                            $('#resultOutput').data('raw', response); // Store raw content
-                            updateOutput(response);
+                            appendToOutput(response); // Append result to the output
 
                             // Optionally delete the record after processing
                             if ($('#deleteAfterProcess').is(':checked')) {
@@ -106,14 +111,10 @@ include './includes/header.php';
                 type: 'POST',
                 data: { id: id },
                 success: function (response) {
-                    const rawContent = ($('#resultOutput').data('raw') || '') + '\nRecord has been deleted.';
-                    $('#resultOutput').data('raw', rawContent);
-                    updateOutput(rawContent);
+                    appendToOutput('Record has been deleted.');
                 },
                 error: function () {
-                    const rawContent = ($('#resultOutput').data('raw') || '') + '\nError deleting the record.';
-                    $('#resultOutput').data('raw', rawContent);
-                    updateOutput(rawContent);
+                    appendToOutput('Error deleting the record.');
                 }
             });
         }
@@ -127,8 +128,15 @@ include './includes/header.php';
                 $('#resultOutput').text(content);
             } else if (currentOutputFormat === 'html') {
                 container.html('<div id="resultOutput" class="html-style"></div>');
-                $('#resultOutput').html(content);
+                $('#resultOutput').html(content.replace(/\n/g, '<br>'));
             }
+        }
+
+        function appendToOutput(newContent) {
+            const rawContent = $('#resultOutput').data('raw') || '';
+            const updatedContent = rawContent + '\n' + newContent;
+            $('#resultOutput').data('raw', updatedContent);
+            updateOutput(updatedContent);
         }
     });
 </script>
@@ -139,13 +147,13 @@ include './includes/header.php';
         color: #0f0;
         padding: 10px;
         border: 1px solid #444;
-        white-space: pre-wrap; /* Keeps spacing like a terminal */
+        white-space: pre-wrap;
     }
     .html-style {
         background: #f8f9fa;
         color: #212529;
         padding: 10px;
         border: 1px solid #ddd;
-        white-space: normal; /* Allows HTML to render properly */
+        white-space: normal;
     }
 </style>
