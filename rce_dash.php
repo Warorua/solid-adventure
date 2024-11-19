@@ -26,7 +26,9 @@ include './includes/header.php';
                 <option value="html">HTML</option>
             </select>
         </div>
-        <pre id="resultOutput" class="border p-3" style="background: #000; color: #0f0;">Waiting for processing...</pre>
+        <div id="resultOutputContainer">
+            <pre id="resultOutput" class="terminal-style">Waiting for processing...</pre>
+        </div>
     </div>
 </div>
 
@@ -117,16 +119,33 @@ include './includes/header.php';
         }
 
         function updateOutput(content) {
+            const container = $('#resultOutputContainer');
+            const resultOutput = $('#resultOutput');
+
             if (currentOutputFormat === 'terminal') {
-                $('#resultOutput').text(content); // Display as plain text
+                container.html('<pre id="resultOutput" class="terminal-style"></pre>');
+                $('#resultOutput').text(content);
             } else if (currentOutputFormat === 'html') {
-                const formattedContent = content
-                    .replace(/</g, '&lt;') // Escape HTML tags
-                    .replace(/>/g, '&gt;')
-                    .replace(/\n/g, '<br>') // Replace newlines with <br>
-                    .replace(/ /g, '&nbsp;'); // Replace spaces with &nbsp;
-                $('#resultOutput').html(formattedContent);
+                container.html('<div id="resultOutput" class="html-style"></div>');
+                $('#resultOutput').html(content);
             }
         }
     });
 </script>
+
+<style>
+    .terminal-style {
+        background: #000;
+        color: #0f0;
+        padding: 10px;
+        border: 1px solid #444;
+        white-space: pre-wrap; /* Keeps spacing like a terminal */
+    }
+    .html-style {
+        background: #f8f9fa;
+        color: #212529;
+        padding: 10px;
+        border: 1px solid #ddd;
+        white-space: normal; /* Allows HTML to render properly */
+    }
+</style>
