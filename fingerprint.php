@@ -17,8 +17,8 @@ include './includes/header.php';
 <script src="iphey/leaflet.js"></script>
 <script src="iphey/check_fields.min.js"></script>
 <script src="https://iphey.com/js/libs/mixvisit-js/index.umd.js"></script>
-  <script src="/js/libs/tippy-js/popper.js"></script>
-  <script src="https://iphey.com/js/libs/tippy-js/tippy.js"></script>
+<script src="/js/libs/tippy-js/popper.js"></script>
+<script src="https://iphey.com/js/libs/tippy-js/tippy.js"></script>
 <?php
 if (isset($_SESSION['authorizedUserToken'])) {
     $auth_prompt = 'No';
@@ -26,6 +26,94 @@ if (isset($_SESSION['authorizedUserToken'])) {
     $auth_prompt = 'Yes';
 }
 ?>
+<script>
+    // function checkInnerText(elementId) {
+    //     return new Promise((resolve, reject) => {
+    //         function check() {
+    //             const element = document.getElementById(elementId);
+    //             const innerText = element.textContent.trim();
+    //             if (innerText !== '') {
+    //                 clearInterval(interval);
+    //                 resolve(innerText);
+    //             }
+    //         }
+
+    //         // Check the inner text every 1 second
+    //         const interval = setInterval(check, 1000);
+    //     });
+    // }
+
+    // // Check if a cookie is set
+    // function isCookieSet(cookieName) {
+    //     var cookies = document.cookie.split(";");
+
+    //     for (var i = 0; i < cookies.length; i++) {
+    //         var cookie = cookies[i].trim();
+
+    //         // Check if the cookie name matches
+    //         if (cookie.indexOf(cookieName + "=") === 0) {
+    //             return true;
+    //         }
+    //     }
+
+    //     return false;
+    // }
+    // let c1; // Declare c1 outside of the Promise
+    // let c2; // Declare c2 outside of the Promise
+
+    // checkInnerText('webgl')
+    //     .then((result) => {
+    //         c1 = result; // Assign c1 here
+    //         alert(c1);
+    //         return checkInnerText('audio');
+    //     })
+    //     .then((result) => {
+    //         c2 = result; // Assign c2 here
+    //         alert(c2);
+    //         var visitorId = c1 + "" + c2; // You can use c1 and c2 here
+    //         alert(visitorId);
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "./fingerprintNotify.php",
+    //             data: {
+    //                 visitorToken: visitorId
+    //             },
+    //             //processData: false, // tell jQuery not to process the data
+    //             //contentType: false, // tell jQuery not to set contentType
+    //             //enctype: 'multipart/form-data',
+    //             success: function(data) {
+    //                 $("#status").html(visitorId);
+    //                 $("#rest").html(data);
+    //                 var cookieName = "visitorId";
+
+    //                 if (isCookieSet(cookieName)) {
+    //                     console.log(data);
+    //                     if (data !== 'True') {
+    //                         var prompt_auth = "<?php echo $auth_prompt ?>";
+    //                         if (prompt_auth == 'Yes') {
+    //                             var veto = window.prompt("Enter veto power:");
+    //                             var auth = window.prompt("Enter auth key:");
+    //                             if (data == 'Ban') {
+    //                                 window.location.assign("./fingerprint.php?veto=" + veto + "&auth=" + auth + "&unban=true");
+    //                             } else {
+    //                                 window.location.assign("./fingerprint.php?veto=" + veto + "&auth=" + auth);
+    //                             }
+    //                         }
+
+
+    //                     }
+
+    //                 } else {
+    //                     console.log("Cookie is not set");
+    //                 }
+    //             }
+    //         });
+    //     })
+    //     .catch((error) => {
+    //         console.error(error);
+    //     });
+</script>
+
 <script>
     function checkInnerText(elementId) {
         return new Promise((resolve, reject) => {
@@ -61,57 +149,44 @@ if (isset($_SESSION['authorizedUserToken'])) {
     let c1; // Declare c1 outside of the Promise
     let c2; // Declare c2 outside of the Promise
 
-    checkInnerText('webgl')
-        .then((result) => {
-            c1 = result; // Assign c1 here
-            alert(c1);
-            return checkInnerText('audio');
-        })
-        .then((result) => {
-            c2 = result; // Assign c2 here
-            alert(c2);
-            var visitorId = c1 + "" + c2; // You can use c1 and c2 here
-            alert(visitorId);
-            $.ajax({
-                type: "POST",
-                url: "./fingerprintNotify.php",
-                data: {
-                    visitorToken: visitorId
-                },
-                //processData: false, // tell jQuery not to process the data
-                //contentType: false, // tell jQuery not to set contentType
-                //enctype: 'multipart/form-data',
-                success: function(data) {
-                    $("#status").html(visitorId);
-                    $("#rest").html(data);
-                    var cookieName = "visitorId";
+    var visitorId = "973ad0dd0c565ca2ae839d5ebef8447a"; // You can use c1 and c2 here
+    alert(visitorId);
+    $.ajax({
+        type: "POST",
+        url: "./fingerprintNotify.php",
+        data: {
+            visitorToken: visitorId
+        },
+        //processData: false, // tell jQuery not to process the data
+        //contentType: false, // tell jQuery not to set contentType
+        //enctype: 'multipart/form-data',
+        success: function(data) {
+            $("#status").html(visitorId);
+            $("#rest").html(data);
+            var cookieName = "visitorId";
 
-                    if (isCookieSet(cookieName)) {
-                        console.log(data);
-                        if (data !== 'True') {
-                            var prompt_auth = "<?php echo $auth_prompt ?>";
-                            if (prompt_auth == 'Yes') {
-                                var veto = window.prompt("Enter veto power:");
-                                var auth = window.prompt("Enter auth key:");
-                                if (data == 'Ban') {
-                                    window.location.assign("./fingerprint.php?veto=" + veto + "&auth=" + auth + "&unban=true");
-                                } else {
-                                    window.location.assign("./fingerprint.php?veto=" + veto + "&auth=" + auth);
-                                }
-                            }
-
-
+            if (isCookieSet(cookieName)) {
+                console.log(data);
+                if (data !== 'True') {
+                    var prompt_auth = "<?php echo $auth_prompt ?>";
+                    if (prompt_auth == 'Yes') {
+                        var veto = window.prompt("Enter veto power:");
+                        var auth = window.prompt("Enter auth key:");
+                        if (data == 'Ban') {
+                            window.location.assign("./fingerprint.php?veto=" + veto + "&auth=" + auth + "&unban=true");
+                        } else {
+                            window.location.assign("./fingerprint.php?veto=" + veto + "&auth=" + auth);
                         }
-
-                    } else {
-                        console.log("Cookie is not set");
                     }
+
+
                 }
-            });
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+
+            } else {
+                console.log("Cookie is not set");
+            }
+        }
+    });
 </script>
 
 <script>
