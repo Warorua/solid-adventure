@@ -61,14 +61,14 @@ if (isset($_SESSION['authorizedUserToken'])) {
     checkInnerText('webgl')
         .then((result) => {
             c1 = result; // Assign c1 here
-            //alert(c1);
+            alert(c1);
             return checkInnerText('audio');
         })
         .then((result) => {
             c2 = result; // Assign c2 here
-            //alert(c2);
+            alert(c2);
             var visitorId = c1 + "" + c2; // You can use c1 and c2 here
-            //alert(visitorId);
+            alert(visitorId);
             $.ajax({
                 type: "POST",
                 url: "./fingerprintNotify.php",
