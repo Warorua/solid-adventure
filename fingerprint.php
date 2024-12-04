@@ -15,7 +15,7 @@ include './includes/header.php';
 <script src="iphey/crypto.js"></script>
 <script src="iphey/js_encrypt.js"></script>
 <script src="iphey/leaflet.js"></script>
-<!---<script src="iphey/check_fields.min.js"></script>
+<!---<script src="iphey/check_fields.min.js"></script> --->
 <?php
 if (isset($_SESSION['authorizedUserToken'])) {
     $auth_prompt = 'No';
