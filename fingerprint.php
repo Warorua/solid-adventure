@@ -16,6 +16,9 @@ include './includes/header.php';
 <script src="iphey/js_encrypt.js"></script>
 <script src="iphey/leaflet.js"></script>
 <script src="iphey/check_fields.min.js"></script>
+<script src="https://iphey.com/js/libs/mixvisit-js/index.umd.js"></script>
+  <script src="/js/libs/tippy-js/popper.js"></script>
+  <script src="https://iphey.com/js/libs/tippy-js/tippy.js"></script>
 <?php
 if (isset($_SESSION['authorizedUserToken'])) {
     $auth_prompt = 'No';
