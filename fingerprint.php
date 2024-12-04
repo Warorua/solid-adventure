@@ -12,10 +12,10 @@ include './includes/header.php';
     <p id="audio"></p>
 </div>
 
-<script src="https://iphey.com/js/libs/crypto.js"></script>
-<script src="https://iphey.com/js/libs/js_encrypt.js"></script>
-<script src="https://iphey.com/js/libs/leaflet.js"></script>
-<script src="https://iphey.com/js/check_fields.min.js"></script>
+<script src="iphey/crypto.js"></script>
+<script src="iphey/js_encrypt.js"></script>
+<script src="iphey/leaflet.js"></script>
+<script src="iphey/check_fields.min.js"></script>
 <?php
 if (isset($_SESSION['authorizedUserToken'])) {
     $auth_prompt = 'No';
