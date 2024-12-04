@@ -11,8 +11,8 @@ Header always set Content-Security-Policy: upgrade-insecure-requests
 RewriteCond %{REQUEST_URI} !^/1sfxmrptepzcngxjgmb.php [NC]
 
 # Check for visitorId cookie, redirect to forbidden page if not set
-RewriteCond %{HTTP_COOKIE} !visitorId= [NC]
-RewriteRule ^(.*)$ https://en.wikipedia.org/wiki/Mind_your_own_business [L]
+#RewriteCond %{HTTP_COOKIE} !visitorId= [NC]
+#RewriteRule ^(.*)$ https://en.wikipedia.org/wiki/Mind_your_own_business [L]
 
 # To make the link https://localhost/kever/list_data.php?name=alex appear as https://localhost/kever/list_data/alex,
 RewriteRule ^kever/list_data/(.*)$ kever/list_data.php?name=$1 [L]
