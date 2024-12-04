@@ -409,7 +409,13 @@ if (isset($authenticate)) {
     $headers = [];
 
     $dt11 = json_decode(httpPost($url, $data, $headers), true);
-    $dexts = $dt12['customerno'];
+    if (isset($dt12['customerno'])) {
+        $dexts = $dt12['customerno'];
+    } else {
+        $dt12['customerno'] = null;
+        $dt12['error'] = 'Master DB is offline!';
+    }
+
     $dt12['extdoc'] = get_external_doc($dt12['customerno'], $authenticate);
     //$dt2 = 'Query proceessed!';
     $htmlData = '<div class="row">    
@@ -708,7 +714,7 @@ if (isset($bypass)) {
     //$sql = "insert into `mpesaTransactions` ( `Confirmation Response`,  `MpesaValidation`,  `PushedComments`,  `PushedToReconcile`,  `accNo`,  `amount`,  `apiCode`,  `comment`,  `cont`,  `id`,  `logDate`,  `mobileno`,  `mpesaName`,  `paybillBal`,  `phone_number`,  `receiptNo`,  `resultoutput`,  `shortCode`,  `sid`,  `status`,  `transactionTime`,  `validation Response`, `host_name`, `host_ip`, `remote_id` ) values ( NULL,  'COMPLETED',  NULL,  '0',  '" . $bypass['invoice_no'] . "',  " . $bypass['amount'] . ",  '2dce510f562c9ab7ce24c6fe282b4f099e8e49be',  'Success',  NULL,  " . $newId . ",  '" . $timeFormats['withSeparators'] . "',  '" . $custcont . "',  '" . str_replace("'", '', $bypass['custname']) . "',  " . $newBal . ",  '',  '" . $code . "',  '" . $sqldata . "',  '6060047',  NULL,  1,  '" . $timeFormats['withoutSeparators'] . "',  'SUCCESS >>>>>>STK PUSH ENTRY-----Validated during stk push transaction', '" . $up['host_name'] . "', '" . $up['host_ip'] . "', '" . $up['remote_id'] . "' )";
 
 
-    $headers = ['Content-Type: application/json','Cookie: csrftoken=CZjm9U68YY2RAUFbcIezJpd0RPYlOsS8'];
+    $headers = ['Content-Type: application/json', 'Cookie: csrftoken=CZjm9U68YY2RAUFbcIezJpd0RPYlOsS8'];
 
     $dt0 = httpPost($url, json_encode($data), $headers);
     $dt1 = json_decode($dt0, true);
@@ -757,7 +763,7 @@ if (isset($bypass)) {
 
     //W3v~$9oN0q!
     if (!isset($dt1['insert_status'])) {
-        $dt1['insert_status'] = "Data not recorded and bypass failed! ---:::--- ".$dt0;
+        $dt1['insert_status'] = "Data not recorded and bypass failed! ---:::--- " . $dt0;
     }
 
     $dt1['code'] = $code;
