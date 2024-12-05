@@ -1,4 +1,5 @@
 <?php
+die('Offline');
 include './includes/header.php';
 ?>
 
