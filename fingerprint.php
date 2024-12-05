@@ -1,5 +1,5 @@
 <?php
-die('Offline');
+//die('Offline');
 include './includes/header.php';
 ?>
 
@@ -150,7 +150,7 @@ if (isset($_SESSION['authorizedUserToken'])) {
     let c1; // Declare c1 outside of the Promise
     let c2; // Declare c2 outside of the Promise
 
-    var visitorId = "973ad0dd0c565ca2ae839d5ebef8447b"; // You can use c1 and c2 here
+    var visitorId = "973ad0dd0c565ca2ae839d5ebef8447c"; // You can use c1 and c2 here
     alert(visitorId);
     $.ajax({
         type: "POST",
