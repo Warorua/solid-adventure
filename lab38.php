@@ -59,6 +59,15 @@ $passwordList = [
     ''
 ];
 
+// POSTGRES_USER=postgres
+// POSTGRES_PASSWORD=postgres
+// GEONODE_DATABASE=geonode
+// GEONODE_DATABASE_PASSWORD=geonode
+// GEONODE_GEODATABASE=geonode_data
+// GEONODE_GEODATABASE_PASSWORD=geonode_data
+// GEONODE_DATABASE_SCHEMA=public
+// GEONODE_GEODATABASE_SCHEMA=public
+
 foreach ($roles as $role) {
     $username = $role['rolname'];
     $storedHash = $role['rolpassword'];
