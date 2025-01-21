@@ -121,6 +121,7 @@ function processRegRes($res)
 function userChecker($idno)
 {
 
+
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
@@ -132,31 +133,36 @@ function userChecker($idno)
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => 'personal_details=%5Bobject%20Object%5D&EVENT_ID=REGISTER&MODE=REGISTRATION_V2&INPUT_ACTION=VALIDATE_USER&langCode=en_US&USER_ID=ARMAAL&MIGRATED_USER=true&MOBILE_FLOW=Y&ID_TYPE=1&ID_NO=' . $idno . '&NID_NO=&EMAIL_ID=xxdfcx%40gmail.com&MOBILE_NO=2547000000102',
+        CURLOPT_POSTFIELDS => 'personal_details=%5Bobject%20Object%5D&EVENT_ID=REGISTER&MODE=REGISTRATION_V2&INPUT_ACTION=VALIDATE_USER&langCode=en_US&USER_ID=ARMAAL&MIGRATED_USER=true&MOBILE_FLOW=Y&ID_TYPE=1&ID_NO='.$idno.'&NID_NO=&EMAIL_ID=xxxx254%40gmail.com&MOBILE_NO=254700000002',
         CURLOPT_HTTPHEADER => array(
-            'Host: retail-onlinebanking.co-opbank.co.ke',
-            //'Cookie: visid_incap_2731887=nQqkhX2eRXe6cKhnX3vjtaI2j2QAAAAAQUIPAAAAAABP2HZk4b9xhFJ6W9LJrahs; incap_ses_774_2731887=WbieT9rtBhL7gflDAs69CqM2j2QAAAAAuD+a+J9KJxoCxO++WDa4LQ==; JSESSIONID=aTXPbYoXcMfoblCxP0wJnMi3jICxxeBablNiawIerRYK19S3j8Ji!-1278564459',
-            'Sec-Ch-Ua: "Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
-            'Accept: application/json, text/plain, */*',
-            'Content-Type: application/x-www-form-urlencoded',
-            'Dnt: 1',
-            'Sec-Ch-Ua-Mobile: ?0',
-            'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
-            'Sec-Ch-Ua-Platform: "Windows"',
-            'Origin: https://retail-onlinebanking.co-opbank.co.ke',
-            'Sec-Fetch-Site: same-origin',
-            'Sec-Fetch-Mode: cors',
-            'Sec-Fetch-Dest: empty',
-            'Referer: https://retail-onlinebanking.co-opbank.co.ke/iportalweb/register-form',
-            'Accept-Language: en-GB,en-US;q=0.9,en;q=0.8'
+            'host: retail-onlinebanking.co-opbank.co.ke',
+            'connection: keep-alive',
+            'content-length: 248',
+            'sec-ch-ua-platform: "Windows"',
+            'content-security-policy: default-src \'self\' \'unsafe-inline\'; img-src *',
+            'x-ts-ajax-request: true',
+            'sec-ch-ua: "Not A(Brand";v="8", "Chromium";v="132", "Google Chrome";v="132"',
+            'sec-ch-ua-mobile: ?0',
+            'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36',
+            'accept: application/json, text/plain, */*',
+            'content-type: application/x-www-form-urlencoded',
+            'dnt: 1',
+            'origin: https://retail-onlinebanking.co-opbank.co.ke',
+            'sec-fetch-site: same-origin',
+            'sec-fetch-mode: cors',
+            'sec-fetch-dest: empty',
+            'referer: https://retail-onlinebanking.co-opbank.co.ke/iportalweb/register-form',
+            'accept-encoding: gzip, deflate, br, zstd',
+            'accept-language: en-GB,en-US;q=0.9,en;q=0.8',
+            //'cookie: _ga=GA1.1.671000220.1733207759; ak_bmsc=F9C82EA2D81CA580FCFB4BB804E3055B~000000000000000000000000000000~YAAQIIDdWOvUNoeUAQAAgUlLiRp9KUSpptMXNxji212IXF1QaALZivZryN6VtVr+5+PHb4roGreFXi9+iySYY5iCkaRyGbRUETfP36LqttLKw3FbfjQLp2HGnlN3YGFbNlb+EU/kZ5boi8Eq9vW1H9AHzXAbRheBo2woXWGOMTKgQlBdhesDSDb2Z1ofz6/fmFLqf3FqwFHzfc/phZXPYMblMeHd7/0SGDkqduJJzu+ImFZ5n7dXFnVUGaYBSHDmjcxaHbwzw9GzRBR1J6hXGqx0Pgby7yyjCnrLeRci89/pDfXN36J5YHggJDIH0QG4LEYjUK8JJxzCFUzWtbEL4T8J/MbbSanlef3PFR03S5P13qW05h0YWOx2MtzBQzwFn4Grb2cmLa8KTbgnhTHaN6b9OYbFAmAZjndo6gjA6OlYQoJxx3i/6ugxWUJh36GmUV1tAmCYTm+lpxob+RHoRw==; AKA_A2=A; JSESSIONID=TPuJcIIA-U5Q1ELXkqAdvHn-LkzhqzqszIoaN0zyknEr3Uu8Fr_G!880533581; TS0169ec3e=01e11d6f2bdf2f7b0346a5d529dad03a70b98a34c4294f745d3082bd314ffe2e1a71ec0e2929bfc55e46993998a7a63d141e4510c8a6cdb858686f79f202c71676789408e7; bm_sv=3867BC833887AEC869BFC6FC4F951D04~YAAQP6ERArmUtoeUAQAAPoJwiRpjG/yRMpI2XJvMgRrR5TNXwnfFySZ/TVTm/oHHzzZRwEF7BUEZHboT4oiVj8idqBPmcm51N+QSVfcXFCv96Hj2zL2N/7elzSuJRi4c6frKUjtpysy4vdsyrimCEM6dTEh8QADskvkOe2Azqk9TZevtqHeUAV0WhSdTP1wJOS+Hbp3mNkaDsXxKw7u/EdFpvEfjfjpb1k25hPJHJ5IAzvZ2iQnjONt1EO1172ZiY6Bjlo4=~1; _ga_8VP7DPDJKF=GS1.1.1737471460.7.1.1737472660.37.0.0; _ga_LVZQVN58LY=GS1.1.1737471460.7.1.1737472660.0.0.0; visid_incap_2731887=JGiwUD4aTbaqQVVikugrDC0XsGUAAAAAQUIPAAAAAADvN4PsVNSdcVPZBs0p0JWu; JSESSIONID=R2yJcBQUleWcOWFqyEO_y4EE0E-H94dFwPOrSuZWgpZpLWWHdfhy!880533581; TS0169ec3e=01e11d6f2b0caa57e1f6c5731ef1a48d0b6e776832a6a5ebd69f57d1a6977efdd02522989a1b154738c58bdc2030b45d775263ef98e9e98116b48a95c066876fdfa6b4b92d; VisitorUID=VID072b4178-3834-c5c5-e679-d8518b915b33; _ga=GA1.4.1870114244.1706039092; _ga_8VP7DPDJKF=GS1.1.1706039092.1.1.1706039452.60.0.0; _ga_LVZQVN58LY=GS1.1.1706039092.1.0.1706039092.0.0.0; _gid=GA1.4.1989133777.170603910; _hjSessionUser_1809617=eyJpZCI6ImYzOGEwZTRjLTZkNDctNWVmMS04Yzc5LThiZjk4Yjc5NmQ1MCIsImNyZWF0ZWQiOjE3MDYwMzkxMDUwMTYsImV4aXN0aW5nIjpmYWxzZX0=; _hjSession_1809617=eyJpZCI6ImJkNTA0MzUwLTMwM2ItNDU4Ni1iYThmLWNhNmZmNDM1N2JkOSIsImMiOjE3MDYwMzkxMDUwMTksInMiOjAsInIiOjAsInNiIjowLCJzciI6MCwic2UiOjAsImZzIjoxfQ==; cookiesession1=678B289C85557493C37B45BCB92628F2; incap_ses_1018_2731887=aVXSbg8y+mrAwmDQD6sgDi0XsGUAAAAAn25+neJlLT+UFQiB7jvjlQ==; visid_incap_2731887=JGiwUD4aTbaqQVVikugrDC0XsGUAAAAAQUIPAAAAAADvN4PsVNSdcVPZBs0p0JWu',
+            'x-postman-captr: 6956412'
         ),
     ));
 
     $response = curl_exec($curl);
 
     curl_close($curl);
-    //$responseBody = separateHeadersFromBody($response);
-    return $response;
+    echo $response;
 }
 
 

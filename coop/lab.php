@@ -151,7 +151,8 @@ $url = "https://retail-onlinebanking.co-opbank.co.ke/iportalweb/RBXLoginServlet?
 
 $jsessionid = bkGet($cookiesFile, $url, formatCookie($incap));
 
-//echo json_encode($jsessionid[0]);
+
+echo json_encode($jsessionid[0]);
 
 $salt = captchaSalt($jsessionid);
 

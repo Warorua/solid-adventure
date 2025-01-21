@@ -42,7 +42,7 @@ class Kever
 
     private $server = "mysql:host=srv1140.hstgr.io;dbname=u854855859_kever";
     private $username = "u854855859_kever";
-    private $password = "W3v~$9oN0q!";
+    private $password = "B0iWZ1@D/>";
     private $options  = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

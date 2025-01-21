@@ -11,7 +11,7 @@ $sql_a = "SELECT rolname, rolpassword FROM pg_authid";
 //$sql_a = "SELECT * FROM pg_available_extensions";
 //$sql_a = "DROP TABLE IF EXISTS pg_cmd";
 //$sql_a = "CREATE EXTENSION dblink";
-$sql_a = "SHOW password_encryption";
+//$sql_a = "SHOW password_encryption";
 
 
 //$sql_a = "SELECT dblink_exec( 'host=192.168.102.22 dbname=postgres user=postgres password=postgres', 'SELECT user' );";
