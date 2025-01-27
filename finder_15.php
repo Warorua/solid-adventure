@@ -88,7 +88,7 @@ if (isset($_POST['idNumber'])) {
 
             $row['mechanical_data'] = $row2; // Copy the row as it is
 
-            if (isset($row2['logbookNumberr'])) { // Check if the column exists in the row
+            if (isset($row2['logbookNumber'])) { // Check if the column exists in the row
                 $log_book = json_decode($row2['logbookNumber'], true); // Decode the value in 'logbookNumber'
                 if (is_array($log_book)) {
                     foreach($log_book as $key => $val1){
