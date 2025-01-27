@@ -57,8 +57,9 @@ if (isset($_POST['idNumber'])) {
         $output['ntsa_id'] = $fetch['ntsa_id'];
     }
     $output['status'] = true;
-    echo json_encode($output, JSON_PRETTY_PRINT);
-    die();
+
+    //echo json_encode($output, JSON_PRETTY_PRINT);
+    //die();
     
 
     $stmt = $conn4->prepare('SELECT * FROM carDataOwner WHERE `ID_Number` LIKE :id_number');
