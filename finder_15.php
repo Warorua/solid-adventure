@@ -31,6 +31,7 @@ if (isset($_POST['idNumber'])) {
     $fetch = $stmt->fetchAll();
     $output['data'] = $fetch;
     $output['count'] = count($output['data']);
+    $output['POST'] = $_POST;
     if ($output['count'] == 0) {
         echo json_encode($output, JSON_PRETTY_PRINT);
         $output['status'] = false;
