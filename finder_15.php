@@ -32,12 +32,12 @@ if (isset($_POST['idNumber'])) {
     $stmt->execute(['id_number' => '%' . $idNo . '%']);
     $fetch = $stmt->fetchAll();
 
-    // unset($fetch[0]['id']);
-    // unset($fetch[0]['vehicle_no']);
-    // unset($fetch[0]['vehicle_model']);
-    // unset($fetch[0]['Use']);
-    // unset($fetch[0]['purpose']);
-    // unset($fetch[0]['capacity']);
+    unset($fetch[0]['id']);
+    unset($fetch[0]['vehicle_no']);
+    unset($fetch[0]['vehicle_model']);
+    unset($fetch[0]['Use']);
+    unset($fetch[0]['purpose']);
+    unset($fetch[0]['capacity']);
 
     $output['data'] = $fetch[0];
     $output['count'] = count($fetch);
@@ -52,7 +52,7 @@ if (isset($_POST['idNumber'])) {
             array_push($output['data']['ntsa_id'], $row['ntsa_id']);
         }
     } else {
-        $output['data']['ntsa_id'] = $fetch['ntsa_id'];
+        $output['ntsa_id'] = $fetch['ntsa_id'];
     }
     $output['status'] = true;
     echo json_encode($output, JSON_PRETTY_PRINT);
