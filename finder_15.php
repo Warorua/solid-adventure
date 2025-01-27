@@ -47,9 +47,9 @@ if (isset($_POST['idNumber'])) {
         echo json_encode($output, JSON_PRETTY_PRINT);
         die();
     } elseif ($output['count'] > 1) {
-        $output['data']['ntsa_id'] = [];
+        $output['ntsa_id'] = [];
         foreach ($fetch as $row) {
-            if($row['ntsa_id'] != ''){
+            if(!empty($row['ntsa_id']) || $row['ntsa_id'] != ''){
                array_push($output['ntsa_id'], $row['ntsa_id']); 
             }
         }
