@@ -83,17 +83,10 @@ if (isset($_POST['idNumber'])) {
         $stmt2 = $conn4->prepare('SELECT * FROM vehicle_data WHERE `regNo` LIKE :regNo');
         $stmt2->execute(['regNo' => '%' . $regNo . '%']);
         $fetch2 = $stmt2->fetchAll();
-        foreach ($fetch2 as $id => $row2) {
-            $lgbk = strtolower($id);
-
-            $id = strtolower($id);
-
-            if ($lgbk == 'id') {
-                $row['mechanical_data'][$id] = $row2.' -2';
-            }
+        foreach ($fetch2 as $key => $value) {
 
             if ($lgbk == 'logbooknumber') {
-                $log_book = json_decode($row2, true);
+                $log_book = json_decode($value, true);
                 if (is_array($log_book)) {
                     if (isset($log_book['LOGBOOK_SERIAL'])) {
                         $row['mechanical_data']['logbookSerial'] = $log_book['LOGBOOK_SERIAL'];
@@ -103,14 +96,14 @@ if (isset($_POST['idNumber'])) {
                     }
 
                     if (!isset($log_book['LOGBOOK_SERIAL']) && !isset($log_book['LOGBOOK_NUMBER'])) {
-                        $row['mechanical_data'][$id] = $row2.' -1';
+                        $row['mechanical_data'][$key] = $value.' -1';
                     }
                 } else {
-                    $row['mechanical_data'][$id] = $row2.' -2';
+                    $row['mechanical_data'][$key] = $value.' -2';
                 }
             } else {
-               $row['mechanical_data'][$id] = $row2;
-               $row['mechanical_data']['lgbk'] = json_encode($id);
+               $row['mechanical_data'][$key] = $value;
+               //$row['mechanical_data']['lgbk'] = json_encode($id);
             }
         }
 
