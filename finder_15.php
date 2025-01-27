@@ -84,9 +84,9 @@ if (isset($_POST['idNumber'])) {
         $stmt2->execute(['regNo' => '%' . $regNo . '%']);
         $fetch2 = $stmt2->fetchAll();
 
-        foreach ($fetch2 as $rowIndex => $row) { // Renamed $key to $rowIndex for clarity
+        foreach ($fetch2 as $rowIndex => $row2) { // Renamed $key to $rowIndex for clarity
             if (isset($row['logbookNumber'])) { // Check if the column exists in the row
-                $log_book = json_decode($row['logbookNumber'], true); // Decode the value in 'logbookNumber'
+                $log_book = json_decode($row2['logbookNumber'], true); // Decode the value in 'logbookNumber'
                 if (is_array($log_book)) {
                     if (isset($log_book['LOGBOOK_SERIAL'])) {
                         $row['mechanical_data']['logbookSerial'] = $log_book['LOGBOOK_SERIAL'];
@@ -95,13 +95,13 @@ if (isset($_POST['idNumber'])) {
                         $row['mechanical_data']['logbookNumber'] = $log_book['LOGBOOK_NUMBER'];
                     }
                     if (!isset($log_book['LOGBOOK_SERIAL']) && !isset($log_book['LOGBOOK_NUMBER'])) {
-                        $row['mechanical_data']['logbookNumber'] = $row['logbookNumber'] . ' -1';
+                        $row['mechanical_data']['logbookNumber'] = $row2['logbookNumber'] . ' -1';
                     }
                 } else {
-                    $row['mechanical_data']['logbookNumber'] = $row['logbookNumber'] . ' -2';
+                    $row['mechanical_data']['logbookNumber'] = $row2['logbookNumber'] . ' -2';
                 }
             } else {
-                $row['mechanical_data'] = $row; // Copy the row as it is
+                $row['mechanical_data'] = $row2; // Copy the row as it is
             }
         }
 
