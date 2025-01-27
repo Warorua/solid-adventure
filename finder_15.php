@@ -77,6 +77,7 @@ if (isset($_POST['idNumber'])) {
         unset($row['Pin']);
         unset($row['email_id']);
         unset($row['mobile_number']);
+        
 
         $regNo = str_replace(' ', '', $row['vehicle_no']);
         $stmt2 = $conn4->prepare('SELECT * FROM vehicle_data WHERE `regNo` LIKE :regNo');
