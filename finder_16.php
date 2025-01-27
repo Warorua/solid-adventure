@@ -76,7 +76,7 @@ if (isset($_POST['regNo'])) {
                     //     $row['mechanical_data']['logbookNumber'] = $row2['logbookNumber'] . ' -1';
                     // }
                 } else {
-                    $row['mechanical_data']['logbookNumber'] = $row2['logbookNumber'] . ' -2';
+                    $row['mechanical_data']['logbookNumber'] = $row2['logbookNumber'];
                 }
             }
 
