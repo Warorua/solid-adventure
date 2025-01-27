@@ -70,7 +70,9 @@ if (isset($_POST['idNumber'])) {
     }
    
     array_push($output['data']['asset'], $asset_obj);
-    
+
+
+    echo json_encode($output, JSON_PRETTY_PRINT);
 } else {
     $output['error'] = 'Required parameters not set!';
     $output['DATA_POST'] = $_SERVER;
