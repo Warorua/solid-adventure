@@ -110,6 +110,7 @@ if (isset($_POST['idNumber'])) {
                 }
             } else {
                $row['mechanical_data'][$id] = $row2;
+               $row['mechanical_data']['lgbk'] = $lgbk;
             }
         }
 
