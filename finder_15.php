@@ -16,7 +16,7 @@ include './includes/uni_conn.php';
 
 $output = [];
 
-$_POST['idNumber'] = '32515522';
+//$_POST['idNumber'] = '32515522';
 
 if (isset($_POST['idNumber'])) {
     $idNo = $_POST['idNumber'];
@@ -39,8 +39,8 @@ if (isset($_POST['idNumber'])) {
     // unset($fetch[0]['purpose']);
     // unset($fetch[0]['capacity']);
 
-    //$output['data'] = $fetch[0];
-    $output['count'] = count($fetch);
+    $output['data'] = $fetch;
+    $output['count'] = count($output['data']);
     //$output['POST'] = $_POST;
     if ($output['count'] < 1) {
         $output['status'] = false;
