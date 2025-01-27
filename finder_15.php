@@ -26,7 +26,7 @@ if (isset($_POST['idNumber'])) {
         die();
     }
 
-    $stmt = $conn4->prepare('SELECT * FROM owner_data WHERE `ID_NUMBER` LIKE :id_number');
+    $stmt = $conn4->prepare('SELECT * FROM carDataOwner WHERE `ID_Number` LIKE :id_number');
     $stmt->execute(['id_number' => '%' . $idNo . '%']);
     $fetch = $stmt->fetchAll();
     $output['data'] = $fetch;
