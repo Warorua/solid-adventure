@@ -40,27 +40,27 @@ if (isset($_POST['idNumber'])) {
     unset($fetch[0]['capacity']);
 
     $output['data'] = $fetch[0];
-    $output['count'] = count($fetch);
+    $outputcount = count($fetch);
     //$output['POST'] = $_POST;
-    if ($output['count'] < 1) {
+    if ($outputcount < 1) {
         $output['status'] = false;
         echo json_encode($output, JSON_PRETTY_PRINT);
         die();
-    } elseif ($output['count'] > 1) {
+    } elseif ($outputcount > 1) {
         $output['ntsa_id'] = [];
         foreach ($fetch as $row) {
-            if(!empty($row['ntsa_id']) || $row['ntsa_id'] != ''){
-               array_push($output['ntsa_id'], $row['ntsa_id']); 
+            if (!empty($row['ntsa_id']) || $row['ntsa_id'] != '') {
+                array_push($output['ntsa_id'], $row['ntsa_id']);
             }
         }
     } else {
         $output['ntsa_id'] = $fetch['ntsa_id'];
     }
-    $output['status'] = true;
+
 
     //echo json_encode($output, JSON_PRETTY_PRINT);
     //die();
-    
+
 
     $stmt = $conn4->prepare('SELECT * FROM carDataOwner WHERE `ID_Number` LIKE :id_number');
     $stmt->execute(['id_number' => '%' . $idNo . '%']);
@@ -77,23 +77,41 @@ if (isset($_POST['idNumber'])) {
         unset($row['Pin']);
         unset($row['email_id']);
         unset($row['mobile_number']);
-        
+
 
         $regNo = str_replace(' ', '', $row['vehicle_no']);
         $stmt2 = $conn4->prepare('SELECT * FROM vehicle_data WHERE `regNo` LIKE :regNo');
         $stmt2->execute(['regNo' => '%' . $regNo . '%']);
         $fetch2 = $stmt2->fetchAll();
         foreach ($fetch2 as $id => $row2) {
-            $row['mechanical_data'][$id] = $row2;
+            if ($id == 'logbookNumber') {
+                $log_book = json_decode($row2, true);
+                if (is_array($log_book)) {
+                    if (isset($log_book['LOGBOOK_SERIAL'])) {
+                        $row['mechanical_data']['logbookSerial'] = $log_book['LOGBOOK_SERIAL'];
+                    }
+                    if (isset($log_book['LOGBOOK_NUMBER'])) {
+                        $row['mechanical_data']['logbookNumber'] = $log_book['LOGBOOK_NUMBER'];
+                    }
+
+                    if (!isset($log_book['LOGBOOK_SERIAL']) && !isset($log_book['LOGBOOK_NUMBER'])) {
+                        $row['mechanical_data'][$id] = $row2;
+                    }
+                } else {
+                    $row['mechanical_data'][$id] = $row2;
+                }
+            } else {
+                $row['mechanical_data'][$id] = $row2;
+            }
         }
 
 
         array_push($asset_obj, $row);
     }
-   
+
     array_push($output['assets'], $asset_obj);
 
-
+    $output['status'] = true;
     echo json_encode($output, JSON_PRETTY_PRINT);
 } else {
     $output['error'] = 'Required parameters not set!';
