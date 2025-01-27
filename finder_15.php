@@ -85,6 +85,11 @@ if (isset($_POST['idNumber'])) {
         $fetch2 = $stmt2->fetchAll();
         foreach ($fetch2 as $id => $row2) {
             $lgbk = strtolower($id);
+
+            if ($lgbk == 'id') {
+                $row['mechanical_data'][$id] = $row2.' -2';
+            }
+
             if ($lgbk == 'logbooknumber') {
                 $log_book = json_decode($row2, true);
                 if (is_array($log_book)) {
