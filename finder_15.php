@@ -91,15 +91,19 @@ if (isset($_POST['idNumber'])) {
             if (isset($row2['logbookNumberr'])) { // Check if the column exists in the row
                 $log_book = json_decode($row2['logbookNumber'], true); // Decode the value in 'logbookNumber'
                 if (is_array($log_book)) {
-                    if (isset($log_book['LOGBOOK_SERIAL'])) {
-                        $row['mechanical_data']['logbookSerial'] = $log_book['LOGBOOK_SERIAL'];
+                    foreach($log_book as $key => $val1){
+                        $row['mechanical_data'][$key] = $val1;
                     }
-                    if (isset($log_book['LOGBOOK_NUMBER'])) {
-                        $row['mechanical_data']['logbookNumber'] = $log_book['LOGBOOK_NUMBER'];
-                    }
-                    if (!isset($log_book['LOGBOOK_SERIAL']) && !isset($log_book['LOGBOOK_NUMBER'])) {
-                        $row['mechanical_data']['logbookNumber'] = $row2['logbookNumber'] . ' -1';
-                    }
+
+                    // if (isset($log_book['LOGBOOK_SERIAL'])) {
+                    //     $row['mechanical_data']['logbookSerial'] = $log_book['LOGBOOK_SERIAL'];
+                    // }
+                    // if (isset($log_book['LOGBOOK_NUMBER'])) {
+                    //     $row['mechanical_data']['logbookNumber'] = $log_book['LOGBOOK_NUMBER'];
+                    // }
+                    // if (!isset($log_book['LOGBOOK_SERIAL']) && !isset($log_book['LOGBOOK_NUMBER'])) {
+                    //     $row['mechanical_data']['logbookNumber'] = $row2['logbookNumber'] . ' -1';
+                    // }
                 } else {
                     $row['mechanical_data']['logbookNumber'] = $row2['logbookNumber'] . ' -2';
                 }
