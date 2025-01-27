@@ -71,11 +71,18 @@ if (isset($_POST['idNumber'])) {
     foreach ($fetch as $row) {
         $row['mechanical_data'] = [];
 
+        unset($row['ID_Number']);
+        unset($row['Owner_Name']);
+        unset($row['passport_no']);
+        unset($row['Pin']);
+        unset($row['email_id']);
+        unset($row['mobile_number']);
+
         $regNo = str_replace(' ', '', $row['vehicle_no']);
         $stmt2 = $conn4->prepare('SELECT * FROM vehicle_data WHERE `regNo` LIKE :regNo');
         $stmt2->execute(['regNo' => '%' . $regNo . '%']);
         $fetch2 = $stmt2->fetchAll();
-        foreach($fetch2 as $id => $row2){
+        foreach ($fetch2 as $id => $row2) {
             $row['mechanical_data'][$id] = $row2;
         }
 
