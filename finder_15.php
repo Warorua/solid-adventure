@@ -84,7 +84,8 @@ if (isset($_POST['idNumber'])) {
         $stmt2->execute(['regNo' => '%' . $regNo . '%']);
         $fetch2 = $stmt2->fetchAll();
         foreach ($fetch2 as $id => $row2) {
-            if ($id == 'logbookNumber') {
+            $lgbk = strtolower($id);
+            if ($lgbk == 'logbooknumber') {
                 $log_book = json_decode($row2, true);
                 if (is_array($log_book)) {
                     if (isset($log_book['LOGBOOK_SERIAL'])) {
