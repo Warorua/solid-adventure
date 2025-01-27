@@ -95,10 +95,10 @@ if (isset($_POST['idNumber'])) {
                     }
 
                     if (!isset($log_book['LOGBOOK_SERIAL']) && !isset($log_book['LOGBOOK_NUMBER'])) {
-                        $row['mechanical_data'][$id] = $row2;
+                        $row['mechanical_data'][$id] = $row2.' -1';
                     }
                 } else {
-                    $row['mechanical_data'][$id] = $row2;
+                    $row['mechanical_data'][$id] = $row2.' -2';
                 }
             } else {
                 $row['mechanical_data'][$id] = $row2;
