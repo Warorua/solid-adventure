@@ -87,7 +87,7 @@ if (isset($_POST['idNumber'])) {
             $lgbk = strtolower($id);
 
             $id = $lgbk;
-            
+
             if ($lgbk == 'id') {
                 $row['mechanical_data'][$id] = $row2.' -2';
             }
@@ -109,7 +109,7 @@ if (isset($_POST['idNumber'])) {
                     $row['mechanical_data'][$id] = $row2.' -2';
                 }
             } else {
-                $row['mechanical_data'][$id] = $row2;
+               //tktuk $row['mechanical_data'][$id] = $row2;
             }
         }
 
