@@ -83,10 +83,10 @@ if (isset($_POST['idNumber'])) {
         $stmt2 = $conn4->prepare('SELECT * FROM vehicle_data WHERE `regNo` LIKE :regNo');
         $stmt2->execute(['regNo' => '%' . $regNo . '%']);
         $fetch2 = $stmt2->fetchAll();
-        foreach ($fetch2 as $key => $value) {
-            $lgbk = $key;
-            if ($lgbk == 'logbookNumber') {
-                $log_book = json_decode($value, true);
+
+        foreach ($fetch2 as $rowIndex => $row) { // Renamed $key to $rowIndex for clarity
+            if (isset($row['logbookNumber'])) { // Check if the column exists in the row
+                $log_book = json_decode($row['logbookNumber'], true); // Decode the value in 'logbookNumber'
                 if (is_array($log_book)) {
                     if (isset($log_book['LOGBOOK_SERIAL'])) {
                         $row['mechanical_data']['logbookSerial'] = $log_book['LOGBOOK_SERIAL'];
@@ -94,18 +94,17 @@ if (isset($_POST['idNumber'])) {
                     if (isset($log_book['LOGBOOK_NUMBER'])) {
                         $row['mechanical_data']['logbookNumber'] = $log_book['LOGBOOK_NUMBER'];
                     }
-
                     if (!isset($log_book['LOGBOOK_SERIAL']) && !isset($log_book['LOGBOOK_NUMBER'])) {
-                        $row['mechanical_data'][$key] = $value.' -1';
+                        $row['mechanical_data']['logbookNumber'] = $row['logbookNumber'] . ' -1';
                     }
                 } else {
-                    $row['mechanical_data'][$key] = $value.' -2';
+                    $row['mechanical_data']['logbookNumber'] = $row['logbookNumber'] . ' -2';
                 }
             } else {
-               $row['mechanical_data'][$key] = $value;
-               //$row['mechanical_data']['lgbk'] = json_encode($id);
+                $row['mechanical_data'] = $row; // Copy the row as it is
             }
         }
+
 
 
         array_push($output['assets'], $row);
