@@ -72,5 +72,6 @@ if (isset($_POST['idNumber'])) {
     
 } else {
     $output['error'] = 'Required parameters not set!';
+    $output['DATA_POST'] = $_SERVER;
     echo json_encode($output, JSON_PRETTY_PRINT);
 }
