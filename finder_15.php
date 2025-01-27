@@ -40,7 +40,7 @@ if (isset($_POST['idNumber'])) {
     // unset($fetch[0]['capacity']);
 
     //$output['data'] = $fetch[0];
-    $output['count'] = count($output['data']);
+    $output['count'] = count($fetch);
     //$output['POST'] = $_POST;
     if ($output['count'] < 1) {
         $output['status'] = false;
