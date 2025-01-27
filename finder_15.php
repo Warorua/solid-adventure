@@ -86,6 +86,8 @@ if (isset($_POST['idNumber'])) {
         foreach ($fetch2 as $id => $row2) {
             $lgbk = strtolower($id);
 
+            $id = $lgbk;
+            
             if ($lgbk == 'id') {
                 $row['mechanical_data'][$id] = $row2.' -2';
             }
