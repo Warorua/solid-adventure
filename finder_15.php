@@ -49,7 +49,7 @@ if (isset($_POST['idNumber'])) {
     } elseif ($output['count'] > 1) {
         $output['data']['ntsa_id'] = [];
         foreach ($fetch as $row) {
-            if(!empty($row['ntsa_id']) || $row['ntsa_id'] != ''){
+            if($row['ntsa_id'] != ''){
                array_push($output['ntsa_id'], $row['ntsa_id']); 
             }
         }
