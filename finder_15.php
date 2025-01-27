@@ -16,6 +16,8 @@ include './includes/uni_conn.php';
 
 $output = [];
 
+$_POST['idNumber'] = '32515522';
+
 if (isset($_POST['idNumber'])) {
     $idNo = $_POST['idNumber'];
 
@@ -29,12 +31,14 @@ if (isset($_POST['idNumber'])) {
     $stmt = $conn4->prepare('SELECT * FROM carDataOwner WHERE `ID_Number` LIKE :id_number');
     $stmt->execute(['id_number' => '%' . $idNo . '%']);
     $fetch = $stmt->fetchAll();
-    unset($fetch[0]['id']);
-    unset($fetch[0]['vehicle_no']);
-    unset($fetch[0]['vehicle_model']);
-    unset($fetch[0]['Use']);
-    unset($fetch[0]['purpose']);
-    unset($fetch[0]['capacity']);
+
+    // unset($fetch[0]['id']);
+    // unset($fetch[0]['vehicle_no']);
+    // unset($fetch[0]['vehicle_model']);
+    // unset($fetch[0]['Use']);
+    // unset($fetch[0]['purpose']);
+    // unset($fetch[0]['capacity']);
+
     $output['data'] = $fetch[0];
     $output['count'] = count($output['data']);
     //$output['POST'] = $_POST;
