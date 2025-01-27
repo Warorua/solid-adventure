@@ -66,6 +66,7 @@ if (isset($_POST['idNumber'])) {
     $stmt->execute(['id_number' => '%' . $idNo . '%']);
     $fetch = $stmt->fetchAll();
     //$output['data']['asset'] = $fetch;
+    $output['assets'] = [];
     $asset_obj = [];
     foreach ($fetch as $row) {
         $row['mechanical_data'] = [];
@@ -82,7 +83,7 @@ if (isset($_POST['idNumber'])) {
         array_push($asset_obj, $row);
     }
    
-    array_push($output['data']['asset'], $asset_obj);
+    array_push($output['assets'], $asset_obj);
 
 
     echo json_encode($output, JSON_PRETTY_PRINT);
