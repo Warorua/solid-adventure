@@ -39,7 +39,12 @@ if (isset($_POST['idNumber'])) {
     unset($fetch[0]['purpose']);
     unset($fetch[0]['capacity']);
 
-    $output['data'] = $fetch[0];
+    if (isset($fetch[0])) {
+        $output['data'] = $fetch[0];
+    } else {
+        $output['data'] = [];
+    }
+    
     $outputcount = count($fetch);
     //$output['POST'] = $_POST;
     if ($outputcount < 1) {

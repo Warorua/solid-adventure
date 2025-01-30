@@ -1,7 +1,7 @@
 <?php
 include './includes/core.php';
 
-$file_name = $file_name = './pdf/'.$_GET['pin'].'.html';
+$file_name = $file_name = './pdf/' . $_GET['pin'] . '.html';
 $_SESSION['kra_pin'] = $_GET['pin'];
 $data = '
 <head>
@@ -141,7 +141,7 @@ $data = '
     <p style="text-indent: 0pt;text-align: left;"><br /></p>
     <div class="flex-container center">
         <div class="flex-item" style="width: 30%; align-items: flex-start;">
-            <p style="text-indent: 0pt;text-align: left; margin-top: 15px;"><span><img width="100%" height="54" alt="image" src="http://localhost/kever/receipt_files/Image_001.jpg" /></span></p>
+            <p style="text-indent: 0pt;text-align: left; margin-top: 15px;"><span><img width="100%" height="54" alt="image" src="./elements/receipt_files/Image_001.jpg" /></span></p>
         </div>
         <div class="flex-item" style="width: 39%; background-color: rgb(167, 167, 167); height: 55px; font-weight: 900;">
             <p style="text-indent: 0pt;text-align: left;"><br /></p>
@@ -161,14 +161,14 @@ $data = '
     <br />
     <p style="text-indent: 0pt;text-align: left;"><a href="http://www.kra.go.ke/">www.kra.go.ke</a></p>
     <p style="text-indent: 0pt;text-align: left;"><br /></p>
-    <p style="padding-left: 6pt;text-indent: 0pt;line-height: 1pt;text-align: left;"><span><img width="717" height="1" alt="image" src="http://localhost/kever/receipt_files/Image_002.png" /></span></p>
+    <p style="padding-left: 6pt;text-indent: 0pt;line-height: 1pt;text-align: left;"><span><img width="717" height="1" alt="image" src="./elements/receipt_files/Image_002.png" /></span></p>
     <p style="text-indent: 0pt;text-align: left;"><br /></p>
-    <h2 style="padding-top: 4pt;text-indent: 0pt;text-align: right;">Certificate Date : <span class="s1">'.$_GET["regi_date"].'</span>
+    <h2 style="padding-top: 4pt;text-indent: 0pt;text-align: right;">Certificate Date : <span class="s1">' . $_GET["regi_date"] . '</span>
     </h2>
     <h2 style="padding-top: 4pt;text-indent: 0pt;text-align: right;">Personal Identification Number</h2>
-    <p class="s1" style="padding-top: 4pt;text-indent: 0pt;text-align: right;">'.$_GET["pin"].'</p>
+    <p class="s1" style="padding-top: 4pt;text-indent: 0pt;text-align: right;">' . $_GET["pin"] . '</p>
     <p style="text-indent: 0pt;text-align: left;"><br /></p>
-    <p style="padding-left: 5pt;text-indent: 0pt;line-height: 3pt;text-align: left;"><span><img width="715" height="4" alt="image" src="http://localhost/kever/receipt_files/Image_003.png" /></span></p>
+    <p style="padding-left: 5pt;text-indent: 0pt;line-height: 3pt;text-align: left;"><span><img width="715" height="4" alt="image" src="./elements/receipt_files/Image_003.png" /></span></p>
     <p style="text-indent: 0pt;text-align: left;"><br /></p>
     <p class="s2" style="padding-top: 7pt;padding-left: 78pt;text-indent: 0pt;text-align: center;">This is to certify
         that taxpayer shown herein has been registered with Kenya Revenue Authority</p>
@@ -182,7 +182,7 @@ $data = '
                     Name</p>
             </td>
             <td style="width:296pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                <p class="s4" style="padding-top: 2pt;padding-left: 1pt;text-indent: 0pt;text-align: left;">'.$_GET["name"].'</p>
+                <p class="s4" style="padding-top: 2pt;padding-left: 1pt;text-indent: 0pt;text-align: left;">' . $_GET["name"] . '</p>
             </td>
         </tr>
         <tr style="height:17pt">
@@ -191,7 +191,7 @@ $data = '
                     Address</p>
             </td>
             <td style="width:296pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
-                <p style="padding-top: 2pt;padding-left: 1pt;text-indent: 0pt;text-align: left;"><a href="mailto:'.$_GET["email"].'" class="s5">'.$_GET["email"].'</a></p>
+                <p style="padding-top: 2pt;padding-left: 1pt;text-indent: 0pt;text-align: left;"><a href="mailto:' . $_GET["email"] . '" class="s5">' . $_GET["email"] . '</a></p>
             </td>
         </tr>
     </table>
@@ -201,58 +201,58 @@ $data = '
         <tr style="height:18pt">
             <td style="width:249pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s3" style="padding-top: 4pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">L.R. Number
-                    :'.$_GET["lr"].'</p>
+                    :' . $_GET["lr"] . '</p>
             </td>
             <td style="width:245pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s3" style="padding-top: 4pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">Building :
-                    <span class="s4">'.$_GET["building"].'</span>
+                    <span class="s4">' . $_GET["building"] . '</span>
                 </p>
             </td>
         </tr>
         <tr style="height:18pt">
             <td style="width:249pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s3" style="padding-top: 4pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">Street/Road
-                    : <span class="s4">'.$_GET["road"].'</span></p>
+                    : <span class="s4">' . $_GET["road"] . '</span></p>
             </td>
             <td style="width:245pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s3" style="padding-top: 3pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">City/Town :
-                    <span class="s4">'.$_GET["town"].'</span>
+                    <span class="s4">' . $_GET["town"] . '</span>
                 </p>
             </td>
         </tr>
         <tr style="height:18pt">
             <td style="width:249pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s3" style="padding-top: 4pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">County :
-                    <span class="s4">'.$_GET["county"].'</span>
+                    <span class="s4">' . $_GET["county"] . '</span>
                 </p>
             </td>
             <td style="width:245pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s3" style="padding-top: 4pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">District :
-                    <span class="s4">'.$_GET["district"].'</span>
+                    <span class="s4">' . $_GET["district"] . '</span>
                 </p>
             </td>
         </tr>
         <tr style="height:18pt">
             <td style="width:249pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s3" style="padding-top: 4pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">Tax Area :
-                    <span class="s4">'.$_GET["locality"].'</span>
+                    <span class="s4">' . $_GET["locality"] . '</span>
                 </p>
             </td>
             <td style="width:245pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s3" style="padding-top: 4pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">Station :
-                    <span class="s4">'.$_GET["postal_town"].'</span>
+                    <span class="s4">' . $_GET["postal_town"] . '</span>
                 </p>
             </td>
         </tr>
         <tr style="height:18pt">
             <td style="width:249pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s3" style="padding-top: 4pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">P. O. Box :
-                    <span class="s4">'.$_GET["box"].'</span>
+                    <span class="s4">' . $_GET["box"] . '</span>
                 </p>
             </td>
             <td style="width:245pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s3" style="padding-top: 4pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">Postal Code
-                    : <span class="s4">'.$_GET["postal_code"].'</span></p>
+                    : <span class="s4">' . $_GET["postal_code"] . '</span></p>
             </td>
         </tr>
     </table>
@@ -288,13 +288,13 @@ $data = '
             </td>
             <td style="width:131pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s4" style="padding-left: 14pt;padding-right: 13pt;text-indent: 0pt;line-height: 11pt;text-align: center;">
-                '.$_GET["obligation"].'</p>
+                ' . $_GET["obligation"] . '</p>
                 <p class="s4" style="padding-left: 14pt;padding-right: 13pt;text-indent: 0pt;line-height: 10pt;text-align: center;">
                     Individual</p>
             </td>
             <td style="width:136pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s4" style="padding-top: 5pt;padding-left: 20pt;padding-right: 19pt;text-indent: 0pt;text-align: center;">
-                '.$_GET["regi_date"].'</p>
+                ' . $_GET["regi_date"] . '</p>
             </td>
             <td style="width:114pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:1pt">
                 <p class="s4" style="padding-top: 5pt;padding-left: 14pt;padding-right: 13pt;text-indent: 0pt;text-align: center;">
@@ -331,7 +331,7 @@ $data = '
     <br />
     <p style="text-indent: 0pt;text-align: left;"><br /></p>
     <h2 style="padding-bottom: 3pt;padding-left: 38pt;text-indent: 0pt;text-align: left;">Disclaimer : <span class="s1">This is a system generated certificate and does not require signature.</span></h2>
-    <p style="padding-left: 6pt;text-indent: 0pt;line-height: 1pt;text-align: left;"><span><img width="706" height="1" alt="image" src="http://localhost/kever/receipt_files/Image_004.png" /></span></p>
+    <p style="padding-left: 6pt;text-indent: 0pt;line-height: 1pt;text-align: left;"><span><img width="706" height="1" alt="image" src="./elements/receipt_files/Image_004.png" /></span></p>
 </body>
 
 </html>';
