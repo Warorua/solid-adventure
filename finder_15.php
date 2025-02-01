@@ -59,7 +59,11 @@ if (isset($_POST['idNumber'])) {
             }
         }
     } else {
-        $output['ntsa_id'] = $fetch['ntsa_id'];
+        if (isset($fetch['ntsa_id'])) {
+            $output['ntsa_id'] = $fetch['ntsa_id'];
+        } else {
+            $output['ntsa_id'] = 'N/A';
+        }
     }
 
 
