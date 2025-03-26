@@ -8,9 +8,9 @@ include './includes/conn_pure.php';
 
 class DatabaseDeep
 {
-    private $server = "mysql:host=srv677.hstgr.io;dbname=u117204720_deepwoods";
-    private $username = "u117204720_deepwoods";
-    private $password = 'Wj9|10g0oN';
+    private $server = "mysql:host=auth-db1577.hstgr.io;dbname=u221263050_severo";
+    private $username = "u221263050_root";
+    private $password = 'Caio2303arruda$';
     private $options  = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
