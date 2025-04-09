@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $conn4->prepare("INSERT INTO users (user_id, username, password, ga_secret) VALUES (:user_id, :username, :pass, :ga)");
     if ($stmt->execute(['user_id'=>generateRandomId(),'username'=>$username, 'pass'=>$password, 'ga'=>$ga_secret])) {
         // Generate QR code for Google Authenticator setup
-        $qrCodeUrl = GoogleQrUrl::generate('PKestrel' . $username, $ga_secret);
+        $qrCodeUrl = GoogleQrUrl::generate('PKestrel' . $username, json_decode($ga_secret,true));
 
         $user_obj['success'] = true;
         $user_obj['message'] = 'Account create successfully';

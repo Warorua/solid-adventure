@@ -12,9 +12,11 @@ $postLines = ['staff_id', 'first_name', 'last_name', 'password', 'email', 'usern
 $url = 'https://edev.nairobiservices.go.ke/api/admin/authentication/auth/login';
 foreach ($dataLine as $row) {
     $dtId = (int)$row['id'];
-    if ($dtId >= 1479) {
+    if ($dtId >= 1802) {
         $username = $row['staff_id'];
+
         foreach ($postLines as $row2) {
+            //$postData = ['username' => $username, 'password' => $row[$row2]];
             $postData = ['username' => $username, 'password' => $row[$row2]];
             $dt1 = httpPost($url, $postData, []);
             $dt2 = json_decode($dt1, true);
