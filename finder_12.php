@@ -64,6 +64,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //echo  $userId;
     // Store the new user in the database (replace with actual DB logic)
     //$stmt = $conn4->prepare("SELECT * FROM users WHERE username = :username");
+
+
+    $stmt = $conn4->prepare("SELECT user_id FROM users WHERE username = :username LIMIT 1");
+    $stmt->execute(['username' => $username]);
+    $username_auth = $stmt->fetch();
+    if ($username_auth) {
+        http_response_code(400);
+        $output['error'] = 'Username has already been taken.';
+        echo json_encode($output, JSON_PRETTY_PRINT);
+        exit;
+    }
+
+
     $qrCodeUrl = GoogleQrUrl::generate('PKestrel' . $username, base64_decode($ga_secret,true));
 
     $stmt = $conn4->prepare("INSERT INTO users (user_id, username, password, ga_secret, qr_url) VALUES (:user_id, :username, :pass, :ga, :qr_url)");

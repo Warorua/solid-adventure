@@ -28,18 +28,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute(['username' => $username]);
         $user = $stmt->fetch();
         if ($user && password_verify($password, $user['password'])) {
-            // Set session variables
-            $_SESSION['user_id'] = $user['user_id'];
-            $_SESSION['username'] = $user['username'];
+            if ($user['flag'] !== '1') {
+                // Set session variables
+                $_SESSION['user_id'] = $user['user_id'];
+                $_SESSION['username'] = $user['username'];
 
 
-            $userId = $user['user_id'];
-            $jwt = generateJWT($userId);
+                $userId = $user['user_id'];
+                $jwt = generateJWT($userId);
 
-            setcookie("authToken", $jwt, time() + (3600 * 24), "/");
+                setcookie("authToken", $jwt, time() + (3600 * 24), "/");
 
-            header('Content-Type: application/json');
-            echo json_encode(['token' => $jwt,'ga_secret'=>$user['ga_secret']], JSON_PRETTY_PRINT);
+                header('Content-Type: application/json');
+                echo json_encode(['token' => $jwt, 'ga_secret' => $user['ga_secret']], JSON_PRETTY_PRINT);
+            } else {
+                $err['error'] = "This account has been flagged.";
+                echo json_encode($err, JSON_PRETTY_PRINT); 
+            }
+            
         } else {
             $err['error'] = "Invalid username or password.";
             echo json_encode($err, JSON_PRETTY_PRINT);
