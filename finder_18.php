@@ -1,6 +1,9 @@
 <?php
 require 'vendor/autoload.php';
 include './includes/core2.php';
+
+$source = 'sec';
+
 include './includes/uni_conn.php';
 
 header('Content-Type: application/json');
