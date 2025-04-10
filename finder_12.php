@@ -64,11 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //echo  $userId;
     // Store the new user in the database (replace with actual DB logic)
     //$stmt = $conn4->prepare("SELECT * FROM users WHERE username = :username");
-    $stmt = $conn4->prepare("INSERT INTO users (user_id, username, password, ga_secret) VALUES (:user_id, :username, :pass, :ga)");
-    if ($stmt->execute(['user_id'=>generateRandomId(),'username'=>$username, 'pass'=>$password, 'ga'=>$ga_secret])) {
-        // Generate QR code for Google Authenticator setup
-        $qrCodeUrl = GoogleQrUrl::generate('PKestrel' . $username, base64_decode($ga_secret,true));
+    $qrCodeUrl = GoogleQrUrl::generate('PKestrel' . $username, base64_decode($ga_secret,true));
 
+    $stmt = $conn4->prepare("INSERT INTO users (user_id, username, password, ga_secret, qr_url) VALUES (:user_id, :username, :pass, :ga, :qr_url)");
+    if ($stmt->execute(['user_id'=>generateRandomId(),'username'=>$username, 'pass'=>$password, 'ga'=>$ga_secret, 'qr_url'=>$qrCodeUrl])) {
+        // Generate QR code for Google Authenticator setup
+        
         $user_obj['success'] = true;
         $user_obj['message'] = 'Account create successfully';
         $user_obj['username'] = $username;
