@@ -49,6 +49,6 @@ if (isset($_POST['kraPin'])) {
     $output['taxpayerIdr'] = $processed;
     echo json_encode($output, JSON_PRETTY_PRINT);
 } else {
-    $output['error'] = 'Required parameters not set!';
+    $output['error'] = 'Required parameters not set! - '.json_encode($_POST);
     echo json_encode($output, JSON_PRETTY_PRINT);
 }
