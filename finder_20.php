@@ -15,9 +15,9 @@ include './includes/uni_conn.php';
 
 
 $output = [];
-if (isset($_GET['kraPin'])) {
-    $_POST['kraPin'] = $_GET['kraPin'];
-}
+// if (isset($_GET['kraPin'])) {
+//     $_POST['kraPin'] = $_GET['kraPin'];
+// }
 
 if (isset($_POST['kraPin'])) {
     $kraPin = $_POST['kraPin'];
@@ -46,11 +46,7 @@ if (isset($_POST['kraPin'])) {
     $result = fixJson(extractCallbackData(httpPost($url, $data)));
     $processed = json_decode(processJson($result), true);
 
-    echo json_encode($processed, JSON_PRETTY_PRINT);
-    exit;
-
-    $output['data'] = $fetch;
-    $output['count'] = count($output['data']);
+    $output['taxpayerIdr'] = $processed;
     echo json_encode($output, JSON_PRETTY_PRINT);
 } else {
     $output['error'] = 'Required parameters not set!';
