@@ -72,7 +72,7 @@ if (isset($_POST['kraPin'])) {
     if(empty($processed)){
         $output['duration'] = null;
     }else{
-        $output['duration'] = $processed;
+        $output['duration'] = $processed[0];
     }
 
     
