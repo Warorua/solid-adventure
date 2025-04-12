@@ -6,13 +6,13 @@ use simplehtmldom\HtmlDocument;
 //include './includes/core.php';
 
 include './includes/core2.php';
-include './includes/core_kra.php';
+
 ////////CAR PLATE SEARCH
 $source = 'pin_data';
 
 include './includes/uni_conn.php';
 
-echo 'inout';
+
 
 $output = [];
 if (isset($_GET['kraPin'])) {
