@@ -12,7 +12,12 @@ $source = 'pin_data';
 
 include './includes/uni_conn.php';
 
+echo 'inout';
+
 $output = [];
+if (isset($_GET['kraPin'])) {
+    $_POST['kraPin'] = $_GET['kraPin'];
+}
 
 if (isset($_POST['kraPin'])) {
     $kraPin = $_POST['kraPin'];
@@ -43,7 +48,7 @@ if (isset($_POST['kraPin'])) {
 
     echo json_encode($processed, JSON_PRETTY_PRINT);
     exit;
-  
+
     $output['data'] = $fetch;
     $output['count'] = count($output['data']);
     echo json_encode($output, JSON_PRETTY_PRINT);
