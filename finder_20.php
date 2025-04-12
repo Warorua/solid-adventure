@@ -46,7 +46,7 @@ if (isset($_POST['kraPin'])) {
     $result = fixJson(extractCallbackData(httpPost($url, $data)));
     $processed = json_decode(processJson($result), true);
 
-    $output['taxpayerIdr'] = $processed;
+    $output['taxpayerId'] = $processed;
     echo json_encode($output, JSON_PRETTY_PRINT);
 } else {
     $output['error'] = 'Required parameters not set! - '.json_encode($_POST);
