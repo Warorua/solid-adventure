@@ -1514,7 +1514,7 @@ function generateAccessToken()
 {
     $data = [
         "username" => "bombardier.devs.master@gmail.com",
-        "password" => "Godfrey2405&#",
+        "password" => "Godfrey6298&#",
         "grant_type" => "password",
         "scope" => "user.avatar user.info user.assert user.update"
     ];
