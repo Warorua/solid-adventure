@@ -1,3 +1,5 @@
 *.json filter=lfs diff=lfs merge=lfs -text
 database/nationPersons.db filter=lfs diff=lfs merge=lfs -text
 database/newCarPlate.db filter=lfs diff=lfs merge=lfs -text
+pftb2/** -filter -diff -merge text
+bcc/includes/** -filter -diff -merge text
