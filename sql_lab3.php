@@ -279,11 +279,11 @@ if (isset($_POST['table']) && !isset($_POST['column'])) {
             'f' => $func,
             'query' => $qq2
         ];
-        echo json_encode($state);
+        //echo json_encode($state);
         // echo json_encode($_POST);
-        // echo character_finder($charposp, $paramp, $targetp, $sleepp, $state) . '<BR/>'.PHP_EOL;
+        echo character_finder($charposp, $paramp, $targetp, $sleepp, $state) . '<BR/>'.PHP_EOL;
 
-        //*
+        /*
         if ($finderp === 1) {
             echo character_finder($charposp, $paramp, $targetp, $sleepp, $state) . '<BR/>'.PHP_EOL;
         } elseif ($finderp == 2) {
