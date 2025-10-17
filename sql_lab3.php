@@ -34,7 +34,7 @@ if (isset($_POST['table']) && !isset($_POST['column'])) {
 */
     $func = $_POST['func'];
     if ($func == 'L') {
-        $verif = json_decode(file_get_contents('./pftb/tableColumns.json'), true);
+        $verif = json_decode(file_get_contents('./pftb2/tableColumns.json'), true);
         if (isset($verif[$_POST['table']]) && !isset($_POST['column'])) {
             echo 'Data already queried';
         } else {
