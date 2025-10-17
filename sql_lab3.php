@@ -114,7 +114,7 @@ if (isset($_POST['table']) && !isset($_POST['column'])) {
             echo length_finder($sleepp, $targetp, $paramp, $state) . '<BR/>'.PHP_EOL;
         }
     } elseif ($func == 'C') {
-        $dfile = './pftb/data/' . $_POST['table'] . '_ColumnNames.json';
+        $dfile = './pftb2/data/' . $_POST['table'] . '_ColumnNames.json';
         if (file_exists($dfile)) {
             $verif = json_decode(file_get_contents($dfile), true);
         } else {
@@ -125,7 +125,7 @@ if (isset($_POST['table']) && !isset($_POST['column'])) {
             exit('Column name needed to process query!');
         }
 
-        $vrfil = './pftb/tableColumns.json';
+        $vrfil = './pftb2/tableColumns.json';
         $vrfil_data = json_decode(file_get_contents($vrfil), true);
 
         if (!isset($vrfil_data[$_POST['table']][$_POST['column']])) {
