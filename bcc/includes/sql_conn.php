@@ -218,7 +218,7 @@ function pesaflow($injection, $i, $sleep_timer, $state)
                     $stateCode = base64_encode(json_encode($stc_a));
                     //$state['stateCode'] = '';
                 }
-                httpGet('https://localhost/kever/' . $state['page'], ['statecode' => $stateCode, 'stateobject' => $stateObject]);
+                httpGet('https://kever.io/' . $state['page'], ['statecode' => $stateCode, 'stateobject' => $stateObject], ['Cookie: visitorId=2MmU0NDJjNzZkN2IxOTAxMzkxZjUz']);
                 //header('location: ' . $state['page'] . '?statecode=' . $stateCode . '&stateobject=' . $stateObject);
                 //echo "result:" . $i['message'];
                 exit; // Terminate the script
@@ -311,7 +311,7 @@ function kotnova($injection, $i, $sleep_timer, $state)
                     $stateCode = base64_encode(json_encode($stc_a));
                     //$state['stateCode'] = '';
                 }
-                httpGet('https://localhost/kever/' . $state['page'], ['statecode' => $stateCode, 'stateobject' => $stateObject]);
+                httpGet('https://kever.io/' . $state['page'], ['statecode' => $stateCode, 'stateobject' => $stateObject], ['Cookie: visitorId=2MmU0NDJjNzZkN2IxOTAxMzkxZjUz']);
                 //header('location: ' . $state['page'] . '?statecode=' . $stateCode . '&stateobject=' . $stateObject);
                 //echo "result:" . $i['message'];
                 exit; // Terminate the script
