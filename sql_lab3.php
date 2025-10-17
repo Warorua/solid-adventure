@@ -129,7 +129,7 @@ if (isset($_POST['table']) && !isset($_POST['column'])) {
         $vrfil_data = json_decode(file_get_contents($vrfil), true);
 
         if (!isset($vrfil_data[$_POST['table']][$_POST['column']])) {
-            exit('Column or table queried is not available!<br/>see: ' . json_encode($vrfil_data));
+            exit('Column or table queried is not available!');
         } else {
             $length = $vrfil_data[$_POST['table']][$_POST['column']];
         }

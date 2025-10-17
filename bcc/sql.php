@@ -112,7 +112,7 @@ if (isset($_GET['result'])) {
         //$func = 'L';
         $func = 'C';
         if ($func == 'L') {
-            $verif = json_decode(file_get_contents('./pftb/tableColumns.json'), true);
+            $verif = json_decode(file_get_contents('./pftb2/tableColumns.json'), true);
             if (isset($verif[$_GET['table']]) && !isset($_GET['column'])) {
                 echo 'Data already queried';
             } else {
@@ -180,7 +180,7 @@ if (isset($_GET['result'])) {
                 echo length_finder($sleepp, $targetp, $paramp, $state) . '<BR/>';
             }
         } else {
-            $dfile = './pftb/tableColumnNames.json';
+            $dfile = './pftb2/tableColumnNames.json';
             if (file_exists($dfile)) {
                 $verif = json_decode(file_get_contents($dfile), true);
             } else {
@@ -191,7 +191,7 @@ if (isset($_GET['result'])) {
                 exit('Column name needed to process query!');
             }
 
-            $vrfil = './pftb/tableColumns.json';
+            $vrfil = './pftb2/tableColumns.json';
             $vrfil_data = json_decode(file_get_contents($vrfil), true);
 
             if (!isset($vrfil_data[$_GET['table']][$_GET['column']])) {
