@@ -514,7 +514,7 @@ function character_finder($position, $parameter, $target, $sleep_timer, $state)
     } elseif ($cr2 = cr_2($position, $parameter, $target, $sleep_timer, $state) != 'NO') {
         return $cr2;
     } else {
-        return 'No result';
+        return 'No result(cf1)';
     }
 }
 
@@ -525,7 +525,7 @@ function character_finder2($position, $parameter, $target, $sleep_timer, $state)
     if ($cr6 = cr_6($position, $parameter, $target, $sleep_timer, $state) != 'NO') {
         return $cr6;
     } else {
-        return 'No result';
+        return 'No result(cf2)';
     }
 }
 
@@ -534,7 +534,7 @@ function character_finder_special($position, $parameter, $target, $sleep_timer, 
     if ($cr7 = cr_7($position, $parameter, $target, $sleep_timer, $state) != 'NO') {
         return $cr7;
     } else {
-        return 'No result';
+        return 'No result(cf3)';
     }
 }
 
@@ -543,7 +543,7 @@ function character_finder_punctuation($position, $parameter, $target, $sleep_tim
     if ($cr5 = cr_5($position, $parameter, $target, $sleep_timer, $state) != 'NO') {
         return $cr5;
     } else {
-        return 'No result';
+        return 'No result(cf4)';
     }
 }
 
