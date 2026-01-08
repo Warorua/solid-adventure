@@ -49,7 +49,7 @@ declare(strict_types=1);
 
             <div class="mb-3">
               <label class="form-label">Endpoint</label>
-              <input id="endpoint" class="form-control form-control-lg mono" value="./game_lab2.php" />
+              <input id="endpoint" class="form-control form-control-lg mono" value="./sql_lab2.php" />
               <div class="form-text muted">Keep same-origin so browser sends session cookies automatically.</div>
             </div>
 
@@ -493,3 +493,4 @@ declare(strict_types=1);
   </script>
 </body>
 </html>
+
