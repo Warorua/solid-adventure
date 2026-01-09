@@ -12,7 +12,7 @@ declare(strict_types=1);
   <style>
     body { background: #0b1220; }
     .card { background: #0f1a2e; border: 1px solid rgba(255,255,255,.08); }
-    .muted { color: rgba(255,255,255,.78) !important; }     /* brighter than text-muted */
+    .muted, form-label { color: rgba(255,255,255,.78) !important; }     /* brighter than text-muted */
     .muted2 { color: rgba(255,255,255,.88) !important; }    /* even brighter for key labels */
     .log {
       background: rgba(255,255,255,.05);
@@ -493,4 +493,5 @@ declare(strict_types=1);
   </script>
 </body>
 </html>
+
 
