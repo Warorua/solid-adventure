@@ -12,7 +12,7 @@ declare(strict_types=1);
   <style>
     body { background: #0b1220; }
     .card { background: #0f1a2e; border: 1px solid rgba(255,255,255,.08); }
-    .muted, form-label { color: rgba(255,255,255,.78) !important; }     /* brighter than text-muted */
+    .muted { color: rgba(255,255,255,.78) !important; }     /* brighter than text-muted */
     .muted2 { color: rgba(255,255,255,.88) !important; }    /* even brighter for key labels */
     .log {
       background: rgba(255,255,255,.05);
@@ -48,19 +48,19 @@ declare(strict_types=1);
             </p>
 
             <div class="mb-3">
-              <label class="form-label">Endpoint</label>
+              <label class="form-label muted">Endpoint</label>
               <input id="endpoint" class="form-control form-control-lg mono" value="./sql_lab2.php" />
               <div class="form-text muted">Keep same-origin so browser sends session cookies automatically.</div>
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Command (must be wrapped in brackets)</label>
+              <label class="form-label muted">Command (must be wrapped in brackets)</label>
               <input id="command" class="form-control form-control-lg mono" value="(run.country2president)" />
             </div>
 
             <div class="row g-2 mb-3">
               <div class="col-4">
-                <label class="form-label">sleep (server)</label>
+                <label class="form-label muted">sleep (server)</label>
                 <input id="sleepParam" class="form-control mono" value="5" />
               </div>
               <div class="col-4">
@@ -493,5 +493,6 @@ declare(strict_types=1);
   </script>
 </body>
 </html>
+
 
 
