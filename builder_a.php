@@ -42,7 +42,7 @@ declare(strict_types=1);
       <div class="col-lg-5">
         <div class="card rounded-4 shadow-sm">
           <div class="card-body">
-            <h4 class="mb-1">Text Tasker</h4>
+            <h4 class="mb-1 muted">Text Tasker</h4>
             <p class="muted mb-3">
               Part 1 settles length (stability rule). Part 2 settles each unicode codepoint per position, then builds the statement.
             </p>
@@ -64,7 +64,7 @@ declare(strict_types=1);
                 <input id="sleepParam" class="form-control mono" value="5" />
               </div>
               <div class="col-4">
-                <label class="form-label">Client delay</label>
+                <label class="form-label muted">Client delay</label>
                 <select id="delayMs" class="form-select">
                   <option value="0">0ms</option>
                   <option value="100">100ms</option>
@@ -74,7 +74,7 @@ declare(strict_types=1);
                 </select>
               </div>
               <div class="col-4">
-                <label class="form-label">Concurrency</label>
+                <label class="form-label muted">Concurrency</label>
                 <select id="concurrency" class="form-select">
                   <option value="1">1 (safe)</option>
                   <option value="2">2</option>
@@ -88,12 +88,12 @@ declare(strict_types=1);
 
             <div class="row g-2 mb-3">
               <div class="col-6">
-                <label class="form-label">No-result tolerance (per settle)</label>
+                <label class="form-label muted">No-result tolerance (per settle)</label>
                 <input id="noResultMax" class="form-control mono" value="8" />
                 <div class="form-text muted">How many “All time - …” / invalid responses allowed before stopping.</div>
               </div>
               <div class="col-6">
-                <label class="form-label">Max attempts (per settle)</label>
+                <label class="form-label muted">Max attempts (per settle)</label>
                 <input id="maxAttempts" class="form-control mono" value="80" />
                 <div class="form-text muted">Hard cap to avoid infinite looping.</div>
               </div>
@@ -130,7 +130,7 @@ declare(strict_types=1);
         <div class="card rounded-4 shadow-sm">
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between mb-2">
-              <h5 class="mb-0">Progress</h5>
+              <h5 class="mb-0 muted">Progress</h5>
               <span class="badge text-bg-secondary" id="phaseBadge">Idle</span>
             </div>
 
@@ -169,7 +169,7 @@ declare(strict_types=1);
 
             <hr class="border-light border-opacity-10 my-4">
 
-            <h5 class="mb-2">Final result</h5>
+            <h5 class="mb-2 muted">Final result</h5>
             <div class="p-3 rounded-4 mono" style="background: rgba(25,135,84,.10); border:1px solid rgba(25,135,84,.25); min-height: 56px;">
               <span id="finalResult" class="fs-5">—</span>
             </div>
@@ -493,6 +493,7 @@ declare(strict_types=1);
   </script>
 </body>
 </html>
+
 
 
 
