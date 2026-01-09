@@ -12,28 +12,32 @@ declare(strict_types=1);
   <style>
     body { background: #0b1220; }
     .card { background: #0f1a2e; border: 1px solid rgba(255,255,255,.08); }
-    .muted { color: rgba(255,255,255,.78) !important; }     /* brighter than text-muted */
-    .muted2 { color: rgba(255,255,255,.88) !important; }    /* even brighter for key labels */
+    .muted { color: rgba(255,255,255,.80) !important; }
     .log {
       background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.10);
       border-radius: 12px;
       padding: 12px;
-      max-height: 320px;
+      max-height: 340px;
       overflow: auto;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: 12px;
       white-space: pre-wrap;
-      color: rgba(255,255,255,.88);
+      color: rgba(255,255,255,.90);
     }
     .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
     .badge-soft { background: rgba(13,110,253,.15); color: #9ec5fe; border: 1px solid rgba(13,110,253,.25); }
-    .statbox {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.10);
+    .statbox { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); }
+    .statlabel { color: rgba(255,255,255,.92); }
+    .statval { color: rgba(255,255,255,.98); }
+    .chip {
+      display:inline-flex; align-items:center; gap:.35rem;
+      padding:.35rem .6rem; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.88);
+      font-size: .85rem;
     }
-    .statval { color: rgba(255,255,255,.96); }
-    .statlabel { color: rgba(255,255,255,.88); }
   </style>
 </head>
 <body class="text-light">
@@ -42,15 +46,17 @@ declare(strict_types=1);
       <div class="col-lg-5">
         <div class="card rounded-4 shadow-sm">
           <div class="card-body">
-            <h4 class="mb-1 muted">Text Tasker</h4>
+            <h4 class="mb-1">Text Tasker</h4>
             <p class="muted mb-3">
-              Part 1 settles length (stability rule). Part 2 settles each unicode codepoint per position, then builds the statement.
+              Part 1 settles length. Part 2 settles each unicode codepoint per position, with retries and finder escalation, then builds the statement.
             </p>
 
             <div class="mb-3">
-              <label class="form-label muted">Endpoint</label>
-              <input id="endpoint" class="form-control form-control-lg mono" value="./sql_lab2.php" />
-              <div class="form-text muted">Keep same-origin so browser sends session cookies automatically.</div>
+              <label class="form-label muted">Endpoint (same origin recommended)</label>
+              <input id="endpoint" class="form-control form-control-lg mono" value="./game_lab2.php" />
+              <div class="form-text muted">
+                Keep this page and the endpoint on the same scheme/host/port so the browser sends session cookies automatically.
+              </div>
             </div>
 
             <div class="mb-3">
@@ -60,7 +66,7 @@ declare(strict_types=1);
 
             <div class="row g-2 mb-3">
               <div class="col-4">
-                <label class="form-label muted">sleep (server)</label>
+                <label class="form-label muted">sleep (server param)</label>
                 <input id="sleepParam" class="form-control mono" value="5" />
               </div>
               <div class="col-4">
@@ -88,14 +94,39 @@ declare(strict_types=1);
 
             <div class="row g-2 mb-3">
               <div class="col-6">
-                <label class="form-label muted">No-result tolerance (per settle)</label>
+                <label class="form-label muted">No-result tolerance (per finder round)</label>
                 <input id="noResultMax" class="form-control mono" value="8" />
-                <div class="form-text muted">How many “All time - …” / invalid responses allowed before stopping.</div>
+                <div class="form-text muted">
+                  Counts “All time - …” / invalid responses. When it reaches this limit, we redo using next finder value.
+                </div>
               </div>
               <div class="col-6">
-                <label class="form-label muted">Max attempts (per settle)</label>
+                <label class="form-label muted">Max attempts (per finder round)</label>
                 <input id="maxAttempts" class="form-control mono" value="80" />
-                <div class="form-text muted">Hard cap to avoid infinite looping.</div>
+                <div class="form-text muted">
+                  Hard cap per finder round to avoid infinite loops.
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label class="form-label muted">Finder start</label>
+                <select id="finderStart" class="form-select">
+                  <option value="1" selected>1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <label class="form-label muted">Finder max</label>
+                <select id="finderMax" class="form-select">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4" selected>4</option>
+                </select>
               </div>
             </div>
 
@@ -107,19 +138,11 @@ declare(strict_types=1);
 
             <hr class="border-light border-opacity-10 my-4">
 
-            <div class="small muted">
-              <div class="mb-2">
-                <span class="badge badge-soft rounded-pill">Stability rule</span>
-                keep querying until a number repeats; the repeated value is selected.
-              </div>
-              <div class="mb-2">
-                <span class="badge badge-soft rounded-pill">No-result handling</span>
-                no-result responses are retried up to tolerance, not immediate fail.
-              </div>
-              <div>
-                <span class="badge badge-soft rounded-pill">Parallel build</span>
-                resolves multiple positions at once (concurrency), then prints final ordered output.
-              </div>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="chip"><span class="badge badge-soft rounded-pill">Stability</span> repeat wins</span>
+              <span class="chip"><span class="badge badge-soft rounded-pill">No-result</span> retry then finder++</span>
+              <span class="chip"><span class="badge badge-soft rounded-pill">Speed</span> parallel charpos</span>
+              <span class="chip"><span class="badge badge-soft rounded-pill">Cancel</span> aborts active calls</span>
             </div>
 
           </div>
@@ -130,7 +153,7 @@ declare(strict_types=1);
         <div class="card rounded-4 shadow-sm">
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between mb-2">
-              <h5 class="mb-0 muted">Progress</h5>
+              <h5 class="mb-0">Progress</h5>
               <span class="badge text-bg-secondary" id="phaseBadge">Idle</span>
             </div>
 
@@ -169,7 +192,7 @@ declare(strict_types=1);
 
             <hr class="border-light border-opacity-10 my-4">
 
-            <h5 class="mb-2 muted">Final result</h5>
+            <h5 class="mb-2">Final result</h5>
             <div class="p-3 rounded-4 mono" style="background: rgba(25,135,84,.10); border:1px solid rgba(25,135,84,.25); min-height: 56px;">
               <span id="finalResult" class="fs-5">—</span>
             </div>
@@ -185,8 +208,6 @@ declare(strict_types=1);
 
   <script>
     let cancelled = false;
-
-    // For parallel requests, we keep a list
     let activeXhrs = [];
 
     const ui = {
@@ -220,7 +241,7 @@ declare(strict_types=1);
 
     function parseResponseText(raw) {
       const t = String(raw || "").trim();
-      if (!t) return { ok:false, reason:"Empty response", value:null, raw:t };
+      if (!t) return { ok:false, reason:"Empty response", value:null, raw:t, noResult:true };
 
       if (t.toLowerCase().includes("all time -")) {
         return { ok:false, reason:"No result found (All time - ...)", value:null, raw:t, noResult:true };
@@ -232,25 +253,24 @@ declare(strict_types=1);
       return { ok:false, reason:"Unrecognized response format", value:null, raw:t, noResult:true };
     }
 
-    function makeFormData({action, charpos, command, sleepVal}) {
+    function makeFormData({action, charpos, command, sleepVal, finderVal}) {
       const fd = new FormData();
       fd.append("ptype", "2");
       fd.append("target", "1");
-      fd.append("action", action);
-      fd.append("finder", "1");
+      fd.append("action", action);               // "length" or "char"
+      fd.append("finder", String(finderVal));    // 1..4
       fd.append("sleep", String(sleepVal));
       fd.append("charpos", charpos === null ? "" : String(charpos));
       fd.append("param", command);
       return fd;
     }
 
-    function postToGameLab({endpoint, action, charpos, command, sleepVal}) {
-      // Browser handles cookies for same-origin
+    function postToGameLab({endpoint, action, charpos, command, sleepVal, finderVal}) {
       return new Promise((resolve, reject) => {
         const xhr = $.ajax({
           url: endpoint,
           method: "POST",
-          data: makeFormData({action, charpos, command, sleepVal}),
+          data: makeFormData({action, charpos, command, sleepVal, finderVal}),
           processData: false,
           contentType: false,
           dataType: "text",
@@ -270,80 +290,96 @@ declare(strict_types=1);
       });
     }
 
-    async function settleNumber({label, probeFn, delayMs, noResultMax, maxAttempts}) {
-      const seen = new Map(); // val->count
-      let attempt = 0;
-      let noResultCount = 0;
-
-      while (true) {
+    // Stability + no-result tolerance + finder escalation (1..4)
+    async function settleNumber({
+      label,
+      probeFnWithFinder,
+      delayMs,
+      noResultMax,
+      maxAttempts,
+      finderStart,
+      finderMax
+    }) {
+      for (let finder = finderStart; finder <= finderMax; finder++) {
         if (cancelled) throw new Error("Cancelled");
-        attempt++;
 
-        if (attempt > maxAttempts) {
-          throw new Error(`${label}: exceeded max attempts (${maxAttempts}) without settling`);
-        }
+        ui.log(`🔁 ${label}: starting settle using finder=${finder}`);
 
-        ui.setStatus(`${label}: probing (attempt ${attempt})...`);
-        ui.log(`${label} attempt ${attempt}`);
+        const seen = new Map(); // value -> count
+        let attempt = 0;
+        let noResultCount = 0;
 
-        const raw = await probeFn();
-        ui.log(`Raw: ${raw}`);
+        while (true) {
+          if (cancelled) throw new Error("Cancelled");
+          attempt++;
 
-        const parsed = parseResponseText(raw);
+          if (attempt > maxAttempts) {
+            ui.log(`⚠️ ${label}: finder=${finder} hit maxAttempts=${maxAttempts} without settling. Escalating finder...`);
+            break; // next finder
+          }
 
-        if (!parsed.ok) {
-          // NEW RULE: do not fail immediately; tolerate a number of no-result hits
-          noResultCount++;
-          ui.log(`⚠️ ${label}: ${parsed.reason}. no-result ${noResultCount}/${noResultMax}`);
+          ui.setStatus(`${label}: finder=${finder} probing (attempt ${attempt})...`);
+          ui.log(`${label} finder=${finder} attempt ${attempt}`);
 
-          if (noResultCount >= noResultMax) {
-            throw new Error(`${label}: too many no-result responses (${noResultCount}/${noResultMax})`);
+          const raw = await probeFnWithFinder(finder);
+          ui.log(`Raw: ${raw}`);
+
+          const parsed = parseResponseText(raw);
+
+          if (!parsed.ok) {
+            noResultCount++;
+            ui.log(`⚠️ ${label}: finder=${finder} ${parsed.reason}. no-result ${noResultCount}/${noResultMax}`);
+
+            if (noResultCount >= noResultMax) {
+              ui.log(`⬆️ ${label}: no-result tolerance reached for finder=${finder}. Retrying with next finder...`);
+              break; // next finder
+            }
+
+            if (delayMs > 0) await sleep(delayMs);
+            continue;
+          }
+
+          // valid number => reset no-result streak
+          noResultCount = 0;
+
+          const val = parsed.value;
+          seen.set(val, (seen.get(val) || 0) + 1);
+
+          const summary = Array.from(seen.entries()).map(([k,c]) => `${k}×${c}`).join(", ");
+          ui.log(`${label}: finder=${finder} parsed=${val} (seen: ${summary})`);
+
+          if (seen.get(val) >= 2) {
+            ui.log(`✅ ${label} settled on ${val} (repeated) using finder=${finder}`);
+            return { value: val, finderUsed: finder };
           }
 
           if (delayMs > 0) await sleep(delayMs);
-          continue;
         }
-
-        // got a valid number; reset no-result streak
-        noResultCount = 0;
-
-        const val = parsed.value;
-        seen.set(val, (seen.get(val) || 0) + 1);
-
-        const summary = Array.from(seen.entries()).map(([k,c]) => `${k}×${c}`).join(", ");
-        ui.log(`${label}: parsed=${val} (seen: ${summary})`);
-
-        if (seen.get(val) >= 2) {
-          ui.log(`✅ ${label} settled on ${val} (repeated)`);
-          return val;
-        }
-
-        if (delayMs > 0) await sleep(delayMs);
       }
+
+      throw new Error(`${label}: exhausted finder range ${finderStart}..${finderMax} without settling`);
     }
 
     async function runWithConcurrency(total, concurrency, workerFn) {
       let nextIndex = 1;
-      const results = new Array(total + 1);
 
       const workers = new Array(concurrency).fill(null).map(async () => {
         while (true) {
           if (cancelled) throw new Error("Cancelled");
           const i = nextIndex++;
           if (i > total) return;
-
-          const res = await workerFn(i);
-          results[i] = res;
+          await workerFn(i);
         }
       });
 
       await Promise.all(workers);
-      return results;
     }
 
     async function runTask() {
       cancelled = false;
       ui.enableRun(true);
+
+      ui.setPhase("Working", "text-bg-primary");
       ui.setFinal("—");
       ui.setLen("—");
       ui.setPos("—");
@@ -355,8 +391,10 @@ declare(strict_types=1);
       const sleepVal = $("#sleepParam").val().trim();
       const delayMs = parseInt($("#delayMs").val(), 10) || 0;
       const concurrency = Math.max(1, parseInt($("#concurrency").val(), 10) || 1);
-      const noResultMax = Math.max(0, parseInt($("#noResultMax").val(), 10) || 0);
+      const noResultMax = Math.max(1, parseInt($("#noResultMax").val(), 10) || 1);
       const maxAttempts = Math.max(1, parseInt($("#maxAttempts").val(), 10) || 1);
+      const finderStart = Math.max(1, Math.min(4, parseInt($("#finderStart").val(), 10) || 1));
+      const finderMax = Math.max(finderStart, Math.min(4, parseInt($("#finderMax").val(), 10) || 4));
 
       if (!command.startsWith("(") || !command.endsWith(")")) {
         ui.setPhase("Error", "text-bg-danger");
@@ -366,20 +404,27 @@ declare(strict_types=1);
       }
 
       ui.log(`Starting. endpoint=${endpoint}, command=${command}, sleep=${sleepVal}`);
-      ui.log(`Settings: delayMs=${delayMs}, concurrency=${concurrency}, noResultMax=${noResultMax}, maxAttempts=${maxAttempts}`);
+      ui.log(`Settings: delayMs=${delayMs}, concurrency=${concurrency}, noResultMax=${noResultMax}, maxAttempts=${maxAttempts}, finder=${finderStart}..${finderMax}`);
 
       try {
+        // PART 1: Length
         ui.setPhase("Length", "text-bg-primary");
+        ui.setStatus("Settling length...");
 
-        const length = await settleNumber({
+        const lenRes = await settleNumber({
           label: "Length",
           delayMs,
           noResultMax,
           maxAttempts,
-          probeFn: () => postToGameLab({endpoint, action:"length", charpos:null, command, sleepVal})
+          finderStart,
+          finderMax,
+          probeFnWithFinder: (finder) =>
+            postToGameLab({endpoint, action:"length", charpos:null, command, sleepVal, finderVal: finder})
         });
 
+        const length = lenRes.value;
         ui.setLen(length);
+        ui.log(`🎯 Length settled: ${length} (finder=${lenRes.finderUsed})`);
 
         if (length <= 0) {
           ui.setPhase("Done", "text-bg-success");
@@ -389,48 +434,48 @@ declare(strict_types=1);
           return;
         }
 
+        // PART 2: Characters (parallel)
         ui.setPhase("Chars", "text-bg-warning");
-        ui.setStatus(`Length settled: ${length}. Building with concurrency=${concurrency}...`);
+        ui.setStatus(`Length=${length}. Building with concurrency=${concurrency}...`);
 
-        const codepoints = new Array(length + 1);
         const chars = new Array(length + 1);
         let resolvedCount = 0;
 
-        // Resolve positions in parallel, each position still settles by repeat rule
         await runWithConcurrency(length, concurrency, async (pos) => {
           ui.setPos(pos);
 
-          const cp = await settleNumber({
+          const cpRes = await settleNumber({
             label: `Char(${pos})`,
             delayMs,
             noResultMax,
             maxAttempts,
-            probeFn: () => postToGameLab({endpoint, action:"char", charpos:pos, command, sleepVal})
+            finderStart,
+            finderMax,
+            probeFnWithFinder: (finder) =>
+              postToGameLab({endpoint, action:"char", charpos:pos, command, sleepVal, finderVal: finder})
           });
+
+          const cp = cpRes.value;
 
           let ch = "";
           try {
             ch = String.fromCodePoint(cp);
           } catch (e) {
-            throw new Error(`Invalid unicode codepoint ${cp} at charpos ${pos}`);
+            throw new Error(`Invalid unicode codepoint ${cp} at charpos ${pos} (finder=${cpRes.finderUsed})`);
           }
 
-          codepoints[pos] = cp;
           chars[pos] = ch;
-
           resolvedCount++;
+
           const pct = Math.floor((resolvedCount / length) * 100);
           ui.setProgress(pct);
 
-          // Build partial “so far” in order (fill unknowns with ·)
+          // Partial preview in order
           let partial = "";
-          for (let i = 1; i <= length; i++) {
-            partial += (chars[i] !== undefined ? chars[i] : "·");
-          }
+          for (let i = 1; i <= length; i++) partial += (chars[i] !== undefined ? chars[i] : "·");
           ui.setSoFar(partial);
 
-          ui.log(`✅ Char(${pos}) => ${cp} => "${ch}" (${resolvedCount}/${length})`);
-          return true;
+          ui.log(`✅ Char(${pos}) => ${cp} => "${ch}" (finder=${cpRes.finderUsed}) [${resolvedCount}/${length}]`);
         });
 
         // Assemble final statement in correct order
@@ -438,6 +483,8 @@ declare(strict_types=1);
         for (let i = 1; i <= length; i++) built += (chars[i] ?? "");
 
         ui.setFinal(built);
+        ui.setSoFar(built);
+        ui.setProgress(100);
         ui.setPhase("Done", "text-bg-success");
         ui.setStatus("Completed successfully.");
         ui.log(`FINAL RESULT: ${built}`);
@@ -464,7 +511,6 @@ declare(strict_types=1);
       cancelled = true;
       ui.log("Cancel requested.");
       ui.setStatus("Cancelling...");
-      // Abort all active requests (parallel-safe)
       for (const x of activeXhrs) {
         try { x.abort(); } catch(e) {}
       }
@@ -493,7 +539,3 @@ declare(strict_types=1);
   </script>
 </body>
 </html>
-
-
-
-
